@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-root',
@@ -7,5 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    public isMenuCollapsed:boolean = false;
     title = 'app works!';
 }
+

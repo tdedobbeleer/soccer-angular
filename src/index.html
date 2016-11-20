@@ -39,21 +39,13 @@
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
-          integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
-            integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
-            crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Fallback to local file -->
     <!--<script>window.angular || document.write('<script src="<c:url value='/resources/js/angular.min.js'/>">\x3C/script>')</script>-->
 
 </head>
 <body>
-<!--[if lt IE 10]>
-<div class="alert alert-danger" role="alert">
-    <spring:message code="text.version.warning"/>
-</div>
 <![endif]-->
 <div id="top">
     <div class="container">
@@ -99,7 +91,7 @@ _________________________________________________________ -->
             </a>
 
             <div class="navbar-buttons">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+                <button type="button" class="navbar-toggle" (click)="isMenuCollapsed = !isMenuCollapsed">
                     <span class="sr-only">Toggle navigation</span>
                     <i class="fa fa-align-justify"></i>
                 </button>
@@ -108,7 +100,7 @@ _________________________________________________________ -->
         </div>
         <!--/.navbar-header -->
 
-        <div class="navbar-collapse collapse" id="navigation">
+        <div class="navbar-collapse collapse" [collapse]="isMenuCollapsed" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="/news.html">Nieuws</a></li>
