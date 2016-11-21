@@ -29,7 +29,7 @@
     <meta name="msapplication-config" content="/resources/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <link href="css/obaju-theme.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap-grid.min.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/style-bs.css?v=1.0.8"/>
     <link rel="stylesheet" type="text/css" href="css/social-buttons.css"/>
@@ -41,9 +41,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
           integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"
-            integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK"
-            crossorigin="anonymous"></script>
 
     <!-- Fallback to local file -->
     <!--<script>window.angular || document.write('<script src="<c:url value='/resources/js/angular.min.js'/>">\x3C/script>')</script>-->
@@ -55,6 +52,25 @@
     <spring:message code="text.version.warning"/>
 </div>
 <![endif]-->
+<header class="navbar navbar-light navbar-fixed-top">
+    <div class="container">
+        <nav>
+            <a class="navbar-brand" href="#/">ng-bootstrap</a>
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#/getting-started">Getting Started</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/components">Components</a>
+                </li>
+            </ul>
+            <p class="github-buttons float-lg-right">
+                <iframe allowtransparency="true" scrolling="no" frameborder="0" src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fng-bootstrap%2Fng-bootstrap&amp;text=Star&amp;data-count-api=%2Frepos%2Fng-bootstrap%2Fng-bootstrap%23stargazers_count&amp;data-count-href=%2Fng-bootstrap%2Fng-bootstrap%2Fstargazers&amp;data-count-aria-label=%23%20stargazers%20on%20GitHub&amp;data-style=mega&amp;data-icon=&amp;aria-label=Star%20ng-bootstrap%2Fng-bootstrap%20on%20GitHub" style="width: 116px; height: 28px; border: none;"></iframe>
+                <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" class="twitter-hashtag-button twitter-hashtag-button-rendered twitter-tweet-button" title="Twitter Tweet Button" src="https://platform.twitter.com/widgets/tweet_button.2dbd32894063b53338de1c1d4a747ea9.en.html#button_hashtag=ngbootstrap&amp;dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fng-bootstrap.github.io%2F%23%2Fhome&amp;size=l&amp;text=I%27m%20checking%20out%20ng-bootstrap%2C%20THE%20Angular%202%20UI%20framework%20for%20Bootstrap%20CSS&amp;time=1479064850706&amp;type=hashtag&amp;url=https%3A%2F%2Fng-bootstrap.github.io" style="position: static; visibility: visible; width: 155px; height: 28px;" data-hashtag="ngbootstrap"></iframe>
+            </p>
+        </nav>
+    </div>
+</header>
 <div id="top">
     <div class="container">
         <div class="col-md-6" data-animate="fadeInDown"></div>
