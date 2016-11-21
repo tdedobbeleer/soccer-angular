@@ -19,6 +19,7 @@
       "mobile": false,
       "styles": [
         "styles.css",
+        "css/obaju-theme.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css"
       ],
       "scripts": [],
