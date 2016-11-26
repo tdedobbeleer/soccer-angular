@@ -29,15 +29,15 @@
     <meta name="msapplication-config" content="/resources/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <link href="css/obaju-theme.css" rel="stylesheet">
+    <link href="assets/css/obaju-theme.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="css/style-bs.css?v=1.0.8"/>
-    <link rel="stylesheet" type="text/css" href="css/social-buttons.css"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css"/>
-    <link media="all" rel="stylesheet" type="text/css" href="css/fileinput.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style-bs.css?v=1.0.8"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/social-buttons.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css"/>
+    <link media="all" rel="stylesheet" type="text/css" href="assets/css/fileinput.min.css"/>
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap.min.css"/>
 
     <!-- Fallback to local file -->
     <!--<script>window.angular || document.write('<script src="<c:url value='/resources/js/angular.min.js'/>">\x3C/script>')</script>-->
@@ -45,110 +45,13 @@
 </head>
 <body>
 
-<div id="top">
-    <div class="container">
-        <div class="col-md-6" data-animate="fadeInDown"></div>
-        <div class="col-md-6" data-animate="fadeInDown">
-            <ul class="menu">
-                <li><a id="changeLang" href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;EN</a></li>
 
-
-                <li><a href="/login.html"><span class="glyphicon glyphicon-user"></span>&nbsp;Inloggen</a></li>
-
-                <li><a href="/faq.html">Website FAQ</a></li>
-                <li><a href="/contact.html"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Contacteer</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- *** TOP BAR END *** -->
-
-<!-- *** NAVBAR ***
-_________________________________________________________ -->
-
-<div class="navbar navbar-default yamm" role="navigation" id="navbar">
-    <div class="container">
-        <div class="navbar-header">
-
-            <a class="navbar-brand home" href="https://www.svk-oh.be">
-                <img src="images/svk-weblogo-themed.png" alt="Obaju logo" class="hidden-xs">
-                <img src="images/svk-weblogo-themed.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
-            </a>
-
-            <div class="navbar-buttons">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-align-justify"></i>
-                </button>
-
-            </div>
-        </div>
-        <!--/.navbar-header -->
-
-        <div class="navbar-collapse collapse" id="navigation">
-
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="/news.html">Berichten</a></li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matchen <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/matches.html">Overzicht</a></li>
-                        <li><a href="/matchPolls.html">Man van de match</a></li>
-                        <li><a href="/statistics.html">Statistieken</a></li>
-                    </ul>
-                </li>
-                <li><a href="/teams.html">Teams</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Doodle <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/doodle.html">Doodle</a></li>
-                        <li><a href="http://doodle.com/zhkfyad4t7m3x42b#table">Trainingsdoodle</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/home.html">Algemeen</a></li>
-                        <li><a href="/team.html">Ons team</a></li>
-                    </ul>
-                </li>
-
-
-            </ul>
-
-        </div>
-    </div>
-    <!-- /.container -->
-</div>
-<!-- /#navbar -->
-
-<!-- *** NAVBAR END *** -->
 <div id="all">
     <div id="content">
         <div class="container">
 
             <app-root>Loading...</app-root>
 
-        </div>
-    </div>
-</div>
-
-<div id="copyright">
-    <div class="container">
-        <div class="col-md-6">
-            <p class="pull-left">Footer text<br/>
-                Github</p>
-
-        </div>
-        <div class="col-md-6">
-            <p class="pull-right">Template by <a href="http://www.bootstrapious.com">Responsive Templates</a> with
-                support from <a href="http://kakusei.cz">Designov&eacute; p&#345;edm&#283;ty</a>
-                <!-- Not removing these links is part of the licence conditions of the template. Thanks for understanding :) -->
-            </p>
         </div>
     </div>
 </div>

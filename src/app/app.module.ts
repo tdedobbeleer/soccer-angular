@@ -6,13 +6,23 @@ import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { CollapseDirective } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { MessagesComponent } from './messages/messages.component';
+import { FooterComponent } from './footer/footer.component';
+import {routing} from "./app.routing";
 
 @NgModule({
     declarations: [
         AppComponent,
-        CollapseDirective
+        CollapseDirective,
+        NavbarComponent,
+        NotFoundComponent,
+        MessagesComponent,
+        FooterComponent
     ],
     imports: [
+        routing,
         BrowserModule,
         FormsModule,
         HttpModule,

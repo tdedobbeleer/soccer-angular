@@ -20,7 +20,6 @@
     "@angular/platform-browser": "~2.1.0",
     "@angular/platform-browser-dynamic": "~2.1.0",
     "@angular/router": "~3.1.0",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.13",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "ng2-bootstrap": "^1.1.16",
