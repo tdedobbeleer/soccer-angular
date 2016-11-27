@@ -14,6 +14,8 @@ import {routing} from "./app.routing";
 import { TeamsListComponent } from './teams-list/teams-list.component';
 import { MessageComponent } from './message/message.component';
 import {NewsrestcontrollerApi} from "./ws/api/NewsrestcontrollerApi";
+import { CommentListComponent } from './comment-list/comment-list.component';
+import { CommentFormComponent } from './comment-form/comment-form.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +26,9 @@ import {NewsrestcontrollerApi} from "./ws/api/NewsrestcontrollerApi";
         MessagesComponent,
         FooterComponent,
         TeamsListComponent,
-        MessageComponent
+        MessageComponent,
+        CommentListComponent,
+        CommentFormComponent
     ],
     imports: [
         routing,

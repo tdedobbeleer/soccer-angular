@@ -5,10 +5,20 @@ import {NewsrestcontrollerApi} from "../ws/api/NewsrestcontrollerApi";
 @Component({
   selector: 'app-messages',
   template: `
-      <app-message
-        *ngFor="let message of newsPage?.list" [message]="message">  
-      </app-message>
-    
+  <div class="row m-t-1">
+      <div class="col-md-12">
+          <div id="blog-homepage" ng-show="!loading">
+              <div id="default">
+                  <div class="news-div">
+                    <app-message
+                      *ngFor="let message of newsPage?.list" [message]="message">
+                    </app-message>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+ 
   `,
   styles: []
 })
