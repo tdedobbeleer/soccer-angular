@@ -11,10 +11,10 @@ import { Component, OnInit } from '@angular/core';
                 <li><a id="changeLang" href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;EN</a></li>
 
 
-                <li><a rooterLink="login" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Inloggen</a></li>
+                <li><a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Inloggen</a></li>
 
-                <li><a rooterLink="faq" routerLinkActive="active">Website FAQ</a></li>
-                <li><a rooterLink="messages" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Contacteer</a>
+                <li><a [routerLink]="['/faq']" routerLinkActive="active">Website FAQ</a></li>
+                <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Contacteer</a>
                 </li>
             </ul>
         </div>
@@ -48,7 +48,7 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation">
 
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="/news.html">Berichten</a></li>
+                <li><a [routerLink]="['/messages']" routerLinkActive="active">Berichten</a></li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matchen <b class="caret"></b></a>
@@ -58,7 +58,7 @@ _________________________________________________________ -->
                         <li><a href="/statistics.html">Statistieken</a></li>
                     </ul>
                 </li>
-                <li><a href="/teams.html">Teams</a></li>
+                <li><a [routerLink]="['/teams']" routerLinkActive="active">Teams</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Doodle <b class="caret"></b></a>
                     <ul class="dropdown-menu">
