@@ -8,7 +8,7 @@ import {Component, OnInit, Input} from '@angular/core';
           <span>{{message.header}}</span>
       </h4>
       <hr>
-      <span align="left">{{message.content}}</span>
+      <span align="left" [innerHTML]="message.content"></span>
     
       <p class="author-category">Posted by
           {{message.postedBy.name}} on

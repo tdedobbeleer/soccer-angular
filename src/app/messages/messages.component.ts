@@ -6,7 +6,7 @@ import {NewsrestcontrollerApi} from "../ws/api/NewsrestcontrollerApi";
   selector: 'app-messages',
   template: `
       <app-message
-        *ngFor="let message of newsPage.list" [message]="message">  
+        *ngFor="let message of newsPage?.list" [message]="message">  
       </app-message>
     
   `,
