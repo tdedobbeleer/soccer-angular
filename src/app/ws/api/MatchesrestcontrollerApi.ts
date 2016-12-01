@@ -39,7 +39,7 @@ import { Configuration }                                     from '../configurat
 
 @Injectable()
 export class MatchesrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+    protected basePath = 'http://localhost:8080/';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 

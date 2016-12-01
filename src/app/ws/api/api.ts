@@ -1,3 +1,4 @@
+export * from './AuthenticationcontrollerApi';
 export * from './DoodlerestcontrollerApi';
 export * from './MatchesrestcontrollerApi';
 export * from './NewsrestcontrollerApi';

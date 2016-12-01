@@ -24,19 +24,9 @@
 
 import * as models from './models';
 
-export interface Account {
-    created?: Date;
+export interface AuthenticationRequestDTO {
+    password?: string;
 
-    fullName?: string;
-
-    id?: number;
-
-    modified?: Date;
-
-    passwordLastSet?: Date;
-
-    stringCreated?: string;
-
-    stringModfied?: string;
+    username?: string;
 
 }

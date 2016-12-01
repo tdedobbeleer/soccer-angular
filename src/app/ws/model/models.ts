@@ -1,5 +1,6 @@
 export * from './Account';
 export * from './AccountDTO';
+export * from './AuthenticationRequestDTO';
 export * from './CommentDTO';
 export * from './DoodleDTO';
 export * from './GoalDTO';

@@ -14,8 +14,12 @@ import {routing} from "./app.routing";
 import { TeamsListComponent } from './teams-list/teams-list.component';
 import { MessageComponent } from './message/message.component';
 import {NewsrestcontrollerApi} from "./ws/api/NewsrestcontrollerApi";
+import {AuthenticationcontrollerApi} from "./ws/api/AuthenticationcontrollerApi";
 import { CommentListComponent } from './comment-list/comment-list.component';
 import { CommentFormComponent } from './comment-form/comment-form.component';
+import { LoginComponent } from './login/login.component';
+import {AuthGuardService} from "./services/auth-guard.service";
+import {LoginService} from "./services/login.service";
 
 @NgModule({
     declarations: [
@@ -28,7 +32,8 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
         TeamsListComponent,
         MessageComponent,
         CommentListComponent,
-        CommentFormComponent
+        CommentFormComponent,
+        LoginComponent,
     ],
     imports: [
         routing,
@@ -37,7 +42,12 @@ import { CommentFormComponent } from './comment-form/comment-form.component';
         HttpModule,
         AlertModule
     ],
-    providers: [NewsrestcontrollerApi],
+    providers: [
+        NewsrestcontrollerApi,
+        AuthenticationcontrollerApi,
+        AuthGuardService,
+        LoginService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

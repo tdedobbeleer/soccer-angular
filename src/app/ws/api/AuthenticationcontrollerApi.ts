@@ -38,7 +38,7 @@ import { Configuration }                                     from '../configurat
 
 
 @Injectable()
-export class DoodlerestcontrollerApi {
+export class AuthenticationcontrollerApi {
     protected basePath = 'http://localhost:8080/';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
@@ -68,13 +68,12 @@ export class DoodlerestcontrollerApi {
     }
 
     /**
-     * Get matchdoodles
+     * authenticate
      * 
-     * @param id id
-     * @param accountId accountId
+     * @param authenticationRequest authenticationRequest
      */
-    public matchdoodles(id: number, accountId: number, extraHttpRequestParams?: any): Observable<models.PresenceDTO> {
-        return this.matchdoodlesWithHttpInfo(id, accountId, extraHttpRequestParams)
+    public authenticate(authenticationRequest: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<any> {
+        return this.authenticateWithHttpInfo(authenticationRequest, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -85,29 +84,11 @@ export class DoodlerestcontrollerApi {
     }
 
     /**
-     * Get matchdoodles
+     * Refresh token
      * 
-     * @param id id
      */
-    public matchdoodles1(id: number, extraHttpRequestParams?: any): Observable<models.MatchDoodleDTO> {
-        return this.matchdoodles1WithHttpInfo(id, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
-
-    /**
-     * Get matchdoodles
-     * 
-     * @param page page
-     * @param size size
-     */
-    public matchdoodles2(page: number, size?: number, extraHttpRequestParams?: any): Observable<models.PageDTOMatchDoodleDTO> {
-        return this.matchdoodles2WithHttpInfo(page, size, extraHttpRequestParams)
+    public refresh(extraHttpRequestParams?: any): Observable<any> {
+        return this.refreshWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -119,23 +100,18 @@ export class DoodlerestcontrollerApi {
 
 
     /**
-     * Get matchdoodles
+     * authenticate
      * 
-     * @param id id
-     * @param accountId accountId
+     * @param authenticationRequest authenticationRequest
      */
-    public matchdoodlesWithHttpInfo(id: number, accountId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/doodle/match/${id}/presence/${accountId}`;
+    public authenticateWithHttpInfo(authenticationRequest: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/auth`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling matchdoodles.');
-        }
-        // verify required parameter 'accountId' is not null or undefined
-        if (accountId === null || accountId === undefined) {
-            throw new Error('Required parameter accountId was null or undefined when calling matchdoodles.');
+        // verify required parameter 'authenticationRequest' is not null or undefined
+        if (authenticationRequest === null || authenticationRequest === undefined) {
+            throw new Error('Required parameter authenticationRequest was null or undefined when calling authenticate.');
         }
 
 
@@ -151,11 +127,13 @@ export class DoodlerestcontrollerApi {
         
             
 
+        headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Put,
+            method: RequestMethod.Post,
             headers: headers,
+            body: authenticationRequest == null ? '' : JSON.stringify(authenticationRequest), // https://github.com/angular/angular/issues/10612
             search: queryParameters
         });
         
@@ -168,70 +146,14 @@ export class DoodlerestcontrollerApi {
     }
 
     /**
-     * Get matchdoodles
+     * Refresh token
      * 
-     * @param id id
      */
-    public matchdoodles1WithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchDoodle/${id}`;
+    public refreshWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/auth/refresh`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling matchdoodles1.');
-        }
-
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            '*/*'
-        ];
-        
-            
-
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-        
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * Get matchdoodles
-     * 
-     * @param page page
-     * @param size size
-     */
-    public matchdoodles2WithHttpInfo(page: number, size?: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchDoodle`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'page' is not null or undefined
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling matchdoodles2.');
-        }
-        if (page !== undefined) {
-            queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined) {
-            queryParameters.set('size', <any>size);
-        }
 
 
         // to determine the Content-Type header
