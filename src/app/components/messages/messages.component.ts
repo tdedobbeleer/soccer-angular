@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PageDTONewsDTO} from "../ws/model/PageDTONewsDTO";
-import {NewsrestcontrollerApi} from "../ws/api/NewsrestcontrollerApi";
+import {PageDTONewsDTO} from "../../ws/model/PageDTONewsDTO";
+import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
 
 @Component({
   selector: 'app-messages',

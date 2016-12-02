@@ -1,10 +1,12 @@
 
 import { RouterModule  }     from '@angular/router';
+import {MessagesComponent} from "./components/messages/messages.component";
+import {NotFoundComponent} from "./components/not-found/not-found.component";
+import {TeamsListComponent} from "./components/teams-list/teams-list.component";
+import {LoginComponent} from "./components/login/login.component";
+import {AccountsComponent} from "./components/accounts/accounts.component";
+import {AuthGuardService} from "./services/auth-guard.service";
 
-import {NotFoundComponent} from "./not-found/not-found.component";
-import {MessagesComponent} from "./messages/messages.component";
-import {TeamsListComponent} from "./teams-list/teams-list.component";
-import {LoginComponent} from "./login/login.component";
 
 export const routing = RouterModule.forRoot([
 	{ path: '', component: MessagesComponent },
@@ -12,5 +14,6 @@ export const routing = RouterModule.forRoot([
 	{ path: 'messages', component: MessagesComponent },
 	{ path: 'teams', component: TeamsListComponent },
 	{ path: 'login', component: LoginComponent },
+	{path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardService]},
 	{ path: '**', redirectTo: 'not-found' }
 ]);
