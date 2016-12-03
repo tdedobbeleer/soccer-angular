@@ -21,6 +21,9 @@ import { LoginComponent } from './components/login/login.component';
 import {AuthGuardService} from "./services/auth-guard.service";
 import {LoginService} from "./services/login.service";
 import { AccountsComponent } from './components/accounts/accounts.component';
+import { TranslationPipe } from './pipes/translation.pipe';
+import {TranslationService} from "./services/translation.service";
+import {TRANSLATION_PROVIDERS} from "./translations";
 
 @NgModule({
     declarations: [
@@ -36,6 +39,7 @@ import { AccountsComponent } from './components/accounts/accounts.component';
         CommentFormComponent,
         LoginComponent,
         AccountsComponent,
+        TranslationPipe
     ],
     imports: [
         routing,
@@ -48,7 +52,9 @@ import { AccountsComponent } from './components/accounts/accounts.component';
         NewsrestcontrollerApi,
         AuthenticationcontrollerApi,
         AuthGuardService,
-        LoginService
+        LoginService,
+        TRANSLATION_PROVIDERS,
+        TranslationService
     ],
     bootstrap: [AppComponent]
 })

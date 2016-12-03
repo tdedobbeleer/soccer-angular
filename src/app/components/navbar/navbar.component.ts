@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TranslationService} from "../../services/translation.service";
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
         <div class="col-md-6" data-animate="fadeInDown"></div>
         <div class="col-md-6" data-animate="fadeInDown">
             <ul class="menu">
-                <li><a id="changeLang" href="#"><span class="glyphicon glyphicon-globe"></span>&nbsp;EN</a></li>
+                <li><a (click)="selectLang(oppositeLang)"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
 
 
-                <li><a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Inloggen</a></li>
+                <li><a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a></li>
 
                 <li><a [routerLink]="['/faq']" routerLinkActive="active">Website FAQ</a></li>
                 <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Contacteer</a>
@@ -89,10 +90,35 @@ _________________________________________________________ -->
   styles: []
 })
 export class NavbarComponent implements OnInit {
+  private selectedLang : Lang;
+  private oppositeLang : Lang;
 
-  constructor() { }
+  private en : Lang = {locale : 'en', display: 'English'};
+  private nl: Lang = {locale : 'nl', display: 'Nederlands'};
+
+  constructor(private _translate: TranslationService) { }
 
   ngOnInit() {
+    this.selectLang(this.nl);
+
   }
+
+  selectLang(lang: Lang) {
+    // set default;
+    this._translate.use(lang.locale);
+    this.refreshText(lang);
+  }
+
+  refreshText(currentLang: Lang) {
+    this.oppositeLang = currentLang === this.en ? this.nl : this.en;
+    this.selectedLang = currentLang;
+  }
+
+}
+
+interface Lang {
+  locale?: string;
+
+  display?: string;
 
 }
