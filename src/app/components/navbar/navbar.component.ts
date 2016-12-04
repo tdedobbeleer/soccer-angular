@@ -37,8 +37,8 @@ _________________________________________________________ -->
         <div class="navbar-header">
 
             <a class="navbar-brand home" href="https://www.svk-oh.be">
-                <img src="images/svk-weblogo-themed.png" alt="Obaju logo" class="hidden-xs">
-                <img src="images/svk-weblogo-themed.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
+                <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="hidden-xs">
+                <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
             </a>
 
             <div class="navbar-buttons">
