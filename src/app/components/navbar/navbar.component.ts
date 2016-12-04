@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {TranslationService} from "../../services/translation.service";
 
 @Component({
@@ -10,9 +10,14 @@ import {TranslationService} from "../../services/translation.service";
         <div class="col-md-6" data-animate="fadeInDown">
             <ul class="menu">
                 <li><a (click)="selectLang(oppositeLang)"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
-
-
-                <li><a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a></li>
+                
+                <li *ngIf="isLoggedIn()">
+                    {{currentUser.firstName}}
+                </li>
+ 
+                <li *ngIf="!isLoggedIn()">
+                    <a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
+                </li>
 
                 <li><a [routerLink]="['/faq']" routerLinkActive="active">Website FAQ</a></li>
                 <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Contacteer</a>
@@ -93,6 +98,8 @@ export class NavbarComponent implements OnInit {
   private selectedLang : Lang;
   private oppositeLang : Lang;
 
+  private currentUser: any;
+
   private en : Lang = {locale : 'en', display: 'English'};
   private nl: Lang = {locale : 'nl', display: 'Nederlands'};
 
@@ -112,6 +119,15 @@ export class NavbarComponent implements OnInit {
   refreshText(currentLang: Lang) {
     this.oppositeLang = currentLang === this.en ? this.nl : this.en;
     this.selectedLang = currentLang;
+  }
+
+  isLoggedIn() {
+    let user = localStorage.getItem('currentUser');
+    if (user !== null) {
+      this.currentUser = JSON.parse(user);
+      return true;
+    }
+    return false;
   }
 
 }
