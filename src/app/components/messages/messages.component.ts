@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {PageDTONewsDTO} from "../../ws/model/PageDTONewsDTO";
 import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-messages',
@@ -26,11 +27,13 @@ export class MessagesComponent implements OnInit {
 
   newsPage: PageDTONewsDTO;
 
-  constructor(private _api: NewsrestcontrollerApi){
+  constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
   }
 
   ngOnInit() {
-    this._api.getNewsPage(0, 10).subscribe(n => this.newsPage = n );
+
+    this._api.getNewsPage(0, 10, this._loginService.jwtHeader)
+        .subscribe(n => this.newsPage = n);
   }
 
 }
