@@ -132,7 +132,7 @@ export class NavbarComponent implements OnInit {
 
 }
 
-interface Lang {
+export interface Lang {
   locale?: string;
 
   display?: string;

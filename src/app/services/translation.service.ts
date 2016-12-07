@@ -1,5 +1,11 @@
-import {Injectable, Inject} from '@angular/core';
-import {TRANSLATIONS} from "../translations";
+import {Injectable} from "@angular/core";
+import {LANG_NL_TRANS, LANG_NL_NAME} from "../lang-nl";
+import {LANG_EN_TRANS, LANG_EN_NAME} from "../lang-en";
+
+const dictionary = {
+    [LANG_EN_NAME]: LANG_EN_TRANS,
+    [LANG_NL_NAME]: LANG_NL_TRANS
+};
 
 @Injectable()
 export class TranslationService {
@@ -10,7 +16,7 @@ export class TranslationService {
   }
 
   // inject our translations
-  constructor(@Inject(TRANSLATIONS) private _translations: any) {
+    constructor() {
   }
 
   public use(lang: string): void {
@@ -22,8 +28,8 @@ export class TranslationService {
     // private perform translation
     let translation = key;
 
-    if (this._translations[this.currentLang] && this._translations[this.currentLang][key]) {
-      return this._translations[this.currentLang][key];
+      if (dictionary[this.currentLang] && dictionary[this.currentLang][key]) {
+          return dictionary[this.currentLang][key];
     }
 
     return translation;

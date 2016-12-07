@@ -1,6 +1,6 @@
-import { browser, element, by } from 'protractor';
+import {browser, element, by} from "protractor";
 
-export class SoccerAppPage {
+export class MigrationProjectPage {
     navigateTo() {
         return browser.get('/');
     }

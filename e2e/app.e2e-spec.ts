@@ -1,10 +1,10 @@
-import { SoccerAppPage } from './app.po';
+import {MigrationProjectPage} from "./app.po";
 
-describe('soccer-app App', function () {
-    let page:SoccerAppPage;
+describe('migration-project App', function () {
+    let page: MigrationProjectPage;
 
     beforeEach(() => {
-        page = new SoccerAppPage();
+        page = new MigrationProjectPage();
     });
 
     it('should display message saying app works', () => {
