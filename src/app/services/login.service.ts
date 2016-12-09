@@ -11,12 +11,18 @@ export class LoginService {
     private LOCAL_STORAGE_USER: string = 'currentUser';
 
     constructor(private _api: AuthenticationcontrollerApi) {
+
+    }
+
+    init() {
         // set token if saved in local storage
-        var currentUser = JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_USER));
+        let currentUser = JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_USER));
+        //Set user
+        this.setUser(currentUser);
         //set default headers
         if (currentUser) {
             //Test if the user can be authenticated
-            _api.isFullyAuthenticated(this.getHeaders(currentUser.token))
+            this._api.isFullyAuthenticated(this.getHeaders(currentUser.token))
                 .subscribe(r => {
                     if (r) {
                         this.setUser(currentUser);
@@ -24,7 +30,7 @@ export class LoginService {
                         localStorage.removeItem(this.LOCAL_STORAGE_USER);
                         this.resetHeaders();
                     }
-                })
+                });
         } else {
             this.resetHeaders();
         }
