@@ -13,7 +13,7 @@ import {LoginService} from "../../services/login.service";
                 <li><a (click)="selectLang(oppositeLang)"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
                 
                 <li *ngIf="isLoggedIn()">
-                    {{currentUser.firstName}}
+                    {{getUser().firstName}}
                 </li>
  
                 <li *ngIf="!isLoggedIn()">
@@ -109,8 +109,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.selectLang(this.nl);
-    this.currentUser = this._loginService.getUser();
-
   }
 
   selectLang(lang: Lang) {
@@ -127,6 +125,10 @@ export class NavbarComponent implements OnInit {
   isLoggedIn() {
     return this._loginService.isLoggedIn();
   }
+
+    getUser() {
+        return this._loginService.getUser();
+    }
 }
 
 export interface Lang {
