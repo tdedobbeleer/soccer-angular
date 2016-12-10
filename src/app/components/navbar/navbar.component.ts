@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {TranslationService} from "../../services/translation.service";
+import {LoginService} from "../../services/login.service";
 
 @Component({
   selector: 'app-navbar',
@@ -103,10 +104,12 @@ export class NavbarComponent implements OnInit {
   private en : Lang = {locale : 'en', display: 'English'};
   private nl: Lang = {locale : 'nl', display: 'Nederlands'};
 
-  constructor(private _translate: TranslationService) { }
+  constructor(private _translate: TranslationService, private _loginService: LoginService) {
+  }
 
   ngOnInit() {
     this.selectLang(this.nl);
+    this.currentUser = this._loginService.getUser();
 
   }
 
@@ -122,14 +125,8 @@ export class NavbarComponent implements OnInit {
   }
 
   isLoggedIn() {
-    let user = localStorage.getItem('currentUser');
-    if (user !== null) {
-      this.currentUser = JSON.parse(user);
-      return true;
-    }
-    return false;
+    return this._loginService.isLoggedIn();
   }
-
 }
 
 export interface Lang {

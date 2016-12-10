@@ -16,7 +16,7 @@ export class LoginService {
 
     init() {
         // set token if saved in local storage
-        let currentUser = JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_USER));
+        let currentUser = this.getUser();
         //Set user
         this.setUser(currentUser);
         //set default headers
@@ -58,6 +58,14 @@ export class LoginService {
         localStorage.removeItem(this.LOCAL_STORAGE_USER);
     }
 
+    isLoggedIn(): boolean {
+        return localStorage.getItem(this.LOCAL_STORAGE_USER) != null;
+    }
+
+    getUser() {
+        return JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_USER));
+    }
+
     private resetHeaders() {
         this.jwtHeader = {};
     }
@@ -69,9 +77,10 @@ export class LoginService {
     }
 
     private setUser(user: any) {
-        //store username and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem(this.LOCAL_STORAGE_USER, JSON.stringify(user));
-        this.jwtHeader = this.getHeaders(user.token);
+        if (user != null) {
+            //store username and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem(this.LOCAL_STORAGE_USER, JSON.stringify(user));
+            this.jwtHeader = this.getHeaders(user.token);
+        }
     }
-
 }
