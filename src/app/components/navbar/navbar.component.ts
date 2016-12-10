@@ -42,8 +42,8 @@ _________________________________________________________ -->
                 <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
             </a>
 
-            <div class="navbar-buttons">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
+            <div class="navbar-buttons" dropdown>
+                <button type="button" class="navbar-toggle" (click)="isMenuCollapsed = !isMenuCollapsed">
                     <span class="sr-only">Toggle navigation</span>
                     <i class="fa fa-align-justify"></i>
                 </button>
@@ -52,31 +52,31 @@ _________________________________________________________ -->
         </div>
         <!--/.navbar-header -->
 
-        <div class="navbar-collapse collapse" id="navigation">
+        <div class="navbar-collapse collapse" id="navigation" [collapse]="isMenuCollapsed">
 
             <ul class="nav navbar-nav navbar-left">
                 <li><a [routerLink]="['/messages']" routerLinkActive="active">Berichten</a></li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matchen <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                <li class="dropdown" dropdown>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>Matchen <b class="caret"></b></a>
+                    <ul class="dropdown-menu" dropdownMenu>
                         <li><a href="/matches.html">Overzicht</a></li>
                         <li><a href="/matchPolls.html">Man van de match</a></li>
                         <li><a href="/statistics.html">Statistieken</a></li>
                     </ul>
                 </li>
                 <li><a [routerLink]="['/teams']" routerLinkActive="active">Teams</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Doodle <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                <li class="dropdown" dropdown>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>Doodle <b class="caret"></b></a>
+                    <ul class="dropdown-menu" dropdownMenu>
                         <li><a href="/doodle.html">Doodle</a></li>
                         <li><a href="http://doodle.com/zhkfyad4t7m3x42b#table">Trainingsdoodle</a></li>
                     </ul>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Info <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+                <li class="dropdown" dropdown>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>Info <b class="caret"></b></a>
+                    <ul class="dropdown-menu" dropdownMenu>
                         <li><a href="/home.html">Algemeen</a></li>
                         <li><a href="/team.html">Ons team</a></li>
                     </ul>
@@ -99,7 +99,7 @@ export class NavbarComponent implements OnInit {
   private selectedLang : Lang;
   private oppositeLang : Lang;
 
-  private currentUser: any;
+    public isMenuCollapsed: boolean = true;
 
   private en : Lang = {locale : 'en', display: 'English'};
   private nl: Lang = {locale : 'nl', display: 'Nederlands'};

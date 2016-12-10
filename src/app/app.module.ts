@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {AlertModule, CollapseDirective} from "ng2-bootstrap/ng2-bootstrap";
+import {AlertModule, DropdownModule, CollapseModule} from "ng2-bootstrap/ng2-bootstrap";
 import {AppComponent} from "./app.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
@@ -35,7 +35,6 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        CollapseDirective,
         NavbarComponent,
         NotFoundComponent,
         MessagesComponent,
@@ -53,6 +52,8 @@ const appRoutes: Routes = [
         FormsModule,
         HttpModule,
         AlertModule,
+        DropdownModule,
+        CollapseModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
