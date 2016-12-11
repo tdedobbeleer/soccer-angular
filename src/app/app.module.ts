@@ -21,6 +21,11 @@ import {AccountsComponent} from "./components/accounts/accounts.component";
 import {TranslationPipe} from "./pipes/translation.pipe";
 import {TranslationService} from "./services/translation.service";
 import {Routes, RouterModule} from "@angular/router";
+import {MatchComponent} from "./components/match/match.component";
+import {MatchesComponent} from "./components/matches/matches.component";
+import {SeasonComponent} from "./components/season/season.component";
+import {MatchesrestcontrollerApi} from "./ws/api/MatchesrestcontrollerApi";
+import {SeasonsrestcontrollerApi} from "./ws/api/SeasonsrestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -28,6 +33,7 @@ const appRoutes: Routes = [
     {path: 'messages', component: MessagesComponent},
     {path: 'teams', component: TeamsListComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'matches', component: MatchesComponent},
     {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardService]},
     {path: '**', redirectTo: 'not-found'}
 ];
@@ -45,7 +51,10 @@ const appRoutes: Routes = [
         CommentFormComponent,
         LoginComponent,
         AccountsComponent,
-        TranslationPipe
+        TranslationPipe,
+        MatchComponent,
+        MatchesComponent,
+        SeasonComponent
     ],
     imports: [
         BrowserModule,
@@ -58,6 +67,8 @@ const appRoutes: Routes = [
     ],
     providers: [
         NewsrestcontrollerApi,
+        MatchesrestcontrollerApi,
+        SeasonsrestcontrollerApi,
         AuthenticationcontrollerApi,
         AuthGuardService,
         LoginService,
