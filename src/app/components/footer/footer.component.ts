@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 
 @Component({
   selector: 'app-footer',
@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
   <div id="copyright">
       <div class="container">
           <div class="col-md-6">
-              <p class="pull-left">Footer text<br/>
-                  Github</p>
-  
+            <a class="pull-left" href="https://github.com/Goddy">
+                <img src="../../../assets/images/GitHub-Mark-Light-64px.png" alt="Obaju logo" class="hidden-xs">
+                <img src="../../../assets/images/GitHub-Mark-Light-32px.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
+            </a>
           </div>
           <div class="col-md-6">
               <p class="pull-right">Template by <a href="http://www.bootstrapious.com">Responsive Templates</a> with

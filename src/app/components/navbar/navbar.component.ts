@@ -12,17 +12,21 @@ import {LoginService} from "../../services/login.service";
             <ul class="menu">
                 <li><a (click)="selectLang(oppositeLang)"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
                 
-                <li *ngIf="isLoggedIn()">
-                    {{getUser().firstName}}
+                <li *ngIf="isLoggedIn()" class="dropdown" dropdown>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="glyphicon glyphicon-user"></span>&nbsp;{{getUser().firstName}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu" dropdownMenu>
+                        <li><a [routerLink]="['/profile']" routerLinkActive="active">{{'nav.profile' | translate}}</a></li>
+                        <li><a (click)="logout()">{{'nav.logout' | translate}}</a></li>                        
+                    </ul>
                 </li>
  
                 <li *ngIf="!isLoggedIn()">
                     <a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
                 </li>
 
-                <li><a [routerLink]="['/faq']" routerLinkActive="active">Website FAQ</a></li>
-                <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Contacteer</a>
-                </li>
+                <li><a [routerLink]="['/faq']" routerLinkActive="active">{{'nav.faq' | translate}}</a></li>
+                <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a>
+                <li><a [routerLink]="['/about']" routerLinkActive="active">{{'nav.about' | translate}}</a></li>
             </ul>
         </div>
     </div>
@@ -55,34 +59,12 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation" [collapse]="isMenuCollapsed">
 
             <ul class="nav navbar-nav navbar-left">
-                <li><a [routerLink]="['/messages']" routerLinkActive="active">Berichten</a></li>
-
-                <li class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>Matchen <b class="caret"></b></a>
-                    <ul class="dropdown-menu" dropdownMenu>
-                        <li><a href="/matches.html">Overzicht</a></li>
-                        <li><a href="/matchPolls.html">Man van de match</a></li>
-                        <li><a href="/statistics.html">Statistieken</a></li>
-                    </ul>
-                </li>
-                <li><a [routerLink]="['/teams']" routerLinkActive="active">Teams</a></li>
-                <li class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>Doodle <b class="caret"></b></a>
-                    <ul class="dropdown-menu" dropdownMenu>
-                        <li><a href="/doodle.html">Doodle</a></li>
-                        <li><a href="http://doodle.com/zhkfyad4t7m3x42b#table">Trainingsdoodle</a></li>
-                    </ul>
-                </li>
-
-                <li class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle>Info <b class="caret"></b></a>
-                    <ul class="dropdown-menu" dropdownMenu>
-                        <li><a href="/home.html">Algemeen</a></li>
-                        <li><a href="/team.html">Ons team</a></li>
-                    </ul>
-                </li>
-
-
+                <li><a [routerLink]="['/messages']" routerLinkActive="active">{{'nav.messages' | translate}}</a></li>
+                <li><a [routerLink]="['/matches']" routerLinkActive="active">{{'nav.matches' | translate}}</a></li>
+                <li><a [routerLink]="['/manofthematch']" routerLinkActive="active">{{'nav.manOfTheMatch' | translate}}</a></li>
+                <li><a [routerLink]="['/teams']" routerLinkActive="active">{{'nav.teams' | translate}}</a></li>
+                <li><a [routerLink]="['/doodles']" routerLinkActive="active">{{'nav.doodle' | translate}}</a></li>
+                <li><a [routerLink]="['/team']" routerLinkActive="active">{{'nav.team' | translate}}</a></li>
             </ul>
 
         </div>
@@ -126,9 +108,13 @@ export class NavbarComponent implements OnInit {
     return this._loginService.isLoggedIn();
   }
 
-    getUser() {
-        return this._loginService.getUser();
-    }
+  getUser() {
+    return this._loginService.getUser();
+  }
+
+  logout() {
+    this._loginService.logout();
+  }
 }
 
 export interface Lang {

@@ -28,8 +28,8 @@ export class TranslationService {
     // private perform translation
     let translation = key;
 
-      if (dictionary[this.currentLang] && dictionary[this.currentLang][key]) {
-          return dictionary[this.currentLang][key];
+    if (dictionary[this.currentLang] && dictionary[this.currentLang][key]) {
+      return dictionary[this.currentLang][key];
     }
 
     return translation;
