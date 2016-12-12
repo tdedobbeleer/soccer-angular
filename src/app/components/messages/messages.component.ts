@@ -6,6 +6,7 @@ import {LoginService} from "../../services/login.service";
 @Component({
   selector: 'app-messages',
   template: `
+<app-tinymce [elementId]="'test'"></app-tinymce>
   <div class="row m-t-1">
       <div class="col-md-12">
           <div id="blog-homepage" ng-show="!loading">
@@ -27,13 +28,13 @@ export class MessagesComponent implements OnInit {
 
   newsPage: PageDTONewsDTO;
 
+  test: any;
+
   constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
   }
 
   ngOnInit() {
-
     this._api.getNewsPage(0, 10, this._loginService.jwtHeader)
-        .subscribe(n => this.newsPage = n);
+        .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
   }
-
 }

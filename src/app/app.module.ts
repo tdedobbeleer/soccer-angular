@@ -26,6 +26,8 @@ import {MatchesComponent} from "./components/matches/matches.component";
 import {SeasonComponent} from "./components/season/season.component";
 import {MatchesrestcontrollerApi} from "./ws/api/MatchesrestcontrollerApi";
 import {SeasonsrestcontrollerApi} from "./ws/api/SeasonsrestcontrollerApi";
+import {TinymceComponent} from "./components/tinymce/tinymce.component";
+import {CreateMessageComponent} from "./components/create-message/create-message.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -54,7 +56,9 @@ const appRoutes: Routes = [
         TranslationPipe,
         MatchComponent,
         MatchesComponent,
-        SeasonComponent
+        SeasonComponent,
+        TinymceComponent,
+        CreateMessageComponent
     ],
     imports: [
         BrowserModule,
