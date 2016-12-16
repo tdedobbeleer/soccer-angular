@@ -1,6 +1,6 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {AlertModule, DropdownModule, CollapseModule} from "ng2-bootstrap/ng2-bootstrap";
 import {AppComponent} from "./app.component";
@@ -37,6 +37,7 @@ const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'matches', component: MatchesComponent},
     {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardService]},
+    {path: 'messages/create', component: CreateMessageComponent},
     {path: '**', redirectTo: 'not-found'}
 ];
 
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         AlertModule,
         DropdownModule,

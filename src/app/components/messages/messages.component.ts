@@ -6,7 +6,6 @@ import {LoginService} from "../../services/login.service";
 @Component({
   selector: 'app-messages',
   template: `
-<app-tinymce [elementId]="'test'"></app-tinymce>
   <div class="row m-t-1">
       <div class="col-md-12">
           <div id="blog-homepage" ng-show="!loading">
@@ -27,8 +26,6 @@ import {LoginService} from "../../services/login.service";
 export class MessagesComponent implements OnInit {
 
   newsPage: PageDTONewsDTO;
-
-  test: any;
 
   constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
   }
