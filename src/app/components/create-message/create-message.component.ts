@@ -24,6 +24,20 @@ import {NewsDTO} from "../../ws/model/NewsDTO";
             </small>
       <input type="hidden" class="form-control" [formControl]="messageForm.controls['content']">
     </div>
+    <div class="form-group">
+        <div class="radio">
+            <input type="radio" name="radio1" id="radio1" value="option1">
+            <label for="radio1">
+                Small
+            </label>
+        </div>
+        <div class="radio">
+            <input type="radio" name="radio1" id="radio2" value="option2">
+            <label for="radio2">
+                Small
+            </label>
+        </div>
+     </div>
     <div class="box-footer">
     <button type="submit" class="btn btn-default">Submit</button>
     </div>
