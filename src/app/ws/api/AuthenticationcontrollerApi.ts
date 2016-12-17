@@ -21,7 +21,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -57,7 +56,7 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     *
+     * 
      * Extends object by coping non-existing properties.
      * @param objA object to be extended
      * @param objB source object
@@ -73,7 +72,7 @@ export class AuthenticationcontrollerApi {
 
     /**
      * authenticate
-     *
+     * 
      * @param authenticationRequestDTO authenticationRequestDTO
      */
     public authenticate(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<any> {
@@ -89,7 +88,7 @@ export class AuthenticationcontrollerApi {
 
     /**
      * Is fully authenticated
-     *
+     * 
      */
     public isFullyAuthenticated(extraHttpRequestParams?: any): Observable<boolean> {
         return this.isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams)
@@ -104,7 +103,7 @@ export class AuthenticationcontrollerApi {
 
     /**
      * Refresh token
-     *
+     * 
      */
     public refresh(extraHttpRequestParams?: any): Observable<any> {
         return this.refreshWithHttpInfo(extraHttpRequestParams)
@@ -120,7 +119,7 @@ export class AuthenticationcontrollerApi {
 
     /**
      * authenticate
-     *
+     * 
      * @param authenticationRequestDTO authenticationRequestDTO
      */
     public authenticateWithHttpInfo(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<Response> {
@@ -165,7 +164,7 @@ export class AuthenticationcontrollerApi {
 
     /**
      * Is fully authenticated
-     *
+     * 
      */
     public isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + `/api/v1/auth/isFullyAuthenticated`;
@@ -201,10 +200,10 @@ export class AuthenticationcontrollerApi {
 
     /**
      * Refresh token
-     *
+     * 
      */
     public refreshWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/auth/refresh`;
+        const path = this.basePath + `/api/v1/auth/token/refresh`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

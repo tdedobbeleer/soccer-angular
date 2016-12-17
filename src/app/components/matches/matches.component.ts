@@ -29,7 +29,7 @@ export class MatchesComponent implements OnInit {
             .subscribe(r => {
                 Observable.from(r).flatMap(
                     s => {
-                        return this._matchesApi.getMatchesForSeasonUsingGET(s.id, this._loginService.jwtHeader)
+                        return this._matchesApi.matchesForSeason(s.id, this._loginService.jwtHeader)
                             .map(m => {
                                 return {season: s, matches: m};
                             })

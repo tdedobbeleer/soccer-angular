@@ -73,6 +73,7 @@ export class LoginService {
     private getHeaders(token: string) {
         let headers: Headers = new Headers();
         headers.append('X-Auth-Token', token);
+        headers.append("Content-Type", "application/json");
         return {headers: headers};
     }
 

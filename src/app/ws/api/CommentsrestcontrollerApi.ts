@@ -41,12 +41,12 @@ import {Configuration} from "../configuration";
 
 
 @Injectable()
-export class MatchesrestcontrollerApi {
+export class CommentsrestcontrollerApi {
     protected basePath = 'http://localhost:8080/';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected http: Http, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -54,16 +54,16 @@ export class MatchesrestcontrollerApi {
             this.configuration = configuration;
         }
     }
-	
-	/**
-     * 
+
+    /**
+     *
      * Extends object by coping non-existing properties.
      * @param objA object to be extended
      * @param objB source object
      */
     private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
+        for (let key in objB) {
+            if (objB.hasOwnProperty(key)) {
                 objA[key] = objB[key];
             }
         }
@@ -71,27 +71,13 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * getNextMatch
-     * 
-     */
-    public getNextMatchUsingGET(extraHttpRequestParams?: any): Observable<models.MatchDTO> {
-        return this.getNextMatchUsingGETWithHttpInfo(extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
-
-    /**
-     * Get matches for season
+     * Get news
      *
      * @param id id
+     * @param commentId commentId
      */
-    public matchesForSeason(id: number, extraHttpRequestParams?: any): Observable<Array<models.MatchDTO>> {
-        return this.matchesForSeasonWithHttpInfo(id, extraHttpRequestParams)
+    public deleteComment(id: number, commentId: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.deleteCommentWithHttpInfo(id, commentId, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -102,89 +88,58 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Get poll for match
-     * 
-     */
-    public matchpoll(extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
-        return this.matchpollWithHttpInfo(extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
-
-    /**
-     * Get poll for match
-     * 
-     * @param id id
-     */
-    public matchpoll1(id: number, extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
-        return this.matchpoll1WithHttpInfo(id, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
-
-
-    /**
-     * getNextMatch
-     * 
-     */
-    public getNextMatchUsingGETWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matches/next`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            '*/*'
-        ];
-        
-            
-
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-        
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * Get matches for season
+     * Get news
      *
      * @param id id
+     * @param commentDTO commentDTO
      */
-    public matchesForSeasonWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matches/season/${id}`;
+    public editComment(id: number, commentDTO: models.CommentDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.editCommentWithHttpInfo(id, commentDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json();
+                }
+            });
+    }
+
+    /**
+     * Get news
+     *
+     * @param id id
+     * @param commentDTO commentDTO
+     */
+    public postComment(id: number, commentDTO: models.CommentDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.postCommentWithHttpInfo(id, commentDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json();
+                }
+            });
+    }
+
+
+    /**
+     * Get news
+     *
+     * @param id id
+     * @param commentId commentId
+     */
+    public deleteCommentWithHttpInfo(id: number, commentId: number, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/news/${id}/comment/${commentId}`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling matchesForSeason.');
+            throw new Error('Required parameter id was null or undefined when calling deleteComment.');
+        }
+        // verify required parameter 'commentId' is not null or undefined
+        if (commentId === null || commentId === undefined) {
+            throw new Error('Required parameter commentId was null or undefined when calling deleteComment.');
         }
 
 
@@ -197,17 +152,14 @@ export class MatchesrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
+            method: RequestMethod.Delete,
             headers: headers,
             search: queryParameters
         });
-        
+
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
             requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
@@ -217,57 +169,23 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Get poll for match
-     * 
-     */
-    public matchpollWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/match/latest/poll`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            '*/*'
-        ];
-        
-            
-
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-        
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * Get poll for match
-     * 
+     * Get news
+     *
      * @param id id
+     * @param commentDTO commentDTO
      */
-    public matchpoll1WithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/match/${id}/poll`;
+    public editCommentWithHttpInfo(id: number, commentDTO: models.CommentDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/news/${id}/comment`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling matchpoll1.');
+            throw new Error('Required parameter id was null or undefined when calling editComment.');
+        }
+        // verify required parameter 'commentDTO' is not null or undefined
+        if (commentDTO === null || commentDTO === undefined) {
+            throw new Error('Required parameter commentDTO was null or undefined when calling editComment.');
         }
 
 
@@ -280,17 +198,68 @@ export class MatchesrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
 
+
+        headers.set('Content-Type', 'application/json');
 
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
+            method: RequestMethod.Put,
             headers: headers,
+            body: commentDTO == null ? '' : JSON.stringify(commentDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters
         });
-        
+
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Get news
+     *
+     * @param id id
+     * @param commentDTO commentDTO
+     */
+    public postCommentWithHttpInfo(id: number, commentDTO: models.CommentDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/news/${id}/comment`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postComment.');
+        }
+        // verify required parameter 'commentDTO' is not null or undefined
+        if (commentDTO === null || commentDTO === undefined) {
+            throw new Error('Required parameter commentDTO was null or undefined when calling postComment.');
+        }
+
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+
+        headers.set('Content-Type', 'application/json');
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: commentDTO == null ? '' : JSON.stringify(commentDTO), // https://github.com/angular/angular/issues/10612
+            search: queryParameters
+        });
+
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
             requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);

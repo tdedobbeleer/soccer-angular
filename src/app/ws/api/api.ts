@@ -1,4 +1,5 @@
 export * from './AuthenticationcontrollerApi';
+export * from './CommentsrestcontrollerApi';
 export * from './DoodlerestcontrollerApi';
 export * from './MatchesrestcontrollerApi';
 export * from './NewsrestcontrollerApi';

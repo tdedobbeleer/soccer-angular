@@ -14,6 +14,7 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
     }
 
     @Input() elementId: String;
+    @Input() content: String;
     @Output() onEditorKeyup = new EventEmitter<any>();
 
     editor;
@@ -26,6 +27,7 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
             skin_url: '/assets/skins/lightgray',
             setup: editor => {
                 this.editor = editor;
+                this.setContent(editor);
                 editor.on('keyup', () => {
                     const content = editor.getContent();
                     this.zone.run(() => {
@@ -39,6 +41,12 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         tinymce.remove(this.editor);
+    }
+
+    private setContent(editor) {
+        if (this.content) {
+            editor.setContent(this.content);
+        }
     }
 
 }

@@ -28,6 +28,7 @@ import {MatchesrestcontrollerApi} from "./ws/api/MatchesrestcontrollerApi";
 import {SeasonsrestcontrollerApi} from "./ws/api/SeasonsrestcontrollerApi";
 import {TinymceComponent} from "./components/tinymce/tinymce.component";
 import {CreateMessageComponent} from "./components/create-message/create-message.component";
+import {MessageFormComponent} from "./components/message-form/message-form.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
         MatchesComponent,
         SeasonComponent,
         TinymceComponent,
-        CreateMessageComponent
+        CreateMessageComponent,
+        MessageFormComponent
     ],
     imports: [
         BrowserModule,

@@ -1,75 +1,47 @@
 import {Component, OnInit} from "@angular/core";
-import {Validators, FormBuilder, FormGroup} from "@angular/forms";
 import {NewsDTO} from "../../ws/model/NewsDTO";
+import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
+import {LoginService} from "../../services/login.service";
 
 @Component({
     selector: 'app-create-message',
     template: `
-<div class="box">
-<h1>Add message</h1>
+<div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a href="/">{{'nav.home' | translate}}</a>
+            </li>
+            <li>{{'nav.messages.create' | translate}}
+            </li>
+        </ul>
+    </div>
     
-  <form [formGroup]="messageForm" novalidate (ngSubmit)="save(messageForm.value, messageForm.valid)">
-    <div class="form-group">
-      <label for="header">Title</label>
-      <input type="text" class="form-control" [formControl]="messageForm.controls['header']">
-      <small *ngIf="submitted && messageForm.controls.header.errors" class="text-danger">
-            Title is required.
-          </small>
-    </div>
-    <div class="form-group">
-      <label for="content">Message</label>
-      <app-tinymce [elementId]="'contentTinyMce'" (onEditorKeyup)="tinyMceCallback($event)"></app-tinymce>
-      <small *ngIf="submitted && messageForm.controls.content.errors" class="text-danger">
-              Content is required.
-            </small>
-      <input type="hidden" class="form-control" [formControl]="messageForm.controls['content']">
-    </div>
-    <div class="form-group">
-        <div class="radio">
-            <input type="radio" name="radio1" id="radio1" value="option1">
-            <label for="radio1">
-                Small
-            </label>
-        </div>
-        <div class="radio">
-            <input type="radio" name="radio1" id="radio2" value="option2">
-            <label for="radio2">
-                Small
-            </label>
-        </div>
-     </div>
-    <div class="box-footer">
-    <button type="submit" class="btn btn-default">Submit</button>
-    </div>
-  </form>
+  <div class="col-md-12">
+    <app-message-form (onSubmit)="save($event)" [content]="" [header]="" [update]="false"></app-message-form>
   </div>
+
   `,
     styles: []
 })
 export class CreateMessageComponent implements OnInit {
 
-    public messageForm: FormGroup;
-    public submitted: boolean;
-    public events: any[] = [];
-
-    constructor(private _fb: FormBuilder) {
+    constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
     }
 
     ngOnInit() {
-        // the short way
-        this.messageForm = this._fb.group({
-            header: ['', [<any>Validators.required]],
-            content: ['', [<any>Validators.required]],
-        });
+
     }
 
-    save(model: NewsDTO, isValid: boolean) {
-        this.submitted = true;
-        console.log(model, isValid);
+    save(model: NewsDTO) {
+        this._api.postNews(model, this._loginService.jwtHeader).subscribe(
+            r => {
+                console.log("Posted");
+            },
+            error => {
+                console.log("error");
+            },
+            () => {
+                console.log("completed");
+            }
+        )
     }
-
-    private tinyMceCallback(event) {
-        this.messageForm.patchValue({content: event})
-    }
-
 }
