@@ -29,6 +29,7 @@ import {SeasonsrestcontrollerApi} from "./ws/api/SeasonsrestcontrollerApi";
 import {TinymceComponent} from "./components/tinymce/tinymce.component";
 import {CreateMessageComponent} from "./components/create-message/create-message.component";
 import {MessageFormComponent} from "./components/message-form/message-form.component";
+import {AuthGuardAdminService} from "./services/auth-guard-admin.service";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -37,8 +38,8 @@ const appRoutes: Routes = [
     {path: 'teams', component: TeamsListComponent},
     {path: 'login', component: LoginComponent},
     {path: 'matches', component: MatchesComponent},
-    {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardService]},
-    {path: 'messages/create', component: CreateMessageComponent},
+    {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: '**', redirectTo: 'not-found'}
 ];
 

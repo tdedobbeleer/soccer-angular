@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {Router, CanActivate, RouterState} from '@angular/router';
+import {Injectable} from "@angular/core";
+import {Router, CanActivate} from "@angular/router";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -8,8 +8,9 @@ export class AuthGuardService implements CanActivate {
 
   canActivate() {
     let url : string = this.router.routerState.snapshot.url;
-    if (localStorage.getItem('currentUser')) {
-      // logged in so return true
+    let currentUser: any = localStorage.getItem('currentUser');
+    if (currentUser && AuthGuardService.hasRole(currentUser.roles, "ROLE_ADMIN")) {
+      // logged in and has role so true
       return true;
     }
 
@@ -17,4 +18,9 @@ export class AuthGuardService implements CanActivate {
     this.router.navigate(['/login'], {queryParams : {redirectUrl : url}});
     return false;
   }
+
+  private static hasRole(roles: any[], role: string): boolean {
+    return roles.indexOf(role) > -1
+  }
+
 }
