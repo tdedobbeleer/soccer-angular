@@ -30,6 +30,7 @@ import {TinymceComponent} from "./components/tinymce/tinymce.component";
 import {CreateMessageComponent} from "./components/create-message/create-message.component";
 import {MessageFormComponent} from "./components/message-form/message-form.component";
 import {AuthGuardAdminService} from "./services/auth-guard-admin.service";
+import {PaginationComponent} from "./components/pagination/pagination.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -62,7 +63,8 @@ const appRoutes: Routes = [
         SeasonComponent,
         TinymceComponent,
         CreateMessageComponent,
-        MessageFormComponent
+        MessageFormComponent,
+        PaginationComponent
     ],
     imports: [
         BrowserModule,

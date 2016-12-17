@@ -8,6 +8,7 @@ import {LoginService} from "../../services/login.service";
   template: `
   <div class="row m-t-1">
       <div class="col-md-12">
+          <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
           <div id="blog-homepage" ng-show="!loading">
               <div id="default">
                   <div class="news-div">
@@ -17,6 +18,7 @@ import {LoginService} from "../../services/login.service";
                   </div>
               </div>
           </div>
+          <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
       </div>
   </div>
  
@@ -32,6 +34,11 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit() {
     this._api.getNewsPage(0, 10, this._loginService.jwtHeader)
+        .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
+  }
+
+  getPage(page: number) {
+    this._api.getNewsPage(page, 10, this._loginService.jwtHeader)
         .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
   }
 }

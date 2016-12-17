@@ -50,7 +50,7 @@ import {NewsDTO} from "../../ws/model/NewsDTO";
        </div>
        
       <div class="box-footer">
-      <button type="submit" class="btn btn-default">{{"btn.submit" | translate}}</button>
+      <button type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
       </div>
     </form>
     </div>
