@@ -80,6 +80,7 @@ const appRoutes: Routes = [
         SeasonsrestcontrollerApi,
         AuthenticationcontrollerApi,
         AuthGuardService,
+        AuthGuardAdminService,
         LoginService,
         TranslationService
     ],
