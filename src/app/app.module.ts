@@ -31,6 +31,7 @@ import {CreateMessageComponent} from "./components/create-message/create-message
 import {MessageFormComponent} from "./components/message-form/message-form.component";
 import {AuthGuardAdminService} from "./services/auth-guard-admin.service";
 import {PaginationComponent} from "./components/pagination/pagination.component";
+import {CommentsrestcontrollerApi} from "./ws/api/CommentsrestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
         NewsrestcontrollerApi,
         MatchesrestcontrollerApi,
         SeasonsrestcontrollerApi,
+        CommentsrestcontrollerApi,
         AuthenticationcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,

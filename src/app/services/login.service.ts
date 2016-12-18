@@ -8,6 +8,7 @@ import {Headers} from "@angular/http";
 export class LoginService {
     public jwtHeader;
 
+    private user: any = null;
     private LOCAL_STORAGE_USER: string = 'currentUser';
 
     constructor(private _api: AuthenticationcontrollerApi) {
@@ -16,7 +17,7 @@ export class LoginService {
 
     init() {
         // set token if saved in local storage
-        let currentUser = this.getUser();
+        let currentUser = this.getUserFromStorage();
         //Set user
         this.setUser(currentUser);
         //set default headers
@@ -55,14 +56,19 @@ export class LoginService {
 
     logout(): void {
         this.resetHeaders();
+        this.user = null;
         localStorage.removeItem(this.LOCAL_STORAGE_USER);
     }
 
     isLoggedIn(): boolean {
-        return localStorage.getItem(this.LOCAL_STORAGE_USER) != null;
+        return this.user != null;
     }
 
     getUser() {
+        return this.user;
+    }
+
+    private getUserFromStorage() {
         return JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_USER));
     }
 
@@ -82,6 +88,7 @@ export class LoginService {
             //store username and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem(this.LOCAL_STORAGE_USER, JSON.stringify(user));
             this.jwtHeader = this.getHeaders(user.token);
+            this.user = user;
         }
     }
 }
