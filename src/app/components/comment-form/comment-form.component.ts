@@ -20,7 +20,7 @@ import {CommentDTO} from "../../ws/model/CommentDTO";
   styles: []
 })
 export class CommentFormComponent implements OnInit {
-  @Input() comment: string;
+  @Input() comment: CommentDTO;
 
   @Output() onSubmit = new EventEmitter<any>();
 
@@ -36,7 +36,7 @@ export class CommentFormComponent implements OnInit {
     this.messageForm = this._fb.group({
       content: ['', [<any>Validators.required]],
     });
-    this.messageForm.patchValue({content: this.comment});
+    this.messageForm.patchValue({content: this.comment.content});
   }
 
   submit(model: CommentDTO, isValid: boolean) {

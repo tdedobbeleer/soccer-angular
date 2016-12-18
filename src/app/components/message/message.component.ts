@@ -1,4 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input} from "@angular/core";
+import {CommentsrestcontrollerApi} from "../../ws/api/CommentsrestcontrollerApi";
+import {CommentDTO} from "../../ws/model/CommentDTO";
 
 @Component({
   selector: 'app-message',
@@ -17,7 +19,9 @@ import {Component, OnInit, Input} from '@angular/core';
         </div>
       </div>
       <div class="m-t-1">
-        <app-comment-list [commentList]="message?.comments"></app-comment-list>
+        <div class="comment post" *ngFor="let comment of message?.comments">
+            <app-comment [comment]="comment" (onSubmit)="updateComment($event)"></app-comment>
+        </div>
       </div>
     </div>
   `,
@@ -26,9 +30,17 @@ import {Component, OnInit, Input} from '@angular/core';
 export class MessageComponent implements OnInit {
   @Input() message;
 
-  constructor() { }
+  constructor(private _api: CommentsrestcontrollerApi) {
+  }
 
   ngOnInit() {
+  }
+
+  updateComment(comment: CommentDTO) {
+    this._api.editComment(comment.id, comment)
+        .subscribe(r => {
+          console.log("success")
+        })
   }
 
 }

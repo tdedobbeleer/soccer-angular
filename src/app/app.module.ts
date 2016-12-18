@@ -12,7 +12,6 @@ import {TeamsListComponent} from "./components/teams-list/teams-list.component";
 import {MessageComponent} from "./components/message/message.component";
 import {NewsrestcontrollerApi} from "./ws/api/NewsrestcontrollerApi";
 import {AuthenticationcontrollerApi} from "./ws/api/AuthenticationcontrollerApi";
-import {CommentListComponent} from "./components/comment-list/comment-list.component";
 import {CommentFormComponent} from "./components/comment-form/comment-form.component";
 import {LoginComponent} from "./components/login/login.component";
 import {AuthGuardService} from "./services/auth-guard.service";
@@ -32,6 +31,7 @@ import {MessageFormComponent} from "./components/message-form/message-form.compo
 import {AuthGuardAdminService} from "./services/auth-guard-admin.service";
 import {PaginationComponent} from "./components/pagination/pagination.component";
 import {CommentsrestcontrollerApi} from "./ws/api/CommentsrestcontrollerApi";
+import {CommentComponent} from "./components/comment/comment.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -54,7 +54,6 @@ const appRoutes: Routes = [
         FooterComponent,
         TeamsListComponent,
         MessageComponent,
-        CommentListComponent,
         CommentFormComponent,
         LoginComponent,
         AccountsComponent,
@@ -65,7 +64,8 @@ const appRoutes: Routes = [
         TinymceComponent,
         CreateMessageComponent,
         MessageFormComponent,
-        PaginationComponent
+        PaginationComponent,
+        CommentComponent
     ],
     imports: [
         BrowserModule,
