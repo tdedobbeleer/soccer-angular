@@ -1,4 +1,4 @@
-# MigrationProject
+# Angular soccer
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
@@ -30,7 +30,16 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## Dev environment
+## Local environment
+Debian env:
+- sudo apt-get install npm
+- npm install npm@latest -g (latest nodejs version)
+
 Install dependencies:
+- npm install
+
+Install seperately if needed:
 - npm install --save tinymce
 - npm install --save ng2-bootstrap
+
+Then try `ng serve`
