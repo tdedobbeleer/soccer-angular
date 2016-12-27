@@ -33,10 +33,10 @@ To get more help on the `angular-cli` use `ng --help` or go check out the [Angul
 ## Local environment
 Debian env:
 - sudo apt-get install npm
-- npm install npm@latest -g (latest nodejs version)
+- sudo npm install npm@latest -g (latest nodejs version)
 
 Install dependencies:
-- npm install
+- sudo npm install
 
 Install seperately if needed:
 - npm install --save tinymce
