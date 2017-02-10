@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, EventEmitter, Output} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {CommentDTO} from "../../ws/model/CommentDTO";
 import {LoginService} from "../../services/login.service";
+import {CommentsrestcontrollerApi} from "../../ws/api/CommentsrestcontrollerApi";
 
 @Component({
     selector: 'app-comment',
@@ -16,16 +17,17 @@ import {LoginService} from "../../services/login.service";
       </span>
     </div>
     <span class="m-t-1" *ngIf="showEditComment && isLoggedIn() && getUser().username == comment?.postedBy?.username">
-        <app-comment-form (onSubmit)="submit($event)" [comment]="comment"></app-comment-form>    
+        <app-comment-form (onSubmit)="updateComment($event)" [comment]="comment"></app-comment-form>    
     </span>
   `,
     styles: []
 })
 export class CommentComponent implements OnInit {
     @Input() comment: CommentDTO;
-    @Output() onSubmit = new EventEmitter<any>();
 
-    constructor(private _loginService: LoginService) {
+    private showEditComment: boolean;
+
+    constructor(private _loginService: LoginService, private _api: CommentsrestcontrollerApi) {
     }
 
     ngOnInit() {
@@ -40,7 +42,11 @@ export class CommentComponent implements OnInit {
     }
 
     updateComment(comment: CommentDTO) {
-        this.onSubmit.emit(comment);
+        this.showEditComment = false;
+        this._api.editComment(comment.id, comment, this._loginService.jwtHeader)
+            .subscribe(r => {
+                console.log("success")
+            })
     }
 
 }

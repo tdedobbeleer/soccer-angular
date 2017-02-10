@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from "@angular/core";
 import {CommentsrestcontrollerApi} from "../../ws/api/CommentsrestcontrollerApi";
 import {CommentDTO} from "../../ws/model/CommentDTO";
 import {LoginService} from "../../services/login.service";
+import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
 
 @Component({
   selector: 'app-message',
@@ -35,7 +36,7 @@ import {LoginService} from "../../services/login.service";
         </div>
         <div class="m-t-1">
           <div class="comment post" *ngFor="let comment of message?.comments">
-              <app-comment [comment]="comment" (onSubmit)="updateComment($event)"></app-comment>
+              <app-comment [comment]="comment"></app-comment>
           </div>
         </div>
       </div>
@@ -46,7 +47,9 @@ import {LoginService} from "../../services/login.service";
 export class MessageComponent implements OnInit {
   @Input() message;
 
-  constructor(private _api: CommentsrestcontrollerApi, private _loginService: LoginService) {
+  private showShowCreateComment: boolean;
+
+  constructor(private _api: CommentsrestcontrollerApi, private _messagesApi: NewsrestcontrollerApi, private _loginService: LoginService) {
   }
 
   ngOnInit() {
@@ -60,17 +63,13 @@ export class MessageComponent implements OnInit {
     return {id: id, content: ""}
   }
 
-  updateComment(comment: CommentDTO) {
-    this._api.editComment(comment.id, comment, this._loginService.jwtHeader)
-        .subscribe(r => {
-          console.log("success")
-        })
-  }
-
   createComment(comment: CommentDTO) {
+    this.showShowCreateComment = false;
     this._api.postComment(comment.id, comment, this._loginService.jwtHeader)
         .subscribe(r => {
-          console.log("success")
+          console.log("success");
+          //Get message again
+          this.message = this._messagesApi.getNews(this.message.id, this._loginService.jwtHeader);
         })
   }
 
