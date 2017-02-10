@@ -7,7 +7,7 @@ import {CommentDTO} from "../../ws/model/CommentDTO";
   template: `
  <form [formGroup]="messageForm" novalidate (ngSubmit)="submit(messageForm.value, messageForm.valid)">
       <div class="form-group">
-         <input type="text" class="form-control" [formControl]="messageForm.controls['content']">
+         <textarea rows="5" type="text" class="form-control" [formControl]="messageForm.controls['content']"></textarea>
          <small *ngIf="submitted && messageForm.controls.content.errors" class="text-danger">
                 {{"validation.comment.empty" | translate}}
               </small>
@@ -34,9 +34,10 @@ export class CommentFormComponent implements OnInit {
   ngOnInit() {
     // the short way
     this.messageForm = this._fb.group({
+        id: ['', [<any>Validators.required]],
       content: ['', [<any>Validators.required]],
     });
-    this.messageForm.patchValue({content: this.comment.content});
+      this.messageForm.patchValue({content: this.comment.content, id: this.comment.id});
   }
 
   submit(model: CommentDTO, isValid: boolean) {
@@ -46,6 +47,4 @@ export class CommentFormComponent implements OnInit {
     }
     console.log(model, isValid);
   }
-
-
 }
