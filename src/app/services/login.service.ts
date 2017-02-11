@@ -68,6 +68,10 @@ export class LoginService {
         return this.user;
     }
 
+    isAdmin() {
+        return (-1 !== this.user.roles.indexOf("ROLE_ADMIN"));
+    }
+
     private getUserFromStorage() {
         return JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_USER));
     }

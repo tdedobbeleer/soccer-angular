@@ -32,6 +32,7 @@ import {AuthGuardAdminService} from "./services/auth-guard-admin.service";
 import {PaginationComponent} from "./components/pagination/pagination.component";
 import {CommentsrestcontrollerApi} from "./ws/api/CommentsrestcontrollerApi";
 import {CommentComponent} from "./components/comment/comment.component";
+import {BASE_PATH} from "./ws/variables";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
+        {provide: BASE_PATH, useValue: 'http://localhost:8080'},
         NewsrestcontrollerApi,
         MatchesrestcontrollerApi,
         SeasonsrestcontrollerApi,

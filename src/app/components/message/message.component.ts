@@ -21,7 +21,7 @@ import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
         </div>
         <div class="pull-right">
         <span class="btn-group" *ngIf="isLoggedIn()">
-            <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create comment" (click)="showShowCreateComment = !showShowCreateComment">
+            <button type="button" class="btn btn-lg btn-info btn-circle" aria-label="Create comment" (click)="showShowCreateComment = !showShowCreateComment">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
         </span>  
@@ -35,8 +35,8 @@ import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
           </span>
         </div>
         <div class="m-t-1">
-          <div class="comment post" *ngFor="let comment of message?.comments">
-              <app-comment [comment]="comment"></app-comment>
+          <div *ngFor="let comment of message?.comments">
+              <app-comment [comment]="comment" [messageId]="message.id"></app-comment>
           </div>
         </div>
       </div>
@@ -69,8 +69,8 @@ export class MessageComponent implements OnInit {
         .subscribe(r => {
           console.log("success");
           //Get message again
-          this.message = this._messagesApi.getNews(this.message.id, this._loginService.jwtHeader);
+          this._messagesApi.getNews(this.message.id, this._loginService.jwtHeader)
+              .subscribe(r => this.message = r);
         })
   }
-
 }

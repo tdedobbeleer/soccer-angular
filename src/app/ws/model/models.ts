@@ -1,4 +1,3 @@
-export * from './Account';
 export * from './AccountDTO';
 export * from './AuthenticationRequestDTO';
 export * from './CommentDTO';
