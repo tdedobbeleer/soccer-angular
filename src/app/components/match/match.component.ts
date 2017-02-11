@@ -28,18 +28,22 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
    
     <div class="box">
         <div class="row visible-xs text-center">
-            <span class="col-xs-12"><h3>{{match?.date}}</h3></span>
+            <div class="col-xs-12"><h3>{{match?.date}}</h3></div>
         </div>
         <div class="row match-my-cols">
-            <span class="col-md-2 col-xs-2 hidden-xs"><h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h3></span>
-            <span class="col-md-2 col-xs-4 right"><h3>{{match?.homeTeam}}</h3></span>
-            <span class="col-md-2 col-xs-2 text-center score"><h2>{{match?.htGoals}} - {{match?.atGoals}}</h2></span>
-            <span class="col-md-2 col-xs-4 left"><h3>{{match?.awayTeam}}</h3></span>
+            <div class="col-md-2 col-xs-12 hidden-xs"><h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h3></div>
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-2 col-xs-3 right"><h2>{{match?.homeTeam}}</h2></div>
+                    <div class="col-md-2 col-xs-6 text-center score"><h2>{{match?.htGoals}} - {{match?.atGoals}}</h2></div>
+                    <div class="col-md-2 col-xs-3 left"><h2>{{match?.awayTeam}}</h2></div>
+                </div>
+            </div>
         </div>
         <div class="row text-center">
-            <span class="col-md-2 col-md-offset-4 col-xs-12 text-center">
+            <div class="col-md-2 col-md-offset-4 col-xs-12 text-center">
                 <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
-            </span>
+            </div>
         </div>
     </div>
 `

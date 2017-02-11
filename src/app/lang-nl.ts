@@ -19,5 +19,7 @@ export const LANG_NL_TRANS = {
     'nav.contact': 'Contact',
     'label.username' : 'Email adres',
     'label.password' : 'Wachtwoord',
-    'btn.login' : 'Inloggen'
+    'btn.login': 'Inloggen',
+    'btn.reactions': 'Reacties',
+    'btn.submit': 'Verzenden'
 };

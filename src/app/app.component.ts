@@ -7,9 +7,7 @@ import {LoginService} from "./services/login.service";
     <app-navbar></app-navbar>
     <div id="all">
         <div id="content">
-            <div class="container">
-                <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>
     </div>

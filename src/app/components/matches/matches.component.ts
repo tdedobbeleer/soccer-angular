@@ -8,9 +8,11 @@ import {Observable} from "rxjs";
 @Component({
     selector: 'app-matches',
     template: `
-    <div *ngIf="loaded">
-      <app-season 
-      *ngFor="let season of seasons" [season]="season.season" [matches]="season.matches"></app-season>
+    <div class="container">
+        <div *ngIf="loaded">
+          <app-season 
+          *ngFor="let season of seasons" [season]="season.season" [matches]="season.matches"></app-season>
+        </div>
     </div>
   `,
     styles: []

@@ -6,17 +6,19 @@ import {LoginService} from "../../services/login.service";
 @Component({
     selector: 'app-create-message',
     template: `
-<div class="col-md-12">
-        <ul class="breadcrumb">
-            <li><a href="/">{{'nav.home' | translate}}</a>
-            </li>
-            <li>{{'nav.messages.create' | translate}}
-            </li>
-        </ul>
-    </div>
-    
-  <div class="col-md-12">
-    <app-message-form (onSubmit)="save($event)" [content]="" [header]="" [update]="false"></app-message-form>
+  <div class="container">
+      <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a href="/">{{'nav.home' | translate}}</a>
+                </li>
+                <li>{{'nav.messages.create' | translate}}
+                </li>
+            </ul>
+        </div>
+        
+      <div class="col-md-12">
+        <app-message-form (onSubmit)="save($event)" [content]="" [header]="" [update]="false"></app-message-form>
+      </div>
   </div>
 
   `,

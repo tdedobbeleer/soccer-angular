@@ -19,5 +19,7 @@ export const LANG_EN_TRANS = {
     'nav.contact': 'Contact',
     'label.username' : 'Email address',
     'label.password' : 'Password',
-    'btn.login' : 'Login'
+    'btn.login': 'Login',
+    'btn.reactions': 'Reactions',
+    'btn.submit': 'Submit'
 };

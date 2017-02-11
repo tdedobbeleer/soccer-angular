@@ -6,22 +6,30 @@ import {LoginService} from "../../services/login.service";
 @Component({
   selector: 'app-messages',
   template: `
-  <div class="row m-t-1">
-      <div class="col-md-12">
-          <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
-          <div id="blog-homepage" ng-show="!loading">
-              <div id="default">
-                  <div class="news-div">
-                    <app-message
-                      *ngFor="let message of newsPage?.list" [message]="message">
-                    </app-message>
-                  </div>
-              </div>
-          </div>
-          <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
-      </div>
+  <div class="pull-right">
+   <span class="btn-group" *ngIf="isAdmin()">
+        <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/messages/create']" routerLinkActive="active">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+    </span>  
   </div>
- 
+  <div class="container">
+    <div class="row m-t-1">
+        <div class="col-md-12">
+            <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
+            <div id="blog-homepage" ng-show="!loading">
+                <div id="default">
+                    <div class="news-div">
+                      <app-message
+                        *ngFor="let message of newsPage?.list" [message]="message">
+                      </app-message>
+                    </div>
+                </div>
+            </div>
+            <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
+        </div>
+    </div>
+  </div> 
   `,
   styles: []
 })
@@ -40,5 +48,9 @@ export class MessagesComponent implements OnInit {
   getPage(page: number) {
     this._api.getNewsPage(page, 10, this._loginService.jwtHeader)
         .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
+  }
+
+  isAdmin() {
+    return this._loginService.isAdmin();
   }
 }

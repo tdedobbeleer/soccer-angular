@@ -35,6 +35,10 @@
     background: #555555;
 }
 
+.full-width {
+    min-width: 100%;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

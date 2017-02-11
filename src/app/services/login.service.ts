@@ -69,7 +69,7 @@ export class LoginService {
     }
 
     isAdmin() {
-        return (-1 !== this.user.roles.indexOf("ROLE_ADMIN"));
+        return (this.isLoggedIn() && -1 !== this.user.roles.indexOf("ROLE_ADMIN"));
     }
 
     private getUserFromStorage() {
