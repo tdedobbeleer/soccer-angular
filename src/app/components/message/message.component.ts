@@ -11,6 +11,10 @@ import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
       <div>
         <h4>
             <span>{{message.header}}</span>
+            <span class="pull-right">
+                <a class="commentBtn" (click)="showAllComments = !showAllComments" href="#comments_{{message.id}}">
+                {{'btn.reactions' | translate}}&nbsp;<span class="badge">{{message?.comments.length}}</span></a>
+            </span>
         </h4>
         <hr>
         <span align="left" [innerHTML]="message.content"></span>
@@ -34,7 +38,7 @@ import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
               <app-comment-form (onSubmit)="createComment($event)" [comment]="getNewComment(message.id)"></app-comment-form>    
           </span>
         </div>
-        <div class="m-t-1">
+        <div class="m-t-1" *ngIf="showAllComments" id="comments_{{message.id}}">
           <div *ngFor="let comment of message?.comments">
               <app-comment [comment]="comment" [messageId]="message.id"></app-comment>
           </div>
