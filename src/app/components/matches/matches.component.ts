@@ -8,6 +8,13 @@ import {Observable} from "rxjs";
 @Component({
     selector: 'app-matches',
     template: `
+    <div class="pull-right">
+        <span class="btn-group" *ngIf="isAdmin()">
+            <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </span>  
+    </div>
     <div class="container">
         <div *ngIf="loaded">
           <app-season 
@@ -42,6 +49,10 @@ export class MatchesComponent implements OnInit {
                         this.loaded = true;
                     })
             })
+    }
+
+    isAdmin() {
+        return this._loginService.isAdmin();
     }
 }
 
