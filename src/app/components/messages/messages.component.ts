@@ -6,13 +6,34 @@ import {LoginService} from "../../services/login.service";
 @Component({
   selector: 'app-messages',
   template: `
-  <div class="pull-right">
-   <span class="btn-group" *ngIf="isAdmin()">
-        <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/messages/create']" routerLinkActive="active">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </button>
-    </span>  
+   <div class="container m-t-1">
+    <ul class="breadcrumb">
+        <li>Home
+        </li>
+    </ul>
+    <div class="col-md-3 col-md-offset-9">
+    <div class="row">
+       <div class="input-group">
+          <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'text.search' | translate}}">
+          <span class="input-group-btn">
+                  <button (click)="getPage(0)" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="row m-t-1">
+    <div class="col-md-2 col-md-offset-9 col-xs-12">
+      <div class="pull-right">
+       <span class="btn-group" *ngIf="isAdmin()">
+            <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/messages/create']" routerLinkActive="active">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </span>  
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <div class="row m-t-1">
         <div class="col-md-12">
@@ -37,16 +58,18 @@ export class MessagesComponent implements OnInit {
 
   newsPage: PageDTONewsDTO;
 
+  searchTerm: string;
+
   constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
   }
 
   ngOnInit() {
-    this._api.getNewsPage(0, 10, this._loginService.jwtHeader)
+    this._api.getNewsPage(0, "", 10, this._loginService.jwtHeader)
         .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
   }
 
   getPage(page: number) {
-    this._api.getNewsPage(page, 10, this._loginService.jwtHeader)
+    this._api.getNewsPage(page, this.searchTerm, 10, this._loginService.jwtHeader)
         .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
   }
 

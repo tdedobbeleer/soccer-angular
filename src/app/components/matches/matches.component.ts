@@ -8,12 +8,14 @@ import {Observable} from "rxjs";
 @Component({
     selector: 'app-matches',
     template: `
-    <div class="pull-right">
-        <span class="btn-group" *ngIf="isAdmin()">
-            <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            </button>
-        </span>  
+    <div class="col-md-2 col-md-offset-9">
+        <div class="pull-right">
+            <span class="btn-group" *ngIf="isAdmin()">
+                <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </span>  
+        </div>
     </div>
     <div class="container">
         <div *ngIf="loaded">

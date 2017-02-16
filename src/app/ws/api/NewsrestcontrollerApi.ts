@@ -94,10 +94,11 @@ export class NewsrestcontrollerApi {
      * Get news
      * 
      * @param page page
+     * @param searchTerm searchTerm
      * @param size size
      */
-    public getNewsPage(page: number, size?: number, extraHttpRequestParams?: any): Observable<models.PageDTONewsDTO> {
-        return this.getNewsPageWithHttpInfo(page, size, extraHttpRequestParams)
+    public getNewsPage(page: number, searchTerm?: string, size?: number, extraHttpRequestParams?: any): Observable<models.PageDTONewsDTO> {
+        return this.getNewsPageWithHttpInfo(page, searchTerm, size, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -114,24 +115,6 @@ export class NewsrestcontrollerApi {
      */
     public postNews(newsDTO: models.NewsDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
         return this.postNewsWithHttpInfo(newsDTO, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
-                }
-            });
-    }
-
-    /**
-     * Search news
-     * 
-     * @param term term
-     * @param page page
-     * @param size size
-     */
-    public searchNewsPage(term: string, page: number, size?: number, extraHttpRequestParams?: any): Observable<models.PageDTONewsDTO> {
-        return this.searchNewsPageWithHttpInfo(term, page, size, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -234,9 +217,10 @@ export class NewsrestcontrollerApi {
      * Get news
      * 
      * @param page page
+     * @param searchTerm searchTerm
      * @param size size
      */
-    public getNewsPageWithHttpInfo(page: number, size?: number, extraHttpRequestParams?: any): Observable<Response> {
+    public getNewsPageWithHttpInfo(page: number, searchTerm?: string, size?: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + `/api/v1/news`;
 
         let queryParameters = new URLSearchParams();
@@ -244,6 +228,9 @@ export class NewsrestcontrollerApi {
         // verify required parameter 'page' is not null or undefined
         if (page === null || page === undefined) {
             throw new Error('Required parameter page was null or undefined when calling getNewsPage.');
+        }
+        if (searchTerm !== undefined) {
+            queryParameters.set('searchTerm', <any>searchTerm);
         }
         if (page !== undefined) {
             queryParameters.set('page', <any>page);
@@ -316,62 +303,6 @@ export class NewsrestcontrollerApi {
             method: RequestMethod.Post,
             headers: headers,
             body: newsDTO == null ? '' : JSON.stringify(newsDTO), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
-        });
-        
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * Search news
-     * 
-     * @param term term
-     * @param page page
-     * @param size size
-     */
-    public searchNewsPageWithHttpInfo(term: string, page: number, size?: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news/search/${term}`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'term' is not null or undefined
-        if (term === null || term === undefined) {
-            throw new Error('Required parameter term was null or undefined when calling searchNewsPage.');
-        }
-        // verify required parameter 'page' is not null or undefined
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling searchNewsPage.');
-        }
-        if (page !== undefined) {
-            queryParameters.set('page', <any>page);
-        }
-        if (size !== undefined) {
-            queryParameters.set('size', <any>size);
-        }
-
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            '*/*'
-        ];
-        
-            
-
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
             search: queryParameters
         });
         

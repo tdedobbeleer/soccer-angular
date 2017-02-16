@@ -3,6 +3,7 @@
 export const LANG_NL_NAME = 'nl';
 
 export const LANG_NL_TRANS = {
+    'text.search': 'Zoeken',
     'hello world': 'hello world',
     'nav.messages': 'Berichten',
     'nav.login' : 'Inloggen',

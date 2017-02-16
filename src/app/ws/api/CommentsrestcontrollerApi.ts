@@ -64,7 +64,7 @@ export class CommentsrestcontrollerApi {
      * @param id id
      * @param commentId commentId
      */
-    public deleteComment(id: number, commentId: number, extraHttpRequestParams?: any): Observable<{}> {
+    public deleteComment(id: number, commentId: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
         return this.deleteCommentWithHttpInfo(id, commentId, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {

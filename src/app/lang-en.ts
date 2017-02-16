@@ -3,6 +3,7 @@
 export const LANG_EN_NAME = 'en';
 
 export const LANG_EN_TRANS = {
+    'text.search': 'Search',
     'hello world': 'hello world',
     'nav.messages': 'Messages',
     'nav.login' : 'Login',
