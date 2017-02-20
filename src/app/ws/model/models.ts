@@ -1,4 +1,5 @@
 export * from './AccountDTO';
+export * from './AddressDTO';
 export * from './AuthenticationRequestDTO';
 export * from './CommentDTO';
 export * from './DoodleDTO';
@@ -14,4 +15,5 @@ export * from './PageDTONewsDTO';
 export * from './PresenceDTO';
 export * from './ResponseEntity';
 export * from './SeasonDTO';
+export * from './TeamDTO';
 export * from './VotesDTO';

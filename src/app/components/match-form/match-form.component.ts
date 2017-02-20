@@ -1,14 +1,13 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
-import {LoginService} from "../../services/login.service";
-import {NewsDTO} from "../../ws/model/NewsDTO";
+import {MatchDTO} from "../../ws/model/MatchDTO";
+import {MatchesrestcontrollerApi} from "../../ws/api/MatchesrestcontrollerApi";
 
 @Component({
-    selector: 'app-message-form',
+    selector: 'app-match-form',
     template: `
-
-    <div class="box">  
+  
+  <div class="box">  
     <form [formGroup]="messageForm" novalidate (ngSubmit)="submit(messageForm.value, messageForm.valid)">
       <div class="form-group">
         <label for="header">{{"label.message.title" | translate}}</label>
@@ -54,69 +53,49 @@ import {NewsDTO} from "../../ws/model/NewsDTO";
       </div>
     </form>
     </div>
-`,
-    styles: []
+`
 })
-export class MessageFormComponent implements OnInit {
+export class MatchFormComponent implements OnInit {
+
     @Input() update: boolean;
-    @Input() header: string;
-    @Input() public content: string;
+    @Input() match: MatchDTO;
 
-    @Output() onSubmit = new EventEmitter<any>();
-
-    public messageForm: FormGroup;
+    public matchForm: FormGroup;
     public submitted: boolean;
 
-    constructor(private _fb: FormBuilder, private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
+    constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi) {
     }
 
     ngOnInit() {
-        // the short way
-        this.messageForm = this._fb.group({
-            header: ['', [<any>Validators.required]],
-            content: ['', [<any>Validators.required]],
-            type: ['', [<any>Validators.required]]
+        this.matchForm = this._fb.group({
+            homeTeam: ['', [<any>Validators.required]],
+            awayTeam: ['', [<any>Validators.required]],
+            season: ['', [<any>Validators.required]],
+            date: ['', [<any>Validators.required]],
+            status: ['', [<any>Validators.required]],
+            atgoals: ['', [<any>Validators.required]],
+            htgoals: ['', [<any>Validators.required]]
         });
-        this.messageForm.patchValue({header: this.header});
-        this.messageForm.patchValue({content: this.content});
+        this.matchForm.patchValue({homeTeam: this.match.homeTeam});
+        this.matchForm.patchValue({awayTeam: this.match.awayTeam});
+        this.matchForm.patchValue({season: this.match.season});
+        this.matchForm.patchValue({date: this.match.date});
+        this.matchForm.patchValue({status: this.match.status});
+        this.matchForm.patchValue({atGoals: this.match.atGoals});
+        this.matchForm.patchValue({htGoals: this.match.htGoals});
+        this.matchForm.patchValue({goals: this.match.goals});
     }
 
-    submit(model: NewsDTO, isValid: boolean) {
+    submit(model: MatchDTO, isValid: boolean) {
         this.submitted = true;
         if (isValid) {
-            if (update) {
-                this._api.(model, this._loginService.jwtHeader).subscribe(
-                    r => {
-                        console.log("Posted");
-                    },
-                    error => {
-                        console.log("error");
-                    },
-                    () => {
-                        console.log("completed");
-                    }
-                )
+            if (this.update) {
 
             } else {
-                this._api.postNews(model, this._loginService.jwtHeader).subscribe(
-                    r => {
-                        console.log("Posted");
-                    },
-                    error => {
-                        console.log("error");
-                    },
-                    () => {
-                        console.log("completed");
-                    }
-                )
+
             }
-            this.onSubmit.emit(model);
+
         }
         console.log(model, isValid);
     }
-
-    private tinyMceCallback(event) {
-        this.messageForm.patchValue({content: event})
-    }
-
 }

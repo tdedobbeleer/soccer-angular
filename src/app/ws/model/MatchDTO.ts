@@ -15,12 +15,12 @@ export interface MatchDTO {
     /**
      * Goals scored by awayteam
      */
-    atGoals?: string;
+    atGoals?: number;
 
     /**
      * Name of the awayteam
      */
-    awayTeam?: string;
+    awayTeam?: models.TeamDTO;
 
     /**
      * Date when match will be played, formatted dd/mm/YYYY
@@ -42,7 +42,7 @@ export interface MatchDTO {
     /**
      * Name of the hometeam
      */
-    homeTeam?: string;
+    homeTeam?: models.TeamDTO;
 
     /**
      * Hour when match will be played, formatted HH:mm
@@ -52,7 +52,7 @@ export interface MatchDTO {
     /**
      * Goals scored by hometeam
      */
-    htGoals?: string;
+    htGoals?: number;
 
     id?: number;
 
@@ -66,9 +66,16 @@ export interface MatchDTO {
      */
     poll?: models.MatchPollDTO;
 
+    season?: models.SeasonDTO;
+
     /**
      * Match status
      */
     status?: string;
+
+    /**
+     * Status text
+     */
+    statusText?: string;
 
 }

@@ -14,6 +14,8 @@ import * as models from "./models";
 export interface GoalDTO {
     assist?: models.AccountDTO;
 
+    order?: number;
+
     scorer?: models.AccountDTO;
 
 }

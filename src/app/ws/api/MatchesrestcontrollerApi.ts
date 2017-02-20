@@ -59,6 +59,22 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
+     * Create match
+     *
+     * @param dto dto
+     */
+    public createMatch(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
+        return this.createMatchWithHttpInfo(dto, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json();
+                }
+            });
+    }
+
+    /**
      * getNextMatch
      * 
      */
@@ -120,6 +136,67 @@ export class MatchesrestcontrollerApi {
             });
     }
 
+    /**
+     * Update match
+     *
+     * @param matchDTO matchDTO
+     */
+    public updateMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
+        return this.updateMatchWithHttpInfo(matchDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json();
+                }
+            });
+    }
+
+
+    /**
+     * Create match
+     *
+     * @param dto dto
+     */
+    public createMatchWithHttpInfo(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/matches`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'dto' is not null or undefined
+        if (dto === null || dto === undefined) {
+            throw new Error('Required parameter dto was null or undefined when calling createMatch.');
+        }
+
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+
+        headers.set('Content-Type', 'application/json');
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: dto == null ? '' : JSON.stringify(dto), // https://github.com/angular/angular/issues/10612
+            search: queryParameters
+        });
+
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
 
     /**
      * getNextMatch
@@ -276,6 +353,51 @@ export class MatchesrestcontrollerApi {
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
+            search: queryParameters
+        });
+
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Update match
+     *
+     * @param matchDTO matchDTO
+     */
+    public updateMatchWithHttpInfo(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + `/api/v1/matches`;
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'matchDTO' is not null or undefined
+        if (matchDTO === null || matchDTO === undefined) {
+            throw new Error('Required parameter matchDTO was null or undefined when calling updateMatch.');
+        }
+
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+
+        headers.set('Content-Type', 'application/json');
+
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            body: matchDTO == null ? '' : JSON.stringify(matchDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters
         });
         

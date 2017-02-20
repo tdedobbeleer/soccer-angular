@@ -33,6 +33,8 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
 import {CommentsrestcontrollerApi} from "./ws/api/CommentsrestcontrollerApi";
 import {CommentComponent} from "./components/comment/comment.component";
 import {BASE_PATH} from "./ws/variables";
+import {MatchFormComponent} from "./components/match-form/match-form.component";
+import {TeamFormComponent} from "./components/team-form/team-form.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -66,7 +68,9 @@ const appRoutes: Routes = [
         CreateMessageComponent,
         MessageFormComponent,
         PaginationComponent,
-        CommentComponent
+        CommentComponent,
+        MatchFormComponent,
+        TeamFormComponent
     ],
     imports: [
         BrowserModule,
