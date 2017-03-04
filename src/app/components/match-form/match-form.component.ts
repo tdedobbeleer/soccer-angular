@@ -4,6 +4,7 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
 import {MatchesrestcontrollerApi} from "../../ws/api/MatchesrestcontrollerApi";
 import {TeamsrestcontrollerApi} from "../../ws/api/TeamsrestcontrollerApi";
 import {TeamDTO} from "../../ws/model/TeamDTO";
+import * as moment from "moment";
 
 @Component({
     selector: 'app-match-form',
@@ -12,19 +13,19 @@ import {TeamDTO} from "../../ws/model/TeamDTO";
   <div class="box">  
     <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value, matchForm.valid)">
       <div class="form-group">
-        <label for="homeTeam">{{"label.message.homeTeam" | translate}}</label>
+        <label for="homeTeam">{{"label.match.homeTeam" | translate}}</label>
         <select name="homeTeam" class="form-control" [formControl]="matchForm.controls['homeTeam']">
               <option *ngFor="let ht of teams" [value]="ht">{{ht.name}}</option>
         </select>
       </div>
        <div class="form-group">
-        <label for="awayTeam">{{"label.message.awayTeam" | translate}}</label>
+        <label for="awayTeam">{{"label.match.awayTeam" | translate}}</label>
         <select name="awayTeam" class="form-control" [formControl]="matchForm.controls['awayTeam']">
               <option *ngFor="let at of teams" [value]="at">{{at.name}}</option>
         </select>
       </div>
        <div class="form-group">
-        <label for="season">{{"label.message.season" | translate}}</label>
+        <label for="season">{{"label.match.season" | translate}}</label>
         <select name="season" class="form-control" [formControl]="matchForm.controls['season']">
               <option *ngFor="let s of seasons" [value]="s">{{s.description}}</option>
         </select>
@@ -63,6 +64,8 @@ export class MatchFormComponent implements OnInit {
     public submitted: boolean;
 
     private teams: TeamDTO[];
+    private dt: Date;
+    private ti: Date;
 
     constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi) {
     }
@@ -84,10 +87,19 @@ export class MatchFormComponent implements OnInit {
             this.matchForm.patchValue({awayTeam: this.match.awayTeam});
             this.matchForm.patchValue({season: this.match.season});
             this.matchForm.patchValue({date: this.match.date});
+            this.matchForm.patchValue({hour: this.match.hour});
             this.matchForm.patchValue({status: this.match.status});
             this.matchForm.patchValue({atGoals: this.match.atGoals});
             this.matchForm.patchValue({htGoals: this.match.htGoals});
             this.matchForm.patchValue({goals: this.match.goals});
+
+            this.ti = moment(this.match.date + " " + this.match.hour, "dd/MM/yyyy HH:mm").toDate();
+            this.dt = this.parseStringDate(this.match.date);
+        }
+
+        else {
+            this.dt = new Date();
+            this.ti = this.parseTime(this.getStringDate(new Date()), "20:00");
         }
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
@@ -98,7 +110,19 @@ export class MatchFormComponent implements OnInit {
     }
 
     updateDateValue(date: Date) {
-        this.matchForm.patchValue({date: date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()});
+        this.matchForm.patchValue({date: this.getStringDate(date)});
+    }
+
+    getStringDate(date: Date): String {
+        return moment(date).format('dd/MM/yyyy').toString();
+    }
+
+    parseStringDate(date: String): Date {
+        return moment(date, "dd/MM/yyyy").toDate();
+    }
+
+    parseTime(date: String, time: String): Date {
+        return moment(date + " " + time, "dd/MM/yyyy HH:mm").toDate();
     }
 
     submit(model: MatchDTO, isValid: boolean) {

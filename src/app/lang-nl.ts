@@ -20,7 +20,13 @@ export const LANG_NL_TRANS = {
     'nav.contact': 'Contact',
     'label.username' : 'Email adres',
     'label.password' : 'Wachtwoord',
+    'label.match.time': 'Tijdstip',
+    'label.match.date': 'Datum',
+    'label.match.awayTeam': 'Uitploeg',
+    'label.match.homeTeam': 'ThuisPloeg',
+    'label.match.season': 'Seizoen',
     'btn.login': 'Inloggen',
     'btn.reactions': 'Reacties',
-    'btn.submit': 'Verzenden'
+    'btn.submit': 'Verzenden',
+    'btn.cancel': 'Annuleren'
 };

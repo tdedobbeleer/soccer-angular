@@ -20,7 +20,13 @@ export const LANG_EN_TRANS = {
     'nav.contact': 'Contact',
     'label.username' : 'Email address',
     'label.password' : 'Password',
+    'label.match.time': 'Time',
+    'label.match.date': 'Date',
+    'label.match.awayTeam': 'Away team',
+    'label.match.homeTeam': 'Home team',
+    'label.match.season': 'Season',
     'btn.login': 'Login',
     'btn.reactions': 'Reactions',
-    'btn.submit': 'Submit'
+    'btn.submit': 'Submit',
+    'btn.cancel': 'Cancel'
 };

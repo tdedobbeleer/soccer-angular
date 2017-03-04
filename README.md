@@ -40,8 +40,7 @@ Install dependencies:
 - sudo npm install
 
 Install seperately if needed:
-- npm install --save tinymce
-- npm install --save ng2-bootstrap
-- npm install --save ng2-date-picker
+- sudo npm install --save tinymce
+- sudo npm install --save ng2-bootstrap
 
 Then try `ng serve`
