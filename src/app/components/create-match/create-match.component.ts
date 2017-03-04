@@ -3,9 +3,9 @@ import {Component, OnInit} from "@angular/core";
 @Component({
     selector: 'app-create-match',
     template: `
-    <p>
+    <div class="container">
       <app-match-form (match)="[]" (update)="false"></app-match-form>
-    </p>
+    </div>
   `,
     styles: []
 })

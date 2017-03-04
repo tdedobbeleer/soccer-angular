@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {AlertModule, DropdownModule, CollapseModule} from "ng2-bootstrap/ng2-bootstrap";
+import {AlertModule, DropdownModule, CollapseModule, DatepickerModule, TimepickerModule} from "ng2-bootstrap";
 import {AppComponent} from "./app.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
@@ -36,7 +36,6 @@ import {BASE_PATH} from "./ws/variables";
 import {MatchFormComponent} from "./components/match-form/match-form.component";
 import {TeamFormComponent} from "./components/team-form/team-form.component";
 import {CreateMatchComponent} from "./components/create-match/create-match.component";
-import {DatePickerModule} from "ng2-datepicker";
 import {TeamsrestcontrollerApi} from "./ws/api/TeamsrestcontrollerApi";
 
 const appRoutes: Routes = [
@@ -82,10 +81,11 @@ const appRoutes: Routes = [
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        AlertModule,
-        DropdownModule,
-        CollapseModule,
-        DatePickerModule,
+        TimepickerModule.forRoot(),
+        AlertModule.forRoot(),
+        DropdownModule.forRoot(),
+        CollapseModule.forRoot(),
+        DatepickerModule.forRoot(),
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
