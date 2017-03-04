@@ -84,7 +84,8 @@ export class MessageFormComponent implements OnInit {
     submit(model: NewsDTO, isValid: boolean) {
         this.submitted = true;
         if (isValid) {
-            if (update) {
+            if (this.update) {
+                /**
                 this._api.(model, this._loginService.jwtHeader).subscribe(
                     r => {
                         console.log("Posted");
@@ -96,6 +97,7 @@ export class MessageFormComponent implements OnInit {
                         console.log("completed");
                     }
                 )
+                 **/
 
             } else {
                 this._api.postNews(model, this._loginService.jwtHeader).subscribe(

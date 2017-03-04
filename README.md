@@ -42,5 +42,6 @@ Install dependencies:
 Install seperately if needed:
 - npm install --save tinymce
 - npm install --save ng2-bootstrap
+- npm install --save ng2-date-picker
 
 Then try `ng serve`

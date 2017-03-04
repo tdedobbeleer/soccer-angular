@@ -60,7 +60,7 @@ export class MatchesrestcontrollerApi {
 
     /**
      * Create match
-     *
+     * 
      * @param dto dto
      */
     public createMatch(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
@@ -138,7 +138,7 @@ export class MatchesrestcontrollerApi {
 
     /**
      * Update match
-     *
+     * 
      * @param matchDTO matchDTO
      */
     public updateMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
@@ -155,7 +155,7 @@ export class MatchesrestcontrollerApi {
 
     /**
      * Create match
-     *
+     * 
      * @param dto dto
      */
     public createMatchWithHttpInfo(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
@@ -366,7 +366,7 @@ export class MatchesrestcontrollerApi {
 
     /**
      * Update match
-     *
+     * 
      * @param matchDTO matchDTO
      */
     public updateMatchWithHttpInfo(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {

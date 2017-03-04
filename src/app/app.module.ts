@@ -35,6 +35,9 @@ import {CommentComponent} from "./components/comment/comment.component";
 import {BASE_PATH} from "./ws/variables";
 import {MatchFormComponent} from "./components/match-form/match-form.component";
 import {TeamFormComponent} from "./components/team-form/team-form.component";
+import {CreateMatchComponent} from "./components/create-match/create-match.component";
+import {DatePickerModule} from "ng2-datepicker";
+import {TeamsrestcontrollerApi} from "./ws/api/TeamsrestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -45,6 +48,7 @@ const appRoutes: Routes = [
     {path: 'matches', component: MatchesComponent},
     {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
     {path: '**', redirectTo: 'not-found'}
 ];
 
@@ -70,7 +74,8 @@ const appRoutes: Routes = [
         PaginationComponent,
         CommentComponent,
         MatchFormComponent,
-        TeamFormComponent
+        TeamFormComponent,
+        CreateMatchComponent
     ],
     imports: [
         BrowserModule,
@@ -80,6 +85,7 @@ const appRoutes: Routes = [
         AlertModule,
         DropdownModule,
         CollapseModule,
+        DatePickerModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
@@ -89,6 +95,7 @@ const appRoutes: Routes = [
         SeasonsrestcontrollerApi,
         CommentsrestcontrollerApi,
         AuthenticationcontrollerApi,
+        TeamsrestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,
