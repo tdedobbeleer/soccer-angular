@@ -5,6 +5,9 @@ import {MatchesrestcontrollerApi} from "../../ws/api/MatchesrestcontrollerApi";
 import {TeamsrestcontrollerApi} from "../../ws/api/TeamsrestcontrollerApi";
 import {TeamDTO} from "../../ws/model/TeamDTO";
 import * as moment from "moment";
+import {SeasonsrestcontrollerApi} from "../../ws/api/SeasonsrestcontrollerApi";
+import {SeasonDTO} from "../../ws/model/SeasonDTO";
+import {LoginService} from "../../services/login.service";
 
 @Component({
     selector: 'app-match-form',
@@ -64,10 +67,11 @@ export class MatchFormComponent implements OnInit {
     public submitted: boolean;
 
     private teams: TeamDTO[];
+    private seasons: SeasonDTO[];
     private dt: Date;
     private ti: Date;
 
-    constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi) {
+    constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi, private _seasonApi: SeasonsrestcontrollerApi, private _loginService: LoginService) {
     }
 
     ngOnInit() {
@@ -103,6 +107,8 @@ export class MatchFormComponent implements OnInit {
         }
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
+        this._seasonApi.getSeasons().subscribe(s => this.seasons = s);
+
     }
 
     updateTimeValue(time: Date) {
@@ -127,11 +133,32 @@ export class MatchFormComponent implements OnInit {
 
     submit(model: MatchDTO, isValid: boolean) {
         this.submitted = true;
+        this.match.season = this.matchForm.getRawValue();
         if (isValid) {
             if (this.update) {
-
+                this._api.updateMatch(model, this._loginService.jwtHeader).subscribe(
+                    r => {
+                        console.log("Posted");
+                    },
+                    error => {
+                        console.log("error");
+                    },
+                    () => {
+                        console.log("completed");
+                    }
+                )
             } else {
-
+                this._api.createMatch(model, this._loginService.jwtHeader).subscribe(
+                    r => {
+                        console.log("Posted");
+                    },
+                    error => {
+                        console.log("error");
+                    },
+                    () => {
+                        console.log("completed");
+                    }
+                )
             }
 
         }

@@ -44,26 +44,11 @@ export class SeasonsrestcontrollerApi {
     }
 
     /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
-    }
-
-    /**
      * Get all seasons
      * 
      */
-    public getSeasonsUsingGET(extraHttpRequestParams?: any): Observable<Array<models.SeasonDTO>> {
-        return this.getSeasonsUsingGETWithHttpInfo(extraHttpRequestParams)
+    public getSeasons(extraHttpRequestParams?: any): Observable<Array<models.SeasonDTO>> {
+        return this.getSeasonsWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -78,13 +63,11 @@ export class SeasonsrestcontrollerApi {
      * Get all seasons
      * 
      */
-    public getSeasonsUsingGETWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+    public getSeasonsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + `/api/v1/seasons`;
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -94,20 +77,16 @@ export class SeasonsrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
             search: queryParameters
         });
-        
+
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

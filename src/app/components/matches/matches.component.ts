@@ -36,7 +36,7 @@ export class MatchesComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._seasonsApi.getSeasonsUsingGET()
+        this._seasonsApi.getSeasons()
             .subscribe(r => {
                 Observable.from(r).flatMap(
                     s => {
