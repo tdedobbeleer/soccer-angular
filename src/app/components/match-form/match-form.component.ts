@@ -4,10 +4,10 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
 import {MatchesrestcontrollerApi} from "../../ws/api/MatchesrestcontrollerApi";
 import {TeamsrestcontrollerApi} from "../../ws/api/TeamsrestcontrollerApi";
 import {TeamDTO} from "../../ws/model/TeamDTO";
-import * as moment from "moment";
 import {SeasonsrestcontrollerApi} from "../../ws/api/SeasonsrestcontrollerApi";
 import {SeasonDTO} from "../../ws/model/SeasonDTO";
 import {LoginService} from "../../services/login.service";
+import {Util} from "../../classes/util";
 
 @Component({
     selector: 'app-match-form',
@@ -97,13 +97,13 @@ export class MatchFormComponent implements OnInit {
             this.matchForm.patchValue({htGoals: this.match.htGoals});
             this.matchForm.patchValue({goals: this.match.goals});
 
-            this.ti = moment(this.match.date + " " + this.match.hour, "dd/MM/yyyy HH:mm").toDate();
-            this.dt = this.parseStringDate(this.match.date);
+            this.ti = Util.parseTime(this.match.date, this.match.hour);
+            this.dt = Util.toDate(this.match.date);
         }
 
         else {
             this.dt = new Date();
-            this.ti = this.parseTime(this.getStringDate(new Date()), "20:00");
+            this.ti = Util.parseTime(Util.parseDate(new Date()), "20:00");
         }
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
@@ -116,19 +116,7 @@ export class MatchFormComponent implements OnInit {
     }
 
     updateDateValue(date: Date) {
-        this.matchForm.patchValue({date: this.getStringDate(date)});
-    }
-
-    getStringDate(date: Date): String {
-        return moment(date).format('dd/MM/yyyy').toString();
-    }
-
-    parseStringDate(date: String): Date {
-        return moment(date, "dd/MM/yyyy").toDate();
-    }
-
-    parseTime(date: String, time: String): Date {
-        return moment(date + " " + time, "dd/MM/yyyy HH:mm").toDate();
+        this.matchForm.patchValue({date: Util.parseDate(date)});
     }
 
     submit(model: MatchDTO, isValid: boolean) {
