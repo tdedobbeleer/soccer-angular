@@ -15,4 +15,6 @@ export interface AuthenticationRequestDTO {
 
     username?: string;
 
+    rememberMe?: boolean;
+
 }

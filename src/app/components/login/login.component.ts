@@ -32,6 +32,9 @@ import {LoginService} from "../../services/login.service";
               <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
               <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
           </div>
+          <div class="form-group">
+              <input type="checkbox" class="form-control" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"> {{"label.message.rememberMe" | translate}} 
+          </div>
           <div class="form-group box-footer">
               <button [disabled]="loading" class="btn btn-primary">{{'btn.login' | translate}}</button>
               <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
@@ -62,7 +65,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.service.login(this.model.username, this.model.password)
+    this.service.login(this.model.username, this.model.password, this.model.rememberMe)
         .subscribe(
             isLoggedIn => {
           if (isLoggedIn) {

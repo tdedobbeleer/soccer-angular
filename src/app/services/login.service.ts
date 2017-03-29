@@ -37,8 +37,8 @@ export class LoginService {
         }
     }
 
-    login(username: string, password: string): Observable<boolean> {
-        let r: AuthenticationRequestDTO = {username: username, password: password};
+    login(username: string, password: string, rememberMe: boolean): Observable<boolean> {
+        let r: AuthenticationRequestDTO = {username: username, password: password, rememberMe: rememberMe};
         return this._api.authenticate(r)
             .map(response => {
                 // login successful if there's a jwt token in the response

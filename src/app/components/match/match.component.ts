@@ -14,15 +14,6 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
         color: #ffffff;
         background-color: #4fbfa8;
     }
-    .row.match-my-cols {
-    overflow: hidden; 
-    }
-    .row.match-my-cols [class*="col-"]{
-        margin-top: -99999px;
-        padding-top: 99999px;
-        margin-bottom: -99999px;
-        padding-bottom: 99999px;
-    }
   `],
     template: `
    
@@ -36,9 +27,9 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
                     <div class="col-md-2 col-sm-12 col-xs-12 hidden-xs"><h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h3></div>
                     <div class="col-md-8">
                         <div class="row">
-                            <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam}}</h3></div>
+                            <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
                             <div class="col-md-2 col-xs-4 text-center score"><h3>{{match?.htGoals}} - {{match?.atGoals}}</h3></div>
-                            <div class="col-md-4 col-xs-4 left"><h3>{{match?.awayTeam}}</h3></div>
+                            <div class="col-md-4 col-xs-4 left"><h3>{{match?.awayTeam?.name}}</h3></div>
                         </div>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12">
