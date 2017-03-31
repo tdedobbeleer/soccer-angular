@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import {Component, OnInit, Input} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
 import {LoginService} from "../../services/login.service";
@@ -62,8 +62,6 @@ export class MessageFormComponent implements OnInit {
     @Input() header: string;
     @Input() public content: string;
 
-    @Output() onSubmit = new EventEmitter<any>();
-
     public messageForm: FormGroup;
     public submitted: boolean;
 
@@ -112,7 +110,6 @@ export class MessageFormComponent implements OnInit {
                     }
                 )
             }
-            this.onSubmit.emit(model);
         }
         console.log(model, isValid);
     }

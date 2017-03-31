@@ -3,6 +3,8 @@ import {CommentsrestcontrollerApi} from "../../ws/api/CommentsrestcontrollerApi"
 import {CommentDTO} from "../../ws/model/CommentDTO";
 import {LoginService} from "../../services/login.service";
 import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
+import {ErrorHandlerService} from "../../services/error-handler.service";
+import {NewsDTO} from "../../ws/model/NewsDTO";
 
 @Component({
   selector: 'app-message',
@@ -49,11 +51,13 @@ import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
   styles: []
 })
 export class MessageComponent implements OnInit {
-  @Input() message;
+  @Input() message: NewsDTO;
 
+  private showAllComments: boolean;
   private showShowCreateComment: boolean;
 
-  constructor(private _api: CommentsrestcontrollerApi, private _messagesApi: NewsrestcontrollerApi, private _loginService: LoginService) {
+  constructor(private _api: CommentsrestcontrollerApi, private _messagesApi: NewsrestcontrollerApi, private _loginService: LoginService,
+              private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
@@ -72,9 +76,11 @@ export class MessageComponent implements OnInit {
     this._api.postComment(comment.id, comment, this._loginService.jwtHeader)
         .subscribe(r => {
           console.log("success");
-          //Get message again
-          this._messagesApi.getNews(this.message.id, this._loginService.jwtHeader)
-              .subscribe(r => this.message = r);
+              this.message.comments.push(comment);
+              this.showAllComments = true;
+            },
+            error => {
+              this._errorHandler.handle(error, "messages");
         })
   }
 }

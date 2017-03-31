@@ -3,6 +3,8 @@
 export const LANG_EN_NAME = 'en';
 
 export const LANG_EN_TRANS = {
+    'title.error.unknown': 'Unknown error',
+    'text.error.unknown': 'Epic fail. Open goal, but the webmaster somehow missed it. Or the internet broke again.',
     'text.search': 'Search',
     'hello world': 'hello world',
     'nav.messages': 'Messages',
@@ -18,6 +20,7 @@ export const LANG_EN_TRANS = {
     'nav.profile': 'Profile',
     'nav.logout': 'Logout',
     'nav.contact': 'Contact',
+    'nav.messages.create': 'Create a message',
     'label.username' : 'Email address',
     'label.password' : 'Password',
     'label.match.time': 'Time',
@@ -25,6 +28,12 @@ export const LANG_EN_TRANS = {
     'label.match.awayTeam': 'Away team',
     'label.match.homeTeam': 'Home team',
     'label.match.season': 'Season',
+    'label.rememberMe': 'Stay logged in',
+    'label.message.sendAndPost': 'Send message to active members and post on this website',
+    'label.message.sendOnly': 'Send to active members',
+    'label.message.postOnly': 'Post only on this website, do not send to active members',
+    'label.message.content': 'Message',
+    'label.message.title': 'Title',
     'btn.login': 'Login',
     'btn.reactions': 'Reactions',
     'btn.submit': 'Submit',

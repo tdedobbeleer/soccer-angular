@@ -33,7 +33,9 @@ import {LoginService} from "../../services/login.service";
               <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
           </div>
           <div class="form-group">
-              <input type="checkbox" class="form-control" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"> {{"label.message.rememberMe" | translate}} 
+              <label>                            
+                <input type="checkbox" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"/> {{'label.rememberMe' | translate}}
+              </label>
           </div>
           <div class="form-group box-footer">
               <button [disabled]="loading" class="btn btn-primary">{{'btn.login' | translate}}</button>

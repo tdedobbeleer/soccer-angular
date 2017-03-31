@@ -37,10 +37,13 @@ import {MatchFormComponent} from "./components/match-form/match-form.component";
 import {TeamFormComponent} from "./components/team-form/team-form.component";
 import {CreateMatchComponent} from "./components/create-match/create-match.component";
 import {TeamsrestcontrollerApi} from "./ws/api/TeamsrestcontrollerApi";
+import {FailWhaleComponent} from "./components/fail-whale/fail-whale.component";
+import {ErrorHandlerService} from "./services/error-handler.service";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
     {path: 'not-found', component: NotFoundComponent},
+    {path: 'failwhale', component: FailWhaleComponent},
     {path: 'messages', component: MessagesComponent},
     {path: 'teams', component: TeamsListComponent},
     {path: 'login', component: LoginComponent},
@@ -74,7 +77,8 @@ const appRoutes: Routes = [
         CommentComponent,
         MatchFormComponent,
         TeamFormComponent,
-        CreateMatchComponent
+        CreateMatchComponent,
+        FailWhaleComponent,
     ],
     imports: [
         BrowserModule,
@@ -99,7 +103,8 @@ const appRoutes: Routes = [
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,
-        TranslationService
+        TranslationService,
+        ErrorHandlerService
     ],
     bootstrap: [AppComponent]
 })

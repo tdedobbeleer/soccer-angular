@@ -5,11 +5,11 @@ import {LoginService} from "./login.service";
 @Injectable()
 export class AuthGuardAdminService implements CanActivate {
 
-    constructor(private router: Router, private _service: LoginService) {
+    constructor(private _router: Router, private _service: LoginService) {
     }
 
     canActivate() {
-        let url: string = this.router.routerState.snapshot.url;
+        let url: string = this._router.routerState.snapshot.url;
         let currentUser: any = this._service.getUser();
         if (this._service.isLoggedIn() && AuthGuardAdminService.hasRole(currentUser.roles, "ROLE_ADMIN")) {
             // logged in and has role so true
@@ -17,7 +17,7 @@ export class AuthGuardAdminService implements CanActivate {
         }
 
         // not logged in so redirect to login page
-        this.router.navigate(['/login'], {queryParams: {redirectUrl: url}});
+        this._router.navigate(['/login'], {queryParams: {redirectUrl: url}});
         return false;
     }
 

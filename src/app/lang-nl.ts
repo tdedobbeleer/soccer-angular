@@ -3,6 +3,8 @@
 export const LANG_NL_NAME = 'nl';
 
 export const LANG_NL_TRANS = {
+    'title.error.unknown': 'Onbekende fout',
+    'text.error.unknown': 'Epic fail. Een open doel, maar de webmaster heeft onbegrijpelijk gemist. Of het internet is weer eens kapot.',
     'text.search': 'Zoeken',
     'hello world': 'hello world',
     'nav.messages': 'Berichten',
@@ -18,6 +20,7 @@ export const LANG_NL_TRANS = {
     'nav.profile': 'Profiel',
     'nav.logout': 'Uitloggen',
     'nav.contact': 'Contact',
+    'nav.messages.create': 'Maak een bericht aan',
     'label.username' : 'Email adres',
     'label.password' : 'Wachtwoord',
     'label.match.time': 'Tijdstip',
@@ -25,6 +28,12 @@ export const LANG_NL_TRANS = {
     'label.match.awayTeam': 'Uitploeg',
     'label.match.homeTeam': 'ThuisPloeg',
     'label.match.season': 'Seizoen',
+    'label.rememberMe': 'Ingelogd blijven',
+    'label.message.sendAndPost': 'Stuur dit bericht naar actieve leden en post op deze website',
+    'label.message.sendOnly': 'Stuur dit bericht naar alle actieve leden',
+    'label.message.postOnly': 'Post alleen op deze website, verstuur niet naar de leden',
+    'label.message.content': 'Bericht',
+    'label.message.title': 'Titel',
     'btn.login': 'Inloggen',
     'btn.reactions': 'Reacties',
     'btn.submit': 'Verzenden',
