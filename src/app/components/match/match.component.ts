@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {MatchDTO} from "../../ws/model/MatchDTO";
+import {LoginService} from "../../services/login.service";
 
 @Component({
     selector: 'app-match',
@@ -24,7 +25,7 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <div class="row">
-                    <div class="col-md-2 col-sm-12 col-xs-12 hidden-xs"><h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h3></div>
+                    <div class="col-md-2 col-sm-12 col-xs-12 hidden-xs"><h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
@@ -37,7 +38,7 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
                           <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
                       </div>
                    <div class="row text-center m-t-1">
-                      <div class="btn-group">
+                      <div class="btn-group" *ngIf="isAdmin()">
                           <button type="button" class="btn btn-circle" aria-label="Edit comment" (click)="showEditComment = !showEditComment">
                               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                           </button>
@@ -80,11 +81,15 @@ import {MatchDTO} from "../../ws/model/MatchDTO";
 export class MatchComponent implements OnInit {
     @Input() match: MatchDTO;
 
-    constructor() {
+    constructor(private _loginService: LoginService) {
     }
 
     ngOnInit() {
 
+    }
+
+    private isAdmin(): boolean {
+        return this._loginService.isAdmin();
     }
 
 }
