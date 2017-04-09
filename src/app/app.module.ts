@@ -39,6 +39,9 @@ import {CreateMatchComponent} from "./components/create-match/create-match.compo
 import {TeamsrestcontrollerApi} from "./ws/api/TeamsrestcontrollerApi";
 import {FailWhaleComponent} from "./components/fail-whale/fail-whale.component";
 import {ErrorHandlerService} from "./services/error-handler.service";
+import {MotmPollsComponent} from "./components/motm-polls/motm-polls.component";
+import {MotmPollComponent} from "./components/motm-poll/motm-poll.component";
+import {PollrestcontrollerApi} from "./ws/api/PollrestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -48,6 +51,7 @@ const appRoutes: Routes = [
     {path: 'teams', component: TeamsListComponent},
     {path: 'login', component: LoginComponent},
     {path: 'matches', component: MatchesComponent},
+    {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
@@ -79,6 +83,8 @@ const appRoutes: Routes = [
         TeamFormComponent,
         CreateMatchComponent,
         FailWhaleComponent,
+        MotmPollsComponent,
+        MotmPollComponent,
     ],
     imports: [
         BrowserModule,
@@ -99,6 +105,7 @@ const appRoutes: Routes = [
         SeasonsrestcontrollerApi,
         CommentsrestcontrollerApi,
         AuthenticationcontrollerApi,
+        PollrestcontrollerApi,
         TeamsrestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,

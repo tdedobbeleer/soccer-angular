@@ -3,6 +3,8 @@ import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
 import {LoginService} from "../../services/login.service";
 import {NewsDTO} from "../../ws/model/NewsDTO";
+import {Router} from "@angular/router";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
     selector: 'app-message-form',
@@ -65,7 +67,7 @@ export class MessageFormComponent implements OnInit {
     public messageForm: FormGroup;
     public submitted: boolean;
 
-    constructor(private _fb: FormBuilder, private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
+    constructor(private _fb: FormBuilder, private _api: NewsrestcontrollerApi, private _loginService: LoginService, private _router: Router, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -100,10 +102,10 @@ export class MessageFormComponent implements OnInit {
             } else {
                 this._api.postNews(model, this._loginService.jwtHeader).subscribe(
                     r => {
-                        console.log("Posted");
+                        this._router.navigate(["/messages"]);
                     },
                     error => {
-                        console.log("error");
+                        this._errorHandler.handle(error, "/messages/create");
                     },
                     () => {
                         console.log("completed");
