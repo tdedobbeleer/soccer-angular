@@ -18,7 +18,7 @@ import {PageDTOMatchPollDTO} from "../../ws/model/PageDTOMatchPollDTO";
       <div class="row m-b-1">
           <app-pagination (onClick)="getPage($event)" [page]="motmPage" *ngIf="!loading"></app-pagination>
       </div>
-      <div *ngIf="!loading && motmPage.length == 0">
+      <div *ngIf="!loading && motmPage?.list.length == 0">
         <div class="alert alert-warning">
             {{'text.no.match.polls' | translate}}
         </div>
@@ -36,8 +36,8 @@ import {PageDTOMatchPollDTO} from "../../ws/model/PageDTOMatchPollDTO";
     styles: []
 })
 export class MotmPollsComponent implements OnInit {
-    private motmPage: PageDTOMatchPollDTO;
-    private loading: boolean;
+    motmPage: PageDTOMatchPollDTO;
+    loading: boolean;
 
     constructor(private _api: PollrestcontrollerApi, private _loginService: LoginService) {
     }
@@ -50,7 +50,7 @@ export class MotmPollsComponent implements OnInit {
         })
     }
 
-    private getPage(page) {
+    getPage(page) {
         this.loading = true;
         this._api.getAllMatchPollsUsingGET(page, 5, "", this._loginService.jwtHeader).subscribe(p => {
             this.motmPage = p;

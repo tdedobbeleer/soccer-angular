@@ -2,7 +2,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {AlertModule, DropdownModule, CollapseModule, DatepickerModule, TimepickerModule} from "ng2-bootstrap";
+import {AlertModule, BsDropdownModule, CollapseModule, DatepickerModule, TimepickerModule} from "ngx-bootstrap";
 import {AppComponent} from "./app.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
@@ -93,7 +93,7 @@ const appRoutes: Routes = [
         HttpModule,
         TimepickerModule.forRoot(),
         AlertModule.forRoot(),
-        DropdownModule.forRoot(),
+        BsDropdownModule.forRoot(),
         CollapseModule.forRoot(),
         DatepickerModule.forRoot(),
         RouterModule.forRoot(appRoutes)

@@ -116,7 +116,7 @@ export class MessageFormComponent implements OnInit {
         console.log(model, isValid);
     }
 
-    private tinyMceCallback(event) {
+    tinyMceCallback(event) {
         this.messageForm.patchValue({content: event})
     }
 

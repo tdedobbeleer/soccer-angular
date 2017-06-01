@@ -27,8 +27,8 @@ import {Observable} from "rxjs";
     styles: []
 })
 export class MatchesComponent implements OnInit {
-    private seasons: Array<Season> = [];
-    private loaded: boolean = false;
+    seasons: Array<Season> = [];
+    loaded: boolean = false;
 
     constructor(private _matchesApi: MatchesrestcontrollerApi,
                 private _seasonsApi: SeasonsrestcontrollerApi,

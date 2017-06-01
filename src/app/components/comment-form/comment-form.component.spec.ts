@@ -1,9 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
-import { CommentFormComponent } from './comment-form.component.ts';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {CommentFormComponent} from "./comment-form.component";
 
 describe('CommentFormComponent', () => {
   let component: CommentFormComponent;

@@ -82,8 +82,8 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 export class MotmPollComponent implements OnInit {
     @Input() poll: MatchPollDTO;
 
-    private actionResultMessage = [];
-    private voteResultMessage = [];
+    actionResultMessage = [];
+    voteResultMessage = [];
 
     constructor(private _api: PollrestcontrollerApi, private _loginService: LoginService, private _errorHandler: ErrorHandlerService) {
     }

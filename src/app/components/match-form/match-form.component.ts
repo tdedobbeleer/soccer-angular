@@ -63,13 +63,13 @@ export class MatchFormComponent implements OnInit {
     @Input() update: boolean;
     @Input() match: MatchDTO;
 
-    public matchForm: FormGroup;
-    public submitted: boolean;
+    matchForm: FormGroup;
+    submitted: boolean;
 
-    private teams: TeamDTO[];
-    private seasons: SeasonDTO[];
-    private dt: Date;
-    private ti: Date;
+    teams: TeamDTO[];
+    seasons: SeasonDTO[];
+    dt: Date;
+    ti: Date;
 
     constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi, private _seasonApi: SeasonsrestcontrollerApi, private _loginService: LoginService) {
     }

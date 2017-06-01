@@ -53,8 +53,8 @@ import {NewsDTO} from "../../ws/model/NewsDTO";
 export class MessageComponent implements OnInit {
   @Input() message: NewsDTO;
 
-  private showAllComments: boolean;
-  private showShowCreateComment: boolean;
+  showAllComments: boolean;
+  showShowCreateComment: boolean;
 
   constructor(private _api: CommentsrestcontrollerApi, private _messagesApi: NewsrestcontrollerApi, private _loginService: LoginService,
               private _errorHandler: ErrorHandlerService) {

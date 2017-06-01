@@ -58,6 +58,8 @@ export class MessagesComponent implements OnInit {
 
   newsPage: PageDTONewsDTO;
 
+  loading: boolean;
+
   searchTerm: string;
 
   constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {

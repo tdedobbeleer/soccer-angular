@@ -37,10 +37,10 @@ Debian env:
 - sudo npm install npm@latest -g (latest nodejs version)
 
 Install dependencies:
-- sudo npm install
+- npm install
 
 Install seperately if needed:
-- sudo npm install --save tinymce
-- sudo npm install --save ng2-bootstrap
+- npm install --save tinymce
+- npm install --save ng2-bootstrap
 
 Then try `ng serve`

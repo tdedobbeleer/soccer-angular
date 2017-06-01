@@ -78,10 +78,9 @@ _________________________________________________________ -->
   styles: []
 })
 export class NavbarComponent implements OnInit {
-  private selectedLang : Lang;
-  private oppositeLang : Lang;
-
-    public isMenuCollapsed: boolean = true;
+  selectedLang: Lang;
+  oppositeLang: Lang;
+  isMenuCollapsed: boolean = true;
 
   private en : Lang = {locale : 'en', display: 'English'};
   private nl: Lang = {locale : 'nl', display: 'Nederlands'};

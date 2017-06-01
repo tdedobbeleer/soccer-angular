@@ -81,6 +81,8 @@ import {LoginService} from "../../services/login.service";
 export class MatchComponent implements OnInit {
     @Input() match: MatchDTO;
 
+    showEditComment: boolean;
+
     constructor(private _loginService: LoginService) {
     }
 
@@ -88,7 +90,7 @@ export class MatchComponent implements OnInit {
 
     }
 
-    private isAdmin(): boolean {
+    isAdmin(): boolean {
         return this._loginService.isAdmin();
     }
 

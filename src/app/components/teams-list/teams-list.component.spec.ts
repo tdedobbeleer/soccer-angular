@@ -1,9 +1,6 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
-import { TeamsListComponent } from './teams-list.component.ts';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {TeamsListComponent} from "./teams-list.component";
 
 describe('TeamsListComponent', () => {
   let component: TeamsListComponent;
