@@ -14,7 +14,7 @@ import {LoginService} from "../../services/login.service";
                 
                 <li *ngIf="isLoggedIn()" class="dropdown" dropdown>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="glyphicon glyphicon-user"></span>&nbsp;{{getUser().firstName}} <b class="caret"></b></a>
-                    <ul class="dropdown-menu" dropdownMenu>
+                    <ul class="dropdown-menu" *dropdownMenu>
                         <li><a [routerLink]="['/profile']" routerLinkActive="active">{{'nav.profile' | translate}}</a></li>
                         <li><a (click)="logout()">{{'nav.logout' | translate}}</a></li>                        
                     </ul>
