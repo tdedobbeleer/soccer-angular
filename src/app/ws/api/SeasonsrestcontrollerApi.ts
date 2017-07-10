@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class SeasonsrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -44,6 +44,22 @@ export class SeasonsrestcontrollerApi {
     }
 
     /**
+     * Create a season
+     *
+     * @param seasonDTO seasonDTO
+     */
+    public createSeason(seasonDTO: models.SeasonDTO, extraHttpRequestParams?: any): Observable<models.SeasonDTO> {
+        return this.createSeasonWithHttpInfo(seasonDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
      * Get all seasons
      * 
      */
@@ -53,18 +69,59 @@ export class SeasonsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
 
 
     /**
+     * Create a season
+     *
+     * @param seasonDTO seasonDTO
+     */
+    public createSeasonWithHttpInfo(seasonDTO: models.SeasonDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/seasons';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'seasonDTO' is not null or undefined
+        if (seasonDTO === null || seasonDTO === undefined) {
+            throw new Error('Required parameter seasonDTO was null or undefined when calling createSeason.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: seasonDTO == null ? '' : JSON.stringify(seasonDTO), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
      * Get all seasons
      * 
      */
     public getSeasonsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/seasons`;
+        const path = this.basePath + '/api/v1/seasons';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -81,9 +138,9 @@ export class SeasonsrestcontrollerApi {
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
             requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);

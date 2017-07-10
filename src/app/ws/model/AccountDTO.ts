@@ -11,8 +11,14 @@
  */
 
 export interface AccountDTO {
+    firstName?: string;
+
     id?: number;
 
+    lastName?: string;
+
     name?: string;
+
+    username?: string;
 
 }

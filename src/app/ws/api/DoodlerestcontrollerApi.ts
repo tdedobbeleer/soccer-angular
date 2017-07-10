@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class DoodlerestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -41,21 +41,6 @@ export class DoodlerestcontrollerApi {
         if (configuration) {
             this.configuration = configuration;
         }
-    }
-
-    /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
     }
 
     /**
@@ -70,7 +55,7 @@ export class DoodlerestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -86,7 +71,7 @@ export class DoodlerestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -103,7 +88,7 @@ export class DoodlerestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -116,7 +101,9 @@ export class DoodlerestcontrollerApi {
      * @param accountId accountId
      */
     public matchdoodlesWithHttpInfo(id: number, accountId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/doodle/match/${id}/presence/${accountId}`;
+        const path = this.basePath + '/api/v1/doodle/match/${id}/presence/${accountId}'
+                .replace('${' + 'id' + '}', String(id))
+                .replace('${' + 'accountId' + '}', String(accountId));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -128,8 +115,6 @@ export class DoodlerestcontrollerApi {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling matchdoodles.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -139,20 +124,16 @@ export class DoodlerestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -164,7 +145,8 @@ export class DoodlerestcontrollerApi {
      * @param id id
      */
     public matchdoodles1WithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchDoodle/${id}`;
+        const path = this.basePath + '/api/v1/matchDoodle/${id}'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -172,8 +154,6 @@ export class DoodlerestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchdoodles1.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -183,20 +163,16 @@ export class DoodlerestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -209,7 +185,7 @@ export class DoodlerestcontrollerApi {
      * @param size size
      */
     public matchdoodles2WithHttpInfo(page: number, size?: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchDoodle`;
+        const path = this.basePath + '/api/v1/matchDoodle';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -220,10 +196,10 @@ export class DoodlerestcontrollerApi {
         if (page !== undefined) {
             queryParameters.set('page', <any>page);
         }
+
         if (size !== undefined) {
             queryParameters.set('size', <any>size);
         }
-
 
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -234,20 +210,16 @@ export class DoodlerestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class AuthenticationcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -44,21 +44,6 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
-    }
-
-    /**
      * authenticate
      * 
      * @param authenticationRequestDTO authenticationRequestDTO
@@ -69,7 +54,7 @@ export class AuthenticationcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -84,22 +69,7 @@ export class AuthenticationcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
-                }
-            });
-    }
-
-    /**
-     * Refresh token
-     * 
-     */
-    public refresh(extraHttpRequestParams?: any): Observable<any> {
-        return this.refreshWithHttpInfo(extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -111,7 +81,7 @@ export class AuthenticationcontrollerApi {
      * @param authenticationRequestDTO authenticationRequestDTO
      */
     public authenticateWithHttpInfo(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/auth`;
+        const path = this.basePath + '/api/v1/auth';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -119,8 +89,6 @@ export class AuthenticationcontrollerApi {
         if (authenticationRequestDTO === null || authenticationRequestDTO === undefined) {
             throw new Error('Required parameter authenticationRequestDTO was null or undefined when calling authenticate.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -131,20 +99,18 @@ export class AuthenticationcontrollerApi {
             '*/*'
         ];
 
-
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
             body: authenticationRequestDTO == null ? '' : JSON.stringify(authenticationRequestDTO), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -155,12 +121,10 @@ export class AuthenticationcontrollerApi {
      * 
      */
     public isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/auth/isFullyAuthenticated`;
+        const path = this.basePath + '/api/v1/auth/isFullyAuthenticated';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -171,52 +135,15 @@ export class AuthenticationcontrollerApi {
             '*/*'
         ];
 
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * Refresh token
-     * 
-     */
-    public refreshWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/auth/token/refresh`;
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            '*/*'
-        ];
-
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters
-        });
-
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

@@ -1,4 +1,12 @@
 export * from './AuthenticationcontrollerApi';
+import {AuthenticationcontrollerApi} from "./AuthenticationcontrollerApi";
+import {CommentsrestcontrollerApi} from "./CommentsrestcontrollerApi";
+import {DoodlerestcontrollerApi} from "./DoodlerestcontrollerApi";
+import {MatchesrestcontrollerApi} from "./MatchesrestcontrollerApi";
+import {NewsrestcontrollerApi} from "./NewsrestcontrollerApi";
+import {PollrestcontrollerApi} from "./PollrestcontrollerApi";
+import {SeasonsrestcontrollerApi} from "./SeasonsrestcontrollerApi";
+import {TeamsrestcontrollerApi} from "./TeamsrestcontrollerApi";
 export * from './CommentsrestcontrollerApi';
 export * from './DoodlerestcontrollerApi';
 export * from './MatchesrestcontrollerApi';
@@ -6,3 +14,4 @@ export * from './NewsrestcontrollerApi';
 export * from './PollrestcontrollerApi';
 export * from './SeasonsrestcontrollerApi';
 export * from './TeamsrestcontrollerApi';
+export const APIS = [AuthenticationcontrollerApi, CommentsrestcontrollerApi, DoodlerestcontrollerApi, MatchesrestcontrollerApi, NewsrestcontrollerApi, PollrestcontrollerApi, SeasonsrestcontrollerApi, TeamsrestcontrollerApi];

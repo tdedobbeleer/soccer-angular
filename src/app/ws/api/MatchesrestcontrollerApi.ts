@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class MatchesrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -44,21 +44,6 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
-    }
-
-    /**
      * Create match
      * 
      * @param dto dto
@@ -69,7 +54,23 @@ export class MatchesrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * Update match
+     *
+     * @param matchDTO matchDTO
+     */
+    public deleteMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.deleteMatchWithHttpInfo(matchDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
                 }
             });
     }
@@ -84,7 +85,7 @@ export class MatchesrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -100,7 +101,7 @@ export class MatchesrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -115,7 +116,7 @@ export class MatchesrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -131,23 +132,23 @@ export class MatchesrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
 
     /**
      * Update match
-     * 
-     * @param matchDTO matchDTO
+     *
+     * @param dto dto
      */
-    public updateMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
-        return this.updateMatchWithHttpInfo(matchDTO, extraHttpRequestParams)
+    public updateMatch(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
+        return this.updateMatchWithHttpInfo(dto, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -159,7 +160,7 @@ export class MatchesrestcontrollerApi {
      * @param dto dto
      */
     public createMatchWithHttpInfo(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matches`;
+        const path = this.basePath + '/api/v1/matches';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -167,8 +168,6 @@ export class MatchesrestcontrollerApi {
         if (dto === null || dto === undefined) {
             throw new Error('Required parameter dto was null or undefined when calling createMatch.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -179,20 +178,59 @@ export class MatchesrestcontrollerApi {
             '*/*'
         ];
 
-
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
             body: dto == null ? '' : JSON.stringify(dto), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Update match
+     *
+     * @param matchDTO matchDTO
+     */
+    public deleteMatchWithHttpInfo(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/matches';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'matchDTO' is not null or undefined
+        if (matchDTO === null || matchDTO === undefined) {
+            throw new Error('Required parameter matchDTO was null or undefined when calling deleteMatch.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Delete,
+            headers: headers,
+            body: matchDTO == null ? '' : JSON.stringify(matchDTO), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -203,12 +241,10 @@ export class MatchesrestcontrollerApi {
      * 
      */
     public getNextMatchUsingGETWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matches/next`;
+        const path = this.basePath + '/api/v1/matches/next';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -218,20 +254,16 @@ export class MatchesrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -243,7 +275,8 @@ export class MatchesrestcontrollerApi {
      * @param id id
      */
     public matchesForSeasonWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matches/season/${id}`;
+        const path = this.basePath + '/api/v1/matches/season/${id}'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -251,8 +284,6 @@ export class MatchesrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchesForSeason.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -262,20 +293,16 @@ export class MatchesrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -286,12 +313,10 @@ export class MatchesrestcontrollerApi {
      * 
      */
     public matchpollWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/match/latest/poll`;
+        const path = this.basePath + '/api/v1/match/latest/poll';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -301,20 +326,16 @@ export class MatchesrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -326,7 +347,8 @@ export class MatchesrestcontrollerApi {
      * @param id id
      */
     public matchpoll1WithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/match/${id}/poll`;
+        const path = this.basePath + '/api/v1/match/${id}/poll'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -334,8 +356,6 @@ export class MatchesrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchpoll1.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -345,20 +365,16 @@ export class MatchesrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -366,20 +382,18 @@ export class MatchesrestcontrollerApi {
 
     /**
      * Update match
-     * 
-     * @param matchDTO matchDTO
+     *
+     * @param dto dto
      */
-    public updateMatchWithHttpInfo(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matches`;
+    public updateMatchWithHttpInfo(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/matches';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'matchDTO' is not null or undefined
-        if (matchDTO === null || matchDTO === undefined) {
-            throw new Error('Required parameter matchDTO was null or undefined when calling updateMatch.');
+        // verify required parameter 'dto' is not null or undefined
+        if (dto === null || dto === undefined) {
+            throw new Error('Required parameter dto was null or undefined when calling updateMatch.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -390,20 +404,18 @@ export class MatchesrestcontrollerApi {
             '*/*'
         ];
 
-
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Put,
             headers: headers,
-            body: matchDTO == null ? '' : JSON.stringify(matchDTO), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            body: dto == null ? '' : JSON.stringify(dto), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

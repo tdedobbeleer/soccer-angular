@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class CommentsrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -41,21 +41,6 @@ export class CommentsrestcontrollerApi {
         if (configuration) {
             this.configuration = configuration;
         }
-    }
-
-    /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for (let key in objB) {
-            if (objB.hasOwnProperty(key)) {
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
     }
 
     /**
@@ -70,7 +55,7 @@ export class CommentsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -87,7 +72,7 @@ export class CommentsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -104,7 +89,7 @@ export class CommentsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -117,7 +102,9 @@ export class CommentsrestcontrollerApi {
      * @param commentId commentId
      */
     public deleteCommentWithHttpInfo(id: number, commentId: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news/${id}/comment/${commentId}`;
+        const path = this.basePath + '/api/v1/news/${id}/comment/${commentId}'
+                .replace('${' + 'id' + '}', String(id))
+                .replace('${' + 'commentId' + '}', String(commentId));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -129,8 +116,6 @@ export class CommentsrestcontrollerApi {
         if (commentId === null || commentId === undefined) {
             throw new Error('Required parameter commentId was null or undefined when calling deleteComment.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -141,16 +126,15 @@ export class CommentsrestcontrollerApi {
             '*/*'
         ];
 
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Delete,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -163,7 +147,8 @@ export class CommentsrestcontrollerApi {
      * @param commentDTO commentDTO
      */
     public editCommentWithHttpInfo(id: number, commentDTO: models.CommentDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news/${id}/comment`;
+        const path = this.basePath + '/api/v1/news/${id}/comment'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -175,8 +160,6 @@ export class CommentsrestcontrollerApi {
         if (commentDTO === null || commentDTO === undefined) {
             throw new Error('Required parameter commentDTO was null or undefined when calling editComment.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -187,20 +170,18 @@ export class CommentsrestcontrollerApi {
             '*/*'
         ];
 
-
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Put,
             headers: headers,
             body: commentDTO == null ? '' : JSON.stringify(commentDTO), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -213,7 +194,8 @@ export class CommentsrestcontrollerApi {
      * @param commentDTO commentDTO
      */
     public postCommentWithHttpInfo(id: number, commentDTO: models.CommentDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news/${id}/comment`;
+        const path = this.basePath + '/api/v1/news/${id}/comment'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -225,8 +207,6 @@ export class CommentsrestcontrollerApi {
         if (commentDTO === null || commentDTO === undefined) {
             throw new Error('Required parameter commentDTO was null or undefined when calling postComment.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -237,20 +217,18 @@ export class CommentsrestcontrollerApi {
             '*/*'
         ];
 
-
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
             body: commentDTO == null ? '' : JSON.stringify(commentDTO), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

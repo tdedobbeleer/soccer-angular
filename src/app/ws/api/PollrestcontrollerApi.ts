@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class PollrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -41,21 +41,6 @@ export class PollrestcontrollerApi {
         if (configuration) {
             this.configuration = configuration;
         }
-    }
-
-    /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
     }
 
     /**
@@ -71,7 +56,7 @@ export class PollrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -87,7 +72,7 @@ export class PollrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -104,7 +89,7 @@ export class PollrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -120,7 +105,7 @@ export class PollrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -136,7 +121,7 @@ export class PollrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -150,7 +135,7 @@ export class PollrestcontrollerApi {
      * @param sort sort
      */
     public getAllMatchPollsUsingGETWithHttpInfo(page: number, size?: number, sort?: string, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchPoll`;
+        const path = this.basePath + '/api/v1/matchPoll';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -161,13 +146,14 @@ export class PollrestcontrollerApi {
         if (page !== undefined) {
             queryParameters.set('page', <any>page);
         }
+
         if (size !== undefined) {
             queryParameters.set('size', <any>size);
         }
+
         if (sort !== undefined) {
             queryParameters.set('sort', <any>sort);
         }
-
 
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -178,20 +164,16 @@ export class PollrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -203,7 +185,8 @@ export class PollrestcontrollerApi {
      * @param id id
      */
     public getMatchPollUsingGETWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchPoll/${id}`;
+        const path = this.basePath + '/api/v1/matchPoll/${id}'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -211,8 +194,6 @@ export class PollrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getMatchPollUsingGET.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -222,20 +203,16 @@ export class PollrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -248,7 +225,8 @@ export class PollrestcontrollerApi {
      * @param vote vote
      */
     public postMatchPollUsingPOSTWithHttpInfo(id: number, vote: models.MultipleChoiceVoteDTOlong, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchPoll/${id}/vote`;
+        const path = this.basePath + '/api/v1/matchPoll/${id}/vote'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -260,8 +238,6 @@ export class PollrestcontrollerApi {
         if (vote === null || vote === undefined) {
             throw new Error('Required parameter vote was null or undefined when calling postMatchPollUsingPOST.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -271,22 +247,19 @@ export class PollrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
 
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
             body: vote == null ? '' : JSON.stringify(vote), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -298,7 +271,8 @@ export class PollrestcontrollerApi {
      * @param id id
      */
     public refreshMatchPollUsingPUTWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/matchPoll/match/${id}/refresh`;
+        const path = this.basePath + '/api/v1/matchPoll/match/${id}/refresh'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -306,8 +280,6 @@ export class PollrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling refreshMatchPollUsingPUT.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -317,20 +289,16 @@ export class PollrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -342,7 +310,8 @@ export class PollrestcontrollerApi {
      * @param id id
      */
     public resetPollUsingPUTWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/poll/${id}/reset`;
+        const path = this.basePath + '/api/v1/poll/${id}/reset'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -350,8 +319,6 @@ export class PollrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling resetPollUsingPUT.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -361,20 +328,16 @@ export class PollrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Put,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

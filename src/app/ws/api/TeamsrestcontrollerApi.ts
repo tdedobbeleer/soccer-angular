@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class TeamsrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -44,23 +44,46 @@ export class TeamsrestcontrollerApi {
     }
 
     /**
+     * Create a new team
      *
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
+     * @param teamDTO teamDTO
      */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for (let key in objB) {
-            if (objB.hasOwnProperty(key)) {
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
+    public createTeam(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<models.TeamDTO> {
+        return this.createTeamWithHttpInfo(teamDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * Create a new team
+     *
+     * @param addressId
+     * @param addressPostalCode
+     * @param addressAddress
+     * @param addressCity
+     * @param addressGoogleLink
+     * @param id
+     * @param name
+     */
+    public deleteTeam(addressId?: number, addressPostalCode?: number, addressAddress?: string, addressCity?: string, addressGoogleLink?: string, id?: number, name?: string, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.deleteTeamWithHttpInfo(addressId, addressPostalCode, addressAddress, addressCity, addressGoogleLink, id, name, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
     }
 
     /**
      * Get teams
-     *
+     * 
      */
     public getTeams(extraHttpRequestParams?: any): Observable<Array<models.TeamDTO>> {
         return this.getTeamsWithHttpInfo(extraHttpRequestParams)
@@ -68,22 +91,112 @@ export class TeamsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * Create a new team
+     *
+     * @param teamDTO teamDTO
+     */
+    public updateTeam(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<models.TeamDTO> {
+        return this.updateTeamWithHttpInfo(teamDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
                 }
             });
     }
 
 
     /**
-     * Get teams
+     * Create a new team
      *
+     * @param teamDTO teamDTO
      */
-    public getTeamsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/teams`;
+    public createTeamWithHttpInfo(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/teams';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'teamDTO' is not null or undefined
+        if (teamDTO === null || teamDTO === undefined) {
+            throw new Error('Required parameter teamDTO was null or undefined when calling createTeam.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
 
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: teamDTO == null ? '' : JSON.stringify(teamDTO), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Create a new team
+     *
+     * @param addressId
+     * @param addressPostalCode
+     * @param addressAddress
+     * @param addressCity
+     * @param addressGoogleLink
+     * @param id
+     * @param name
+     */
+    public deleteTeamWithHttpInfo(addressId?: number, addressPostalCode?: number, addressAddress?: string, addressCity?: string, addressGoogleLink?: string, id?: number, name?: string, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/teams';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        if (addressId !== undefined) {
+            queryParameters.set('address.id', <any>addressId);
+        }
+
+        if (addressPostalCode !== undefined) {
+            queryParameters.set('address.postalCode', <any>addressPostalCode);
+        }
+
+        if (addressAddress !== undefined) {
+            queryParameters.set('address.address', <any>addressAddress);
+        }
+
+        if (addressCity !== undefined) {
+            queryParameters.set('address.city', <any>addressCity);
+        }
+
+        if (addressGoogleLink !== undefined) {
+            queryParameters.set('address.googleLink', <any>addressGoogleLink);
+        }
+
+        if (id !== undefined) {
+            queryParameters.set('id', <any>id);
+        }
+
+        if (name !== undefined) {
+            queryParameters.set('name', <any>name);
+        }
 
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -95,16 +208,89 @@ export class TeamsrestcontrollerApi {
             '*/*'
         ];
 
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Delete,
+            headers: headers,
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Get teams
+     * 
+     */
+    public getTeamsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/teams';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Create a new team
+     *
+     * @param teamDTO teamDTO
+     */
+    public updateTeamWithHttpInfo(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/teams';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'teamDTO' is not null or undefined
+        if (teamDTO === null || teamDTO === undefined) {
+            throw new Error('Required parameter teamDTO was null or undefined when calling updateTeam.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            body: teamDTO == null ? '' : JSON.stringify(teamDTO), // https://github.com/angular/angular/issues/10612
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);

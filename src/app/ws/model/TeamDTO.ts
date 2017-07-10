@@ -14,16 +14,8 @@ import * as models from "./models";
 export interface TeamDTO {
     address?: models.AddressDTO;
 
-    created?: Date;
-
     id?: number;
 
-    modified?: Date;
-
     name?: string;
-
-    stringCreated?: string;
-
-    stringModfied?: string;
 
 }

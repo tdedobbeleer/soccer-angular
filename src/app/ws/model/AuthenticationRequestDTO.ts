@@ -13,8 +13,8 @@
 export interface AuthenticationRequestDTO {
     password?: string;
 
-    username?: string;
-
     rememberMe?: boolean;
+
+    username?: string;
 
 }

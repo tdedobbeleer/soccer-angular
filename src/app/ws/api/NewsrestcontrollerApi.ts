@@ -9,6 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+/* tslint:disable:no-unused-variable member-ordering */
 import {Inject, Injectable, Optional} from "@angular/core";
 import {
     Http,
@@ -25,12 +26,11 @@ import * as models from "../model/models";
 import {BASE_PATH} from "../variables";
 import {Configuration} from "../configuration";
 
-/* tslint:disable:no-unused-variable member-ordering */
-
 
 @Injectable()
 export class NewsrestcontrollerApi {
-    protected basePath = 'https://localhost:8080/';
+
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
@@ -44,21 +44,6 @@ export class NewsrestcontrollerApi {
     }
 
     /**
-     * 
-     * Extends object by coping non-existing properties.
-     * @param objA object to be extended
-     * @param objB source object
-     */
-    private extendObj<T1,T2>(objA: T1, objB: T2) {
-        for(let key in objB){
-            if(objB.hasOwnProperty(key)){
-                (objA as any)[key] = (objB as any)[key];
-            }
-        }
-        return <T1&T2>objA;
-    }
-
-    /**
      * Delete news
      * 
      * @param id id
@@ -69,7 +54,7 @@ export class NewsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -85,7 +70,7 @@ export class NewsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -103,7 +88,7 @@ export class NewsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -119,7 +104,7 @@ export class NewsrestcontrollerApi {
                 if (response.status === 204) {
                     return undefined;
                 } else {
-                    return response.json();
+                    return response.json() || {};
                 }
             });
     }
@@ -131,7 +116,8 @@ export class NewsrestcontrollerApi {
      * @param id id
      */
     public deleteNewsWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news/${id}`;
+        const path = this.basePath + '/api/v1/news/${id}'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -139,8 +125,6 @@ export class NewsrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteNews.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -150,20 +134,16 @@ export class NewsrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Delete,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -175,7 +155,8 @@ export class NewsrestcontrollerApi {
      * @param id id
      */
     public getNewsWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news/${id}`;
+        const path = this.basePath + '/api/v1/news/${id}'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -183,8 +164,6 @@ export class NewsrestcontrollerApi {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getNews.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -194,20 +173,16 @@ export class NewsrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -221,7 +196,7 @@ export class NewsrestcontrollerApi {
      * @param size size
      */
     public getNewsPageWithHttpInfo(page: number, searchTerm?: string, size?: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news`;
+        const path = this.basePath + '/api/v1/news';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -232,13 +207,14 @@ export class NewsrestcontrollerApi {
         if (searchTerm !== undefined) {
             queryParameters.set('searchTerm', <any>searchTerm);
         }
+
         if (page !== undefined) {
             queryParameters.set('page', <any>page);
         }
+
         if (size !== undefined) {
             queryParameters.set('size', <any>size);
         }
-
 
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -249,20 +225,16 @@ export class NewsrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
-
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
@@ -274,7 +246,7 @@ export class NewsrestcontrollerApi {
      * @param newsDTO newsDTO
      */
     public postNewsWithHttpInfo(newsDTO: models.NewsDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + `/api/v1/news`;
+        const path = this.basePath + '/api/v1/news';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -282,8 +254,6 @@ export class NewsrestcontrollerApi {
         if (newsDTO === null || newsDTO === undefined) {
             throw new Error('Required parameter newsDTO was null or undefined when calling postNews.');
         }
-
-
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -293,22 +263,19 @@ export class NewsrestcontrollerApi {
         let produces: string[] = [
             '*/*'
         ];
-        
-            
 
         headers.set('Content-Type', 'application/json');
-
 
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Post,
             headers: headers,
             body: newsDTO == null ? '' : JSON.stringify(newsDTO), // https://github.com/angular/angular/issues/10612
-            search: queryParameters
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
-        
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
-            requestOptions = this.extendObj(requestOptions, extraHttpRequestParams);
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
         }
 
         return this.http.request(path, requestOptions);
