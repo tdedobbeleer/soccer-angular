@@ -42,6 +42,8 @@ import {ErrorHandlerService} from "./services/error-handler.service";
 import {MotmPollsComponent} from "./components/motm-polls/motm-polls.component";
 import {MotmPollComponent} from "./components/motm-poll/motm-poll.component";
 import {PollrestcontrollerApi} from "./ws/api/PollrestcontrollerApi";
+import {TeamComponent} from "./components/team/team.component";
+import {SafePipe} from "./pipes/safe.pipe";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -85,6 +87,8 @@ const appRoutes: Routes = [
         FailWhaleComponent,
         MotmPollsComponent,
         MotmPollComponent,
+        TeamComponent,
+        SafePipe,
     ],
     imports: [
         BrowserModule,
