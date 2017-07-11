@@ -19,7 +19,7 @@ import {LoginService} from "../../services/login.service";
             </div>
             <div class="col-md-4 col-xs-12 text-center">
             <div class="btn-group">
-              <button type="button" class="btn btn-circle" aria-label="Show map" (click)="showMap = !showMap">
+              <button *ngIf="team.address?.googleLink != null" type="button" class="btn btn-circle" aria-label="Show map" (click)="showMap = !showMap">
                   <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
               </button>
               <button *ngIf="isAdmin()" type="button" class="btn btn-circle" aria-label="Edit team">
