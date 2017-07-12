@@ -44,6 +44,8 @@ import {MotmPollComponent} from "./components/motm-poll/motm-poll.component";
 import {PollrestcontrollerApi} from "./ws/api/PollrestcontrollerApi";
 import {TeamComponent} from "./components/team/team.component";
 import {SafePipe} from "./pipes/safe.pipe";
+import { PlayersComponent } from './components/players/players.component';
+import { PlayerComponent } from './components/player/player.component';
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -89,6 +91,8 @@ const appRoutes: Routes = [
         MotmPollComponent,
         TeamComponent,
         SafePipe,
+        PlayersComponent,
+        PlayerComponent,
     ],
     imports: [
         BrowserModule,

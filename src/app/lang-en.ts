@@ -20,6 +20,7 @@ export const LANG_EN_TRANS = {
     'nav.profile': 'Profile',
     'nav.logout': 'Logout',
     'nav.contact': 'Contact',
+    'nav.players' : 'Our team',
     'nav.messages.create': 'Create a message',
     'label.username' : 'Email address',
     'label.password' : 'Password',

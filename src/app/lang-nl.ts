@@ -20,6 +20,7 @@ export const LANG_NL_TRANS = {
     'nav.profile': 'Profiel',
     'nav.logout': 'Uitloggen',
     'nav.contact': 'Contact',
+    'nav.players' : 'Ons team',
     'nav.messages.create': 'Maak een bericht aan',
     'label.username' : 'Email adres',
     'label.password' : 'Wachtwoord',
