@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {MatchPollDTO} from "../../ws/model/MatchPollDTO";
+import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
 import {LoginService} from "../../services/login.service";
-import {PollrestcontrollerApi} from "../../ws/api/PollrestcontrollerApi";
+import {PollrestcontrollerApi} from "../../ws/soccer/api/PollrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({

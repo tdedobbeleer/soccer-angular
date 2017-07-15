@@ -2,15 +2,27 @@ import * as moment from "moment";
 
 export class Util {
 
-    static parseDate(date: Date): String {
-        return moment(date).format('dd/MM/yyyy').toString();
+    static parseDate(date: Date): string {
+        return moment(date).format('DD/MM/YYYY').toString();
     }
 
-    static parseTime(date: String, time: String): Date {
-        return moment(date + " " + time, "dd/MM/yyyy HH:mm").toDate();
+    static parseTime(date: string, time: string): Date {
+        return moment(date + " " + time, "DD/MM/YYYY HH:mm").toDate();
     }
 
-    static toDate(date: String): Date {
-        return moment(date, "dd/MM/yyyy").toDate();
+    static toDate(date: string): Date {
+        return moment(date, "DD/MM/YYYY").toDate();
+    }
+
+    static parseUnixDate(date: number): Date {
+        return moment.unix(date).toDate();
+    }
+
+    static dateTimeIsBetween(date: Date, startDate: Date, offsetMinutes: number): boolean {
+        let odate = moment(date);
+        let sdate = moment(startDate);
+        let eDate = moment(startDate).add(offsetMinutes, 'minute');
+
+        return odate.isSameOrAfter(sdate) && odate.isSameOrBefore(eDate);
     }
 }

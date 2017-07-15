@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {SeasonDTO} from "../../ws/model/SeasonDTO";
-import {MatchesrestcontrollerApi} from "../../ws/api/MatchesrestcontrollerApi";
-import {SeasonsrestcontrollerApi} from "../../ws/api/SeasonsrestcontrollerApi";
+import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
+import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
+import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
 import {LoginService} from "../../services/login.service";
 import {Observable} from "rxjs";
 
@@ -19,8 +19,8 @@ import {Observable} from "rxjs";
     </div>
     <div class="container">
         <div *ngIf="loaded">
-          <app-season 
-          *ngFor="let season of seasons" [season]="season.season" [matches]="season.matches"></app-season>
+          <app-next-match></app-next-match>
+          <app-season *ngFor="let season of seasons" [season]="season.season" [matches]="season.matches"></app-season>
         </div>
     </div>
   `,
@@ -50,7 +50,11 @@ export class MatchesComponent implements OnInit {
                         this.seasons.push(seasonObject);
                         this.loaded = true;
                     })
-            })
+            });
+
+
+
+
     }
 
     isAdmin() {

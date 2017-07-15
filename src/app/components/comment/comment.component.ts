@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {CommentDTO} from "../../ws/model/CommentDTO";
+import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
 import {LoginService} from "../../services/login.service";
-import {CommentsrestcontrollerApi} from "../../ws/api/CommentsrestcontrollerApi";
+import {CommentsrestcontrollerApi} from "../../ws/soccer/api/CommentsrestcontrollerApi";
 
 @Component({
     selector: 'app-comment',

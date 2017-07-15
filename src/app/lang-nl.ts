@@ -37,5 +37,6 @@ export const LANG_NL_TRANS = {
     'btn.login': 'Inloggen',
     'btn.reactions': 'Reacties',
     'btn.submit': 'Verzenden',
-    'btn.cancel': 'Annuleren'
+    'btn.cancel': 'Annuleren',
+    'text.match.next': 'Volgende match'
 };

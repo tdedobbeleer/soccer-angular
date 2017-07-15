@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {SeasonDTO} from "../../ws/model/SeasonDTO";
-import {MatchDTO} from "../../ws/model/MatchDTO";
+import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
+import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
 
 @Component({
     selector: 'app-season',

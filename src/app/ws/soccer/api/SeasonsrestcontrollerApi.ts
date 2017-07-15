@@ -45,7 +45,7 @@ export class SeasonsrestcontrollerApi {
 
     /**
      * Create a season
-     *
+     * 
      * @param seasonDTO seasonDTO
      */
     public createSeason(seasonDTO: models.SeasonDTO, extraHttpRequestParams?: any): Observable<models.SeasonDTO> {
@@ -77,7 +77,7 @@ export class SeasonsrestcontrollerApi {
 
     /**
      * Create a season
-     *
+     * 
      * @param seasonDTO seasonDTO
      */
     public createSeasonWithHttpInfo(seasonDTO: models.SeasonDTO, extraHttpRequestParams?: any): Observable<Response> {

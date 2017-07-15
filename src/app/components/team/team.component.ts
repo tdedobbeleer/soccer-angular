@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {TeamDTO} from "../../ws/model/TeamDTO";
+import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
 import {LoginService} from "../../services/login.service";
 
 @Component({

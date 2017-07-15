@@ -1,11 +1,11 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {MatchDTO} from "../../ws/model/MatchDTO";
-import {MatchesrestcontrollerApi} from "../../ws/api/MatchesrestcontrollerApi";
-import {TeamsrestcontrollerApi} from "../../ws/api/TeamsrestcontrollerApi";
-import {TeamDTO} from "../../ws/model/TeamDTO";
-import {SeasonsrestcontrollerApi} from "../../ws/api/SeasonsrestcontrollerApi";
-import {SeasonDTO} from "../../ws/model/SeasonDTO";
+import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
+import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
+import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
+import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
+import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
+import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
 import {LoginService} from "../../services/login.service";
 import {Util} from "../../classes/util";
 

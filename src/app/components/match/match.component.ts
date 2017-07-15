@@ -1,20 +1,10 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {MatchDTO} from "../../ws/model/MatchDTO";
+import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
 import {LoginService} from "../../services/login.service";
 
 @Component({
     selector: 'app-match',
-    styles: [`
-    .right {
-      text-align: right;
-    }
-    .left {
-      text-align: left;
-    }
-    .score {
-        color: #ffffff;
-        background-color: #4fbfa8;
-    }
+    styles: [`  
   `],
     template: `
    

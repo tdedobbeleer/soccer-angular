@@ -89,7 +89,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectLang(this.nl);
+    this.selectLang(this._translate.currentLang() == 'en' ? this.en : this.nl);
   }
 
   selectLang(lang: Lang) {

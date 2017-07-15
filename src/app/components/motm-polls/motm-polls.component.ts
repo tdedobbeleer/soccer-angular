@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {PollrestcontrollerApi} from "../../ws/api/PollrestcontrollerApi";
+import {PollrestcontrollerApi} from "../../ws/soccer/api/PollrestcontrollerApi";
 import {LoginService} from "../../services/login.service";
-import {PageDTOMatchPollDTO} from "../../ws/model/PageDTOMatchPollDTO";
+import {PageDTOMatchPollDTO} from "../../ws/soccer/model/PageDTOMatchPollDTO";
 
 @Component({
     selector: 'app-motm-polls',

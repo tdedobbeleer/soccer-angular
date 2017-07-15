@@ -45,7 +45,7 @@ export class TeamsrestcontrollerApi {
 
     /**
      * Create a new team
-     *
+     * 
      * @param teamDTO teamDTO
      */
     public createTeam(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<models.TeamDTO> {
@@ -68,7 +68,7 @@ export class TeamsrestcontrollerApi {
      * @param addressCity
      * @param addressGoogleLink
      * @param id
-     * @param name
+     * @param name 
      */
     public deleteTeam(addressId?: number, addressPostalCode?: number, addressAddress?: string, addressCity?: string, addressGoogleLink?: string, id?: number, name?: string, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
         return this.deleteTeamWithHttpInfo(addressId, addressPostalCode, addressAddress, addressCity, addressGoogleLink, id, name, extraHttpRequestParams)
@@ -98,7 +98,7 @@ export class TeamsrestcontrollerApi {
 
     /**
      * Create a new team
-     *
+     * 
      * @param teamDTO teamDTO
      */
     public updateTeam(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<models.TeamDTO> {
@@ -115,7 +115,7 @@ export class TeamsrestcontrollerApi {
 
     /**
      * Create a new team
-     *
+     * 
      * @param teamDTO teamDTO
      */
     public createTeamWithHttpInfo(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<Response> {
@@ -163,7 +163,7 @@ export class TeamsrestcontrollerApi {
      * @param addressCity
      * @param addressGoogleLink
      * @param id
-     * @param name
+     * @param name 
      */
     public deleteTeamWithHttpInfo(addressId?: number, addressPostalCode?: number, addressAddress?: string, addressCity?: string, addressGoogleLink?: string, id?: number, name?: string, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/teams';
@@ -257,7 +257,7 @@ export class TeamsrestcontrollerApi {
 
     /**
      * Create a new team
-     *
+     * 
      * @param teamDTO teamDTO
      */
     public updateTeamWithHttpInfo(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<Response> {

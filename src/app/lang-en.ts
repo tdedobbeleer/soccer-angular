@@ -37,5 +37,6 @@ export const LANG_EN_TRANS = {
     'btn.login': 'Login',
     'btn.reactions': 'Reactions',
     'btn.submit': 'Submit',
-    'btn.cancel': 'Cancel'
+    'btn.cancel': 'Cancel',
+    'text.match.next': 'Next match'
 };

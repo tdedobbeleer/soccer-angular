@@ -10,8 +10,8 @@ import {MessagesComponent} from "./components/messages/messages.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import {TeamsListComponent} from "./components/teams-list/teams-list.component";
 import {MessageComponent} from "./components/message/message.component";
-import {NewsrestcontrollerApi} from "./ws/api/NewsrestcontrollerApi";
-import {AuthenticationcontrollerApi} from "./ws/api/AuthenticationcontrollerApi";
+import {NewsrestcontrollerApi} from "./ws/soccer/api/NewsrestcontrollerApi";
+import {AuthenticationcontrollerApi} from "./ws/soccer/api/AuthenticationcontrollerApi";
 import {CommentFormComponent} from "./components/comment-form/comment-form.component";
 import {LoginComponent} from "./components/login/login.component";
 import {AuthGuardService} from "./services/auth-guard.service";
@@ -23,27 +23,29 @@ import {Routes, RouterModule} from "@angular/router";
 import {MatchComponent} from "./components/match/match.component";
 import {MatchesComponent} from "./components/matches/matches.component";
 import {SeasonComponent} from "./components/season/season.component";
-import {MatchesrestcontrollerApi} from "./ws/api/MatchesrestcontrollerApi";
-import {SeasonsrestcontrollerApi} from "./ws/api/SeasonsrestcontrollerApi";
+import {MatchesrestcontrollerApi} from "./ws/soccer/api/MatchesrestcontrollerApi";
+import {SeasonsrestcontrollerApi} from "./ws/soccer/api/SeasonsrestcontrollerApi";
 import {TinymceComponent} from "./components/tinymce/tinymce.component";
 import {CreateMessageComponent} from "./components/create-message/create-message.component";
 import {MessageFormComponent} from "./components/message-form/message-form.component";
 import {AuthGuardAdminService} from "./services/auth-guard-admin.service";
 import {PaginationComponent} from "./components/pagination/pagination.component";
-import {CommentsrestcontrollerApi} from "./ws/api/CommentsrestcontrollerApi";
+import {CommentsrestcontrollerApi} from "./ws/soccer/api/CommentsrestcontrollerApi";
 import {CommentComponent} from "./components/comment/comment.component";
-import {BASE_PATH} from "./ws/variables";
+import {BASE_PATH} from "./ws/soccer/variables";
 import {MatchFormComponent} from "./components/match-form/match-form.component";
 import {TeamFormComponent} from "./components/team-form/team-form.component";
 import {CreateMatchComponent} from "./components/create-match/create-match.component";
-import {TeamsrestcontrollerApi} from "./ws/api/TeamsrestcontrollerApi";
+import {TeamsrestcontrollerApi} from "./ws/soccer/api/TeamsrestcontrollerApi";
 import {FailWhaleComponent} from "./components/fail-whale/fail-whale.component";
 import {ErrorHandlerService} from "./services/error-handler.service";
 import {MotmPollsComponent} from "./components/motm-polls/motm-polls.component";
 import {MotmPollComponent} from "./components/motm-poll/motm-poll.component";
-import {PollrestcontrollerApi} from "./ws/api/PollrestcontrollerApi";
+import {PollrestcontrollerApi} from "./ws/soccer/api/PollrestcontrollerApi";
 import {TeamComponent} from "./components/team/team.component";
 import {SafePipe} from "./pipes/safe.pipe";
+import {ForecastrestcontrollerApi} from "./ws/weather/api/ForecastrestcontrollerApi";
+import {NextMatchComponent} from "./components/next-match/next-match.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -89,6 +91,7 @@ const appRoutes: Routes = [
         MotmPollComponent,
         TeamComponent,
         SafePipe,
+        NextMatchComponent,
     ],
     imports: [
         BrowserModule,
@@ -111,6 +114,7 @@ const appRoutes: Routes = [
         AuthenticationcontrollerApi,
         PollrestcontrollerApi,
         TeamsrestcontrollerApi,
+        ForecastrestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,

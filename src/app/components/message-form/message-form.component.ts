@@ -1,8 +1,8 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
+import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {LoginService} from "../../services/login.service";
-import {NewsDTO} from "../../ws/model/NewsDTO";
+import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
 import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 

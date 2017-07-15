@@ -12,6 +12,8 @@
 import * as models from "./models";
 
 export interface MatchDTO {
+    address?: models.AddressDTO;
+
     /**
      * Goals scored by awayteam
      */
@@ -26,8 +28,6 @@ export interface MatchDTO {
      * Date when match will be played, formatted dd/mm/YYYY
      */
     date?: string;
-
-    fullAddress?: string;
 
     /**
      * Goals of this match, orederd

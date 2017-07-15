@@ -9,10 +9,15 @@ const dictionary = {
 
 @Injectable()
 export class TranslationService {
-  private _currentLang: string;
+  private LOCAL_STORAGE_LANG: string = 'lang';
 
-  public get currentLang() {
-    return this._currentLang;
+  public currentLang() {
+    if (localStorage.getItem(this.LOCAL_STORAGE_LANG)) {
+      return localStorage.getItem(this.LOCAL_STORAGE_LANG);
+    }
+    else {
+      return LANG_NL_NAME;
+    }
   }
 
   // inject our translations
@@ -21,15 +26,15 @@ export class TranslationService {
 
   public use(lang: string): void {
     // set current language
-    this._currentLang = lang;
+    localStorage.setItem(this.LOCAL_STORAGE_LANG, lang);
   }
 
   private translate(key: string): string {
     // private perform translation
     let translation = key;
 
-    if (dictionary[this.currentLang] && dictionary[this.currentLang][key]) {
-      return dictionary[this.currentLang][key];
+    if (dictionary[this.currentLang()] && dictionary[this.currentLang()][key]) {
+      return dictionary[this.currentLang()][key];
     }
 
     return translation;

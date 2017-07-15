@@ -1,10 +1,10 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {CommentsrestcontrollerApi} from "../../ws/api/CommentsrestcontrollerApi";
-import {CommentDTO} from "../../ws/model/CommentDTO";
+import {CommentsrestcontrollerApi} from "../../ws/soccer/api/CommentsrestcontrollerApi";
+import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
 import {LoginService} from "../../services/login.service";
-import {NewsrestcontrollerApi} from "../../ws/api/NewsrestcontrollerApi";
+import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {NewsDTO} from "../../ws/model/NewsDTO";
+import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
 
 @Component({
   selector: 'app-message',

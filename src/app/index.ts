@@ -1,3 +1,3 @@
 export * from './app.component';
 export * from './app.module';
-export * from './ws/api/api';
+export * from './ws/soccer/api/api';

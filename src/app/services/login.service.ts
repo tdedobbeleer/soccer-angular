@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
-import {AuthenticationRequestDTO} from "../ws/model/AuthenticationRequestDTO";
-import {AuthenticationcontrollerApi} from "../ws/api/AuthenticationcontrollerApi";
+import {AuthenticationRequestDTO} from "../ws/soccer/model/AuthenticationRequestDTO";
+import {AuthenticationcontrollerApi} from "../ws/soccer/api/AuthenticationcontrollerApi";
 import {Observable} from "rxjs";
 import {Headers} from "@angular/http";
 

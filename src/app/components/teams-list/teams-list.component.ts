@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {TeamsrestcontrollerApi} from "../../ws/api/TeamsrestcontrollerApi";
+import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
 import {LoginService} from "../../services/login.service";
-import {TeamDTO} from "../../ws/model/TeamDTO";
+import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
 
 @Component({
   selector: 'app-teams-list',

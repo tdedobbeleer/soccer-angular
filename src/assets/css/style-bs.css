@@ -1,3 +1,16 @@
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.score {
+    color: #ffffff;
+    background-color: #4fbfa8;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;
