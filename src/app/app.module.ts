@@ -46,6 +46,7 @@ import {TeamComponent} from "./components/team/team.component";
 import {SafePipe} from "./pipes/safe.pipe";
 import {ForecastrestcontrollerApi} from "./ws/weather/api/ForecastrestcontrollerApi";
 import {NextMatchComponent} from "./components/next-match/next-match.component";
+import {environment} from "../environments/environment";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -106,7 +107,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
-        {provide: BASE_PATH, useValue: 'http://localhost:8080'},
+        {provide: BASE_PATH, useValue: environment.api_url},
         NewsrestcontrollerApi,
         MatchesrestcontrollerApi,
         SeasonsrestcontrollerApi,
