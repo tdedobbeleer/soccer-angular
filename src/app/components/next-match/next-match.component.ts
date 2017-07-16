@@ -37,7 +37,7 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
                           </div>
                           <div class="row">
                               <div class="col-md-12">
-                                  <h4>{{forecast.main.temp}}°</h4>
+                                  <h4>{{this.math.floor(forecast.main.temp)}}°</h4>
                                   {{forecast.weather[0].description}}    
                               </div>
                           </div>  
@@ -62,10 +62,12 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
 export class NextMatchComponent implements OnInit {
     match: MatchDTO;
     forecast: WeatherList;
+    math: Math;
 
     constructor(private _matchesApi: MatchesrestcontrollerApi,
                 private _forecastApi: ForecastrestcontrollerApi,
                 private _translationService: TranslationService) {
+        this.math = Math;
     }
 
     ngOnInit() {

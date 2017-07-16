@@ -37,6 +37,7 @@ import {LoginService} from "../../services/login.service";
     styles: []
 })
 export class TeamComponent implements OnInit {
+    showMap: boolean;
     @Input() team: TeamDTO;
 
     constructor(private _loginService: LoginService) {
