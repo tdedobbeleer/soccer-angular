@@ -47,6 +47,8 @@ import {SafePipe} from "./pipes/safe.pipe";
 import {ForecastrestcontrollerApi} from "./ws/weather/api/ForecastrestcontrollerApi";
 import {NextMatchComponent} from "./components/next-match/next-match.component";
 import {environment} from "../environments/environment";
+import {RegistrationFormComponent} from "./components/registration-form/registration-form.component";
+import {ReCaptchaModule} from "angular2-recaptcha";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -55,6 +57,7 @@ const appRoutes: Routes = [
     {path: 'messages', component: MessagesComponent},
     {path: 'teams', component: TeamsListComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegistrationFormComponent},
     {path: 'matches', component: MatchesComponent},
     {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardAdminService]},
@@ -93,8 +96,10 @@ const appRoutes: Routes = [
         TeamComponent,
         SafePipe,
         NextMatchComponent,
+        RegistrationFormComponent,
     ],
     imports: [
+        ReCaptchaModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,

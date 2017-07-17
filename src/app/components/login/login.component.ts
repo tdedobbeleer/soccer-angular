@@ -36,6 +36,9 @@ import {LoginService} from "../../services/login.service";
               <label>                            
                 <input type="checkbox" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"/> {{'label.rememberMe' | translate}}
               </label>
+              <div>
+                <a [routerLink]="['/register']" routerLinkActive="active">{{'nav.register' | translate}}</a>
+              </div>
           </div>
           <div class="form-group box-footer">
               <button [disabled]="loading" class="btn btn-primary">{{'btn.login' | translate}}</button>
