@@ -60,4 +60,7 @@ export class RegistrationFormComponent implements OnInit {
         });
     }
 
+    submit(model: any, isValid: boolean) {
+    }
+
 }

@@ -37,7 +37,8 @@
     "tinymce": "^4.5.1",
     "ts-helpers": "^1.1.1",
     "typescript": "^2.0.10",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "angular2-recaptcha": "0.6.0"
   },
   "devDependencies": {
     "@angular/cli": "1.1.0",
