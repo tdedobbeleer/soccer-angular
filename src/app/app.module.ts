@@ -49,6 +49,7 @@ import {NextMatchComponent} from "./components/next-match/next-match.component";
 import {environment} from "../environments/environment";
 import {RegistrationFormComponent} from "./components/registration-form/registration-form.component";
 import {ReCaptchaModule} from "angular2-recaptcha";
+import {RegistrationrestcontrollerApi} from "./ws/soccer/api/RegistrationrestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -121,6 +122,7 @@ const appRoutes: Routes = [
         PollrestcontrollerApi,
         TeamsrestcontrollerApi,
         ForecastrestcontrollerApi,
+        RegistrationrestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,
