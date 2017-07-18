@@ -33,8 +33,8 @@ To get more help on the `angular-cli` use `ng --help` or go check out the [Angul
 ## Local environment
 Debian env:
 - sudo apt-get install npm
-- sudo npm install -g angular-cli
-- sudo npm install npm@latest -g (latest nodejs version)
+- npm install -g angular-cli
+- npm install npm@latest -g (latest nodejs version)
 
 Install dependencies:
 - npm install
