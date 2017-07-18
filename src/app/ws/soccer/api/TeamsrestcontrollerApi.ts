@@ -67,7 +67,7 @@ export class TeamsrestcontrollerApi {
      * @param addressAddress
      * @param addressCity
      * @param addressGoogleLink
-     * @param id
+     * @param id 
      * @param name 
      */
     public deleteTeam(addressId?: number, addressPostalCode?: number, addressAddress?: string, addressCity?: string, addressGoogleLink?: string, id?: number, name?: string, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
@@ -162,7 +162,7 @@ export class TeamsrestcontrollerApi {
      * @param addressAddress
      * @param addressCity
      * @param addressGoogleLink
-     * @param id
+     * @param id 
      * @param name 
      */
     public deleteTeamWithHttpInfo(addressId?: number, addressPostalCode?: number, addressAddress?: string, addressCity?: string, addressGoogleLink?: string, id?: number, name?: string, extraHttpRequestParams?: any): Observable<Response> {

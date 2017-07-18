@@ -13,6 +13,7 @@ export * from './PageDTOMatchDoodleDTO';
 export * from './PageDTOMatchPollDTO';
 export * from './PageDTONewsDTO';
 export * from './PresenceDTO';
+export * from './RegistrationDTO';
 export * from './ResponseEntity';
 export * from './SeasonDTO';
 export * from './TeamDTO';

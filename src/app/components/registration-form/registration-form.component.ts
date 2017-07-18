@@ -28,7 +28,7 @@ import {FormGroup, Validators, FormBuilder} from "@angular/forms";
          <input name="repeatPassword" class="form-control" [formControl]="registrationForm.controls['repeatPassword']"/>
       </div>
       <div class="form-group">
-        <re-captcha site_key="6Le0aCkUAAAAACGypCCASAYNfjf2f6SLu8O5V2vf"></re-captcha>
+        <re-captcha site_key="6Le0aCkUAAAAACGypCCASAYNfjf2f6SLu8O5V2vf" (captchaResponse)="handleCaptchaResponse($event)"></re-captcha>
       </div>
       
        
@@ -46,6 +46,7 @@ import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 export class RegistrationFormComponent implements OnInit {
     registrationForm: FormGroup;
     submitted: boolean;
+    captchaResponse: any;
 
     constructor(private _fb: FormBuilder) {
     }
@@ -61,6 +62,14 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     submit(model: any, isValid: boolean) {
+        //Check if captcha response is not empty
+        //Check if form is valid
+        //Then submit
+
+    }
+
+    handleCaptchaResponse(event: any) {
+        this.captchaResponse = event;
     }
 
 }
