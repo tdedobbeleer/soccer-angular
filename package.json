@@ -9,7 +9,7 @@
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "postinstall": "ng build --aot -prod",
+    "postinstall": "ng build --aot -$ENV",
     "deploy": "git push origin master && git push heroku master"
   },
   "engines": {
