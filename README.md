@@ -28,13 +28,14 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 
 ## Further help
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To get more help on the `angular/cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Local environment
 Debian env:
+- curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - & sudo apt-get install -y nodejs
 - sudo apt-get install npm
-- npm install -g angular-cli
-- npm install npm@latest -g (latest nodejs version)
+- sudo npm install npm@latest -g (latest nodejs version)
+- sudo npm install -g angular/cli
 
 Install dependencies:
 - npm install
