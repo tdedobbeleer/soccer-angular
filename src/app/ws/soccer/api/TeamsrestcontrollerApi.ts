@@ -44,8 +44,8 @@ export class TeamsrestcontrollerApi {
     }
 
     /**
-     * Create a new team
-     * 
+     *
+     * @summary Create a new team
      * @param teamDTO teamDTO
      */
     public createTeam(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<models.TeamDTO> {
@@ -60,13 +60,13 @@ export class TeamsrestcontrollerApi {
     }
 
     /**
-     * Create a new team
      *
+     * @summary Create a new team
      * @param addressId
      * @param addressPostalCode
      * @param addressAddress
      * @param addressCity
-     * @param addressGoogleLink
+     * @param addressGoogleLink 
      * @param id 
      * @param name 
      */
@@ -82,8 +82,8 @@ export class TeamsrestcontrollerApi {
     }
 
     /**
-     * Get teams
-     * 
+     *
+     * @summary Get teams
      */
     public getTeams(extraHttpRequestParams?: any): Observable<Array<models.TeamDTO>> {
         return this.getTeamsWithHttpInfo(extraHttpRequestParams)
@@ -97,8 +97,8 @@ export class TeamsrestcontrollerApi {
     }
 
     /**
-     * Create a new team
-     * 
+     *
+     * @summary Create a new team
      * @param teamDTO teamDTO
      */
     public updateTeam(teamDTO: models.TeamDTO, extraHttpRequestParams?: any): Observable<models.TeamDTO> {
@@ -161,7 +161,7 @@ export class TeamsrestcontrollerApi {
      * @param addressPostalCode
      * @param addressAddress
      * @param addressCity
-     * @param addressGoogleLink
+     * @param addressGoogleLink 
      * @param id 
      * @param name 
      */

@@ -44,8 +44,8 @@ export class NewsrestcontrollerApi {
     }
 
     /**
-     * Delete news
-     * 
+     *
+     * @summary Delete news
      * @param id id
      */
     public deleteNews(id: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
@@ -60,8 +60,8 @@ export class NewsrestcontrollerApi {
     }
 
     /**
-     * Get news
-     * 
+     *
+     * @summary Get news
      * @param id id
      */
     public getNews(id: number, extraHttpRequestParams?: any): Observable<models.NewsDTO> {
@@ -76,8 +76,8 @@ export class NewsrestcontrollerApi {
     }
 
     /**
-     * Get news
-     * 
+     *
+     * @summary Get news
      * @param page page
      * @param searchTerm searchTerm
      * @param size size
@@ -94,8 +94,8 @@ export class NewsrestcontrollerApi {
     }
 
     /**
-     * Post news
-     * 
+     *
+     * @summary Post news
      * @param newsDTO newsDTO
      */
     public postNews(newsDTO: models.NewsDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {

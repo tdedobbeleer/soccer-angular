@@ -44,8 +44,8 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * authenticate
-     * 
+     *
+     * @summary authenticate
      * @param authenticationRequestDTO authenticationRequestDTO
      */
     public authenticate(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<any> {
@@ -60,8 +60,8 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * Is fully authenticated
-     * 
+     *
+     * @summary Is fully authenticated
      */
     public isFullyAuthenticated(extraHttpRequestParams?: any): Observable<boolean> {
         return this.isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams)

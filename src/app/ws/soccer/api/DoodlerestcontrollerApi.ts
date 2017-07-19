@@ -44,8 +44,8 @@ export class DoodlerestcontrollerApi {
     }
 
     /**
-     * Get matchdoodles
-     * 
+     *
+     * @summary Get matchdoodles
      * @param id id
      * @param accountId accountId
      */
@@ -61,8 +61,8 @@ export class DoodlerestcontrollerApi {
     }
 
     /**
-     * Get matchdoodles
-     * 
+     *
+     * @summary Get matchdoodles
      * @param id id
      */
     public matchdoodles1(id: number, extraHttpRequestParams?: any): Observable<models.MatchDoodleDTO> {
@@ -77,8 +77,8 @@ export class DoodlerestcontrollerApi {
     }
 
     /**
-     * Get matchdoodles
-     * 
+     *
+     * @summary Get matchdoodles
      * @param page page
      * @param size size
      */

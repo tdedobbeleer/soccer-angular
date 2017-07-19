@@ -44,8 +44,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Create match
-     * 
+     *
+     * @summary Create match
      * @param dto dto
      */
     public createMatch(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
@@ -60,8 +60,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Update match
-     * 
+     *
+     * @summary Update match
      * @param matchDTO matchDTO
      */
     public deleteMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
@@ -76,8 +76,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * getNextMatch
-     * 
+     *
+     * @summary getNextMatch
      */
     public getNextMatchUsingGET(extraHttpRequestParams?: any): Observable<models.MatchDTO> {
         return this.getNextMatchUsingGETWithHttpInfo(extraHttpRequestParams)
@@ -91,8 +91,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Get matches for season
-     * 
+     *
+     * @summary Get matches for season
      * @param id id
      */
     public matchesForSeason(id: number, extraHttpRequestParams?: any): Observable<Array<models.MatchDTO>> {
@@ -107,8 +107,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Get poll for match
-     * 
+     *
+     * @summary Get poll for match
      */
     public matchpoll(extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
         return this.matchpollWithHttpInfo(extraHttpRequestParams)
@@ -122,8 +122,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Get poll for match
-     * 
+     *
+     * @summary Get poll for match
      * @param id id
      */
     public matchpoll1(id: number, extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
@@ -138,8 +138,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Update match
-     * 
+     *
+     * @summary Update match
      * @param dto dto
      */
     public updateMatch(dto: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.MatchDTO> {

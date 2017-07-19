@@ -44,8 +44,8 @@ export class RegistrationrestcontrollerApi {
     }
 
     /**
-     * Create an account
      *
+     * @summary Create an account
      * @param registrationDTO registrationDTO
      * @param captchaResponse captchaResponse
      */
@@ -63,7 +63,7 @@ export class RegistrationrestcontrollerApi {
 
     /**
      * Create an account
-     *
+     * 
      * @param registrationDTO registrationDTO
      * @param captchaResponse captchaResponse
      */

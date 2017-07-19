@@ -44,8 +44,8 @@ export class CommentsrestcontrollerApi {
     }
 
     /**
-     * Get news
-     * 
+     *
+     * @summary Get news
      * @param id id
      * @param commentId commentId
      */
@@ -61,8 +61,8 @@ export class CommentsrestcontrollerApi {
     }
 
     /**
-     * Get news
-     * 
+     *
+     * @summary Get news
      * @param id id
      * @param commentDTO commentDTO
      */
@@ -78,8 +78,8 @@ export class CommentsrestcontrollerApi {
     }
 
     /**
-     * Post news
-     * 
+     *
+     * @summary Post news
      * @param id id
      * @param commentDTO commentDTO
      */

@@ -44,8 +44,8 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * getAllMatchPolls
-     * 
+     *
+     * @summary getAllMatchPolls
      * @param page page
      * @param size size
      * @param sort sort
@@ -62,8 +62,8 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * getMatchPoll
-     * 
+     *
+     * @summary getMatchPoll
      * @param id id
      */
     public getMatchPollUsingGET(id: number, extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
@@ -78,8 +78,8 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * postMatchPoll
-     * 
+     *
+     * @summary postMatchPoll
      * @param id id
      * @param vote vote
      */
@@ -95,8 +95,8 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * refreshMatchPoll
-     * 
+     *
+     * @summary refreshMatchPoll
      * @param id id
      */
     public refreshMatchPollUsingPUT(id: number, extraHttpRequestParams?: any): Observable<Array<models.AccountDTO>> {
@@ -111,8 +111,8 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * resetPoll
-     * 
+     *
+     * @summary resetPoll
      * @param id id
      */
     public resetPollUsingPUT(id: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
