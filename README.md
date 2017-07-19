@@ -35,7 +35,7 @@ Debian env:
 - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - & sudo apt-get install -y nodejs
 - sudo apt-get install npm
 - sudo npm install npm@latest -g (latest nodejs version)
-- sudo npm install -g angular/cli
+- sudo npm install -g angular/cli@1.1.0
 
 Install dependencies:
 - npm install
