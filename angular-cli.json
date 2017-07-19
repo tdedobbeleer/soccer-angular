@@ -1,7 +1,7 @@
 {
   "project": {
-    "version": "1.0.0-beta.22-1",
-    "name": "migration-project"
+    "version": "1.0",
+    "name": "soccer-project"
   },
   "apps": [
     {
