@@ -43,5 +43,8 @@ export const LANG_EN_TRANS = {
     'btn.reactions': 'Reactions',
     'btn.submit': 'Submit',
     'btn.cancel': 'Cancel',
-    'text.match.next': 'Next match'
+    'text.match.next': 'Next match',
+    'validation.email.email': "Please specify a valid email address",
+    'validation.required': "This field cannot be empty",
+    'validation.password.pattern': "Please use 5 to 15 characters for the password. Allowed characters: letters, digits, dots, underscores and dashes"
 };

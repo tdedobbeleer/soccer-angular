@@ -50,6 +50,7 @@ import {environment} from "../environments/environment";
 import {RegistrationFormComponent} from "./components/registration-form/registration-form.component";
 import {ReCaptchaModule} from "angular2-recaptcha";
 import {RegistrationrestcontrollerApi} from "./ws/soccer/api/RegistrationrestcontrollerApi";
+import {ValidationService} from "./services/validation.service";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -127,7 +128,8 @@ const appRoutes: Routes = [
         AuthGuardAdminService,
         LoginService,
         TranslationService,
-        ErrorHandlerService
+        ErrorHandlerService,
+        ValidationService
     ],
     bootstrap: [AppComponent]
 })

@@ -43,5 +43,8 @@ export const LANG_NL_TRANS = {
     'btn.reactions': 'Reacties',
     'btn.submit': 'Verzenden',
     'btn.cancel': 'Annuleren',
-    'text.match.next': 'Volgende match'
+    'text.match.next': 'Volgende match',
+    'validation.email.email': "Gelieve een correct email adres op te geven",
+    'validation.required': "Mag niet leeg zijn",
+    'validation.password.pattern': "Minimaal 5 tekens, maximaal 15. Toegelaten karakters: letters, cijfers, punten, dashes en underscores"
 };
