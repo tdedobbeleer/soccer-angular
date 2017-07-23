@@ -11,21 +11,19 @@
  */
 import * as models from "./models";
 
-export interface MatchPollDTO {
-    id?: number;
+export interface ValidationErrorDetailDTO {
+    detail?: string;
 
-    matchDate?: string;
+    developerMessage?: string;
 
-    matchDescription?: string;
+    path?: string;
 
-    matchId?: number;
+    status?: number;
 
-    options?: Array<models.AccountDTO>;
+    timeStamp?: number;
 
-    status?: string;
+    title?: string;
 
-    totalVotes?: number;
-
-    votes?: Array<models.VotesDTO>;
+    validationErrorDTOList?: Array<models.ValidationErrorDTO>;
 
 }

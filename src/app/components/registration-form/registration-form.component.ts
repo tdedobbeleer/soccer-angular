@@ -6,12 +6,28 @@ import {environment} from "../../../environments/environment";
 import {ReCaptchaComponent} from "angular2-recaptcha";
 import {TranslationService} from "../../services/translation.service";
 import {ValidationService} from "../../services/validation.service";
+import {ErrorUtil} from "../../classes/error-util";
+import {Response} from "@angular/http";
+import {equalsValidator} from "../../functions/equals-validator";
 
 @Component({
     selector: 'app-registration-form',
     template: `
-<div class="container">
-<div class="box">  
+<div class="container m-t-1">
+<ul class="breadcrumb">
+        <li>
+            <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+        </li>
+        <li>
+            {{'nav.register' | translate }}
+        </li>
+    </ul>
+
+<div class="box" [hidden]="success">  
+     <alert [type]="'danger'" dismissible="true"  [hidden]="!globalError">{{globalError}}</alert>
+     <alert [type]="'success'" dismissible="true" [hidden]="!success">
+        <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
+    </alert>
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value, registrationForm.valid)">
       <div class="form-group">
         <label for="email">{{"label.registration.email" | translate}}</label>
@@ -43,15 +59,16 @@ import {ValidationService} from "../../services/validation.service";
       </div>
        <div class="form-group">
         <label for="repeatPassword">{{"label.registration.repeatPassword" | translate}}</label>
-         <input name="repeatPassword" class="form-control" [(ngModel)]="repeatPassword" [ngModelOptions]="{standalone: true}"/>
-         <small *ngIf="submitted && passwordError" class="text-danger">
-              {{"validation.match.date.empty" | translate}}
+         <input name="repeatPassword" class="form-control" [formControl]="registrationForm.controls.repeatPassword"/>
+         <small class="text-danger" [hidden]="!formErrors.repeatPassword">
+             {{formErrors.repeatPassword}}
         </small>
       </div>
       <div class="form-group">
         <re-captcha (captchaResponse)="handleCaptchaResponse($event)"></re-captcha>
-        <small *ngIf="submitted && captchaError" class="text-danger">
-              {{"validation.match.date.empty" | translate}}
+        <input type="hidden" [formControl]="registrationForm.controls.captchaResponse"/>
+         <small class="text-danger" [hidden]="!formErrors.captchaResponse">
+             {{formErrors.captchaResponse}}
         </small>
       </div>
       
@@ -69,11 +86,8 @@ import {ValidationService} from "../../services/validation.service";
 })
 export class RegistrationFormComponent implements OnInit {
     registrationForm: FormGroup;
-    submitted: boolean;
-    captchaResponse: any;
-    repeatPassword: string;
-    passwordError: boolean;
-    captchaError: boolean;
+    success: boolean = false;
+    globalError: any;
 
     @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
@@ -81,7 +95,9 @@ export class RegistrationFormComponent implements OnInit {
         'firstName': '',
         'lastName': '',
         'email': '',
-        'password': ''
+        'password': '',
+        'repeatPassword': '',
+        'captchaResponse': ''
     };
 
     constructor(private _fb: FormBuilder, private _api: RegistrationrestcontrollerApi, private _translationService: TranslationService, private _validationService: ValidationService) {
@@ -89,10 +105,12 @@ export class RegistrationFormComponent implements OnInit {
 
     ngOnInit() {
         this.registrationForm = this._fb.group({
-            firstName: ['', [<any>Validators.required]],
-            lastName: ['', [<any>Validators.required]],
+            firstName: ['', [<any>Validators.required, Validators.pattern("^[\u00c0-\u01ffa-zA-Z\.-\\s']+$")]],
+            lastName: ['', [<any>Validators.required, Validators.pattern("^[\u00c0-\u01ffa-zA-Z\.-\\s']+$")]],
             email: ['', [<any>Validators.email]],
             password: ['', [<any>Validators.pattern("^[0-9a-zA-Z\._-]{5,15}$")]],
+            repeatPassword: ['', [<any>Validators.required, equalsValidator("password")]],
+            captchaResponse: ['', [<any>Validators.required]]
         });
 
         //Setup recaptcha
@@ -107,35 +125,30 @@ export class RegistrationFormComponent implements OnInit {
             location.reload();
         });
 
+        //Set listener
         this.registrationForm.valueChanges
             .subscribe(data => this._validationService.onValueChanged(this.registrationForm, this.formErrors));
-
-        this._validationService.onValueChanged(this.registrationForm, this.formErrors);
     }
 
     submit(model: RegistrationDTO, isValid: boolean) {
-        this.submitted = true;
+        //Mark all controls as dirty, since the form has been submitted
         this._validationService.markControlsAsDirty(this.registrationForm);
+        //trigger the validation
         this._validationService.onValueChanged(this.registrationForm, this.formErrors);
 
-        let isModelValid: boolean = true;
-        if (model.password !== this.repeatPassword) {
-            isModelValid = false;
-            this.passwordError = true;
-        }
-
-        if (!this.captchaResponse) {
-            isModelValid = false;
-            this.captchaError = true;
-        }
-
-        if (isValid && isModelValid) {
-            this._api.createAccount(model, this.captchaResponse).subscribe(
+        if (isValid) {
+            this._api.createAccount(model, this.registrationForm.controls['captchaResponse'].value).subscribe(
                 r => {
-                    console.log("Posted");
+                    console.log("Registration success");
+                    this.success = true;
+                    this.globalError = false;
                 },
-                error => {
-                    console.log("error");
+                (error: Response) => {
+                    let res = error.json();
+                    if (res.status == '400') {
+                        this.globalError = ErrorUtil.getValidationError(res, this._translationService.currentLang());
+                    }
+                    console.log("error: " + error);
                 },
                 () => {
                     console.log("completed");
@@ -145,7 +158,7 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     handleCaptchaResponse(event: any) {
-        this.captchaResponse = event;
+        this.registrationForm.patchValue({captchaResponse: event});
     }
 
 }

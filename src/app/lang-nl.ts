@@ -6,6 +6,7 @@ export const LANG_NL_TRANS = {
     'title.error.unknown': 'Onbekende fout',
     'text.error.unknown': 'Epic fail. Een open doel, maar de webmaster heeft onbegrijpelijk gemist. Of het internet is weer eens kapot.',
     'text.search': 'Zoeken',
+    'text.registration.succes': 'De registratie is gelukt.</br>Uw account zal nu geactiveerd moeten worden door de beheerder. U wordt op de hoogte gebracht van deze actie.</br>Daarna kan u rechts boven inloggen.</br></br>Veel plezier op deze website!',
     'hello world': 'hello world',
     'nav.messages': 'Berichten',
     'nav.login' : 'Inloggen',
@@ -20,6 +21,7 @@ export const LANG_NL_TRANS = {
     'nav.profile': 'Profiel',
     'nav.logout': 'Uitloggen',
     'nav.contact': 'Contact',
+    'nav.register': 'Registreer',
     'nav.messages.create': 'Maak een bericht aan',
     'label.username' : 'Email adres',
     'label.password' : 'Wachtwoord',
@@ -46,5 +48,8 @@ export const LANG_NL_TRANS = {
     'text.match.next': 'Volgende match',
     'validation.email.email': "Gelieve een correct email adres op te geven",
     'validation.required': "Mag niet leeg zijn",
-    'validation.password.pattern': "Minimaal 5 tekens, maximaal 15. Toegelaten karakters: letters, cijfers, punten, dashes en underscores"
+    'validation.password.pattern': "Minimaal 5 tekens, maximaal 15. Toegelaten karakters: letters, cijfers, punten, dashes en underscores",
+    'validation.firstName.pattern': 'De naam bevat niet toegelaten karakters (gebruik geen afkortingen, punten of vreemde tekens)',
+    'validation.lastName.pattern': 'De naam bevat niet toegelaten karakters (gebruik geen afkortingen, punten of vreemde tekens)',
+    'validation.repeatPassword.equals': 'De wachtwoorden moeten hetzelfde zijn'
 };

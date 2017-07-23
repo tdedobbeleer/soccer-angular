@@ -20,7 +20,11 @@ export class ValidationService {
 
             if (control && control.dirty && !control.valid) {
                 for (const key in control.errors) {
-                    formErrors[field] += this._translationService.instant('validation.' + field + '.' + key) + ' ';
+                    if (key == 'required') {
+                        formErrors[field] += this._translationService.instant('validation.' + key) + ' ';
+                    } else {
+                        formErrors[field] += this._translationService.instant('validation.' + field + '.' + key) + ' ';
+                    }
                 }
             }
         }

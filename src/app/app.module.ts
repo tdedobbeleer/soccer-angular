@@ -51,6 +51,7 @@ import {RegistrationFormComponent} from "./components/registration-form/registra
 import {ReCaptchaModule} from "angular2-recaptcha";
 import {RegistrationrestcontrollerApi} from "./ws/soccer/api/RegistrationrestcontrollerApi";
 import {ValidationService} from "./services/validation.service";
+import {SafeTranslationPipe} from "./pipes/safe-translation.pipe";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -99,6 +100,7 @@ const appRoutes: Routes = [
         SafePipe,
         NextMatchComponent,
         RegistrationFormComponent,
+        SafeTranslationPipe,
     ],
     imports: [
         ReCaptchaModule,

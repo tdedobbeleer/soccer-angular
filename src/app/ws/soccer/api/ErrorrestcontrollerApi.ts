@@ -28,13 +28,13 @@ import {Configuration} from "../configuration";
 
 
 @Injectable()
-export class AuthenticationcontrollerApi {
+export class ErrorrestcontrollerApi {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected http: Http, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -44,12 +44,11 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * 
-     * @summary authenticate
-     * @param authenticationRequestDTO authenticationRequestDTO
+     *
+     * @summary Get example 400 error
      */
-    public authenticate(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<any> {
-        return this.authenticateWithHttpInfo(authenticationRequestDTO, extraHttpRequestParams)
+    public get400Error(extraHttpRequestParams?: any): Observable<models.ValidationErrorDetailDTO> {
+        return this.get400ErrorWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -60,11 +59,11 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * 
-     * @summary Is fully authenticated
+     *
+     * @summary Get example 500 error
      */
-    public isFullyAuthenticated(extraHttpRequestParams?: any): Observable<boolean> {
-        return this.isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams)
+    public get500Error(extraHttpRequestParams?: any): Observable<models.ErrorDetailDTO> {
+        return this.get500ErrorWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -76,19 +75,14 @@ export class AuthenticationcontrollerApi {
 
 
     /**
-     * authenticate
-     * 
-     * @param authenticationRequestDTO authenticationRequestDTO
+     * Get example 400 error
+     *
      */
-    public authenticateWithHttpInfo(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/v1/auth';
+    public get400ErrorWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/error/400';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'authenticationRequestDTO' is not null or undefined
-        if (authenticationRequestDTO === null || authenticationRequestDTO === undefined) {
-            throw new Error('Required parameter authenticationRequestDTO was null or undefined when calling authenticate.');
-        }
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -99,12 +93,9 @@ export class AuthenticationcontrollerApi {
             '*/*'
         ];
 
-        headers.set('Content-Type', 'application/json');
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            method: RequestMethod.Get,
             headers: headers,
-            body: authenticationRequestDTO == null ? '' : JSON.stringify(authenticationRequestDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
             withCredentials: this.configuration.withCredentials
         });
@@ -117,11 +108,11 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * Is fully authenticated
-     * 
+     * Get example 500 error
+     *
      */
-    public isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/v1/auth/isFullyAuthenticated';
+    public get500ErrorWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/error/500';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845

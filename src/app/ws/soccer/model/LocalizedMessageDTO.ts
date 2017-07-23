@@ -9,23 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import * as models from "./models";
 
-export interface MatchPollDTO {
-    id?: number;
+export interface LocalizedMessageDTO {
+    messageEn?: string;
 
-    matchDate?: string;
-
-    matchDescription?: string;
-
-    matchId?: number;
-
-    options?: Array<models.AccountDTO>;
-
-    status?: string;
-
-    totalVotes?: number;
-
-    votes?: Array<models.VotesDTO>;
+    messageNl?: string;
 
 }

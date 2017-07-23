@@ -6,6 +6,7 @@ export const LANG_EN_TRANS = {
     'title.error.unknown': 'Unknown error',
     'text.error.unknown': 'Epic fail. Open goal, but the webmaster somehow missed it. Or the internet broke again.',
     'text.search': 'Search',
+    'text.registration.succes': 'The registration was successful.</br>Your account will have to be activated by the administrator. You will be notified of this action.</br>Afterwards, you can try to login.</br></br>Have a lot of fun on this website!',
     'hello world': 'hello world',
     'nav.messages': 'Messages',
     'nav.login' : 'Login',
@@ -20,6 +21,7 @@ export const LANG_EN_TRANS = {
     'nav.profile': 'Profile',
     'nav.logout': 'Logout',
     'nav.contact': 'Contact',
+    'nav.register': 'Register',
     'nav.messages.create': 'Create a message',
     'label.username' : 'Email address',
     'label.password' : 'Password',
@@ -46,5 +48,8 @@ export const LANG_EN_TRANS = {
     'text.match.next': 'Next match',
     'validation.email.email': "Please specify a valid email address",
     'validation.required': "This field cannot be empty",
-    'validation.password.pattern': "Please use 5 to 15 characters for the password. Allowed characters: letters, digits, dots, underscores and dashes"
+    'validation.password.pattern': "Please use 5 to 15 characters for the password. Allowed characters: letters, digits, dots, underscores and dashes",
+    'validation.firstName.pattern': 'The name contains invalid characters (do not use abbreviations, dots or other characters)',
+    'validation.lastName.pattern': 'The name contains invalid characters (do not use abbreviations, dots or other characters)',
+    'validation.repeatPassword.equals': 'The two passwords should match'
 };
