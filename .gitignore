@@ -23,5 +23,3 @@ npm-debug.log
 .vscode
 *.log
 *.stackdump
-firebase.json
-.firebaserc
