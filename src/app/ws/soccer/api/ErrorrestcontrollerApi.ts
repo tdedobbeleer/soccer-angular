@@ -44,7 +44,7 @@ export class ErrorrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get example 400 error
      */
     public get400Error(extraHttpRequestParams?: any): Observable<models.ValidationErrorDetailDTO> {
@@ -59,7 +59,7 @@ export class ErrorrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get example 500 error
      */
     public get500Error(extraHttpRequestParams?: any): Observable<models.ErrorDetailDTO> {
@@ -76,7 +76,7 @@ export class ErrorrestcontrollerApi {
 
     /**
      * Get example 400 error
-     *
+     * 
      */
     public get400ErrorWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/error/400';
@@ -109,7 +109,7 @@ export class ErrorrestcontrollerApi {
 
     /**
      * Get example 500 error
-     *
+     * 
      */
     public get500ErrorWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/error/500';

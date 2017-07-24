@@ -6,9 +6,9 @@ import {environment} from "../../../environments/environment";
 import {ReCaptchaComponent} from "angular2-recaptcha";
 import {TranslationService} from "../../services/translation.service";
 import {ValidationService} from "../../services/validation.service";
-import {ErrorUtil} from "../../classes/error-util";
 import {Response} from "@angular/http";
 import {equalsValidator} from "../../functions/equals-validator";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
     selector: 'app-registration-form',
@@ -22,12 +22,11 @@ import {equalsValidator} from "../../functions/equals-validator";
             {{'nav.register' | translate }}
         </li>
     </ul>
-
+ <alert [type]="'success'" dismissible="true" [hidden]="!success">
+    <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
+</alert>
 <div class="box" [hidden]="success">  
      <alert [type]="'danger'" dismissible="true"  [hidden]="!globalError">{{globalError}}</alert>
-     <alert [type]="'success'" dismissible="true" [hidden]="!success">
-        <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
-    </alert>
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value, registrationForm.valid)">
       <div class="form-group">
         <label for="email">{{"label.registration.email" | translate}}</label>
@@ -100,7 +99,7 @@ export class RegistrationFormComponent implements OnInit {
         'captchaResponse': ''
     };
 
-    constructor(private _fb: FormBuilder, private _api: RegistrationrestcontrollerApi, private _translationService: TranslationService, private _validationService: ValidationService) {
+    constructor(private _fb: FormBuilder, private _api: RegistrationrestcontrollerApi, private _translationService: TranslationService, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -144,11 +143,7 @@ export class RegistrationFormComponent implements OnInit {
                     this.globalError = false;
                 },
                 (error: Response) => {
-                    let res = error.json();
-                    if (res.status == '400') {
-                        this.globalError = ErrorUtil.getValidationError(res, this._translationService.currentLang());
-                    }
-                    console.log("error: " + error);
+                    this.globalError = this._errorService.handle(error);
                 },
                 () => {
                     console.log("completed");

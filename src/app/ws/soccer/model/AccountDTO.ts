@@ -11,6 +11,8 @@
  */
 
 export interface AccountDTO {
+    activated?: boolean;
+
     firstName?: string;
 
     id?: number;
@@ -18,6 +20,8 @@ export interface AccountDTO {
     lastName?: string;
 
     name?: string;
+
+    role?: string;
 
     username?: string;
 

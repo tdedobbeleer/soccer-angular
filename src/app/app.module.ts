@@ -16,7 +16,6 @@ import {CommentFormComponent} from "./components/comment-form/comment-form.compo
 import {LoginComponent} from "./components/login/login.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {LoginService} from "./services/login.service";
-import {AccountsComponent} from "./components/accounts/accounts.component";
 import {TranslationPipe} from "./pipes/translation.pipe";
 import {TranslationService} from "./services/translation.service";
 import {Routes, RouterModule} from "@angular/router";
@@ -52,6 +51,9 @@ import {ReCaptchaModule} from "angular2-recaptcha";
 import {RegistrationrestcontrollerApi} from "./ws/soccer/api/RegistrationrestcontrollerApi";
 import {ValidationService} from "./services/validation.service";
 import {SafeTranslationPipe} from "./pipes/safe-translation.pipe";
+import {AccountListComponent} from "./components/account-list/account-list.component";
+import {AccountComponent} from "./components/account/account.component";
+import {AccountrestcontrollerApi} from "./ws/soccer/api/AccountrestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -63,7 +65,7 @@ const appRoutes: Routes = [
     {path: 'register', component: RegistrationFormComponent},
     {path: 'matches', component: MatchesComponent},
     {path: 'manofthematch', component: MotmPollsComponent},
-    {path: 'accounts', component: AccountsComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
     {path: '**', redirectTo: 'not-found'}
@@ -80,7 +82,6 @@ const appRoutes: Routes = [
         MessageComponent,
         CommentFormComponent,
         LoginComponent,
-        AccountsComponent,
         TranslationPipe,
         MatchComponent,
         MatchesComponent,
@@ -101,6 +102,8 @@ const appRoutes: Routes = [
         NextMatchComponent,
         RegistrationFormComponent,
         SafeTranslationPipe,
+        AccountListComponent,
+        AccountComponent,
     ],
     imports: [
         ReCaptchaModule,
@@ -126,6 +129,7 @@ const appRoutes: Routes = [
         TeamsrestcontrollerApi,
         ForecastrestcontrollerApi,
         RegistrationrestcontrollerApi,
+        AccountrestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,

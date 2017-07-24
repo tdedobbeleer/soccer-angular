@@ -28,13 +28,13 @@ import {Configuration} from "../configuration";
 
 
 @Injectable()
-export class AuthenticationcontrollerApi {
+export class AccountrestcontrollerApi {
 
     protected basePath = 'https://localhost:8080';
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected http: Http, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -44,12 +44,13 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * 
-     * @summary authenticate
-     * @param authenticationRequestDTO authenticationRequestDTO
+     *
+     * @summary Change activation status
+     * @param id id
+     * @param status status
      */
-    public authenticate(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<any> {
-        return this.authenticateWithHttpInfo(authenticationRequestDTO, extraHttpRequestParams)
+    public changeActivation(id: number, status: boolean, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.changeActivationWithHttpInfo(id, status, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -60,11 +61,11 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * 
-     * @summary Is fully authenticated
+     *
+     * @summary Get Accounts
      */
-    public isFullyAuthenticated(extraHttpRequestParams?: any): Observable<boolean> {
-        return this.isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams)
+    public getAccounts(extraHttpRequestParams?: any): Observable<Array<models.AccountDTO>> {
+        return this.getAccountsWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -76,19 +77,29 @@ export class AuthenticationcontrollerApi {
 
 
     /**
-     * authenticate
-     * 
-     * @param authenticationRequestDTO authenticationRequestDTO
+     * Change activation status
+     *
+     * @param id id
+     * @param status status
      */
-    public authenticateWithHttpInfo(authenticationRequestDTO: models.AuthenticationRequestDTO, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/v1/auth';
+    public changeActivationWithHttpInfo(id: number, status: boolean, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/accounts/${id}/activation'
+                .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'authenticationRequestDTO' is not null or undefined
-        if (authenticationRequestDTO === null || authenticationRequestDTO === undefined) {
-            throw new Error('Required parameter authenticationRequestDTO was null or undefined when calling authenticate.');
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling changeActivation.');
         }
+        // verify required parameter 'status' is not null or undefined
+        if (status === null || status === undefined) {
+            throw new Error('Required parameter status was null or undefined when calling changeActivation.');
+        }
+        if (status !== undefined) {
+            queryParameters.set('status', <any>status);
+        }
+
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'
@@ -99,12 +110,9 @@ export class AuthenticationcontrollerApi {
             '*/*'
         ];
 
-        headers.set('Content-Type', 'application/json');
-
         let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Post,
+            method: RequestMethod.Put,
             headers: headers,
-            body: authenticationRequestDTO == null ? '' : JSON.stringify(authenticationRequestDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
             withCredentials: this.configuration.withCredentials
         });
@@ -117,11 +125,11 @@ export class AuthenticationcontrollerApi {
     }
 
     /**
-     * Is fully authenticated
-     * 
+     * Get Accounts
+     *
      */
-    public isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/v1/auth/full';
+    public getAccountsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/accounts';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
