@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "svk-q-01",
+    "p": "svk-p-01",
+    "q": "svk-q-01"
+  }
+}
