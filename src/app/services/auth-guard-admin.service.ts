@@ -1,14 +1,16 @@
-import {Injectable} from "@angular/core";
+import {Injectable, Inject} from "@angular/core";
 import {Router, CanActivate} from "@angular/router";
 import {LoginService} from "./login.service";
+import {DOCUMENT} from "@angular/common";
 
 @Injectable()
 export class AuthGuardAdminService implements CanActivate {
 
-    constructor(private _router: Router, private _service: LoginService) {
+    constructor(private _router: Router, private _service: LoginService, @Inject(DOCUMENT) private document: any) {
     }
 
     canActivate() {
+        let remoteUrl = document.location.pathname ? document.location.pathname.slice(1) : "";
         let url: string = this._router.routerState.snapshot.url;
         let currentUser: any = this._service.getUser();
         if (this._service.isLoggedIn() && AuthGuardAdminService.hasRole(currentUser.roles, "ROLE_ADMIN")) {
@@ -17,7 +19,7 @@ export class AuthGuardAdminService implements CanActivate {
         }
 
         // not logged in so redirect to login page
-        this._router.navigate(['/login'], {queryParams: {redirectUrl: url}});
+        this._router.navigate(['/login'], {queryParams: {redirectUrl: url ? url : remoteUrl}});
         return false;
     }
 

@@ -44,7 +44,7 @@ export class AccountrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Change activation status
      * @param id id
      * @param status status
@@ -62,6 +62,38 @@ export class AccountrestcontrollerApi {
 
     /**
      *
+     * @summary Demote user
+     * @param id id
+     */
+    public demote(id: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.demoteWithHttpInfo(id, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     *
+     * @summary Elevate user
+     * @param id id
+     */
+    public elevate(id: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.elevateWithHttpInfo(id, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     * 
      * @summary Get Accounts
      */
     public getAccounts(extraHttpRequestParams?: any): Observable<Array<models.AccountDTO>> {
@@ -78,7 +110,7 @@ export class AccountrestcontrollerApi {
 
     /**
      * Change activation status
-     *
+     * 
      * @param id id
      * @param status status
      */
@@ -125,8 +157,86 @@ export class AccountrestcontrollerApi {
     }
 
     /**
-     * Get Accounts
+     * Demote user
      *
+     * @param id id
+     */
+    public demoteWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/accounts/${id}/demotion'
+                .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling demote.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Elevate user
+     *
+     * @param id id
+     */
+    public elevateWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/accounts/${id}/elevation'
+                .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling elevate.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Get Accounts
+     * 
      */
     public getAccountsWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/accounts';

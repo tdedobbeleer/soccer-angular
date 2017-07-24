@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, EventEmitter} from "@angular/core";
 import {AuthenticationRequestDTO} from "../ws/soccer/model/AuthenticationRequestDTO";
 import {AuthenticationcontrollerApi} from "../ws/soccer/api/AuthenticationcontrollerApi";
 import {Observable} from "rxjs";
@@ -11,6 +11,8 @@ export class LoginService {
     private user: any = null;
     private LOCAL_STORAGE_USER: string = 'currentUser';
 
+    public userUpdated: EventEmitter<any> = new EventEmitter();
+
     constructor(private _api: AuthenticationcontrollerApi) {
 
     }
@@ -18,20 +20,24 @@ export class LoginService {
     init() {
         // set token if saved in local storage
         let currentUser = this.getUserFromStorage();
-        //Set user
+        //Set the user: if not valid, the calls will fail and the user will be redirected.
         this.setUser(currentUser);
         //set default headers
         if (currentUser) {
             //Test if the user can be authenticated
             this._api.isFullyAuthenticated(this.getHeaders(currentUser.token))
-                .subscribe(r => {
-                    if (r) {
+                .subscribe(
+                    r => {
                         this.setUser(currentUser);
-                    } else {
+                        this.userUpdated.emit(currentUser);
+                    },
+                    err => {
                         localStorage.removeItem(this.LOCAL_STORAGE_USER);
+                        this.setUser(undefined);
+                        this.userUpdated.emit(undefined);
                         this.resetHeaders();
-                    }
                 });
+
         } else {
             this.resetHeaders();
         }
@@ -45,6 +51,7 @@ export class LoginService {
                 let token = response && response.token;
                 if (token) {
                     this.setUser(response);
+                    this.userUpdated.emit(response);
                     // return true to indicate successful login
                     return true;
                 } else {
@@ -56,7 +63,8 @@ export class LoginService {
 
     logout(): void {
         this.resetHeaders();
-        this.user = null;
+        this.user = undefined;
+        this.userUpdated.emit(undefined);
         localStorage.removeItem(this.LOCAL_STORAGE_USER);
     }
 

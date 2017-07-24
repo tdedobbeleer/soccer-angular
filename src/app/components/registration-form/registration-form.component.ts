@@ -143,7 +143,7 @@ export class RegistrationFormComponent implements OnInit {
                     this.globalError = false;
                 },
                 (error: Response) => {
-                    this.globalError = this._errorService.handle(error);
+                    this.globalError = this._errorService.handle(error, "/registration");
                 },
                 () => {
                     console.log("completed");

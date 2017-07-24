@@ -63,7 +63,7 @@ export class TeamsrestcontrollerApi {
      * 
      * @summary Create a new team
      * @param addressId
-     * @param addressPostalCode
+     * @param addressPostalCode 
      * @param addressAddress 
      * @param addressCity 
      * @param addressGoogleLink 
@@ -158,7 +158,7 @@ export class TeamsrestcontrollerApi {
      * Create a new team
      *
      * @param addressId
-     * @param addressPostalCode
+     * @param addressPostalCode 
      * @param addressAddress 
      * @param addressCity 
      * @param addressGoogleLink 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {TranslationService} from "../../services/translation.service";
 import {LoginService} from "../../services/login.service";
+import {isUndefined} from "util";
 
 @Component({
   selector: 'app-navbar',
@@ -12,15 +13,15 @@ import {LoginService} from "../../services/login.service";
             <ul class="menu">
                 <li><a (click)="selectLang(oppositeLang)"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
                 
-                <li *ngIf="isLoggedIn()" class="dropdown" dropdown>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="glyphicon glyphicon-user"></span>&nbsp;{{getUser().firstName}} <b class="caret"></b></a>
+                <li *ngIf="isLoggedIn" class="dropdown" dropdown>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="glyphicon glyphicon-user"></span>&nbsp;{{user.firstName}} <b class="caret"></b></a>
                     <ul class="dropdown-menu" *dropdownMenu>
                         <li><a [routerLink]="['/profile']" routerLinkActive="active">{{'nav.profile' | translate}}</a></li>
                         <li><a (click)="logout()">{{'nav.logout' | translate}}</a></li>                        
                     </ul>
                 </li>
  
-                <li *ngIf="!isLoggedIn()">
+                <li *ngIf="!isLoggedIn">
                     <a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
                 </li>
 
@@ -80,6 +81,8 @@ _________________________________________________________ -->
 export class NavbarComponent implements OnInit {
   selectedLang: Lang;
   oppositeLang: Lang;
+  user: any;
+  isLoggedIn: boolean;
   isMenuCollapsed: boolean = true;
 
   private en : Lang = {locale : 'en', display: 'English'};
@@ -90,6 +93,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.selectLang(this._translate.currentLang() == 'en' ? this.en : this.nl);
+    this.isLoggedIn = this._loginService.isLoggedIn();
+    this.user = this._loginService.getUser();
+    this._loginService.userUpdated.subscribe(u => {
+      this.user = u;
+      this.isLoggedIn = !isUndefined(u);
+    })
   }
 
   selectLang(lang: Lang) {
@@ -101,14 +110,6 @@ export class NavbarComponent implements OnInit {
   refreshText(currentLang: Lang) {
     this.oppositeLang = currentLang === this.en ? this.nl : this.en;
     this.selectedLang = currentLang;
-  }
-
-  isLoggedIn() {
-    return this._loginService.isLoggedIn();
-  }
-
-  getUser() {
-    return this._loginService.getUser();
   }
 
   logout() {

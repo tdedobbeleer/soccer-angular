@@ -52,7 +52,6 @@ import {RegistrationrestcontrollerApi} from "./ws/soccer/api/Registrationrestcon
 import {ValidationService} from "./services/validation.service";
 import {SafeTranslationPipe} from "./pipes/safe-translation.pipe";
 import {AccountListComponent} from "./components/account-list/account-list.component";
-import {AccountComponent} from "./components/account/account.component";
 import {AccountrestcontrollerApi} from "./ws/soccer/api/AccountrestcontrollerApi";
 
 const appRoutes: Routes = [
@@ -103,7 +102,6 @@ const appRoutes: Routes = [
         RegistrationFormComponent,
         SafeTranslationPipe,
         AccountListComponent,
-        AccountComponent,
     ],
     imports: [
         ReCaptchaModule,

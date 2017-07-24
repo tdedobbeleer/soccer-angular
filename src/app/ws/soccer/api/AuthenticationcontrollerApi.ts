@@ -63,7 +63,7 @@ export class AuthenticationcontrollerApi {
      * 
      * @summary Is fully authenticated
      */
-    public isFullyAuthenticated(extraHttpRequestParams?: any): Observable<boolean> {
+    public isFullyAuthenticated(extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
         return this.isFullyAuthenticatedWithHttpInfo(extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {

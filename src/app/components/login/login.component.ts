@@ -75,9 +75,12 @@ export class LoginComponent implements OnInit {
             isLoggedIn => {
           if (isLoggedIn) {
             //redirect if needed
-            let redirectTo = this.route.queryParams['redirectTo'];
-            let url = redirectTo ? redirectTo : ['/'];
-            this.router.navigate(url);
+            this.route.queryParamMap
+                .map(params => params.get('redirectUrl') || '').subscribe(p => {
+              let url = p ? [p] : ['/'];
+              this.router.navigate(url);
+            });
+
           } else {
             this.handleLoginError();
           }
