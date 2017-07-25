@@ -16,7 +16,7 @@ import {LoginService} from "../../services/login.service";
   </div>
   <div class="m-t-1 container">
   <div>
-  <alert [type]="danger" [hidden]="!globalError">{{globalError}}</alert>
+  <alert [type]="'danger'" [hidden]="!globalError">{{globalError}}</alert>
   <table class="table table-responsive table-striped">
         <tr>
             <th>Id</th>
