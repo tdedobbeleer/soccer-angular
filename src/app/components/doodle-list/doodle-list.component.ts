@@ -16,7 +16,7 @@ import {LoginService} from "../../services/login.service";
   </div>
   <div class="m-t-1 container">
         <app-pagination (onClick)="getPage($event)" [page]="doodlePage"></app-pagination>
-        <app-doodle *ngFor="let doodle of doodlePage?.list" [doodle]="doodle"></app-doodle>
+        <app-doodle *ngFor="let doodle of doodlePage?.list" [matchDoodle]="doodle"></app-doodle>
         <app-pagination (onClick)="getPage($event)" [page]="doodlePage"></app-pagination>
   </div>
   `,

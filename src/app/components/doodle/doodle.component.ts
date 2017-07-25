@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {DoodleDTO} from "../../ws/soccer/model/DoodleDTO";
 import {LoginService} from "../../services/login.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {DoodlerestcontrollerApi} from "../../ws/soccer/api/DoodlerestcontrollerApi";
@@ -11,28 +10,28 @@ import {Router} from "@angular/router";
   selector: 'app-doodle',
   template: `
     <div class="panel panel-default">
-      <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{doodle.date}}
+      <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}}
       </div>
       <div class="panel-body">
         <alert [type]="'danger'" *ngIf="error">{{'text.doodle.error' | translate}}</alert>
         <div class="doodle-title">
-          <h3>{{doodle.description}}
-            <span *ngIf="doodle.status == 'CANCELLED'">
+          <h3>{{matchDoodle.description}}
+            <span *ngIf="matchDoodle.status == 'CANCELLED'">
               <b>({{'text.match.status.cancelled' | translate}}!)</b>
             </span>
           </h3>
         </div>
         <div class="doodle-badge btn-group btn-group-lg">
           <a class="btn btn-default doodle-users" data-toggle="tooltip" data-container="body"
-             ng-click="showUsers = !showUsers"
+             (click)="showUsers = !showUsers"
              title="{{'tooltip.doodle.presences' | translate}}" aria-hidden="true"><span
                   class="glyphicon glyphicon-user"></span> <span
-                  class="count-badge">{{doodle.doodle.total}}</span>
+                  class="count-badge">{{matchDoodle.doodle.total}}</span>
           </a>
-          <a (click)="changePresence(doodle.doodle.currentPresence)" data-toggle="tooltip" *ngIf="isLoggedIn()"
+          <a (click)="changePresence(matchDoodle.doodle.currentPresence)" data-toggle="tooltip" *ngIf="isLoggedIn()"
                data-container="body" title="{{'tooltip.doodle.changePresence' | translate}}"
                data-placement="top" class="btn btn-default"><span
-                    [ngClass]="getPresenceClass(doodle.doodle.currentPresence)"
+                    [ngClass]="getPresenceClass(matchDoodle.doodle.currentPresence)"
                     aria-hidden="true"></span>
           </a>
           <a (click)="login()" data-toggle="tooltip" data-container="body" *ngIf="!isLoggedIn()"
@@ -43,7 +42,7 @@ import {Router} from "@angular/router";
         </div>
       </div>
       <div class="panel-body list" *ngIf="showUsers">
-        <div class="doodle-list" *ngFor="let presence of doodle.doodle.presences">
+        <div class="doodle-list" *ngFor="let presence of matchDoodle?.doodle?.presences">
             <span class="doodle-list-name">
               <div>{{presence.account.name}}</div>
               <div *ngIf="isAdmin() && presence.modified != null && showModified"><i>({{'text.doodle.modified' | translate}}:
@@ -59,7 +58,7 @@ import {Router} from "@angular/router";
             </span>
         </div>
     </div>
-    <div class="panel-body" *ngIf="showUsers">
+    <div class="panel-body" *ngIf="showUsers && isAdmin()">
           <a class="pull-right" data-toggle="tooltip" data-container="body"
              (click)="showModified = !showModified"
              title="{{'tooltip.doodle.time' | translate}}" aria-hidden="true">
@@ -72,14 +71,14 @@ import {Router} from "@angular/router";
   styles: []
 })
 export class DoodleComponent implements OnInit {
-  @Input() doodle:MatchDoodleDTO;
-  showUsers : boolean = false;
-  showModified: boolean = false;
-  error : boolean = false;
+  @Input() matchDoodle:MatchDoodleDTO;
+  private showUsers : boolean = false;
+  private showModified: boolean = false;
 
   constructor(private _router: Router, private _api : DoodlerestcontrollerApi, private _errorHandler : ErrorHandlerService, private _loginService : LoginService) { }
 
   ngOnInit() {
+
   }
 
   isAdmin() {
@@ -96,12 +95,29 @@ export class DoodleComponent implements OnInit {
 
   changePresence(presence : PresenceDTO) {
     if (presence.editable) {
-      this._api.changePresence(this.doodle.id, presence.account.id, this._loginService.jwtHeader)
+      this._api.changePresence(this.matchDoodle.id, presence.account.id, this._loginService.jwtHeader)
           .subscribe(
               r => {
-                presence.type = r.type;
+                //Update current presence
+                if (this.matchDoodle.doodle.currentPresence.account.id == presence.account.id) {
+                    this.matchDoodle.doodle.currentPresence.type = r.type;
+                }
+                //Update all other presences
+                this.matchDoodle.doodle.presences.forEach(p => {
+                    if (p.account.id == presence.account.id) {
+                        p.type = r.type;
+                    }
+                });
+
+                //Change total
+                if (r.type == PresenceDTO.TypeEnum.PRESENT) {
+                    this.matchDoodle.doodle.total = this.matchDoodle.doodle.total + 1;
+                } else {
+                    this.matchDoodle.doodle.total = this.matchDoodle.doodle.total - 1;
+                }
               },
               e => {
+                //Something went terribly wrong...
                 this._errorHandler.handle(e);
               }
           )
