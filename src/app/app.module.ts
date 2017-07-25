@@ -53,6 +53,8 @@ import {ValidationService} from "./services/validation.service";
 import {SafeTranslationPipe} from "./pipes/safe-translation.pipe";
 import {AccountListComponent} from "./components/account-list/account-list.component";
 import {AccountrestcontrollerApi} from "./ws/soccer/api/AccountrestcontrollerApi";
+import { DoodleListComponent } from './components/src/app/components/doodle-list/doodle-list.component';
+import { DoodleComponent } from './components/src/app/components/doodle/doodle.component';
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -102,6 +104,8 @@ const appRoutes: Routes = [
         RegistrationFormComponent,
         SafeTranslationPipe,
         AccountListComponent,
+        DoodleListComponent,
+        DoodleComponent,
     ],
     imports: [
         ReCaptchaModule,
