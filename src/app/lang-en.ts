@@ -51,5 +51,7 @@ export const LANG_EN_TRANS = {
     'validation.password.pattern': "Please use 5 to 15 characters for the password. Allowed characters: letters, digits, dots, underscores and dashes",
     'validation.firstName.pattern': 'The name contains invalid characters (do not use abbreviations, dots or other characters)',
     'validation.lastName.pattern': 'The name contains invalid characters (do not use abbreviations, dots or other characters)',
+    'validation.atGoals.pattern': 'Only digits are allowed',
+    'validation.htGoals.pattern': 'Only digits are allowed',
     'validation.repeatPassword.equals': 'The two passwords should match'
 };

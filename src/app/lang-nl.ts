@@ -51,5 +51,7 @@ export const LANG_NL_TRANS = {
     'validation.password.pattern': "Minimaal 5 tekens, maximaal 15. Toegelaten karakters: letters, cijfers, punten, dashes en underscores",
     'validation.firstName.pattern': 'De naam bevat niet toegelaten karakters (gebruik geen afkortingen, punten of vreemde tekens)',
     'validation.lastName.pattern': 'De naam bevat niet toegelaten karakters (gebruik geen afkortingen, punten of vreemde tekens)',
+    'validation.atGoals.pattern': 'Alleen cijfers zijn toegelaten',
+    'validation.htGoals.pattern': 'Alleen cijfers zijn toegelaten',
     'validation.repeatPassword.equals': 'De wachtwoorden moeten hetzelfde zijn'
 };

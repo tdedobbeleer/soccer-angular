@@ -58,11 +58,6 @@ export interface MatchDTO {
     id?: number;
 
     /**
-     * Match location
-     */
-    locationUrl?: string;
-
-    /**
      * Motm poll
      */
     poll?: models.MatchPollDTO;
@@ -72,11 +67,18 @@ export interface MatchDTO {
     /**
      * Match status
      */
-    status?: string;
+    status?: MatchDTO.StatusEnum;
 
     /**
      * Status text
      */
     statusText?: string;
 
+}
+export namespace MatchDTO {
+    export enum StatusEnum {
+        PLAYED = <any> 'PLAYED',
+        NOTPLAYED = <any> 'NOT_PLAYED',
+        CANCELLED = <any> 'CANCELLED'
+    }
 }

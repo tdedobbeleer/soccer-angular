@@ -27,7 +27,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 </alert>
 <div class="box" [hidden]="success">  
      <alert [type]="'danger'" dismissible="true"  [hidden]="!globalError">{{globalError}}</alert>
-    <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value, registrationForm.valid)">
+    <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value)">
       <div class="form-group">
         <label for="email">{{"label.registration.email" | translate}}</label>
         <input name="email" class="form-control" [formControl]="registrationForm.controls.email"/>
@@ -129,13 +129,13 @@ export class RegistrationFormComponent implements OnInit {
             .subscribe(data => this._validationService.onValueChanged(this.registrationForm, this.formErrors));
     }
 
-    submit(model: RegistrationDTO, isValid: boolean) {
+    submit(model: RegistrationDTO) {
         //Mark all controls as dirty, since the form has been submitted
         this._validationService.markControlsAsDirty(this.registrationForm);
         //trigger the validation
         this._validationService.onValueChanged(this.registrationForm, this.formErrors);
 
-        if (isValid) {
+        if (this.registrationForm.valid) {
             this._api.createAccount(model, this.registrationForm.controls['captchaResponse'].value).subscribe(
                 r => {
                     console.log("Registration success");
