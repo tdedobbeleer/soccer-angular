@@ -9,22 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 /* tslint:disable:no-unused-variable member-ordering */
-import {Inject, Injectable, Optional} from "@angular/core";
-import {
-    Http,
-    Headers,
-    URLSearchParams,
-    RequestMethod,
-    RequestOptions,
-    RequestOptionsArgs,
-    Response
-} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import * as models from "../model/models";
-import {BASE_PATH} from "../variables";
-import {Configuration} from "../configuration";
+
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Http, Headers, URLSearchParams }                    from '@angular/http';
+import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Response, ResponseContentType }                     from '@angular/http';
+
+import { Observable }                                        from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import * as models                                           from '../model/models';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
@@ -34,7 +32,7 @@ export class TeamsrestcontrollerApi {
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -62,7 +60,7 @@ export class TeamsrestcontrollerApi {
     /**
      * 
      * @summary Create a new team
-     * @param addressId
+     * @param addressId 
      * @param addressPostalCode 
      * @param addressAddress 
      * @param addressCity 
@@ -144,7 +142,7 @@ export class TeamsrestcontrollerApi {
             headers: headers,
             body: teamDTO == null ? '' : JSON.stringify(teamDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -156,8 +154,8 @@ export class TeamsrestcontrollerApi {
 
     /**
      * Create a new team
-     *
-     * @param addressId
+     * 
+     * @param addressId 
      * @param addressPostalCode 
      * @param addressAddress 
      * @param addressCity 
@@ -212,7 +210,7 @@ export class TeamsrestcontrollerApi {
             method: RequestMethod.Delete,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -245,7 +243,7 @@ export class TeamsrestcontrollerApi {
             method: RequestMethod.Get,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -286,7 +284,7 @@ export class TeamsrestcontrollerApi {
             headers: headers,
             body: teamDTO == null ? '' : JSON.stringify(teamDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {

@@ -9,22 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 /* tslint:disable:no-unused-variable member-ordering */
-import {Inject, Injectable, Optional} from "@angular/core";
-import {
-    Http,
-    Headers,
-    URLSearchParams,
-    RequestMethod,
-    RequestOptions,
-    RequestOptionsArgs,
-    Response
-} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import * as models from "../model/models";
-import {BASE_PATH} from "../variables";
-import {Configuration} from "../configuration";
+
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Http, Headers, URLSearchParams }                    from '@angular/http';
+import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Response, ResponseContentType }                     from '@angular/http';
+
+import { Observable }                                        from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import * as models                                           from '../model/models';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
@@ -169,7 +167,7 @@ export class PollrestcontrollerApi {
             method: RequestMethod.Get,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -186,7 +184,7 @@ export class PollrestcontrollerApi {
      */
     public getMatchPollUsingGETWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/matchPoll/${id}'
-                .replace('${' + 'id' + '}', String(id));
+                    .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -208,7 +206,7 @@ export class PollrestcontrollerApi {
             method: RequestMethod.Get,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -226,7 +224,7 @@ export class PollrestcontrollerApi {
      */
     public postMatchPollUsingPOSTWithHttpInfo(id: number, vote: models.MultipleChoiceVoteDTOlong, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/matchPoll/${id}/vote'
-                .replace('${' + 'id' + '}', String(id));
+                    .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -255,7 +253,7 @@ export class PollrestcontrollerApi {
             headers: headers,
             body: vote == null ? '' : JSON.stringify(vote), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -272,7 +270,7 @@ export class PollrestcontrollerApi {
      */
     public refreshMatchPollUsingPUTWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/matchPoll/match/${id}/refresh'
-                .replace('${' + 'id' + '}', String(id));
+                    .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -294,7 +292,7 @@ export class PollrestcontrollerApi {
             method: RequestMethod.Put,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -311,7 +309,7 @@ export class PollrestcontrollerApi {
      */
     public resetPollUsingPUTWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/poll/${id}/reset'
-                .replace('${' + 'id' + '}', String(id));
+                    .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -333,7 +331,7 @@ export class PollrestcontrollerApi {
             method: RequestMethod.Put,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {

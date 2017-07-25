@@ -53,8 +53,9 @@ import {ValidationService} from "./services/validation.service";
 import {SafeTranslationPipe} from "./pipes/safe-translation.pipe";
 import {AccountListComponent} from "./components/account-list/account-list.component";
 import {AccountrestcontrollerApi} from "./ws/soccer/api/AccountrestcontrollerApi";
-import { DoodleListComponent } from './components/src/app/components/doodle-list/doodle-list.component';
-import { DoodleComponent } from './components/src/app/components/doodle/doodle.component';
+import {DoodleListComponent} from "./components/doodle-list/doodle-list.component";
+import {DoodleComponent} from "./components/doodle/doodle.component";
+import {DoodlerestcontrollerApi} from "./ws/soccer/api/DoodlerestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     {path: 'register', component: RegistrationFormComponent},
     {path: 'matches', component: MatchesComponent},
     {path: 'manofthematch', component: MotmPollsComponent},
+    {path: 'doodles', component: DoodleListComponent},
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
@@ -132,6 +134,7 @@ const appRoutes: Routes = [
         ForecastrestcontrollerApi,
         RegistrationrestcontrollerApi,
         AccountrestcontrollerApi,
+        DoodlerestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,
