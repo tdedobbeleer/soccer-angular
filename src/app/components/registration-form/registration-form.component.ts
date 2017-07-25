@@ -72,7 +72,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       </div>
       
        
-      <div class="box-footer">
+      <div class="form-group box-footer">
         <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/login']">{{"btn.cancel" | translate}}</a>
