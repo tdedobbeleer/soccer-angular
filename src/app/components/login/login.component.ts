@@ -25,12 +25,12 @@ import {LoginService} from "../../services/login.service";
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
               <label for="username">{{'label.username' | translate}}</label>
               <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-              <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+              <div *ngIf="f.submitted && !username.valid" class="help-block">{{validation.username.required | translate}}</div>
           </div>
           <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
               <label for="password">{{'label.password' | translate}}</label>
               <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-              <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+              <div *ngIf="f.submitted && !password.valid" class="help-block">{{validation.password.required | translate}}</div>
           </div>
           <div class="form-group">
               <label>                            
