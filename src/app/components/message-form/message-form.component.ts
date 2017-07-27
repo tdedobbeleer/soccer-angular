@@ -1,10 +1,10 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
-import {LoginService} from "../../services/login.service";
 import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
 import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-message-form',
@@ -67,7 +67,7 @@ export class MessageFormComponent implements OnInit {
     public messageForm: FormGroup;
     public submitted: boolean;
 
-    constructor(private _fb: FormBuilder, private _api: NewsrestcontrollerApi, private _loginService: LoginService, private _router: Router, private _errorHandler: ErrorHandlerService) {
+    constructor(private _fb: FormBuilder, private _api: NewsrestcontrollerApi, private _router: Router, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -86,7 +86,7 @@ export class MessageFormComponent implements OnInit {
         if (isValid) {
             if (this.update) {
                 /**
-                this._api.(model, this._loginService.jwtHeader).subscribe(
+                 this._api.(model, SecUtil.getJwtHeaders()).subscribe(
                     r => {
                         console.log("Posted");
                     },
@@ -100,7 +100,7 @@ export class MessageFormComponent implements OnInit {
                  **/
 
             } else {
-                this._api.postNews(model, this._loginService.jwtHeader).subscribe(
+                this._api.postNews(model, SecUtil.getJwtHeaders()).subscribe(
                     r => {
                         this._router.navigate(["/messages"]);
                     },

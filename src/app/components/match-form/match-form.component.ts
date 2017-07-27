@@ -10,6 +10,7 @@ import {LoginService} from "../../services/login.service";
 import {Util} from "../../classes/util";
 import {ValidationService} from "../../services/validation.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {SecUtil} from "../../classes/sec-util";
 import StatusEnum = MatchDTO.StatusEnum;
 
 @Component({
@@ -179,7 +180,7 @@ export class MatchFormComponent implements OnInit {
 
         if (this.matchForm.valid) {
             if (this.update) {
-                this._api.updateMatch(model, this._loginService.jwtHeader).subscribe(
+                this._api.updateMatch(model, SecUtil.getJwtHeaders()).subscribe(
                     r => {
                         this.createSuccess = true;
                         this.globalError = '';
@@ -193,7 +194,7 @@ export class MatchFormComponent implements OnInit {
                     }
                 )
             } else {
-                this._api.createMatch(model, this._loginService.jwtHeader).subscribe(
+                this._api.createMatch(model, SecUtil.getJwtHeaders()).subscribe(
                     r => {
                         this.updateSuccess = true;
                         this.globalError = '';

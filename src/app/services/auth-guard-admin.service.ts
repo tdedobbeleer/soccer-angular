@@ -2,6 +2,7 @@ import {Injectable, Inject} from "@angular/core";
 import {Router, CanActivate} from "@angular/router";
 import {LoginService} from "./login.service";
 import {DOCUMENT} from "@angular/common";
+import {SecUtil} from "../classes/sec-util";
 
 @Injectable()
 export class AuthGuardAdminService implements CanActivate {
@@ -12,8 +13,7 @@ export class AuthGuardAdminService implements CanActivate {
     canActivate() {
         let remoteUrl = document.location.pathname ? document.location.pathname.slice(1) : "";
         let url: string = this._router.routerState.snapshot.url;
-        let currentUser: any = this._service.getUser();
-        if (this._service.isLoggedIn() && AuthGuardAdminService.hasRole(currentUser.roles, "ROLE_ADMIN")) {
+        if (SecUtil.isAdmin()) {
             // logged in and has role so true
             return true;
         }
@@ -22,9 +22,4 @@ export class AuthGuardAdminService implements CanActivate {
         this._router.navigate(['/login'], {queryParams: {redirectUrl: url ? url : remoteUrl}});
         return false;
     }
-
-    private static hasRole(roles: any[], role: string): boolean {
-        return roles.indexOf(role) > -1
-    }
-
 }

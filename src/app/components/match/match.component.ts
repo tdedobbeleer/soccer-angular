@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
-import {LoginService} from "../../services/login.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-match',
@@ -73,7 +73,7 @@ export class MatchComponent implements OnInit {
 
     showEditComment: boolean;
 
-    constructor(private _loginService: LoginService) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -81,7 +81,7 @@ export class MatchComponent implements OnInit {
     }
 
     isAdmin(): boolean {
-        return this._loginService.isAdmin();
+        return SecUtil.isAdmin();
     }
 
 }

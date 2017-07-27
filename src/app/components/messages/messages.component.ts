@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {PageDTONewsDTO} from "../../ws/soccer/model/PageDTONewsDTO";
 import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
-import {LoginService} from "../../services/login.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
   selector: 'app-messages',
@@ -61,21 +61,22 @@ export class MessagesComponent implements OnInit {
   loading: boolean;
 
   searchTerm: string;
+  currentPage: any = 0;
 
-  constructor(private _api: NewsrestcontrollerApi, private _loginService: LoginService) {
+  constructor(private _api: NewsrestcontrollerApi) {
   }
 
   ngOnInit() {
-    this._api.getNewsPage(0, "", 10, this._loginService.jwtHeader)
-        .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
+    this.getPage(this.currentPage);
+    SecUtil.userUpdated.subscribe(() => this.getPage(this.currentPage));
   }
 
   getPage(page: number) {
-    this._api.getNewsPage(page, this.searchTerm, 10, this._loginService.jwtHeader)
+    this._api.getNewsPage(page, this.searchTerm, 10, SecUtil.getJwtHeaders())
         .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
   }
 
   isAdmin() {
-    return this._loginService.isAdmin();
+    return SecUtil.isAdmin();
   }
 }

@@ -1,10 +1,12 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input} from "@angular/core";
 import {LoginService} from "../../services/login.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {DoodlerestcontrollerApi} from "../../ws/soccer/api/DoodlerestcontrollerApi";
 import {MatchDoodleDTO} from "../../ws/soccer/model/MatchDoodleDTO";
 import {PresenceDTO} from "../../ws/soccer/model/PresenceDTO";
 import {Router} from "@angular/router";
+import {SecUtil} from "../../classes/sec-util";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-doodle',
@@ -78,15 +80,16 @@ export class DoodleComponent implements OnInit {
   constructor(private _router: Router, private _api : DoodlerestcontrollerApi, private _errorHandler : ErrorHandlerService, private _loginService : LoginService) { }
 
   ngOnInit() {
-
+      //this.setUserProperties();
+      //this._loginService.userUpdated.subscribe(this.setUserProperties)
   }
 
   isAdmin() {
-    return this._loginService.isAdmin();
+      return SecUtil.isAdmin();
   }
 
   isLoggedIn() {
-    return this._loginService.isLoggedIn();
+      return SecUtil.isLoggedIn();
   }
 
   login() {
@@ -95,7 +98,7 @@ export class DoodleComponent implements OnInit {
 
   changePresence(presence : PresenceDTO) {
     if (presence.editable) {
-      this._api.changePresence(this.matchDoodle.id, presence.account.id, this._loginService.jwtHeader)
+        this._api.changePresence(this.matchDoodle.id, presence.account.id, SecUtil.getJwtHeaders())
           .subscribe(
               r => {
                 //Update current presence
@@ -126,16 +129,22 @@ export class DoodleComponent implements OnInit {
   }
 
   getPresenceClass(presence : PresenceDTO) {
-    switch (presence.type) {
-      case PresenceDTO.TypeEnum.NOTFILLEDIN:
-        return "glyphicon glyphicon-question-sign grey";
-      case PresenceDTO.TypeEnum.PRESENT:
-        return "glyphicon glyphicon-ok green";
-      case PresenceDTO.TypeEnum.NOTPRESENT:
-        return "glyphicon glyphicon-remove red";
-      default:
-        return "glyphicon glyphicon-lock grey";
-    }
+      console.log("Cretaing presence class");
+      if (!isNullOrUndefined(presence)) {
+          switch (presence.type) {
+              case PresenceDTO.TypeEnum.NOTFILLEDIN:
+                  return "glyphicon glyphicon-question-sign grey";
+              case PresenceDTO.TypeEnum.PRESENT:
+                  return "glyphicon glyphicon-ok green";
+              case PresenceDTO.TypeEnum.NOTPRESENT:
+                  return "glyphicon glyphicon-remove red";
+              default:
+                  return "glyphicon glyphicon-lock grey";
+          }
+      } else {
+          return "glyphicon glyphicon-lock grey";
+      }
+
 }
 
 }

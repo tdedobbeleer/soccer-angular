@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {LoginService} from "../../services/login.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-team',
@@ -40,7 +40,7 @@ export class TeamComponent implements OnInit {
     showMap: boolean;
     @Input() team: TeamDTO;
 
-    constructor(private _loginService: LoginService) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -48,6 +48,6 @@ export class TeamComponent implements OnInit {
     }
 
     isAdmin(): boolean {
-        return this._loginService.isAdmin();
+        return SecUtil.isAdmin();
     }
 }

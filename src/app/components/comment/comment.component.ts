@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from "@angular/core";
 import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
 import {LoginService} from "../../services/login.service";
 import {CommentsrestcontrollerApi} from "../../ws/soccer/api/CommentsrestcontrollerApi";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-comment',
@@ -42,20 +43,20 @@ export class CommentComponent implements OnInit {
     }
 
     isLoggedIn() {
-        return this._loginService.isLoggedIn();
+        return SecUtil.isLoggedIn();
     }
 
     isAdmin() {
-        return this._loginService.isAdmin();
+        return SecUtil.isAdmin();
     }
 
     getUser() {
-        return this._loginService.getUser();
+        return SecUtil.getUser();
     }
 
     updateComment(comment: CommentDTO) {
         this.showEditComment = false;
-        this._api.editComment(this.messageId, comment, this._loginService.jwtHeader)
+        this._api.editComment(this.messageId, comment, SecUtil.getJwtHeaders())
             .subscribe(r => {
                 console.log("success");
                 this.comment.content = comment.content;
@@ -64,7 +65,7 @@ export class CommentComponent implements OnInit {
 
     deleteComment(comment: CommentDTO) {
         this.showEditComment = false;
-        this._api.deleteComment(this.messageId, comment.id, this._loginService.jwtHeader)
+        this._api.deleteComment(this.messageId, comment.id, SecUtil.getJwtHeaders())
             .subscribe(r => {
                 console.log("success");
                 this.comment = null;

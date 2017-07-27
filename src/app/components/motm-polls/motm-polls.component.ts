@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {PollrestcontrollerApi} from "../../ws/soccer/api/PollrestcontrollerApi";
-import {LoginService} from "../../services/login.service";
 import {PageDTOMatchPollDTO} from "../../ws/soccer/model/PageDTOMatchPollDTO";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-motm-polls',
@@ -38,24 +38,29 @@ import {PageDTOMatchPollDTO} from "../../ws/soccer/model/PageDTOMatchPollDTO";
 export class MotmPollsComponent implements OnInit {
     motmPage: PageDTOMatchPollDTO;
     loading: boolean;
+    currentPage: any = 0;
 
-    constructor(private _api: PollrestcontrollerApi, private _loginService: LoginService) {
+    constructor(private _api: PollrestcontrollerApi) {
     }
 
     ngOnInit() {
+        this.init();
+        SecUtil.userUpdated.subscribe(() => this.init());
+
+    }
+
+    private init() {
         this.loading = true;
-        this._api.getAllMatchPollsUsingGET(0, 5, "", this._loginService.jwtHeader).subscribe(p => {
-            this.motmPage = p;
-            this.loading = false;
-        })
+        this.getPage(this.currentPage);
     }
 
     getPage(page) {
         this.loading = true;
-        this._api.getAllMatchPollsUsingGET(page, 5, "", this._loginService.jwtHeader).subscribe(p => {
+        this._api.getAllMatchPollsUsingGET(page, 5, "", SecUtil.getJwtHeaders()).subscribe(p => {
             this.motmPage = p;
             this.loading = true;
-        })
+            this.currentPage = page;
+        });
     }
 
 }

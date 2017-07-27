@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Router, CanActivate} from "@angular/router";
 import {LoginService} from "./login.service";
+import {SecUtil} from "../classes/sec-util";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -10,7 +11,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate() {
     let url: string = this.router.routerState.snapshot.url;
-    if (this._service.isLoggedIn()) {
+      if (SecUtil.isLoggedIn()) {
       // logged in so return true
       return true;
     }

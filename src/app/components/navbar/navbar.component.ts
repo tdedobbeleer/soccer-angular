@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {TranslationService} from "../../services/translation.service";
 import {LoginService} from "../../services/login.service";
 import {isUndefined} from "util";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
   selector: 'app-navbar',
@@ -93,9 +94,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.selectLang(this._translate.currentLang() == 'en' ? this.en : this.nl);
-    this.isLoggedIn = this._loginService.isLoggedIn();
-    this.user = this._loginService.getUser();
-    this._loginService.userUpdated.subscribe(u => {
+    this.isLoggedIn = SecUtil.isLoggedIn();
+    this.user = SecUtil.getUser();
+    SecUtil.userUpdated.subscribe(u => {
       this.user = u;
       this.isLoggedIn = !isUndefined(u);
     })

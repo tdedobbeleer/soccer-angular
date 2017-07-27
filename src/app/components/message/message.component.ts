@@ -5,6 +5,7 @@ import {LoginService} from "../../services/login.service";
 import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
   selector: 'app-message',
@@ -64,7 +65,7 @@ export class MessageComponent implements OnInit {
   }
 
   isLoggedIn() {
-    return this._loginService.isLoggedIn();
+      return SecUtil.isLoggedIn();
   }
 
   getNewComment(id: any) {
@@ -73,7 +74,7 @@ export class MessageComponent implements OnInit {
 
   createComment(comment: CommentDTO) {
     this.showShowCreateComment = false;
-    this._api.postComment(comment.id, comment, this._loginService.jwtHeader)
+      this._api.postComment(comment.id, comment, SecUtil.getJwtHeaders())
         .subscribe(r => {
           console.log("success");
               this.message.comments.push(comment);

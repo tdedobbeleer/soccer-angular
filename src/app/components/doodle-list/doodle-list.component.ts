@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {PageDTOMatchDoodleDTO} from "../../ws/soccer/model/PageDTOMatchDoodleDTO";
 import {DoodlerestcontrollerApi} from "../../ws/soccer/api/DoodlerestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {LoginService} from "../../services/login.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
   selector: 'app-doodle-list',
@@ -24,18 +25,21 @@ import {LoginService} from "../../services/login.service";
 })
 export class DoodleListComponent implements OnInit {
   doodlePage : PageDTOMatchDoodleDTO;
+    currentPage: any = 0;
 
   constructor(private _api : DoodlerestcontrollerApi, private _errorHandler : ErrorHandlerService, private _loginService : LoginService) { }
 
   ngOnInit() {
     //Get the first page
-    this.getPage(0);
+      this.getPage(this.currentPage);
+      SecUtil.userUpdated.subscribe(() => this.getPage(this.currentPage));
   }
 
   getPage(page) {
-    this._api.matchDoodlesPage(page,5, this._loginService.jwtHeader).subscribe(
+      this._api.matchDoodlesPage(page, 5, SecUtil.getJwtHeaders()).subscribe(
         r => {
           this.doodlePage = r;
+            this.currentPage = page;
         },
         e => {
           this._errorHandler.handle(e, "doodles");

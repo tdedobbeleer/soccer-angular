@@ -2,8 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
 import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
 import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
-import {LoginService} from "../../services/login.service";
 import {Observable} from "rxjs";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-matches',
@@ -31,16 +31,20 @@ export class MatchesComponent implements OnInit {
     loaded: boolean = false;
 
     constructor(private _matchesApi: MatchesrestcontrollerApi,
-                private _seasonsApi: SeasonsrestcontrollerApi,
-                private _loginService: LoginService) {
+                private _seasonsApi: SeasonsrestcontrollerApi) {
     }
 
     ngOnInit() {
+        this.init();
+        SecUtil.userUpdated.subscribe(() => this.init());
+    }
+
+    private init() {
         this._seasonsApi.getSeasons()
             .subscribe(r => {
                 Observable.from(r).flatMap(
                     s => {
-                        return this._matchesApi.matchesForSeason(s.id, this._loginService.jwtHeader)
+                        return this._matchesApi.matchesForSeason(s.id, SecUtil.getJwtHeaders())
                             .map(m => {
                                 return {season: s, matches: m};
                             })
@@ -51,14 +55,10 @@ export class MatchesComponent implements OnInit {
                         this.loaded = true;
                     })
             });
-
-
-
-
     }
 
     isAdmin() {
-        return this._loginService.isAdmin();
+        return SecUtil.isAdmin();
     }
 }
 

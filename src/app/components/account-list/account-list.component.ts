@@ -4,6 +4,7 @@ import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {Response} from "@angular/http";
 import {LoginService} from "../../services/login.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-account-list',
@@ -65,7 +66,7 @@ export class AccountListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._api.getAccounts(this._loginService.jwtHeader).subscribe(
+        this._api.getAccounts(SecUtil.getJwtHeaders()).subscribe(
             a => {
                 this.accountList = a;
             },
@@ -76,7 +77,7 @@ export class AccountListComponent implements OnInit {
     }
 
     changeActivation(account: AccountDTO) {
-        this._api.changeActivation(account.id, !account.activated, this._loginService.jwtHeader).subscribe(
+        this._api.changeActivation(account.id, !account.activated, SecUtil.getJwtHeaders()).subscribe(
             r => {
                 account.activated = !account.activated;
             },
@@ -88,7 +89,7 @@ export class AccountListComponent implements OnInit {
 
     changeRole(account: AccountDTO) {
         if (account.role == "ADMIN") {
-            this._api.demote(account.id, this._loginService.jwtHeader).subscribe(
+            this._api.demote(account.id, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     account.role = "USER";
                 },
@@ -98,7 +99,7 @@ export class AccountListComponent implements OnInit {
             )
         }
         else {
-            this._api.elevate(account.id, this._loginService.jwtHeader).subscribe(
+            this._api.elevate(account.id, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     account.role = "ADMIN";
                 },

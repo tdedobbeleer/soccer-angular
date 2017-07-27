@@ -3,6 +3,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
 import {LoginService} from "../../services/login.service";
 import {PollrestcontrollerApi} from "../../ws/soccer/api/PollrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-motm-poll',
@@ -92,17 +93,17 @@ export class MotmPollComponent implements OnInit {
     }
 
     isLoggedIn(): boolean {
-        return this._loginService.isLoggedIn();
+        return SecUtil.isLoggedIn();
     }
 
     isAdmin(): boolean {
-        return this._loginService.isAdmin();
+        return SecUtil.isAdmin();
     }
 
     reset(poll: MatchPollDTO) {
-        this._api.resetPollUsingPUT(poll.id, this._loginService.jwtHeader).subscribe(
+        this._api.resetPollUsingPUT(poll.id, SecUtil.getJwtHeaders()).subscribe(
             p => {
-                this._api.getMatchPollUsingGET(poll.id, this._loginService.jwtHeader).subscribe(p => this.poll = p);
+                this._api.getMatchPollUsingGET(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
             },
             error => {
                 this._errorHandler.handle(error, "manofthematch");
@@ -111,9 +112,9 @@ export class MotmPollComponent implements OnInit {
     }
 
     refresh(poll: MatchPollDTO) {
-        this._api.refreshMatchPollUsingPUT(poll.matchId, this._loginService.jwtHeader).subscribe(
+        this._api.refreshMatchPollUsingPUT(poll.matchId, SecUtil.getJwtHeaders()).subscribe(
             p => {
-                this._api.getMatchPollUsingGET(poll.id, this._loginService.jwtHeader).subscribe(p => this.poll = p);
+                this._api.getMatchPollUsingGET(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
             },
             error => {
                 this._errorHandler.handle(error, "manofthematch");
@@ -122,9 +123,9 @@ export class MotmPollComponent implements OnInit {
     }
 
     vote(selectedAccount: any, poll: MatchPollDTO) {
-        this._api.postMatchPollUsingPOST(poll.id, selectedAccount, this._loginService.jwtHeader).subscribe(
+        this._api.postMatchPollUsingPOST(poll.id, selectedAccount, SecUtil.getJwtHeaders()).subscribe(
             p => {
-                this._api.getMatchPollUsingGET(poll.id, this._loginService.jwtHeader).subscribe(p => this.poll = p);
+                this._api.getMatchPollUsingGET(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
             },
             error => {
                 this._errorHandler.handle(error, "manofthematch");
