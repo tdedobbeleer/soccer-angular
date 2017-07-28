@@ -56,6 +56,9 @@ import {AccountrestcontrollerApi} from "./ws/soccer/api/AccountrestcontrollerApi
 import {DoodleListComponent} from "./components/doodle-list/doodle-list.component";
 import {DoodleComponent} from "./components/doodle/doodle.component";
 import {DoodlerestcontrollerApi} from "./ws/soccer/api/DoodlerestcontrollerApi";
+import {PasswordrecoveryrestcontrollerApi} from "./ws/soccer/api/PasswordrecoveryrestcontrollerApi";
+import {RequestRecoveryCodeFormComponent} from "./components/request-recovery-code-form/request-recovery-code-form.component";
+import {RecoveryCodeFormComponent} from "./components/recovery-code-form/recovery-code-form.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -71,6 +74,8 @@ const appRoutes: Routes = [
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'password/recovery/request', component: RequestRecoveryCodeFormComponent},
+    {path: 'password/recovery', component: RecoveryCodeFormComponent},
     {path: '**', redirectTo: 'not-found'}
 ];
 
@@ -108,6 +113,8 @@ const appRoutes: Routes = [
         AccountListComponent,
         DoodleListComponent,
         DoodleComponent,
+        RequestRecoveryCodeFormComponent,
+        RecoveryCodeFormComponent,
     ],
     imports: [
         ReCaptchaModule,
@@ -135,6 +142,7 @@ const appRoutes: Routes = [
         RegistrationrestcontrollerApi,
         AccountrestcontrollerApi,
         DoodlerestcontrollerApi,
+        PasswordrecoveryrestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,

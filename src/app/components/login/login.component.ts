@@ -39,6 +39,9 @@ import {LoginService} from "../../services/login.service";
               <div>
                 <a [routerLink]="['/register']" routerLinkActive="active">{{'nav.register' | translate}}</a>
               </div>
+              <div>
+                <a [routerLink]="['/password/recovery/request']" routerLinkActive="active">{{'nav.requestRecovery' | translate}}</a>
+              </div>
           </div>
           <div class="form-group box-footer">
               <button [disabled]="loading" class="btn btn-primary">{{'btn.login' | translate}}</button>
