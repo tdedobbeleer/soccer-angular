@@ -22,11 +22,11 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             {{'nav.register' | translate }}
         </li>
     </ul>
- <alert [type]="'success'" dismissible="true" [hidden]="!success">
+ <alert [type]="'success'" [dismissible]="true" [hidden]="!success">
     <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
 </alert>
 <div class="box" [hidden]="success">  
-     <alert [type]="'danger'" dismissible="true"  [hidden]="!globalError">{{globalError}}</alert>
+     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!globalError">{{globalError}}</alert>
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value)">
       <div class="form-group">
         <label for="email">{{"label.registration.email" | translate}}</label>

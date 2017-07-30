@@ -23,8 +23,8 @@ import {Response} from "@angular/http";
      <alert [type]="'success'" [hidden]="!success">
          <span [innerHtml]="'text.recovery.request.success' | htmlTranslate"></span>
     </alert>
-     <alert [type]="'danger'" dismissible="true"  [hidden]="!globalError">{{globalError}}</alert>
-     <alert [type]="'danger'" dismissible="true"  [hidden]="!emailError">{{'text.recovery.request.email.failed' | translate}}</alert>
+     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!globalError">{{globalError}}</alert>
+     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!emailError">{{'text.recovery.request.email.failed' | translate}}</alert>
     <form [formGroup]="recoveryForm" novalidate (ngSubmit)="submit(recoveryForm.value)">
       <div class="form-group">
         <label for="email">{{"label.recovery.email" | translate}}</label>

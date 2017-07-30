@@ -18,9 +18,6 @@ import {isNullOrUndefined} from "util";
         <alert [type]="'danger'" *ngIf="error">{{'text.doodle.error' | translate}}</alert>
         <div class="doodle-title">
           <h3>{{matchDoodle.description}}
-            <span *ngIf="matchDoodle.status == 'CANCELLED'">
-              <b>({{'text.match.status.cancelled' | translate}}!)</b>
-            </span>
           </h3>
         </div>
         <div class="doodle-badge btn-group btn-group-lg">
@@ -74,8 +71,9 @@ import {isNullOrUndefined} from "util";
 })
 export class DoodleComponent implements OnInit {
   @Input() matchDoodle:MatchDoodleDTO;
-  private showUsers : boolean = false;
-  private showModified: boolean = false;
+  showUsers : boolean = false;
+  showModified: boolean = false;
+  error :any = "";
 
   constructor(private _router: Router, private _api : DoodlerestcontrollerApi, private _errorHandler : ErrorHandlerService, private _loginService : LoginService) { }
 
@@ -121,7 +119,7 @@ export class DoodleComponent implements OnInit {
               },
               e => {
                 //Something went terribly wrong...
-                this._errorHandler.handle(e);
+                this.error = this._errorHandler.handle(e);
               }
           )
     }

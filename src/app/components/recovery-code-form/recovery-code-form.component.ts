@@ -19,11 +19,11 @@ import {Response} from "@angular/http";
             {{'nav.recovery.use' | translate }}
         </li>
     </ul>
- <alert [type]="'success'" dismissible="true" [hidden]="!success">
+ <alert [type]="'success'" [dismissible]="true" [hidden]="!success">
     <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
 </alert>
 <div class="box" [hidden]="success">  
-     <alert [type]="'danger'" dismissible="true"  [hidden]="!globalError">{{globalError}}</alert>
+     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!globalError">{{globalError}}</alert>
     <form [formGroup]="recoveryForm" novalidate (ngSubmit)="submit(recoveryForm.value)">
       <div class="form-group">
         <label for="email">{{"label.recovery.email" | translate}}</label>
