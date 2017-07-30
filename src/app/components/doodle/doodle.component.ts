@@ -9,8 +9,8 @@ import {SecUtil} from "../../classes/sec-util";
 import {isNullOrUndefined} from "util";
 
 @Component({
-  selector: 'app-doodle',
-  template: `
+    selector: 'app-doodle',
+    template: `
     <div class="panel panel-default">
       <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}}
       </div>
@@ -67,82 +67,83 @@ import {isNullOrUndefined} from "util";
     </div>
     </div>
   `,
-  styles: []
+    styles: []
 })
 export class DoodleComponent implements OnInit {
-  @Input() matchDoodle:MatchDoodleDTO;
-  showUsers : boolean = false;
-  showModified: boolean = false;
-  error :any = "";
+    @Input() matchDoodle: MatchDoodleDTO;
+    showUsers: boolean = false;
+    showModified: boolean = false;
+    error: any = "";
 
-  constructor(private _router: Router, private _api : DoodlerestcontrollerApi, private _errorHandler : ErrorHandlerService, private _loginService : LoginService) { }
-
-  ngOnInit() {
-      //this.setUserProperties();
-      //this._loginService.userUpdated.subscribe(this.setUserProperties)
-  }
-
-  isAdmin() {
-      return SecUtil.isAdmin();
-  }
-
-  isLoggedIn() {
-      return SecUtil.isLoggedIn();
-  }
-
-  login() {
-    this._router.navigate(['/login'], {queryParams: {redirectUrl: "doodles"}});
-  }
-
-  changePresence(presence : PresenceDTO) {
-    if (presence.editable) {
-        this._api.changePresence(this.matchDoodle.id, presence.account.id, SecUtil.getJwtHeaders())
-          .subscribe(
-              r => {
-                //Update current presence
-                if (this.matchDoodle.doodle.currentPresence.account.id == presence.account.id) {
-                    this.matchDoodle.doodle.currentPresence.type = r.type;
-                }
-                //Update all other presences
-                this.matchDoodle.doodle.presences.forEach(p => {
-                    if (p.account.id == presence.account.id) {
-                        p.type = r.type;
-                    }
-                });
-
-                //Change total
-                if (r.type == PresenceDTO.TypeEnum.PRESENT) {
-                    this.matchDoodle.doodle.total = this.matchDoodle.doodle.total + 1;
-                } else {
-                    this.matchDoodle.doodle.total = this.matchDoodle.doodle.total - 1;
-                }
-              },
-              e => {
-                //Something went terribly wrong...
-                this.error = this._errorHandler.handle(e);
-              }
-          )
+    constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService, private _loginService: LoginService) {
     }
 
-  }
+    ngOnInit() {
+        //this.setUserProperties();
+        //this._loginService.userUpdated.subscribe(this.setUserProperties)
+    }
 
-  getPresenceClass(presence : PresenceDTO) {
-      console.log("Cretaing presence class");
-      if (!isNullOrUndefined(presence)) {
-          switch (presence.type) {
-              case PresenceDTO.TypeEnum.NOTFILLEDIN:
-                  return "glyphicon glyphicon-question-sign grey";
-              case PresenceDTO.TypeEnum.PRESENT:
-                  return "glyphicon glyphicon-ok green";
-              case PresenceDTO.TypeEnum.NOTPRESENT:
-                  return "glyphicon glyphicon-remove red";
-              default:
-                  return "glyphicon glyphicon-lock grey";
-          }
-      } else {
-          return "glyphicon glyphicon-lock grey";
-      }
+    isAdmin() {
+        return SecUtil.isAdmin();
+    }
 
-}
+    isLoggedIn() {
+        return SecUtil.isLoggedIn();
+    }
+
+    login() {
+        this._router.navigate(['/login'], {queryParams: {redirectUrl: "doodles"}});
+    }
+
+    changePresence(presence: PresenceDTO) {
+        if (presence.editable) {
+            this._api.changePresence(this.matchDoodle.id, presence.account.id, SecUtil.getJwtHeaders())
+                .subscribe(
+                    r => {
+                        //Update current presence
+                        if (this.matchDoodle.doodle.currentPresence.account.id == presence.account.id) {
+                            this.matchDoodle.doodle.currentPresence.type = r.type;
+                        }
+                        //Update all other presences
+                        this.matchDoodle.doodle.presences.forEach(p => {
+                            if (p.account.id == presence.account.id) {
+                                p.type = r.type;
+                            }
+                        });
+
+                        //Change total
+                        if (r.type == PresenceDTO.TypeEnum.PRESENT) {
+                            this.matchDoodle.doodle.total = this.matchDoodle.doodle.total + 1;
+                        } else {
+                            this.matchDoodle.doodle.total = this.matchDoodle.doodle.total - 1;
+                        }
+                    },
+                    e => {
+                        //Something went terribly wrong...
+                        this.error = this._errorHandler.handle(e);
+                    }
+                )
+        }
+
+    }
+
+    getPresenceClass(presence: PresenceDTO) {
+        console.log("Cretaing presence class");
+        if (!isNullOrUndefined(presence)) {
+            switch (presence.type) {
+                case PresenceDTO.TypeEnum.NOTFILLEDIN:
+                    return "glyphicon glyphicon-question-sign grey";
+                case PresenceDTO.TypeEnum.PRESENT:
+                    return "glyphicon glyphicon-ok green";
+                case PresenceDTO.TypeEnum.NOTPRESENT:
+                    return "glyphicon glyphicon-remove red";
+                default:
+                    return "glyphicon glyphicon-lock grey";
+            }
+        } else {
+            return "glyphicon glyphicon-lock grey";
+        }
+
+    }
 
 }
