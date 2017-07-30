@@ -51,14 +51,14 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       </div>
        <div class="form-group">
         <label for="password">{{"label.registration.password" | translate}}</label>
-         <input name="password" class="form-control" [formControl]="registrationForm.controls.password"/>
+         <input type="password" name="password" class="form-control" [formControl]="registrationForm.controls.password"/>
          <small class="text-danger" [hidden]="!formErrors.password">
              {{formErrors.password}}
         </small>
       </div>
        <div class="form-group">
         <label for="repeatPassword">{{"label.registration.repeatPassword" | translate}}</label>
-         <input name="repeatPassword" class="form-control" [formControl]="registrationForm.controls.repeatPassword"/>
+         <input type="password" name="repeatPassword" class="form-control" [formControl]="registrationForm.controls.repeatPassword"/>
          <small class="text-danger" [hidden]="!formErrors.repeatPassword">
              {{formErrors.repeatPassword}}
         </small>
