@@ -59,6 +59,7 @@ import {DoodlerestcontrollerApi} from "./ws/soccer/api/DoodlerestcontrollerApi";
 import {PasswordrecoveryrestcontrollerApi} from "./ws/soccer/api/PasswordrecoveryrestcontrollerApi";
 import {RequestRecoveryCodeFormComponent} from "./components/request-recovery-code-form/request-recovery-code-form.component";
 import {RecoveryCodeFormComponent} from "./components/recovery-code-form/recovery-code-form.component";
+import {FocusOnErrorDirective} from "./directives/focus-on-error.directive";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -115,6 +116,7 @@ const appRoutes: Routes = [
         DoodleComponent,
         RequestRecoveryCodeFormComponent,
         RecoveryCodeFormComponent,
+        FocusOnErrorDirective,
     ],
     imports: [
         ReCaptchaModule,

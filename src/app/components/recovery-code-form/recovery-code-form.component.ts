@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {PasswordrecoveryrestcontrollerApi} from "../../ws/soccer/api/PasswordrecoveryrestcontrollerApi";
 import {ValidationService} from "../../services/validation.service";
@@ -6,6 +6,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 import {equalsValidator} from "../../functions/equals-validator";
 import {PasswordRecoveryDTO} from "../../ws/soccer/model/PasswordRecoveryDTO";
 import {Response} from "@angular/http";
+import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 
 @Component({
   selector: 'app-recovery-code-form',
@@ -19,11 +20,13 @@ import {Response} from "@angular/http";
             {{'nav.recovery.use' | translate }}
         </li>
     </ul>
- <alert [type]="'success'" [dismissible]="true" [hidden]="!success">
+ <alert [type]="'success'" [dismissible]="false" [hidden]="!success">
     <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
 </alert>
-<div class="box" [hidden]="success">  
-     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!globalError">{{globalError}}</alert>
+<div class="box" [hidden]="success">
+     <div class="error-div">
+        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError">{{globalError}}</alert>
+     </div>
     <form [formGroup]="recoveryForm" novalidate (ngSubmit)="submit(recoveryForm.value)">
       <div class="form-group">
         <label for="email">{{"label.recovery.email" | translate}}</label>
@@ -77,6 +80,8 @@ export class RecoveryCodeFormComponent implements OnInit {
     'repeatPassword': '',
   };
 
+    @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
+
   constructor(private _fb: FormBuilder, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
   }
 
@@ -108,6 +113,7 @@ export class RecoveryCodeFormComponent implements OnInit {
           },
           (error: Response) => {
             this.globalError = this._errorService.handle(error, "/password/recovery");
+              this.errorFocus.trigger();
           },
           () => {
             console.log("completed");

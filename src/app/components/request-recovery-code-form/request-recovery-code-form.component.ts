@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {ValidationService} from "../../services/validation.service";
 import {PasswordrecoveryrestcontrollerApi} from "../../ws/soccer/api/PasswordrecoveryrestcontrollerApi";
 import {PasswordRecoveryDTO} from "../../ws/soccer/model/PasswordRecoveryDTO";
 import {Response} from "@angular/http";
+import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 
 @Component({
   selector: 'app-request-recovery-code-form',
@@ -23,8 +24,11 @@ import {Response} from "@angular/http";
      <alert [type]="'success'" [hidden]="!success">
          <span [innerHtml]="'text.recovery.request.success' | htmlTranslate"></span>
     </alert>
-     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!globalError">{{globalError}}</alert>
-     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!emailError">{{'text.recovery.request.email.failed' | translate}}</alert>
+    <div class="error-div">
+        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError">{{globalError}}</alert>
+        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!emailError">{{'text.recovery.request.email.failed' | translate}}</alert>
+     </div>
+     
     <form [formGroup]="recoveryForm" novalidate (ngSubmit)="submit(recoveryForm.value)">
       <div class="form-group">
         <label for="email">{{"label.recovery.email" | translate}}</label>
@@ -54,6 +58,8 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
   success : boolean = false;
   emailError : boolean;
   globalError : any;
+
+  @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
 
   constructor(private _fb: FormBuilder, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {}
 
@@ -88,6 +94,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
             } else {
               this.globalError = this._errorService.handle(error, "/password/recovery/request");
             }
+            this.errorFocus.trigger();
           },
       )
     }

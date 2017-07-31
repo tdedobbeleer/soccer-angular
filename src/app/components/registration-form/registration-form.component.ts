@@ -9,6 +9,7 @@ import {ValidationService} from "../../services/validation.service";
 import {Response} from "@angular/http";
 import {equalsValidator} from "../../functions/equals-validator";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 
 @Component({
     selector: 'app-registration-form',
@@ -22,11 +23,13 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             {{'nav.register' | translate }}
         </li>
     </ul>
- <alert [type]="'success'" [dismissible]="true" [hidden]="!success">
+ <alert [type]="'success'" [dismissible]="false" [hidden]="!success">
     <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
 </alert>
-<div class="box" [hidden]="success">  
-     <alert [type]="'danger'" [dismissible]="true"  [hidden]="!globalError">{{globalError}}</alert>
+<div class="box" [hidden]="success">
+     <div class="error-div">
+        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError">{{globalError}}</alert>
+     </div>
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value)">
       <div class="form-group">
         <label for="email">{{"label.registration.email" | translate}}</label>
@@ -89,6 +92,7 @@ export class RegistrationFormComponent implements OnInit {
     globalError: any;
 
     @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
+    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
 
     formErrors = {
         'firstName': '',
@@ -144,6 +148,7 @@ export class RegistrationFormComponent implements OnInit {
                 },
                 (error: Response) => {
                     this.globalError = this._errorService.handle(error, "/registration");
+                    this.error.trigger();
                 },
                 () => {
                     console.log("completed");
