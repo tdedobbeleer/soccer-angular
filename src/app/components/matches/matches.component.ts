@@ -4,6 +4,7 @@ import {MatchesrestcontrollerApi} from "../../ws/soccer/api/Matchesrestcontrolle
 import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
 import {Observable} from "rxjs";
 import {SecUtil} from "../../classes/sec-util";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
     selector: 'app-matches',
@@ -31,7 +32,8 @@ export class MatchesComponent implements OnInit {
     loaded: boolean = false;
 
     constructor(private _matchesApi: MatchesrestcontrollerApi,
-                private _seasonsApi: SeasonsrestcontrollerApi) {
+                private _seasonsApi: SeasonsrestcontrollerApi,
+                private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -53,6 +55,9 @@ export class MatchesComponent implements OnInit {
                     .subscribe(seasonObject => {
                         this.seasons.push(seasonObject);
                         this.loaded = true;
+                        },
+                        e => {
+                            this._errorHandler.handle(e);
                     })
             });
     }

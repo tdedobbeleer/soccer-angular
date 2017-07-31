@@ -4,11 +4,13 @@ export const LANG_EN_NAME = 'en';
 
 export const LANG_EN_TRANS = {
     'title.error.unknown': 'Unknown error',
+    'title.service.unavailable': "Server unavailable",
     'text.error.unknown': 'Epic fail. Open goal, but the webmaster somehow missed it. Or the internet broke again.',
     'text.search': 'Search',
     'text.registration.succes': 'The registration was successful.</br>Your account will have to be activated by the administrator. You will be notified of this action.</br>Afterwards, you can try to login.</br></br>Have a lot of fun on this website!',
     'text.recovery.request.email.failed' : 'Could not send email, please try again later.',
     'text.recovery.request.success' : 'An email with the recovery code has been sent. Please check your inbox.',
+    'text.service.unavailable': "The server is temporarily down. Please try again later.",
     'hello world': 'hello world',
     'nav.messages': 'Messages',
     'nav.login' : 'Login',

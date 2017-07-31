@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {PollrestcontrollerApi} from "../../ws/soccer/api/PollrestcontrollerApi";
 import {PageDTOMatchPollDTO} from "../../ws/soccer/model/PageDTOMatchPollDTO";
 import {SecUtil} from "../../classes/sec-util";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
     selector: 'app-motm-polls',
@@ -40,7 +41,7 @@ export class MotmPollsComponent implements OnInit {
     loading: boolean;
     currentPage: any = 0;
 
-    constructor(private _api: PollrestcontrollerApi) {
+    constructor(private _api: PollrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -60,7 +61,11 @@ export class MotmPollsComponent implements OnInit {
             this.motmPage = p;
             this.loading = true;
             this.currentPage = page;
-        });
+            },
+            e => {
+                this._errorHandler.handle(e);
+            }
+        );
     }
 
 }

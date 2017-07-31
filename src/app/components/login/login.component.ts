@@ -40,7 +40,7 @@ import {LoginService} from "../../services/login.service";
                 <a [routerLink]="['/register']" routerLinkActive="active">{{'nav.register' | translate}}</a>
               </div>
               <div>
-                <a [routerLink]="['/password/recovery/request']" routerLinkActive="active">{{'nav.requestRecovery' | translate}}</a>
+                <a [routerLink]="['/password/recovery/request']" routerLinkActive="active">{{'nav.recovery.request' | translate}}</a>
               </div>
           </div>
           <div class="form-group box-footer">

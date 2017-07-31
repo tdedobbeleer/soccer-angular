@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {PageDTONewsDTO} from "../../ws/soccer/model/PageDTONewsDTO";
 import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {SecUtil} from "../../classes/sec-util";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
   selector: 'app-messages',
@@ -63,7 +64,7 @@ export class MessagesComponent implements OnInit {
   searchTerm: string;
   currentPage: any = 0;
 
-  constructor(private _api: NewsrestcontrollerApi) {
+  constructor(private _api: NewsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
@@ -73,7 +74,9 @@ export class MessagesComponent implements OnInit {
 
   getPage(page: number) {
     this._api.getNewsPage(page, this.searchTerm, 10, SecUtil.getJwtHeaders())
-        .subscribe(n => this.newsPage = n, err => console.log('error fetching messages'));
+        .subscribe(
+            n => this.newsPage = n,
+            err => this._errorHandler.handle(err));
   }
 
   isAdmin() {

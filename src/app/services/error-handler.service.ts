@@ -22,6 +22,9 @@ export class ErrorHandlerService {
                 case 400:
                     let d = error.json();
                     return ErrorUtil.getValidationError(d, this._translationService.currentLang());
+                case 503:
+                    this._router.navigate(['/unavailable']);
+                    break;
                 default:
                     this._router.navigate(['/failwhale']);
                     break;

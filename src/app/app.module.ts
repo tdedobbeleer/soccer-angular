@@ -60,6 +60,7 @@ import {PasswordrecoveryrestcontrollerApi} from "./ws/soccer/api/Passwordrecover
 import {RequestRecoveryCodeFormComponent} from "./components/request-recovery-code-form/request-recovery-code-form.component";
 import {RecoveryCodeFormComponent} from "./components/recovery-code-form/recovery-code-form.component";
 import {FocusOnErrorDirective} from "./directives/focus-on-error.directive";
+import {ServiceUnavailableComponent} from "./components/service-unavailable/service-unavailable.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -72,6 +73,7 @@ const appRoutes: Routes = [
     {path: 'matches', component: MatchesComponent},
     {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'doodles', component: DoodleListComponent},
+    {path: 'unavailable', component: ServiceUnavailableComponent},
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
@@ -117,6 +119,7 @@ const appRoutes: Routes = [
         RequestRecoveryCodeFormComponent,
         RecoveryCodeFormComponent,
         FocusOnErrorDirective,
+        ServiceUnavailableComponent,
     ],
     imports: [
         ReCaptchaModule,

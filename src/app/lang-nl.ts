@@ -4,11 +4,13 @@ export const LANG_NL_NAME = 'nl';
 
 export const LANG_NL_TRANS = {
     'title.error.unknown': 'Onbekende fout',
+    'title.service.unavailable': "Service down",
     'text.error.unknown': 'Epic fail. Een open doel, maar de webmaster heeft onbegrijpelijk gemist. Of het internet is weer eens kapot.',
     'text.search': 'Zoeken',
     'text.registration.succes': 'De registratie is gelukt.</br>Uw account zal nu geactiveerd moeten worden door de beheerder. U wordt op de hoogte gebracht van deze actie.</br>Daarna kan u rechts boven inloggen.</br></br>Veel plezier op deze website!',
     'text.recovery.request.email.failed' : 'De email kon niet verstuurd worden. Gelieve later opnieuw te proberen.',
     'text.recovery.request.success' : 'Er werd een email verzonden met de wachtwoord reset code. Gelieve je inbox te raadplegen.',
+    'text.service.unavailable': "De server is momenteel down wegens onderhoud. Gelieve later opnieuw te proberen.",
     'hello world': 'hello world',
     'nav.messages': 'Berichten',
     'nav.login' : 'Inloggen',
