@@ -90,7 +90,7 @@ import StatusEnum = MatchDTO.StatusEnum;
 })
 export class MatchFormComponent implements OnInit {
     @Input() update: boolean;
-    @Input() match: MatchDTO;
+    @Input() match: any;
 
     matchForm: FormGroup;
     submitted: boolean;

@@ -48,7 +48,7 @@ import {Router} from "@angular/router";
                                   <button type="button" class="btn btn-sm" aria-label="Motm" (click)="showDetails = !showDetails">
                                       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                   </button>
-                                  <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" (click)="editMatch()">
+                                  <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                   </button>
                                   <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match" (click)="deleteMatch()">
@@ -110,9 +110,4 @@ export class MatchComponent implements OnInit {
             }
         )
     }
-
-    editMatch() {
-        this._router.navigate(['/matches/edit'], {queryParams: {id: this.match.id}});
-    }
-
 }

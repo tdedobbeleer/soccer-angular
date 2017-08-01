@@ -61,6 +61,7 @@ import {RequestRecoveryCodeFormComponent} from "./components/request-recovery-co
 import {RecoveryCodeFormComponent} from "./components/recovery-code-form/recovery-code-form.component";
 import {FocusOnErrorDirective} from "./directives/focus-on-error.directive";
 import {ServiceUnavailableComponent} from "./components/service-unavailable/service-unavailable.component";
+import {EditMatchComponent} from "./components/edit-match/edit-match.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'matches/edit/:id', component: EditMatchComponent, canActivate: [AuthGuardAdminService]},
     {path: 'password/recovery/request', component: RequestRecoveryCodeFormComponent},
     {path: 'password/recovery', component: RecoveryCodeFormComponent},
     {path: '**', redirectTo: 'not-found'}
@@ -120,6 +122,7 @@ const appRoutes: Routes = [
         RecoveryCodeFormComponent,
         FocusOnErrorDirective,
         ServiceUnavailableComponent,
+        EditMatchComponent,
     ],
     imports: [
         ReCaptchaModule,

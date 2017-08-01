@@ -9,20 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 /* tslint:disable:no-unused-variable member-ordering */
-
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { Http, Headers, URLSearchParams }                    from '@angular/http';
-import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { Response, ResponseContentType }                     from '@angular/http';
-
-import { Observable }                                        from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
-import * as models                                           from '../model/models';
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import {Inject, Injectable, Optional} from "@angular/core";
+import {
+    Http,
+    Headers,
+    URLSearchParams,
+    RequestMethod,
+    RequestOptions,
+    RequestOptionsArgs,
+    Response
+} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import * as models from "../model/models";
+import {BASE_PATH} from "../variables";
+import {Configuration} from "../configuration";
 
 
 @Injectable()
@@ -64,6 +66,22 @@ export class MatchesrestcontrollerApi {
      */
     public deleteMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
         return this.deleteMatchWithHttpInfo(matchDTO, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     *
+     * @summary Get match
+     * @param id id
+     */
+    public getMatch(id: number, extraHttpRequestParams?: any): Observable<models.MatchDTO> {
+        return this.getMatchWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -225,6 +243,45 @@ export class MatchesrestcontrollerApi {
             body: matchDTO == null ? '' : JSON.stringify(matchDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
             withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Get match
+     *
+     * @param id id
+     */
+    public getMatchWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/matches/${id}'
+                .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getMatch.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Get,
+            headers: headers,
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
