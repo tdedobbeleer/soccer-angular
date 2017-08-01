@@ -9,19 +9,21 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 @Component({
     selector: 'app-matches',
     template: `
-    <div class="col-md-2 col-md-offset-9">
+  
+    <div class="container">
         <div class="pull-right">
             <span class="btn-group" *ngIf="isAdmin()">
-                <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
+                <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
             </span>  
         </div>
-    </div>
-    <div class="container">
         <div *ngIf="loaded">
           <app-next-match></app-next-match>
           <app-season *ngFor="let season of seasons" [season]="season.season" [matches]="season.matches"></app-season>
+        </div>
+        <div class="box" *ngIf="loaded && seasons?.length == 0">
+            <p>{{"text.seasons.empty" | translate}}</p>
         </div>
     </div>
   `,
@@ -57,6 +59,7 @@ export class MatchesComponent implements OnInit {
                         this.loaded = true;
                         },
                         e => {
+                            this.loaded = true;
                             this._errorHandler.handle(e);
                     })
             });

@@ -19,6 +19,9 @@ import {SecUtil} from "../../classes/sec-util";
         <app-pagination (onClick)="getPage($event)" [page]="doodlePage"></app-pagination>
         <app-doodle *ngFor="let doodle of doodlePage?.list" [matchDoodle]="doodle"></app-doodle>
         <app-pagination (onClick)="getPage($event)" [page]="doodlePage"></app-pagination>
+        <div class="box" *ngIf="doodlePage?.totalPages == 0">
+           <p>{{"text.doodles.empty" | translate}}</p>
+        </div>
   </div>
   `,
   styles: []

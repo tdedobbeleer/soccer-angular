@@ -16,6 +16,9 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       </ul>
   </div>
   <div class="m-t-1 container">
+      <div class="box" *ngIf="motmPage?.totalPages == 0">
+         <p>{{"text.motm.empty" | translate}}</p>
+      </div>
       <div class="row m-b-1">
           <app-pagination (onClick)="getPage($event)" [page]="motmPage" *ngIf="!loading"></app-pagination>
       </div>

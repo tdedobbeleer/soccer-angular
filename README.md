@@ -40,8 +40,12 @@ Debian env:
 Install dependencies:
 - npm install
 
-Install seperately if needed:
-- npm install --save tinymce
-- npm install --save ng2-bootstrap
+Update all dependencies at once
+- sudo npm install -g npm-check-updates
+- ncu -u
 
-Then try `ng serve`
+Run the server
+- ng serve
+
+## Accident help
+If ng serve does not work, update all depenencies, throw away the node modules folder and use the npm install commando again. Using the latest packages should always work.

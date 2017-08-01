@@ -7,6 +7,9 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
     template: `
     <h3>{{season?.description}}</h3>
     <app-match *ngFor="let match of matches" [match]="match"></app-match>
+     <div class="box" *ngIf="matches?.length == 0">
+            <p>{{"text.matches.empty" | translate}}</p>
+    </div>
   `,
     styles: []
 })
