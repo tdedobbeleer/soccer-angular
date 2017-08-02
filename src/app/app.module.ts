@@ -62,6 +62,7 @@ import {RecoveryCodeFormComponent} from "./components/recovery-code-form/recover
 import {FocusOnErrorDirective} from "./directives/focus-on-error.directive";
 import {ServiceUnavailableComponent} from "./components/service-unavailable/service-unavailable.component";
 import {EditMatchComponent} from "./components/edit-match/edit-match.component";
+import {GoalsComponent} from "./components/goal/goal.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -123,6 +124,7 @@ const appRoutes: Routes = [
         FocusOnErrorDirective,
         ServiceUnavailableComponent,
         EditMatchComponent,
+        GoalsComponent,
     ],
     imports: [
         ReCaptchaModule,

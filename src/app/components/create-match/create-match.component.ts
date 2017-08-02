@@ -4,7 +4,7 @@ import {Component, OnInit} from "@angular/core";
     selector: 'app-create-match',
     template: `
     <div class="container">
-      <app-match-form (match)="[]" (update)="false"></app-match-form>
+      <app-match-form></app-match-form>
     </div>
   `,
     styles: []
