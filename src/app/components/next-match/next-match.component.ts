@@ -76,7 +76,7 @@ export class NextMatchComponent implements OnInit {
     }
 
     getNextMatch(lang: any) {
-        this._matchesApi.getNextMatchUsingGET().subscribe(m => {
+        this._matchesApi.nextMatchPoll().subscribe(m => {
             if (m) {
                 this.match = m;
                 let matchDate = Util.parseTime(m.date, m.hour);

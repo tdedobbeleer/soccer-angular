@@ -4,6 +4,7 @@ import {SecUtil} from "../../classes/sec-util";
 import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {Router} from "@angular/router";
+import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
 
 @Component({
     selector: 'app-match',
@@ -42,11 +43,8 @@ import {Router} from "@angular/router";
                       </div>
                       <div class="text-center">
                           <div class="btn-group">
-                                  <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map" (click)="showMap = !showMap">
+                                  <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map" (click)="showMap = !showMap;showDetails = false;" >
                                       <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                  </button>
-                                  <button type="button" class="btn btn-sm" aria-label="Motm" (click)="showDetails = !showDetails">
-                                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                   </button>
                                   <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -60,7 +58,10 @@ import {Router} from "@angular/router";
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 m-l-1">
+                <div *ngIf="showMap">
+                    <iframe id="mapFrame" width="100%" height="450" scrolling="no" marginheight="0" marginwidth="0" [src]="match.address?.googleLink | safe" frameborder="0"></iframe>
+                </div>
                 <div *ngIf="showDetails">
                     <div *ngFor="let g of match.goals">
                         <div>
@@ -69,14 +70,14 @@ import {Router} from "@angular/router";
                             <span *ngIf="g.assist">({{g.assist.name}})</span>
                         </div>
                     </div>
-                </div>
-                <div *ngIf="showMap">
-                    <iframe id="mapFrame" width="100%" height="450" scrolling="no" marginheight="0" marginwidth="0" [src]="match.address?.googleLink | safe" frameborder="0"></iframe>
-                </div>
+                </div>            
                 </div>
             </div>
         </div>
-        <a href="javascript:void(0)" class="btn btn-block btn-default expand" (click)="showDetails = !showDetails"><span class="glyphicon glyphicon-menu-down"></span></a>
+        <a href="javascript:void(0)" class="btn btn-block btn-default expand" (click)="showDetails = !showDetails;showMap = false;">
+            <span *ngIf="!showDetails" class="glyphicon glyphicon-menu-down"></span>
+            <span *ngIf="showDetails" class="glyphicon glyphicon-menu-up"></span>
+        </a>
     </div>
 `
 })
@@ -88,6 +89,8 @@ export class MatchComponent implements OnInit {
     showMap: boolean;
 
     matchStatus = MatchDTO.StatusEnum;
+
+    poll : MatchPollDTO;
 
     constructor(private _api: MatchesrestcontrollerApi, private _errorHandler: ErrorHandlerService, private _router: Router) {
     }

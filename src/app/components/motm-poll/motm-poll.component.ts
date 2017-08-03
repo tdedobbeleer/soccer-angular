@@ -8,7 +8,7 @@ import {SecUtil} from "../../classes/sec-util";
 @Component({
     selector: 'app-motm-poll',
     template: `
-          <div class="col-md-6">
+          <div *ngIf="poll">
               <div class="panel panel-info">
                   <div>
                       <div class="panel-heading">
@@ -86,7 +86,7 @@ export class MotmPollComponent implements OnInit {
     actionResultMessage = [];
     voteResultMessage = [];
 
-    constructor(private _api: PollrestcontrollerApi, private _loginService: LoginService, private _errorHandler: ErrorHandlerService) {
+    constructor(private _api: PollrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {

@@ -29,7 +29,9 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       </div>
       <div  *ngFor="let poll of motmPage?.list">
         <div class="clearfix" *ngIf="$index % 2 == 0"></div>
-        <app-motm-poll [poll]="poll"></app-motm-poll>
+        <div class="col-md-6">
+            <app-motm-poll [poll]="poll"></app-motm-poll>
+        </div>
       </div>
       <div class="clearfix"></div>
       <div class="row m-t-1">

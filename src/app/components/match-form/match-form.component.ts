@@ -28,6 +28,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div class="form-group">
         <label for="homeTeam">{{"label.match.homeTeam" | translate}}</label>
         <select name="homeTeam" class="form-control" [formControl]="matchForm.controls['homeTeam']">
+              <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let ht of teams" [value]="ht" [selected]="matchForm.value?.homeTeam?.id == ht.id">{{ht.name}}</option>
         </select>
         <small class="text-danger" [hidden]="!formErrors.homeTeam">
@@ -37,6 +38,7 @@ import StatusEnum = MatchDTO.StatusEnum;
        <div class="form-group">
         <label for="awayTeam">{{"label.match.awayTeam" | translate}}</label>
         <select name="awayTeam" class="form-control" [formControl]="matchForm.controls['awayTeam']">
+              <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let at of teams" [value]="at" [selected]="matchForm.value?.awayTeam?.id == at.id">{{at.name}}</option>
         </select>
          <small class="text-danger" [hidden]="!formErrors.awayTeam">
@@ -46,6 +48,7 @@ import StatusEnum = MatchDTO.StatusEnum;
        <div class="form-group">
         <label for="season">{{"label.match.season" | translate}}</label>
         <select name="season" class="form-control" [formControl]="matchForm.controls['season']">
+              <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let s of seasons" [value]="s">{{s.description}}</option>
         </select>
          <small class="text-danger" [hidden]="!formErrors.season">
@@ -55,6 +58,7 @@ import StatusEnum = MatchDTO.StatusEnum;
        <div class="form-group">
         <label for="status">{{"label.match.status" | translate}}</label>
         <select name="season" class="form-control" [formControl]="matchForm.controls['status']">
+              <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option value="{{statusEnum.NOTPLAYED}}" [selected]="matchForm.value?.status == statusEnum.NOTPLAYED">{{"text.match.status.notPlayed" | translate}}</option>
               <option value="{{statusEnum.PLAYED}}" [selected]="matchForm.value?.status == statusEnum.PLAYED">{{"text.match.status.played" | translate}}</option>
               <option value="{{statusEnum.CANCELLED}}" [selected]="matchForm.value?.status == statusEnum.CANCELLED">{{"text.match.status.cancelled" | translate}}</option>
@@ -103,10 +107,15 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
       <div class="form-group">
         <label for="time">{{"label.match.time" | translate}}</label>
-        <timepicker [(ngModel)]="ti" (ngModelChange)="updateTimeValue(ti)" [ngModelOptions]="{standalone: true}"></timepicker>
-         <small class="text-danger" [hidden]="!formErrors.time">
-             {{formErrors.time}}
-        </small>
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <timepicker [(ngModel)]="ti" (ngModelChange)="updateTimeValue(ti)" [ngModelOptions]="{standalone: true}"></timepicker>
+                 <small class="text-danger" [hidden]="!formErrors.time">
+                     {{formErrors.time}}
+                </small>
+            </div>
+        </div>
+      
         <input type="hidden" class="form-control" [formControl]="matchForm.controls.time">
       </div>
       
