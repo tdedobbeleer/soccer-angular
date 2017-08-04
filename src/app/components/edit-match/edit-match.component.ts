@@ -12,13 +12,13 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
         </li>
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active">{{'nav.matches' | translate }}</a>
+            <a [routerLink]="['/']" routerLinkActive="active">{{'nav.match' | translate }}</a>
         </li>
         <li>
-            {{'nav.matches.edit' | translate }}
+            {{'nav.match.edit' | translate }}
         </li>
     </ul>
-      <app-match-form [matchId]="matchId"></app-match-form>
+      <app-edit-match-form [matchId]="matchId"></app-edit-match-form>
     </div>
   `,
     styles: []

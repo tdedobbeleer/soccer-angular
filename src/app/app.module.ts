@@ -63,6 +63,8 @@ import {FocusOnErrorDirective} from "./directives/focus-on-error.directive";
 import {ServiceUnavailableComponent} from "./components/service-unavailable/service-unavailable.component";
 import {EditMatchComponent} from "./components/edit-match/edit-match.component";
 import {GoalsComponent} from "./components/goal/goal.component";
+import {FocusOnSuccessDirective} from "./directives/focus-on-success.directive";
+import {EditMatchFormComponent} from "./components/edit-match-form/edit-match-form.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -125,6 +127,8 @@ const appRoutes: Routes = [
         ServiceUnavailableComponent,
         EditMatchComponent,
         GoalsComponent,
+        FocusOnSuccessDirective,
+        EditMatchFormComponent,
     ],
     imports: [
         ReCaptchaModule,

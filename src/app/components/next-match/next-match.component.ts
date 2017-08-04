@@ -17,19 +17,19 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <div class="row">
-                    <div class="col-md-2 col-sm-12 col-xs-12 hidden-xs"><h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
-                    <div class="col-md-8">
-                        <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs"><h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
+                    <div class="col-md-6">
+                        <div class="row text-center">
                             <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
                             <div class="col-md-2 col-xs-4 text-center score"><h3> - </h3></div>
                             <div class="col-md-4 col-xs-4 left"><h3>{{match?.awayTeam?.name}}</h3></div>
                         </div>
                     </div>
-                    <div class="col-md-2 col-xs-12 col-sm-12">
+                    <div class="col-md-3 col-xs-12 col-sm-12">
                       <div class="row text-center visible-sm visible-xs">
                           <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
                       </div>
-                      <div *ngIf="forecast">
+                      <div *ngIf="forecast" class="text-center">
                           <div class="row">
                           <div class="col-md-12">
                                <img [src]="getWeatherIcon(forecast?.weather[0]?.icon) | safe"/>

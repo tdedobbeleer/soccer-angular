@@ -28,7 +28,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
             <div class="col-md-12 col-xs-12">
                 <div class="row m-b-1">
                     <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs">
-                    <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - <span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h5>
+                    <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
                     </div>
                     <div class="col-md-6">
                         <div class="row text-center">
@@ -39,7 +39,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                     </div>
                     <div class="col-md-3 col-xs-12 col-sm-12">
                       <div class="row text-center visible-sm visible-xs">
-                          <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - <span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h5>
+                          <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
                       </div>
                       <div class="text-center">
                           <div class="btn-group">
@@ -66,7 +66,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                     <div *ngFor="let g of match.goals">
                         <div>
                             <span *ngIf="g.scorer"><i class="fa fa-futbol-o"></i>&nbsp;{{g.scorer.name}}</span>
-                            <span *ngIf="!g.scorer"><i class="fa fa-futbol-o"></i>&nbsp;{{'text.matches.ownGoal' | translate}}</span>
+                            <span *ngIf="!g.scorer"><i class="fa fa-futbol-o"></i>&nbsp;{{'text.match.ownGoal' | translate}}</span>
                             <span *ngIf="g.assist">({{g.assist.name}})</span>
                         </div>
                     </div>

@@ -1,34 +1,31 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
-import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
-import {Util} from "../../classes/util";
-import {ValidationService} from "../../services/validation.service";
-import {ErrorHandlerService} from "../../services/error-handler.service";
+import {Component, OnInit, ViewChild, Input} from "@angular/core";
 import {SecUtil} from "../../classes/sec-util";
+import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
+import {Util} from "../../classes/util";
+import {Validators, FormBuilder, FormArray, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
+import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
+import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
+import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
 import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
+import {ErrorHandlerService} from "../../services/error-handler.service";
+import {ValidationService} from "../../services/validation.service";
+import {GoalDTO} from "../../ws/soccer/model/GoalDTO";
+import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
+import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
 import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 import StatusEnum = MatchDTO.StatusEnum;
 
 @Component({
-    selector: 'app-match-form',
+    selector: 'app-edit-match-form',
     template: `
-  
-  <div class="box">
-    <div class="success-div">
-        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">{{"text.match.success.create" | translate}}</alert>
-    </div>
+<div class="box">
     <div class="error-div">
          <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError">{{globalError}}</alert>
     </div>
     
-    <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value)" *ngIf="loaded">
+    <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value)">
       <div class="form-group">
         <label for="homeTeam">{{"label.match.homeTeam" | translate}}</label>
         <select name="homeTeam" class="form-control" [formControl]="matchForm.controls['homeTeam']">
@@ -53,12 +50,52 @@ import StatusEnum = MatchDTO.StatusEnum;
         <label for="season">{{"label.match.season" | translate}}</label>
         <select name="season" class="form-control" [formControl]="matchForm.controls['season']">
               <option value="null" disabled>{{'text.select' | translate}}</option>
-              <option *ngFor="let s of seasons" [ngValue]="s">{{s.description}}</option>
+              <option *ngFor="let s of seasons" [ngValue]="s" [selected]="matchForm.value?.season?.id == s.id">{{s.description}}</option>
         </select>
          <small class="text-danger" [hidden]="!formErrors.season">
              {{formErrors.season}}
         </small>
-      </div>      
+      </div>
+       <div class="form-group">
+        <label for="status">{{"label.match.status" | translate}}</label>
+        <select name="season" class="form-control" [formControl]="matchForm.controls['status']">
+              <option value="null" disabled selected>{{'text.select' | translate}}</option>
+              <option value="{{statusEnum.NOTPLAYED}}" [selected]="matchForm.value?.status == statusEnum.NOTPLAYED">{{"text.match.status.notPlayed" | translate}}</option>
+              <option value="{{statusEnum.PLAYED}}" [selected]="matchForm.value?.status == statusEnum.PLAYED">{{"text.match.status.played" | translate}}</option>
+              <option value="{{statusEnum.CANCELLED}}" [selected]="matchForm.value?.status == statusEnum.CANCELLED">{{"text.match.status.cancelled" | translate}}</option>
+        </select>
+         <small class="text-danger" [hidden]="!formErrors.status">
+             {{formErrors.status}}
+        </small>
+      </div>
+     
+        <div class="form-group">
+        <label for="htGoals">{{"label.match.htGoals" | translate}}</label>
+        <input name="htGoals" class="form-control" [formControl]="matchForm.controls.htGoals"/>
+         <small class="text-danger" [hidden]="!formErrors.htGoals">
+             {{formErrors.htGoals}}
+        </small>
+        </div>
+        <div class="form-group">
+        <label for="atGoals">{{"label.match.atGoals" | translate}}</label>
+        <input name="atGoals" class="form-control" [formControl]="matchForm.controls.atGoals"/>
+         <small class="text-danger" [hidden]="!formErrors.atGoals">
+             {{formErrors.atGoals}}
+        </small>
+        </div>
+           
+        <div class="form-group" *ngIf="matchForm.value?.status == statusEnum.PLAYED && hasGoals(matchForm.value)">
+        <div formArrayName="goals">
+            <label for="goals">{{"label.match.goals" | translate}}</label>
+            <div *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i">
+                <app-goal [goal]="goals.controls[i]" [players]="accounts"></app-goal>
+            </div>
+        </div>
+         <small class="text-danger" [hidden]="!formErrors.date">
+             {{formErrors.goals}}
+        </small>
+        </div>
+      
       
       <div class="form-group">
         <label for="date">{{"label.match.date" | translate}}</label>
@@ -90,21 +127,26 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
     </form>
     </div>
-`
+  `,
+    styles: []
 })
-export class MatchFormComponent implements OnInit {
-    matchForm: FormGroup;
-    loaded: boolean;
+export class EditMatchFormComponent implements OnInit {
 
-    globalError : string = "";
-    createSuccess : boolean = false;
+    @Input() matchId?: any;
+
+    homeTeamName: string = "SVK";
+
+    matchForm: FormGroup;
+
+    statusEnum = StatusEnum;
+
+    globalError: string = "";
 
     teams: TeamDTO[];
     seasons: SeasonDTO[];
     accounts: AccountDTO[];
 
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) success: FocusOnErrorDirective;
 
     dt: Date;
     ti: Date;
@@ -115,31 +157,53 @@ export class MatchFormComponent implements OnInit {
         'season': '',
         'date': '',
         'hour': '',
+        'status': '',
+        'atGoals': '',
+        'htGoals': '',
+        'goals': '',
     };
 
     constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi,
                 private _seasonApi: SeasonsrestcontrollerApi, private _accountApi: AccountrestcontrollerApi,
-                private _validationService: ValidationService, private _errorHandler: ErrorHandlerService) {
+                private _validationService: ValidationService, private _errorHandler: ErrorHandlerService,
+                private _router: Router) {
     }
 
     ngOnInit() {
         this.matchForm = this._fb.group({
-            homeTeam: [null, [<any>Validators.required]],
-            awayTeam: [null, [<any>Validators.required]],
-            season: [null, [<any>Validators.required]],
+            homeTeam: ['', [<any>Validators.required]],
+            awayTeam: ['', [<any>Validators.required]],
+            season: ['', [<any>Validators.required]],
             date: ['', [<any>Validators.required]],
             hour: ['', [<any>Validators.required]],
+            status: ['', [<any>Validators.required]],
+            goals: [this._fb.array([])],
+            atGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]$")]],
+            htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]$")]]
         });
-        this.dt = new Date();
-        this.ti = Util.parseTime(Util.parseDate(new Date()), "20:00");
-        //Set the date and time
-        this.updateDateValue(this.dt);
-        this.updateTimeValue(this.ti);
-        this.loaded = true;
+
+        this._api.getMatch(this.matchId, SecUtil.getJwtHeaders()).subscribe(
+            match => {
+                this.matchForm.patchValue({homeTeam: match.homeTeam});
+                this.matchForm.patchValue({awayTeam: match.awayTeam});
+                this.matchForm.patchValue({season: match.season});
+                this.matchForm.patchValue({date: match.date});
+                this.matchForm.patchValue({hour: match.hour});
+                this.matchForm.patchValue({status: match.status});
+                this.matchForm.patchValue({atGoals: match.atGoals});
+                this.matchForm.patchValue({htGoals: match.htGoals});
+                //Set the goals
+                this.setGoals(match.goals);
+
+                this.ti = Util.parseTime(match.date, match.hour);
+                this.dt = Util.toDate(match.date);
+            }
+        );
 
         //Set listener
         this.matchForm.valueChanges
             .subscribe(data => this._validationService.onValueChanged(this.matchForm, this.formErrors));
+
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
         this._seasonApi.getSeasons().subscribe(s => this.seasons = s);
@@ -155,10 +219,22 @@ export class MatchFormComponent implements OnInit {
         this.matchForm.patchValue({date: Util.parseDate(date)});
     }
 
+    hasGoals(model: MatchDTO) {
+        return model.homeTeam.name == this.homeTeamName && model.goals.length > 0;
+    }
+
+    setGoals(goals: GoalDTO[]) {
+        const goalsFGs = goals.map(address => this._fb.group(address));
+        const goalsFormArray = this._fb.array(goalsFGs);
+        this.matchForm.setControl('goals', goalsFormArray);
+    }
+
+    get goals(): FormArray {
+        return this.matchForm.get('goals') as FormArray;
+    };
+
     submit(model: MatchDTO) {
-        this.createSuccess = false;
         this.globalError = '';
-        //this.match.season = this.matchForm.getRawValue();
 
         //Mark all controls as dirty, since the form has been submitted
         this._validationService.markControlsAsDirty(this.matchForm);
@@ -166,21 +242,23 @@ export class MatchFormComponent implements OnInit {
         this._validationService.onValueChanged(this.matchForm, this.formErrors);
 
         if (this.matchForm.valid) {
-            this._api.createMatch(model, SecUtil.getJwtHeaders()).subscribe(
+            this._api.updateMatch(model, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this.globalError = '';
-                    this.createSuccess = true;
-                    this.success.trigger();
                     console.log("Posted");
                 },
                 error => {
                     this.globalError = this._errorHandler.handle(error);
                     this.error.trigger();
                 },
+                () => {
+                    this._router.navigate(['/matches']);
+                }
             )
 
         } else {
-            console.log("invalid form: "+ this.matchForm);
+            console.log("invalid form: " + this.matchForm);
         }
     }
+
 }

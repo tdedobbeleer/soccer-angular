@@ -25,4 +25,12 @@ export class Util {
 
         return odate.isSameOrAfter(sdate) && odate.isSameOrBefore(eDate);
     }
+
+    static addZero(number: number): any {
+        if (number < 10) {
+            return '0' + number;
+        } else {
+            return number;
+        }
+    }
 }

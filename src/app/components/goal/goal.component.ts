@@ -11,13 +11,13 @@ import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
           
           <select class="form-control" formControlName="scorer">
                 <option value="null" disabled selected>{{'text.match.scorer' | translate}}</option>
-                <option *ngFor="let p of players" [value]="p" [selected]="goal.value.scorer?.id == p.id">{{p.name}}</option>
+                <option *ngFor="let p of players" [ngValue]="p" [selected]="goal.value.scorer?.id == p.id">{{p.name}}</option>
           </select>
         </div>
         <div class="form-group col-md-3">
           <select class="form-control" formControlName="assist">
                 <option value="null" disabled selected>{{'text.match.assist' | translate}}</option>
-                <option *ngFor="let p of players" [value]="p" [selected]="goal.value.assist?.id == p.id">{{p.name}}</option>
+                <option *ngFor="let p of players" [ngValue]="p" [selected]="goal.value.assist?.id == p.id">{{p.name}}</option>
           </select>
         </div>
     </div>
@@ -32,7 +32,8 @@ export class GoalsComponent implements OnInit {
     }
 
     ngOnInit() {
-        //console.log("Goal " + JSON.stringify(this.goal.value));
+        console.log("Goal " + JSON.stringify(this.goal.value));
+        console.log("Playas " + JSON.stringify(this.players));
     }
 
 }
