@@ -68,7 +68,8 @@ import StatusEnum = MatchDTO.StatusEnum;
              {{formErrors.status}}
         </small>
       </div>
-     
+       
+      <div *ngIf="matchForm.value?.status == statusEnum.PLAYED">         
         <div class="form-group">
         <label for="htGoals">{{"label.match.htGoals" | translate}}</label>
         <input name="htGoals" class="form-control" [formControl]="matchForm.controls.htGoals"/>
@@ -84,7 +85,7 @@ import StatusEnum = MatchDTO.StatusEnum;
         </small>
         </div>
            
-        <div class="form-group" *ngIf="matchForm.value?.status == statusEnum.PLAYED && hasGoals(matchForm.value)">
+        <div class="form-group" *ngIf="hasGoals(matchForm.value)">
         <div formArrayName="goals">
             <label for="goals">{{"label.match.goals" | translate}}</label>
             <div *ngFor="let goal of goals.controls; let i = index" [formGroupName]="i">
@@ -95,6 +96,7 @@ import StatusEnum = MatchDTO.StatusEnum;
              {{formErrors.goals}}
         </small>
         </div>
+      </div>
       
       
       <div class="form-group">
@@ -125,8 +127,8 @@ import StatusEnum = MatchDTO.StatusEnum;
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/profile']">{{"btn.cancel" | translate}}</a>
       </div>
-    </form>
-    </div>
+      </form>
+      </div>
   `,
     styles: []
 })
@@ -171,6 +173,7 @@ export class EditMatchFormComponent implements OnInit {
 
     ngOnInit() {
         this.matchForm = this._fb.group({
+            id: [this.matchId, [<any>Validators.required]],
             homeTeam: ['', [<any>Validators.required]],
             awayTeam: ['', [<any>Validators.required]],
             season: ['', [<any>Validators.required]],
@@ -202,7 +205,11 @@ export class EditMatchFormComponent implements OnInit {
 
         //Set listener
         this.matchForm.valueChanges
-            .subscribe(data => this._validationService.onValueChanged(this.matchForm, this.formErrors));
+            .subscribe(data => {
+                this._validationService.onValueChanged(this.matchForm, this.formErrors);
+                this.onGoalsChange(this.matchForm.value.homeTeam, this.matchForm.value.htGoals);
+                this.onGoalsChange(this.matchForm.value.awayTeam, this.matchForm.value.atGoals);
+            });
 
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
@@ -224,7 +231,7 @@ export class EditMatchFormComponent implements OnInit {
     }
 
     setGoals(goals: GoalDTO[]) {
-        const goalsFGs = goals.map(address => this._fb.group(address));
+        const goalsFGs = goals.map(g => this._fb.group(g));
         const goalsFormArray = this._fb.array(goalsFGs);
         this.matchForm.setControl('goals', goalsFormArray);
     }
@@ -233,7 +240,28 @@ export class EditMatchFormComponent implements OnInit {
         return this.matchForm.get('goals') as FormArray;
     };
 
-    submit(model: MatchDTO) {
+    onGoalsChange(team: TeamDTO, nrg: any) {
+        if (team.name == this.homeTeamName && nrg !== '') {
+            let nrOfGoals = this.goals.length;
+            if (nrOfGoals > nrg) {
+                const removeTotal = nrOfGoals - nrg;
+                let indexToRemove = nrOfGoals - 1;
+                for (let _i = 0; _i < removeTotal; _i++) {
+                    this.goals.removeAt(indexToRemove);
+                    indexToRemove--;
+                }
+            } else if (nrOfGoals < nrg) {
+                const add = nrg - nrOfGoals;
+                let order = nrOfGoals++;
+                for (let _i = 0; _i < add; _i++) {
+                    this.goals.push(this._fb.group({order: order, assist: null, scorer: null}));
+                    order++;
+                }
+            }
+        }
+    }
+
+    submit(model: any) {
         this.globalError = '';
 
         //Mark all controls as dirty, since the form has been submitted

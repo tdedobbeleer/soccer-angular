@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {FormGroup} from "@angular/forms";
 import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
+import {isNullOrUndefined} from "util";
 
 @Component({
     selector: 'app-goal',
@@ -9,15 +10,15 @@ import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
         <input type="hidden" formControlName="order">
         <div class="form-group col-md-3">
           
-          <select class="form-control" formControlName="scorer">
-                <option value="null" disabled selected>{{'text.match.scorer' | translate}}</option>
-                <option *ngFor="let p of players" [ngValue]="p" [selected]="goal.value.scorer?.id == p.id">{{p.name}}</option>
+          <select [compareWith]="isSelectedScorer" class="form-control" formControlName="scorer">
+                <option [ngValue]="null" selected disabled >{{'text.match.scorer' | translate}}</option>
+                <option *ngFor="let p of players" [ngValue]="p">{{p.name}}</option>
           </select>
         </div>
         <div class="form-group col-md-3">
-          <select class="form-control" formControlName="assist">
-                <option value="null" disabled selected>{{'text.match.assist' | translate}}</option>
-                <option *ngFor="let p of players" [ngValue]="p" [selected]="goal.value.assist?.id == p.id">{{p.name}}</option>
+          <select [compareWith]="isSelectedAssist" class="form-control" formControlName="assist">
+                <option [ngValue]="null" selected disabled>{{'text.match.assist' | translate}}</option>
+                <option *ngFor="let p of players" [ngValue]="p">{{p.name}}</option>
           </select>
         </div>
     </div>
@@ -29,11 +30,19 @@ export class GoalsComponent implements OnInit {
     @Input('players') public players: AccountDTO[];
 
     constructor() {
+
     }
 
     ngOnInit() {
-        console.log("Goal " + JSON.stringify(this.goal.value));
-        console.log("Playas " + JSON.stringify(this.players));
     }
 
+    isSelectedAssist(selected: any, player: any) {
+        if (isNullOrUndefined(selected)) return isNullOrUndefined(player);
+        return selected.id == player.id;
+    }
+
+    isSelectedScorer(selected: any, player: any) {
+        if (isNullOrUndefined(selected)) return isNullOrUndefined(player);
+        return selected.id == player.id;
+    }
 }
