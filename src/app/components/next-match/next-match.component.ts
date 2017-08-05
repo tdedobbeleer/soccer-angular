@@ -9,7 +9,7 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
 @Component({
     selector: 'app-next-match',
     template: `
-    <h3>{{'text.match.next' | translate}}</h3>
+    <h3 *ngIf="match">{{'text.match.next' | translate}}</h3>
     <div class="box" *ngIf="match">
         <div class="row visible-xs text-center">
             <div class="col-xs-12"><h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h3></div>
@@ -18,14 +18,14 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
             <div class="col-md-12 col-xs-12">
                 <div class="row">
                     <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs"><h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="row text-center">
                             <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
                             <div class="col-md-2 col-xs-4 text-center score"><h3> - </h3></div>
                             <div class="col-md-4 col-xs-4 left"><h3>{{match?.awayTeam?.name}}</h3></div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-xs-12 col-sm-12">
+                    <div class="col-md-2 col-xs-12 col-sm-12">
                       <div class="row text-center visible-sm visible-xs">
                           <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
                       </div>
@@ -46,13 +46,11 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
                 </div>
             </div>
         </div>
-        <div class="row text-center hidden-sm hidden-xs">
-            <div class="col-md-8 col-md-offset-2 col-xs-12">
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-4 col-xs-offset-4 col-xs-4 text-center">
-                        <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
-                    </div>
-                </div>
+        <div class="row hidden-sm hidden-xs">
+            <div class="col-md-12 col-xs-12">
+               <div class="text-center">
+                    <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
+               </div>
             </div>
         </div>
     </div>

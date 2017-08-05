@@ -12,7 +12,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
         </li>
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active">{{'nav.matches' | translate }}</a>
+            <a [routerLink]="['/matches']" routerLinkActive="active">{{'nav.matches' | translate }}</a>
         </li>
         <li>
             {{'nav.match.edit' | translate }}
