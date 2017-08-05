@@ -28,7 +28,7 @@ import {SecUtil} from "../../classes/sec-util";
         </div>
         <div class="pull-right">
         <span class="btn-group" *ngIf="isLoggedIn()">
-            <button type="button" class="btn btn-lg btn-info btn-circle" aria-label="Create comment" (click)="showShowCreateComment = !showShowCreateComment">
+            <button type="button" class="btn btn-info" aria-label="Create comment" (click)="showShowCreateComment = !showShowCreateComment">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
         </span>  

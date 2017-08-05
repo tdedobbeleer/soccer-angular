@@ -12,8 +12,9 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
         <li>Home
         </li>
     </ul>
-    <div class="col-md-3 col-md-offset-9">
+    
     <div class="row">
+       <div class="col-md-4">
        <div class="input-group">
           <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'text.search' | translate}}">
           <span class="input-group-btn">
@@ -21,16 +22,14 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
           </span>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row m-t-1">
-    <div class="col-md-2 col-md-offset-9 col-xs-12">
+      <div class="col-md-1 col-md-offset-11 m-t-1 m-b-1">
       <div class="pull-right">
        <span class="btn-group" *ngIf="isAdmin()">
-            <button type="button" class="btn btn-lg btn-danger btn-circle" aria-label="Create message" [routerLink]="['/messages/create']" routerLinkActive="active">
+            <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/messages/create']" routerLinkActive="active">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
         </span>  
+        </div>
       </div>
     </div>
   </div>
