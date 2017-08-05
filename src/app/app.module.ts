@@ -65,6 +65,9 @@ import {EditMatchComponent} from "./components/edit-match/edit-match.component";
 import {GoalsComponent} from "./components/goal/goal.component";
 import {FocusOnSuccessDirective} from "./directives/focus-on-success.directive";
 import {EditMatchFormComponent} from "./components/edit-match-form/edit-match-form.component";
+import {AccountprofilerestcontrollerApi} from "./ws/soccer/api/AccountprofilerestcontrollerApi";
+import {PlayerComponent} from "./components/player/player.component";
+import {PlayerListComponent} from "./components/player-list/player-list.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -75,6 +78,7 @@ const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationFormComponent},
     {path: 'matches', component: MatchesComponent},
+    {path: 'team', component: PlayerListComponent},
     {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'doodles', component: DoodleListComponent},
     {path: 'unavailable', component: ServiceUnavailableComponent},
@@ -129,6 +133,8 @@ const appRoutes: Routes = [
         GoalsComponent,
         FocusOnSuccessDirective,
         EditMatchFormComponent,
+        PlayerComponent,
+        PlayerListComponent,
     ],
     imports: [
         ReCaptchaModule,
@@ -157,6 +163,7 @@ const appRoutes: Routes = [
         AccountrestcontrollerApi,
         DoodlerestcontrollerApi,
         PasswordrecoveryrestcontrollerApi,
+        AccountprofilerestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,
