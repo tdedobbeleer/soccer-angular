@@ -1,7 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
-import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
     selector: 'app-edit-match',
@@ -26,7 +24,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 export class EditMatchComponent implements OnInit {
     matchId: any;
 
-    constructor(private _route: ActivatedRoute, private _api: MatchesrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _route: ActivatedRoute) {
     }
 
     ngOnInit() {

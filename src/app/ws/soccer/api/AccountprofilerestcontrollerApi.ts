@@ -44,7 +44,7 @@ export class AccountprofilerestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get all Account profiles
      */
     public getAllProfiles(extraHttpRequestParams?: any): Observable<Array<models.ProfileDTO>> {
@@ -59,7 +59,7 @@ export class AccountprofilerestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get Account profile
      * @param id id
      */
@@ -77,7 +77,7 @@ export class AccountprofilerestcontrollerApi {
 
     /**
      * Get all Account profiles
-     *
+     * 
      */
     public getAllProfilesWithHttpInfo(extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/profiles';
@@ -110,7 +110,7 @@ export class AccountprofilerestcontrollerApi {
 
     /**
      * Get Account profile
-     *
+     * 
      * @param id id
      */
     public getProfileWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {

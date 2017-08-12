@@ -68,6 +68,9 @@ import {EditMatchFormComponent} from "./components/edit-match-form/edit-match-fo
 import {AccountprofilerestcontrollerApi} from "./ws/soccer/api/AccountprofilerestcontrollerApi";
 import {PlayerComponent} from "./components/player/player.component";
 import {PlayerListComponent} from "./components/player-list/player-list.component";
+import {EditAccountFormComponent} from "./components/edit-account-form/edit-account-form.component";
+import {EditAccountComponent} from "./components/edit-account/edit-account.component";
+import {ImageUploadModule} from "angular2-image-upload";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -82,6 +85,7 @@ const appRoutes: Routes = [
     {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'doodles', component: DoodleListComponent},
     {path: 'unavailable', component: ServiceUnavailableComponent},
+    {path: 'account/profile/edit/:id', component: EditAccountComponent},
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
@@ -135,6 +139,8 @@ const appRoutes: Routes = [
         EditMatchFormComponent,
         PlayerComponent,
         PlayerListComponent,
+        EditAccountFormComponent,
+        EditAccountComponent,
     ],
     imports: [
         ReCaptchaModule,
@@ -147,6 +153,7 @@ const appRoutes: Routes = [
         BsDropdownModule.forRoot(),
         CollapseModule.forRoot(),
         DatepickerModule.forRoot(),
+        ImageUploadModule.forRoot(),
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
