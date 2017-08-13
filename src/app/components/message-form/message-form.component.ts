@@ -14,7 +14,7 @@ import {SecUtil} from "../../classes/sec-util";
     <form [formGroup]="messageForm" novalidate (ngSubmit)="submit(messageForm.value, messageForm.valid)">
       <div class="form-group">
         <label for="header">{{"label.message.title" | translate}}</label>
-        <input type="text" class="form-control" [formControl]="messageForm.controls['header']">
+        <input type="text" class="form-control" formControlName="header">
         <small *ngIf="submitted && messageForm.controls.header.errors" class="text-danger">
               {{"validation.message.title.empty" | translate}}
             </small>
@@ -25,23 +25,23 @@ import {SecUtil} from "../../classes/sec-util";
         <small *ngIf="submitted && messageForm.controls.content.errors" class="text-danger">
                 {{"validation.message.content.empty" | translate}}
               </small>
-        <input type="hidden" class="form-control" [formControl]="messageForm.controls['content']">
+        <input type="hidden" class="form-control" formControlName="content">
       </div>
       <div *ngIf="!update" class="form-group">
           <div class="radio">
-              <input type="radio" name="type" id="radio1" value="POST_AND_SEND" checked="checked" [formControl]="messageForm.controls['type']">
+              <input type="radio" name="type" id="radio1" value="POST_AND_SEND" checked="checked" formControlName="type">
               <label for="radio1">
                   {{"label.message.sendAndPost" | translate}}
               </label>
           </div>
           <div class="radio">
-              <input type="radio" name="type" id="radio2" value="SEND" [formControl]="messageForm.controls['type']">
+              <input type="radio" name="type" id="radio2" value="SEND" formControlName="type">
               <label for="radio2">
                   {{"label.message.sendOnly" | translate}}
               </label>
           </div>
           <div class="radio">
-              <input type="radio" name="type" id="radio3" value="POST" [formControl]="messageForm.controls['type']">
+              <input type="radio" name="type" id="radio3" value="POST" formControlName="type">
               <label for="radio3">
                   {{"label.message.postOnly" | translate}}
               </label>

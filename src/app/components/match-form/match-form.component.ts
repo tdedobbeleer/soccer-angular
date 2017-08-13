@@ -31,7 +31,7 @@ import StatusEnum = MatchDTO.StatusEnum;
     <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value)" *ngIf="loaded">
       <div class="form-group">
         <label for="homeTeam">{{"label.match.homeTeam" | translate}}</label>
-        <select name="homeTeam" class="form-control" [formControl]="matchForm.controls['homeTeam']">
+        <select name="homeTeam" class="form-control" formControlName="homeTeam">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let ht of teams" [ngValue]="ht" [selected]="matchForm.value?.homeTeam?.id == ht.id">{{ht.name}}</option>
         </select>
@@ -41,7 +41,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
        <div class="form-group">
         <label for="awayTeam">{{"label.match.awayTeam" | translate}}</label>
-        <select name="awayTeam" class="form-control" [formControl]="matchForm.controls['awayTeam']">
+        <select name="awayTeam" class="form-control" formControlName="awayTeam">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let at of teams" [ngValue]="at" [selected]="matchForm.value?.awayTeam?.id == at.id">{{at.name}}</option>
         </select>
@@ -51,7 +51,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
        <div class="form-group">
         <label for="season">{{"label.match.season" | translate}}</label>
-        <select name="season" class="form-control" [formControl]="matchForm.controls['season']">
+        <select name="season" class="form-control" formControlName="season">
               <option value="null" disabled>{{'text.select' | translate}}</option>
               <option *ngFor="let s of seasons" [ngValue]="s">{{s.description}}</option>
         </select>
@@ -63,7 +63,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div class="form-group">
         <label for="date">{{"label.match.date" | translate}}</label>
         <datepicker [ngModel]="dt" (ngModelChange)="updateDateValue(dt)" [ngModelOptions]="{standalone: true}"></datepicker>
-        <input type="hidden" [formControl]="matchForm.controls['date']">
+        <input type="hidden"formControlName="date">
          <small class="text-danger" [hidden]="!formErrors.date">
              {{formErrors.date}}
         </small>
@@ -79,7 +79,7 @@ import StatusEnum = MatchDTO.StatusEnum;
             </div>
         </div>
       
-        <input type="hidden" class="form-control" [formControl]="matchForm.controls.hour">
+        <input type="hidden" class="form-control" formControlName="hour">
       </div>
       
        

@@ -42,19 +42,6 @@ import PositionEnum = ProfileDTO.PositionEnum;
       </div>
       </div>
       
-      <div>
-        <image-upload
-          [max]="1"
-          [url]="'profile/' + profileForm.value.id + '/image'"
-          [class]="'btn'"
-          [headers]="getHeaders()"
-          [buttonCaption]="'btn.select' | translate"
-          [dropBoxMessage]="'text.images.drop' | translate"
-          [extensions]="['jpg','png','gif']"    
-          (uploadFinished)="imageUploadFinished($event)">
-        </image-upload>
-      </div>
-      
       <div class="form-group">
         <label for="position">{{"label.account.postion" | translate}}</label>
         <select name="postion" class="form-control" formControlName="position">
@@ -62,7 +49,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
               <option value="{{positionEnum.GOALKEEPER}}" [selected]="profileForm.value?.position == positionEnum.GOALKEEPER">{{"text.account.position.goalKeeper" | translate}}</option>
               <option value="{{positionEnum.DEFENDER}}" [selected]="profileForm.value?.position == positionEnum.DEFENDER">{{"text.account.position.defender" | translate}}</option>
               <option value="{{positionEnum.MIDFIELDER}}" [selected]="profileForm.value?.position == positionEnum.MIDFIELDER">{{"text.account.position.midfielder" | translate}}</option>
-              <option value="{{positionEnum.FORWARD}" [selected]="profileForm.value?.position == positionEnum.FORWARD">{{"text.account.position.forward" | translate}}</option>
+              <option value="{{positionEnum.FORWARD}}" [selected]="profileForm.value?.position == positionEnum.FORWARD">{{"text.account.position.forward" | translate}}</option>
         </select>
          <small class="text-danger" [hidden]="!formErrors.postion">
              {{formErrors.postion}}
@@ -184,10 +171,6 @@ export class EditAccountFormComponent implements OnInit {
             });
     }
 
-    imageUploadFinished() {
-
-    }
-
     submitPassword(model: any) {
         this.globalError = '';
 
@@ -215,10 +198,6 @@ export class EditAccountFormComponent implements OnInit {
         } else {
             console.log("invalid form: " + this.passwordForm);
         }
-    }
-
-    getHeaders() {
-        return SecUtil.getJwtHeaders();
     }
 
     submitProfile(model: any) {

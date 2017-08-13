@@ -7,7 +7,7 @@ import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
   template: `
  <form [formGroup]="messageForm" novalidate (ngSubmit)="submit(messageForm.value, messageForm.valid)">
       <div class="form-group">
-         <textarea rows="5" type="text" class="form-control" [formControl]="messageForm.controls['content']"></textarea>
+         <textarea rows="5" type="text" class="form-control" formControlName="content"></textarea>
          <small *ngIf="submitted && messageForm.controls.content.errors" class="text-danger">
                 {{"validation.comment.empty" | translate}}
               </small>

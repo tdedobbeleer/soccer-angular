@@ -74,6 +74,22 @@ export class AccountprofilerestcontrollerApi {
             });
     }
 
+    /**
+     *
+     * @summary Post image
+     * @param image image
+     */
+    public postProfileImage(image: any, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.postProfileImageWithHttpInfo(image, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
 
     /**
      * Get all Account profiles
@@ -136,6 +152,53 @@ export class AccountprofilerestcontrollerApi {
         let requestOptions: RequestOptionsArgs = new RequestOptions({
             method: RequestMethod.Get,
             headers: headers,
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Post image
+     *
+     * @param image image
+     */
+    public postProfileImageWithHttpInfo(image: any, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/profiles/${id}/image';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        let formParams = new URLSearchParams();
+
+        // verify required parameter 'image' is not null or undefined
+        if (image === null || image === undefined) {
+            throw new Error('Required parameter image was null or undefined when calling postProfileImage.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'multipart/form-data'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        headers.set('Content-Type', 'application/x-www-form-urlencoded');
+
+        if (image !== undefined) {
+            formParams.set('image', <any>image);
+        }
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: headers,
+            body: formParams.toString(),
             search: queryParameters,
             withCredentials: this.configuration.withCredentials
         });
