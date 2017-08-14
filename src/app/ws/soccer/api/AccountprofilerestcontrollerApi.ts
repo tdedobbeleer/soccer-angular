@@ -91,7 +91,7 @@ export class AccountprofilerestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Update Account profile
      * @param profileDTO profileDTO
      */
@@ -228,7 +228,7 @@ export class AccountprofilerestcontrollerApi {
 
     /**
      * Update Account profile
-     *
+     * 
      * @param profileDTO profileDTO
      */
     public updateProfileWithHttpInfo(profileDTO: models.ProfileDTO, extraHttpRequestParams?: any): Observable<Response> {

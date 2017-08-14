@@ -61,7 +61,7 @@ export class AccountrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Change password
      * @param passwordDTO passwordDTO
      */
@@ -174,7 +174,7 @@ export class AccountrestcontrollerApi {
 
     /**
      * Change password
-     *
+     * 
      * @param passwordDTO passwordDTO
      */
     public changePasswordWithHttpInfo(passwordDTO: models.PasswordDTO, extraHttpRequestParams?: any): Observable<Response> {

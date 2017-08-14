@@ -21,11 +21,11 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
         </li>
     </ul>
  <alert [type]="'success'" [dismissible]="false" [hidden]="!success">
-    <span [innerHtml]="'text.registration.succes' | htmlTranslate"></span>
+    <span [innerHtml]="'text.registration.succes' | safeHtml"></span>
 </alert>
 <div class="box" [hidden]="success">
      <div class="error-div">
-        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError">{{globalError}}</alert>
+        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
      </div>
     <form [formGroup]="recoveryForm" novalidate (ngSubmit)="submit(recoveryForm.value)">
       <div class="form-group">

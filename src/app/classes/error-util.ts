@@ -4,13 +4,17 @@ export class ErrorUtil {
 
     static getValidationError(error: ValidationErrorDetailDTO, lang: String) {
         let r: string = '';
-        error.validationErrorDTOList.forEach(e => {
+        for (let _i = 0; _i < error.validationErrorDTOList.length; _i++) {
             if (lang == 'en') {
-                r += e.localizedMessageDTO.messageEn;
+                r += error.validationErrorDTOList[_i].localizedMessageDTO.messageEn;
             } else {
-                r += e.localizedMessageDTO.messageNl;
+                r += error.validationErrorDTOList[_i].localizedMessageDTO.messageNl;
             }
-        });
+
+            if ((_i + 1) !== error.validationErrorDTOList.length) {
+                r += '<br/>';
+            }
+        }
         return r;
 
     }

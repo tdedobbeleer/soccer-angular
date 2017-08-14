@@ -232,9 +232,8 @@ header h3 {
 }
 
 .comment {
-    padding-top: 5px;
+    padding: 10px 0 10px 10px;
     margin-left: 5%;
-    border-top: 1px solid #BCE8F1
 }
 
 .addCommentDiv, .editCommentDiv, .addCommentBtn {

@@ -71,6 +71,12 @@ import {PlayerListComponent} from "./components/player-list/player-list.componen
 import {EditAccountFormComponent} from "./components/edit-account-form/edit-account-form.component";
 import {EditAccountComponent} from "./components/edit-account/edit-account.component";
 import {ImageUploadModule} from "angular2-image-upload";
+import {EditMessageComponent} from "./components/edit-message/edit-message.component";
+import {EditMessageFormComponent} from "./components/edit-message-form/edit-message-form.component";
+import {EditTeamFormComponent} from "./components/edit-team-form/edit-team-form.component";
+import {CreateTeamFormComponent} from "./components/create-team-form/create-team-form.component";
+import {CreateTeamComponent} from "./components/create-team/create-team.component";
+import {EditTeamComponent} from "./components/edit-team/edit-team.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -88,6 +94,7 @@ const appRoutes: Routes = [
     {path: 'account/profile/edit/:id', component: EditAccountComponent},
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'messages/edit/:id', component: EditMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/edit/:id', component: EditMatchComponent, canActivate: [AuthGuardAdminService]},
     {path: 'password/recovery/request', component: RequestRecoveryCodeFormComponent},
@@ -141,6 +148,12 @@ const appRoutes: Routes = [
         PlayerListComponent,
         EditAccountFormComponent,
         EditAccountComponent,
+        EditMessageComponent,
+        EditMessageFormComponent,
+        EditTeamFormComponent,
+        CreateTeamFormComponent,
+        CreateTeamComponent,
+        EditTeamComponent,
     ],
     imports: [
         ReCaptchaModule,

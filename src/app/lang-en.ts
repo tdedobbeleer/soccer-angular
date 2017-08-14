@@ -32,6 +32,11 @@ export const LANG_EN_TRANS = {
     'text.defender': 'Defender',
     'text.midfielder': 'Midfielder',
     'text.forward': 'Forward',
+    'text.on': 'on',
+    'text.by': 'by',
+    'text.yes': 'yes',
+    'text.no': 'no',
+    'text.verification.delete.news': 'Are you sure you want to delete this message?',
     'label.match.atGoals': 'Goals away team',
     'label.match.htGoals': 'Goals hometeam',
     'label.match.goals': 'Goals',
@@ -93,5 +98,8 @@ export const LANG_EN_TRANS = {
     'validation.lastName.pattern': 'The name contains invalid characters (do not use abbreviations, dots or other characters)',
     'validation.atGoals.pattern': 'Only digits are allowed',
     'validation.htGoals.pattern': 'Only digits are allowed',
-    'validation.repeatPassword.equals': 'The two passwords should match'
+    'validation.repeatPassword.equals': 'The two passwords should match',
+    'validation.newPassword.pattern': 'Please use 5 to 15 characters for the password. Allowed characters: letters, digits, dots, underscores and dashes',
+    'validation.postalCode.pattern': 'The postal code should only contain digits',
+    'validation.username.email': 'Please specify a valid email address',
 };

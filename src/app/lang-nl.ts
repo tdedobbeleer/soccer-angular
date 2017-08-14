@@ -32,6 +32,11 @@ export const LANG_NL_TRANS = {
     'text.defender': 'Verdediger',
     'text.midfielder': 'Middenvelder',
     'text.forward': 'Aanvaller',
+    'text.on': 'op',
+    'text.by': 'door',
+    'text.yes': 'ja',
+    'text.no': 'nee',
+    'text.verification.delete.news': 'Ben je zeker dat je dit bericht wilt verwijderen?',
     'hello world': 'hello world',
     'nav.messages': 'Berichten',
     'nav.login' : 'Inloggen',
@@ -93,5 +98,8 @@ export const LANG_NL_TRANS = {
     'validation.lastName.pattern': 'De naam bevat niet toegelaten karakters (gebruik geen afkortingen, punten of vreemde tekens)',
     'validation.atGoals.pattern': 'Alleen cijfers zijn toegelaten',
     'validation.htGoals.pattern': 'Alleen cijfers zijn toegelaten',
-    'validation.repeatPassword.equals': 'De wachtwoorden moeten hetzelfde zijn'
+    'validation.repeatPassword.equals': 'De wachtwoorden moeten hetzelfde zijn',
+    'validation.newPassword.pattern': 'Minimaal 5 tekens, maximaal 15. Toegelaten karakters: letters, cijfers, punten, dashes en underscores',
+    'validation.postalCode.pattern': 'De postcode mag alleen cijfers bevatten',
+    'validation.username.email': 'Gelieve een correct email adres op te geven',
 };

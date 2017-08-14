@@ -10,7 +10,7 @@ import {SecUtil} from "../../classes/sec-util";
 @Component({
   selector: 'app-message',
   template: `
-    <div class="post">
+    <div class="post" *ngIf="!deleted">
       <div>
         <h4>
             <span>{{message.header}}</span>
@@ -20,15 +20,32 @@ import {SecUtil} from "../../classes/sec-util";
             </span>
         </h4>
         <hr>
-        <span align="left" [innerHTML]="message.content"></span>
+        <span align="left" [innerHTML]="message.content | safeHtml"></span>
       
         <div class="author-category">Posted by
             {{message.postedBy.name}} on
-            {{message.postDate}}   
+            {{message.postDate}}
+            <span class="btn-group" *ngIf="isLoggedIn() && (isAdmin() || message.postedBy.id == getUser().id)">
+                <button type="button" class="btn btn-sm" aria-label="Edit" [routerLink]="['/messages/edit/' + message.id]" routerLinkActive="active">
+                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-sm btn-warning" aria-label="Delete" (click)="showDeleteNews = !showDeleteNews">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
+            </span>  
+            
         </div>
+        <div class="m-t-1 text-center" *ngIf="showDeleteNews">
+            <b>{{"text.verification.delete.news" | translate}}</b> 
+            <span class="btn-group btn-group-xs">
+              <button class="btn btn-xs" (click)="deleteMessage()"><b>{{"text.yes" | translate}}</b></button>
+              <button class="btn btn-xs" (click)="showDeleteNews = false"><b>{{"text.no" | translate}}</b></button>
+            </span>
+        </div>
+      
         <div class="pull-right">
-        <span class="btn-group" *ngIf="isLoggedIn()">
-            <button type="button" class="btn btn-info" aria-label="Create comment" (click)="showShowCreateComment = !showShowCreateComment">
+        <span class="btn-group" *ngIf="isLoggedIn() && showAllComments">
+            <button type="button" class="btn btn-info" aria-label="Create comment" (click)="showCreateComment = !showCreateComment">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
         </span>  
@@ -36,15 +53,13 @@ import {SecUtil} from "../../classes/sec-util";
       </div>
        <div class="clearfix"></div>
       <div class="m-t-1">
-        <div *ngIf="showShowCreateComment">
+        <div *ngIf="showCreateComment">
           <span class="m-t-1">
               <app-comment-form (onSubmit)="createComment($event)" [comment]="getNewComment(message.id)"></app-comment-form>    
           </span>
         </div>
         <div class="m-t-1" *ngIf="showAllComments">
-          <div *ngFor="let comment of message?.comments">
-              <app-comment [comment]="comment" [messageId]="message.id"></app-comment>
-          </div>
+            <app-comment *ngFor="let c of message?.comments" [comment]="c" [messageId]="message.id"></app-comment>
         </div>
       </div>
     </div>
@@ -54,14 +69,24 @@ import {SecUtil} from "../../classes/sec-util";
 export class MessageComponent implements OnInit {
   @Input() message: NewsDTO;
 
-  showAllComments: boolean;
-  showShowCreateComment: boolean;
+  showAllComments: boolean = false;
+  showCreateComment: boolean = false;
+  showDeleteNews: boolean = false;
+  deleted: boolean = false;
 
   constructor(private _api: CommentsrestcontrollerApi, private _messagesApi: NewsrestcontrollerApi, private _loginService: LoginService,
               private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
+  }
+
+  isAdmin() {
+    return SecUtil.isAdmin();
+  }
+
+  getUser() {
+    return SecUtil.getUser();
   }
 
   isLoggedIn() {
@@ -72,12 +97,23 @@ export class MessageComponent implements OnInit {
     return {id: id, content: ""}
   }
 
+  deleteMessage() {
+    this._messagesApi.deleteNews(this.message.id, SecUtil.getJwtHeaders()).subscribe(
+        r => {
+          this.deleted = true;
+        },
+        e => {
+          this._errorHandler.handle(e);
+        }
+    )
+  }
+
   createComment(comment: CommentDTO) {
-    this.showShowCreateComment = false;
+    this.showCreateComment = false;
       this._api.postComment(comment.id, comment, SecUtil.getJwtHeaders())
         .subscribe(r => {
           console.log("success");
-              this.message.comments.push(comment);
+              this.message.comments.push(r);
               this.showAllComments = true;
             },
             error => {

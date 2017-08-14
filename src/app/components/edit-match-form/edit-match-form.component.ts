@@ -22,7 +22,7 @@ import StatusEnum = MatchDTO.StatusEnum;
     template: `
 <div class="box">
     <div class="error-div">
-         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError">{{globalError}}</alert>
+         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
     </div>
     
     <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value)">

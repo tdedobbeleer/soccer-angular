@@ -15,15 +15,15 @@ import PositionEnum = ProfileDTO.PositionEnum;
     selector: 'app-edit-account-form',
     template: `
 <div class="box">
-    <div class="success-div">
-        <alert [type]="'success'" [dismissible]="false" *ngIf="updateProfileSuccess">{{"text.match.success.create" | translate}}</alert>
-    </div>
-    <div class="error-div">
-         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError">{{globalError}}</alert>
-    </div>
     
     <div>
     <h2>{{'title.account.details' | translate}} <span class="pull-right glyphicon glyphicon-user"></span></h2>
+    <div class="success-div">
+        <alert [type]="'success'" [dismissible]="false" *ngIf="updateProfileSuccess">{{"text.account.success.change" | translate}}</alert>
+    </div>
+    <div class="error-div">
+         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
+    </div>
     <form [formGroup]="profileForm" novalidate (ngSubmit)="submitProfile(profileForm.value)">
     <div formGroupName="account">
       <div class="form-group">
@@ -99,7 +99,9 @@ import PositionEnum = ProfileDTO.PositionEnum;
     
      <form [formGroup]="passwordForm" novalidate (ngSubmit)="submitPassword(passwordForm.value)">
       <alert [type]="'success'" [dismissible]="false" *ngIf="updatePasswordSuccess">{{"text.password.success.change" | translate}}</alert>
-      <alert [type]="'danger'" [dismissible]="false" *ngIf="globalPasswordError">{{globalPasswordError}}</alert>
+      <alert [type]="'danger'" [dismissible]="false" *ngIf="globalPasswordError">
+         <span [innerHtml]="globalPasswordError | safeHtml"></span>
+      </alert>
       <div class="form-group">
         <label for="oldPassword">{{"label.password" | translate}}</label>
                <input name="oldPassword" type="password" class="form-control" formControlName="oldPassword"/>
