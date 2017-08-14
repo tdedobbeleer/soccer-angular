@@ -32,35 +32,35 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
      </div>
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value)">
       <div class="form-group">
-        <label for="email">{{"label.registration.email" | translate}}</label>
+        <label for="email">{{"label.email" | translate}}</label>
         <input name="email" class="form-control" [formControl]="registrationForm.controls.email"/>
         <small class="text-danger" [hidden]="!formErrors.email">
              {{formErrors.email}}
         </small>
       </div>
       <div class="form-group">
-        <label for="firstName">{{"label.registration.firstName" | translate}}</label>
+        <label for="firstName">{{"label.firstName" | translate}}</label>
         <input name="firstName" class="form-control" [formControl]="registrationForm.controls.firstName"/>
         <small class="text-danger" [hidden]="!formErrors.firstName">
              {{formErrors.firstName}}
         </small>
       </div>
       <div class="form-group">
-        <label for="lastName">{{"label.registration.lastName" | translate}}</label>
+        <label for="lastName">{{"label.lastName" | translate}}</label>
         <input name="lastName" class="form-control" [formControl]="registrationForm.controls.lastName"/>
          <small class="text-danger" [hidden]="!formErrors.lastName">
              {{formErrors.lastName}}
         </small>
       </div>
        <div class="form-group">
-        <label for="password">{{"label.registration.password" | translate}}</label>
+        <label for="password">{{"label.password" | translate}}</label>
          <input type="password" name="password" class="form-control" [formControl]="registrationForm.controls.password"/>
          <small class="text-danger" [hidden]="!formErrors.password">
              {{formErrors.password}}
         </small>
       </div>
        <div class="form-group">
-        <label for="repeatPassword">{{"label.registration.repeatPassword" | translate}}</label>
+        <label for="repeatPassword">{{"label.repeatPassword" | translate}}</label>
          <input type="password" name="repeatPassword" class="form-control" [formControl]="registrationForm.controls.repeatPassword"/>
          <small class="text-danger" [hidden]="!formErrors.repeatPassword">
              {{formErrors.repeatPassword}}

@@ -181,8 +181,8 @@ export class EditMatchFormComponent implements OnInit {
             hour: ['', [<any>Validators.required]],
             status: ['', [<any>Validators.required]],
             goals: [this._fb.array([])],
-            atGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]$")]],
-            htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]$")]]
+            atGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]],
+            htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]]
         });
 
         this._api.getMatch(this.matchId, SecUtil.getJwtHeaders()).subscribe(

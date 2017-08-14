@@ -75,12 +75,28 @@ export class AccountprofilerestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Post image
      * @param image image
      */
     public postProfileImage(image: any, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
         return this.postProfileImageWithHttpInfo(image, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     *
+     * @summary Update Account profile
+     * @param profileDTO profileDTO
+     */
+    public updateProfile(profileDTO: models.ProfileDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.updateProfileWithHttpInfo(profileDTO, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -165,7 +181,7 @@ export class AccountprofilerestcontrollerApi {
 
     /**
      * Post image
-     *
+     * 
      * @param image image
      */
     public postProfileImageWithHttpInfo(image: any, extraHttpRequestParams?: any): Observable<Response> {
@@ -199,6 +215,47 @@ export class AccountprofilerestcontrollerApi {
             method: RequestMethod.Post,
             headers: headers,
             body: formParams.toString(),
+            search: queryParameters,
+            withCredentials: this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Update Account profile
+     *
+     * @param profileDTO profileDTO
+     */
+    public updateProfileWithHttpInfo(profileDTO: models.ProfileDTO, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/profiles';
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'profileDTO' is not null or undefined
+        if (profileDTO === null || profileDTO === undefined) {
+            throw new Error('Required parameter profileDTO was null or undefined when calling updateProfile.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        headers.set('Content-Type', 'application/json');
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: headers,
+            body: profileDTO == null ? '' : JSON.stringify(profileDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
             withCredentials: this.configuration.withCredentials
         });

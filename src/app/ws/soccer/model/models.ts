@@ -15,6 +15,7 @@ export * from './NewsDTO';
 export * from './PageDTOMatchDoodleDTO';
 export * from './PageDTOMatchPollDTO';
 export * from './PageDTONewsDTO';
+export * from './PasswordDTO';
 export * from './PasswordRecoveryDTO';
 export * from './PresenceDTO';
 export * from './ProfileDTO';
