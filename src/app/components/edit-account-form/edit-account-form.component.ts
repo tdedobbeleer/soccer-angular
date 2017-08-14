@@ -76,15 +76,15 @@ import PositionEnum = ProfileDTO.PositionEnum;
       
       <div class="form-group">
         <label for="position">{{"label.position" | translate}}</label>
-        <select name="postion" class="form-control" formControlName="position">
+        <select name="position" class="form-control" formControlName="position">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option value="{{positionEnum.GOALKEEPER}}" [selected]="profileForm.value?.position == positionEnum.GOALKEEPER">{{"text.goalKeeper" | translate}}</option>
               <option value="{{positionEnum.DEFENDER}}" [selected]="profileForm.value?.position == positionEnum.DEFENDER">{{"text.defender" | translate}}</option>
               <option value="{{positionEnum.MIDFIELDER}}" [selected]="profileForm.value?.position == positionEnum.MIDFIELDER">{{"text.midfielder" | translate}}</option>
               <option value="{{positionEnum.FORWARD}}" [selected]="profileForm.value?.position == positionEnum.FORWARD">{{"text.forward" | translate}}</option>
         </select>
-         <small class="text-danger" [hidden]="!formErrors.postion">
-             {{formErrors.postion}}
+         <small class="text-danger" [hidden]="!formErrors.position">
+             {{formErrors.position}}
         </small>
       </div>
       
