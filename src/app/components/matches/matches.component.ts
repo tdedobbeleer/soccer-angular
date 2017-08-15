@@ -19,12 +19,17 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
                 {{'nav.matches' | translate }}
             </li>
         </ul>
-        <div class="pull-right p-b-1">
-            <span class="btn-group" *ngIf="isAdmin()">
+        
+        <div class="row">
+          <div class="col-md-1 col-md-offset-11">
+          <div class="pull-right">
+           <span class="btn-group" *ngIf="isAdmin()">
                 <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
             </span>  
+            </div>
+          </div>
         </div>
         <div *ngIf="loaded">
           <app-next-match></app-next-match>

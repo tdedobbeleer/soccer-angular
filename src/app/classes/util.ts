@@ -33,4 +33,10 @@ export class Util {
             return number;
         }
     }
+
+    static buildGoogleLink(address: string, postalCode: number, city: string) {
+        return "https://maps.google.be/maps?q=" + address +
+            ", +" + postalCode + "+" +
+            city + "&output=embed";
+    }
 }
