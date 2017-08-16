@@ -92,6 +92,7 @@ const appRoutes: Routes = [
     {path: 'doodles', component: DoodleListComponent},
     {path: 'unavailable', component: ServiceUnavailableComponent},
     {path: 'account/profile/edit/:id', component: EditAccountComponent},
+    {path: 'teams/create', component: CreateTeamComponent, canActivate: [AuthGuardAdminService]},
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/edit/:id', component: EditMessageComponent, canActivate: [AuthGuardAdminService]},

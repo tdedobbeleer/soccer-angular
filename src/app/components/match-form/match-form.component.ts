@@ -86,7 +86,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div class="form-group box-footer">
         <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
-        <a id="btnCancel" class="btn btn-default" [routerLink]="['/profile']">{{"btn.cancel" | translate}}</a>
+        <a id="btnCancel" class="btn btn-default" [routerLink]="['/matches']">{{"btn.cancel" | translate}}</a>
       </div>
     </form>
     </div>

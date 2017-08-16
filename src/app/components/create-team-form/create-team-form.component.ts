@@ -5,12 +5,17 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {ValidationService} from "../../services/validation.service";
 import {AddressDTO} from "../../ws/soccer/model/AddressDTO";
 import {Util} from "../../classes/util";
+import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
+import {ErrorHandlerService} from "../../services/error-handler.service";
+import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
+import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-create-team-form',
     template: `
+    <div class="box">
     <div class="success-div">
-        <alert [type]="'success'" [dismissible]="false" *ngIf="createTeamSuccess">{{"text.team.success.create" | translate}}</alert>
+        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">{{"text.team.success.create" | translate}}</alert>
     </div>
     <div class="error-div">
          <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
@@ -24,13 +29,24 @@ import {Util} from "../../classes/util";
         </small>
       </div>
         
-      <div class="form-group">
+      <div class="form-group"> 
+        <input name="useExistingAddress" type="checkbox" formControlName="useExistingAddress"/>
         <label for="useExistingAddress">{{"label.team.useExistingAddress" | translate}}</label>
-        <input name="useExistingAddress" type="checkbox" class="form-control" formControlName="useExistingAddress"/>
       </div>
       
+       <div class="form-group" *ngIf="teamForm.value.useExistingAddress">
+        <label for="address">{{"label.team.address" | translate}}</label>
+        <select name="existingAddress" class="form-control" formControlName="selectedAddress" (change)="setAddress()">
+              <option value="null" disabled [selected]="true">{{'text.select' | translate}}</option>
+              <option *ngFor="let a of addressList" [ngValue]="a" [selected]="false">{{a.address}} {{a.postalCode}} {{a.city}}</option>
+        </select>
+        <small class="text-danger" [hidden]="!formErrors.address.address">
+             {{formErrors.address.address}}
+        </small>
+      </div>      
       
-      <div formGroupName="address" *ngIf="!teamForm.value.useExistingAddress">
+      <div *ngIf="!teamForm.value.useExistingAddress">
+          <div formGroupName="address">
           <div class="form-group">
             <label for="address">{{"label.address" | translate}}</label>
                    <input name="address" class="form-control" formControlName="address"/>
@@ -52,28 +68,40 @@ import {Util} from "../../classes/util";
                  {{formErrors.address.city}}
             </small>
           </div>
+          </div>
            <div class="form-group" *ngIf="showMap">
-            <label for="useGoogleLink">{{"label.team.useGoogleLink" | translate}}</label>
-            <input name="useGoogleLink" type="checkbox" class="form-control" formControlName="useGoogleLink" (change)="onGoogleLinkChange()"/>
+            <input name="useGoogleLink" type="checkbox" formControlName="useGoogleLink" (change)="onGoogleLinkChange()"/>
+             <label for="useGoogleLink">{{"label.team.useGoogleLink" | translate}}</label>
           </div>
           <div *ngIf="showMap">
             <iframe id="mapFrame" width="100%" height="450" scrolling="no" marginheight="0" marginwidth="0" [src]="googleLink | safe" frameborder="0"></iframe>
           </div>
       </div>
+       <div class="form-group box-footer">
+        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
+        <a id="btnCancel" class="btn btn-default" [routerLink]="['/teams']">{{"btn.cancel" | translate}}</a>
+      </div>
       </form>
+      </div>
   `,
     styles: []
 })
 export class CreateTeamFormComponent implements OnInit {
+    globalError = '';
     teamForm: FormGroup;
     showMap: boolean = false;
+    createSuccess: boolean = false;
     googleLink: string;
+    addressList: AddressDTO[];
 
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
     @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
 
     formErrors = {
+        'name': '',
         'address': {
+            'id': '',
             'address': '',
             'postalCode': '',
             'city': '',
@@ -81,21 +109,31 @@ export class CreateTeamFormComponent implements OnInit {
         },
     };
 
-    constructor(private _validationService: ValidationService, private _fb: FormBuilder) {
+    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
+        this._api.getTeamAddresses().subscribe(
+            r => {
+                this.addressList = r;
+            },
+            e => {
+                this._errorHandler.handle(e);
+            }
+        );
+
         this.teamForm = this._fb.group({
             useGoogleLink: [false, []],
             useExistingAddress: [false, []],
+            name: ['', [<any>Validators.required, Validators.required]],
             selectedAddress: ['', []],
             address: this._fb.group({
-                address: ['', []],
-                city: ['', []],
+                id: ['', ''],
+                address: ['', [<any>Validators.required]],
+                city: ['', [<any>Validators.required]],
                 postalCode: ['', [Validators.pattern("^[0-9]+$")]],
                 googleLink: ['', []]
             }),
-            name: ['', [Validators.required, Validators.required]]
         });
 
         //Set listener
@@ -103,11 +141,37 @@ export class CreateTeamFormComponent implements OnInit {
             .subscribe(data => {
                 this._validationService.onValueChanged(this.teamForm, this.formErrors);
                 this.checkAddress();
+                this.createSuccess = false;
             });
     }
 
-    submit(model: any) {
+    submit(model: TeamDTO) {
+        this.globalError = '';
+        this.createSuccess = false;
+        //this.match.season = this.matchForm.getRawValue();
 
+        //Mark all controls as dirty, since the form has been submitted
+        this._validationService.markControlsAsDirty(this.teamForm);
+        //trigger the validation
+        this._validationService.onValueChanged(this.teamForm, this.formErrors);
+
+        if (this.teamForm.valid) {
+            this._api.createTeam(model, SecUtil.getJwtHeaders()).subscribe(
+                r => {
+                    this.globalError = '';
+                    this.createSuccess = true;
+                    this.success.trigger();
+                    console.log("Posted");
+                },
+                error => {
+                    this.globalError = this._errorHandler.handle(error);
+                    this.error.trigger();
+                },
+            )
+
+        } else {
+            console.log("invalid form: " + this.teamForm);
+        }
     }
 
     private onGoogleLinkChange() {
@@ -120,7 +184,7 @@ export class CreateTeamFormComponent implements OnInit {
 
     private checkAddress() {
         let address: AddressDTO = this.teamForm.value.address;
-        if (address.address &&
+        if (!this.teamForm.value.useExistingAddress && address.address &&
             address.postalCode &&
             address.city) {
             this.showMap = true;
@@ -128,6 +192,13 @@ export class CreateTeamFormComponent implements OnInit {
         }
         else {
             this.showMap = false;
+        }
+    }
+
+    private setAddress() {
+        let address: AddressDTO = this.teamForm.value.selectedAddress;
+        if (address && this.teamForm.value.useExistingAddress) {
+            this.teamForm.controls['address'].patchValue(address);
         }
     }
 

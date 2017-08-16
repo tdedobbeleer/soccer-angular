@@ -110,7 +110,7 @@ export class NewsrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Update news
      * @param newsDTO newsDTO
      */
@@ -299,7 +299,7 @@ export class NewsrestcontrollerApi {
 
     /**
      * Update news
-     *
+     * 
      * @param newsDTO newsDTO
      */
     public updateNewsWithHttpInfo(newsDTO: models.NewsDTO, extraHttpRequestParams?: any): Observable<Response> {
