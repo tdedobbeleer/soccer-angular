@@ -42,7 +42,7 @@ import {SecUtil} from "../../classes/sec-util";
                       <button *ngIf="team.address?.googleLink != null" type="button" class="btn" aria-label="Show map" (click)="showMap[team.id] = !showMap[team.id]">
                           <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                       </button>
-                      <button *ngIf="isAdmin()" type="button" class="btn" aria-label="Edit team">
+                      <button *ngIf="isAdmin()" type="button" class="btn" aria-label="Edit team" [routerLink]="['/teams/edit/' + team.id]" routerLinkActive="active">
                           <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                       </button>
                     </div>

@@ -9,22 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 /* tslint:disable:no-unused-variable member-ordering */
-import {Inject, Injectable, Optional} from "@angular/core";
-import {
-    Http,
-    Headers,
-    URLSearchParams,
-    RequestMethod,
-    RequestOptions,
-    RequestOptionsArgs,
-    Response
-} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import * as models from "../model/models";
-import {BASE_PATH} from "../variables";
-import {Configuration} from "../configuration";
+
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Http, Headers, URLSearchParams }                    from '@angular/http';
+import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Response, ResponseContentType }                     from '@angular/http';
+
+import { Observable }                                        from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import * as models                                           from '../model/models';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
@@ -34,7 +32,7 @@ export class AccountprofilerestcontrollerApi {
     public defaultHeaders: Headers = new Headers();
     public configuration: Configuration = new Configuration();
 
-    constructor(protected http: Http, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected http: Http, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -130,7 +128,7 @@ export class AccountprofilerestcontrollerApi {
             method: RequestMethod.Get,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -147,7 +145,7 @@ export class AccountprofilerestcontrollerApi {
      */
     public getProfileWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/profiles/${id}'
-                .replace('${' + 'id' + '}', String(id));
+                    .replace('${' + 'id' + '}', String(id));
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
@@ -169,7 +167,7 @@ export class AccountprofilerestcontrollerApi {
             method: RequestMethod.Get,
             headers: headers,
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -216,7 +214,7 @@ export class AccountprofilerestcontrollerApi {
             headers: headers,
             body: formParams.toString(),
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
@@ -257,7 +255,7 @@ export class AccountprofilerestcontrollerApi {
             headers: headers,
             body: profileDTO == null ? '' : JSON.stringify(profileDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {

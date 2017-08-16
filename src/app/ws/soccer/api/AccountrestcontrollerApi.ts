@@ -9,22 +9,20 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+
 /* tslint:disable:no-unused-variable member-ordering */
-import {Inject, Injectable, Optional} from "@angular/core";
-import {
-    Http,
-    Headers,
-    URLSearchParams,
-    RequestMethod,
-    RequestOptions,
-    RequestOptionsArgs,
-    Response
-} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import * as models from "../model/models";
-import {BASE_PATH} from "../variables";
-import {Configuration} from "../configuration";
+
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { Http, Headers, URLSearchParams }                    from '@angular/http';
+import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
+import { Response, ResponseContentType }                     from '@angular/http';
+
+import { Observable }                                        from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
+import * as models                                           from '../model/models';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
@@ -203,7 +201,7 @@ export class AccountrestcontrollerApi {
             headers: headers,
             body: passwordDTO == null ? '' : JSON.stringify(passwordDTO), // https://github.com/angular/angular/issues/10612
             search: queryParameters,
-            withCredentials: this.configuration.withCredentials
+            withCredentials:this.configuration.withCredentials
         });
         // https://github.com/swagger-api/swagger-codegen/issues/4037
         if (extraHttpRequestParams) {
