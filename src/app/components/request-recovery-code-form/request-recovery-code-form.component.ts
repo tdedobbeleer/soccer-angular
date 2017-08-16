@@ -22,10 +22,10 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 
 <div class="box">  
      <alert [type]="'success'" [hidden]="!success">
-         <span [innerHtml]="'text.recovery.request.success' | htmlTranslate"></span>
+         <span [innerHtml]="'text.recovery.request.success' | safeHtml"></span>
     </alert>
     <div class="error-div">
-        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError">{{globalError}}</alert>
+        <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
         <alert [type]="'danger'" [dismissible]="false"  [hidden]="!emailError">{{'text.recovery.request.email.failed' | translate}}</alert>
      </div>
      

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {TranslationService} from "./translation.service";
 import {FormGroup} from "@angular/forms";
+import {isObject} from "util";
 
 @Injectable()
 export class ValidationService {
@@ -14,16 +15,22 @@ export class ValidationService {
         }
 
         for (const field in formErrors) {
-            // clear previous error message (if any)
-            formErrors[field] = '';
+            const parsedfield = formErrors[field];
             const control = form.get(field);
 
-            if (control && control.dirty && !control.valid) {
-                for (const key in control.errors) {
-                    if (key == 'required') {
-                        formErrors[field] += this._translationService.instant('validation.' + key) + ' ';
-                    } else {
-                        formErrors[field] += this._translationService.instant('validation.' + field + '.' + key) + ' ';
+            if (isObject(parsedfield)) {
+                this.onValueChanged(form.get(field), parsedfield);
+            } else {
+                // clear previous error message (if any)
+                formErrors[field] = '';
+
+                if (control && control.dirty && !control.valid) {
+                    for (const key in control.errors) {
+                        if (key == 'required') {
+                            formErrors[field] += this._translationService.instant('validation.' + key) + ' ';
+                        } else {
+                            formErrors[field] += this._translationService.instant('validation.' + field + '.' + key) + ' ';
+                        }
                     }
                 }
             }
@@ -32,8 +39,11 @@ export class ValidationService {
 
     markControlsAsDirty(form?: FormGroup) {
         Object.keys(form.controls).forEach(key => {
-            form.get(key).markAsDirty();
+            if (form.get(key) instanceof FormGroup) {
+                this.markControlsAsDirty(<FormGroup> form.get(key));
+            } else {
+                form.get(key).markAsDirty();
+            }
         });
     }
-
 }

@@ -17,7 +17,7 @@ import {SecUtil} from "../../classes/sec-util";
   </div>
   <div class="m-t-1 container">
   <div>
-  <alert [type]="'danger'" [hidden]="!globalError">{{globalError}}</alert>
+  <alert [type]="'danger'" [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
   <table class="table table-responsive table-striped">
         <tr>
             <th>Id</th>

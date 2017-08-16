@@ -1,27 +1,31 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
-import {LoginService} from "../../services/login.service";
 import {CommentsrestcontrollerApi} from "../../ws/soccer/api/CommentsrestcontrollerApi";
 import {SecUtil} from "../../classes/sec-util";
+import {ErrorHandlerService} from "../../services/error-handler.service";
 
 @Component({
     selector: 'app-comment',
     template: `
-    <div class="comment post" *ngIf="comment !== null">
-        <div *ngIf="!showEditComment">
+    <div class="comment" *ngIf="comment">
+        <div *ngIf="!showEditComment" class="row" (mouseover)="showBtns = true" (mouseleave)="showBtns = false">
+          <div class="col-md-10">
+          <i class="fa fa-2x fa-comment"></i>
           <span>{{comment?.content}} -
               {{'text.by' | translate}}&nbsp;{{comment?.postedBy?.name}}&nbsp;{{'text.on' | translate}}&nbsp;{{comment?.postDate}}
           </span>
-           <span class="btn-group pull-right" *ngIf="isLoggedIn() && (getUser().username == comment?.postedBy?.username || isAdmin())">
-                  <button type="button" class="btn btn-warning btn-circle" aria-label="Delete comment" (click)="deleteComment(comment)">
+          </div>
+          <div class="col-md-2">
+           <span class="btn-group pull-right" *ngIf="showBtns && isLoggedIn() && (getUser().username == comment?.postedBy?.username || isAdmin())">
+                  <button type="button" class="btn btn-warning" aria-label="Delete comment" (click)="deleteComment(comment)">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </button>
-          </span>
-          <span class="btn-group pull-right">
-                  <button type="button" class="btn btn-circle" aria-label="Edit comment" (click)="showEditComment = !showEditComment">
+                  <button type="button" class="btn" aria-label="Edit comment" (click)="showEditComment = !showEditComment">
                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                   </button>
           </span>
+          </div>
+        
         </div>
         <span class="m-t-1" *ngIf="showEditComment && isLoggedIn() && getUser().username == comment?.postedBy?.username">
             <app-comment-form (onSubmit)="updateComment($event)" [comment]="comment"></app-comment-form>    
@@ -35,8 +39,9 @@ export class CommentComponent implements OnInit {
     @Input() messageId: number;
 
     private showEditComment: boolean;
+    private showBtns: boolean;
 
-    constructor(private _loginService: LoginService, private _api: CommentsrestcontrollerApi) {
+    constructor(private _errorHandler: ErrorHandlerService, private _api: CommentsrestcontrollerApi) {
     }
 
     ngOnInit() {
@@ -60,16 +65,24 @@ export class CommentComponent implements OnInit {
             .subscribe(r => {
                 console.log("success");
                 this.comment.content = comment.content;
+                },
+                e => {
+                    this._errorHandler.handle(e);
             })
     }
 
     deleteComment(comment: CommentDTO) {
         this.showEditComment = false;
         this._api.deleteComment(this.messageId, comment.id, SecUtil.getJwtHeaders())
-            .subscribe(r => {
+            .subscribe(
+                r => {
                 console.log("success");
                 this.comment = null;
-            })
+                },
+                e => {
+                    this._errorHandler.handle(e);
+                }
+            )
     }
 
 }

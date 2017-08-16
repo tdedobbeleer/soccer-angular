@@ -36,6 +36,9 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
                     });
                 });
             },
+            init_instance_callback: (editor: any) => {
+                this.setContent(editor);
+            }
         });
     }
 
@@ -44,7 +47,7 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
     }
 
     private setContent(editor) {
-        if (this.content) {
+        if (this.editor && this.content) {
             editor.setContent(this.content);
         }
     }

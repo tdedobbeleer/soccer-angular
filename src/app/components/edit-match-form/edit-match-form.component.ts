@@ -22,13 +22,13 @@ import StatusEnum = MatchDTO.StatusEnum;
     template: `
 <div class="box">
     <div class="error-div">
-         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError">{{globalError}}</alert>
+         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
     </div>
     
     <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value)">
       <div class="form-group">
         <label for="homeTeam">{{"label.match.homeTeam" | translate}}</label>
-        <select name="homeTeam" class="form-control" [formControl]="matchForm.controls['homeTeam']">
+        <select name="homeTeam" class="form-control" formControlName="homeTeam">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let ht of teams" [ngValue]="ht" [selected]="matchForm.value?.homeTeam?.id == ht.id">{{ht.name}}</option>
         </select>
@@ -38,7 +38,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
        <div class="form-group">
         <label for="awayTeam">{{"label.match.awayTeam" | translate}}</label>
-        <select name="awayTeam" class="form-control" [formControl]="matchForm.controls['awayTeam']">
+        <select name="awayTeam" class="form-control" formControlName="awayTeam">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option *ngFor="let at of teams" [ngValue]="at" [selected]="matchForm.value?.awayTeam?.id == at.id">{{at.name}}</option>
         </select>
@@ -48,7 +48,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
        <div class="form-group">
         <label for="season">{{"label.match.season" | translate}}</label>
-        <select name="season" class="form-control" [formControl]="matchForm.controls['season']">
+        <select name="season" class="form-control" formControlName="season">
               <option value="null" disabled>{{'text.select' | translate}}</option>
               <option *ngFor="let s of seasons" [ngValue]="s" [selected]="matchForm.value?.season?.id == s.id">{{s.description}}</option>
         </select>
@@ -58,7 +58,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       </div>
        <div class="form-group">
         <label for="status">{{"label.match.status" | translate}}</label>
-        <select name="season" class="form-control" [formControl]="matchForm.controls['status']">
+        <select name="season" class="form-control" formControlName="status">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option value="{{statusEnum.NOTPLAYED}}" [selected]="matchForm.value?.status == statusEnum.NOTPLAYED">{{"text.match.status.notPlayed" | translate}}</option>
               <option value="{{statusEnum.PLAYED}}" [selected]="matchForm.value?.status == statusEnum.PLAYED">{{"text.match.status.played" | translate}}</option>
@@ -72,14 +72,14 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div *ngIf="matchForm.value?.status == statusEnum.PLAYED">         
         <div class="form-group">
         <label for="htGoals">{{"label.match.htGoals" | translate}}</label>
-        <input name="htGoals" class="form-control" [formControl]="matchForm.controls.htGoals"/>
+        <input name="htGoals" class="form-control" formControlName="htGoals"/>
          <small class="text-danger" [hidden]="!formErrors.htGoals">
              {{formErrors.htGoals}}
         </small>
         </div>
         <div class="form-group">
         <label for="atGoals">{{"label.match.atGoals" | translate}}</label>
-        <input name="atGoals" class="form-control" [formControl]="matchForm.controls.atGoals"/>
+        <input name="atGoals" class="form-control" formControlName="atGoals"/>
          <small class="text-danger" [hidden]="!formErrors.atGoals">
              {{formErrors.atGoals}}
         </small>
@@ -102,7 +102,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div class="form-group">
         <label for="date">{{"label.match.date" | translate}}</label>
         <datepicker [ngModel]="dt" (ngModelChange)="updateDateValue(dt)" [ngModelOptions]="{standalone: true}"></datepicker>
-        <input type="hidden" [formControl]="matchForm.controls['date']">
+        <input type="hidden" formControlName="date">
          <small class="text-danger" [hidden]="!formErrors.date">
              {{formErrors.date}}
         </small>
@@ -118,7 +118,7 @@ import StatusEnum = MatchDTO.StatusEnum;
             </div>
         </div>
       
-        <input type="hidden" class="form-control" [formControl]="matchForm.controls.hour">
+        <input type="hidden" class="form-control" formControlName="hour">
       </div>
       
        
@@ -181,8 +181,8 @@ export class EditMatchFormComponent implements OnInit {
             hour: ['', [<any>Validators.required]],
             status: ['', [<any>Validators.required]],
             goals: [this._fb.array([])],
-            atGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]$")]],
-            htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]$")]]
+            atGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]],
+            htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]]
         });
 
         this._api.getMatch(this.matchId, SecUtil.getJwtHeaders()).subscribe(

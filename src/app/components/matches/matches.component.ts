@@ -11,12 +11,25 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
     template: `
   
     <div class="container">
-        <div class="pull-right">
-            <span class="btn-group" *ngIf="isAdmin()">
+        <ul class="breadcrumb">
+            <li>
+                <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Home</a>
+            </li>
+            <li>
+                {{'nav.matches' | translate }}
+            </li>
+        </ul>
+        
+        <div class="row">
+          <div class="col-md-1 col-md-offset-11">
+          <div class="pull-right">
+           <span class="btn-group" *ngIf="isAdmin()">
                 <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
             </span>  
+            </div>
+          </div>
         </div>
         <div *ngIf="loaded">
           <app-next-match></app-next-match>

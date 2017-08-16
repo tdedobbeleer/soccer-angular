@@ -7,65 +7,84 @@ import {ValidationService} from "../../services/validation.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {SecUtil} from "../../classes/sec-util";
 import {equalsValidator} from "../../functions/equals-validator";
+import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
+import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
 import PositionEnum = ProfileDTO.PositionEnum;
 
 @Component({
     selector: 'app-edit-account-form',
     template: `
 <div class="box">
-    <div class="error-div">
-         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError">{{globalError}}</alert>
-    </div>
     
+    <div>
+    <h2>{{'title.account.details' | translate}} <span class="pull-right glyphicon glyphicon-user"></span></h2>
+    <div class="success-div">
+        <alert [type]="'success'" [dismissible]="false" *ngIf="updateProfileSuccess">{{"text.account.success.change" | translate}}</alert>
+    </div>
+    <div class="error-div">
+         <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
+    </div>
     <form [formGroup]="profileForm" novalidate (ngSubmit)="submitProfile(profileForm.value)">
     <div formGroupName="account">
       <div class="form-group">
-        <label for="email">{{"label.account.email" | translate}}</label>
+        <label for="email">{{"label.email" | translate}}</label>
                <input name="email" class="form-control" formControlName="username"/>
-         <small class="text-danger" [hidden]="!formErrors.email">
-             {{formErrors.email}}
+         <small class="text-danger" [hidden]="!formErrors.account.username">
+             {{formErrors.account.username}}
         </small>
       </div>
       <div class="form-group">
-        <label for="firstName">{{"label.account.firstName" | translate}}</label>
+        <label for="firstName">{{"label.firstName" | translate}}</label>
                <input name="firstName" class="form-control" formControlName="firstName"/>
-         <small class="text-danger" [hidden]="!formErrors.firstName">
-             {{formErrors.email}}
+         <small class="text-danger" [hidden]="!formErrors.account.firstName">
+             {{formErrors.account.firstName}}
         </small>
       </div>
       <div class="form-group">
-        <label for="lastName">{{"label.account.lastName" | translate}}</label>
+        <label for="lastName">{{"label.lastName" | translate}}</label>
                <input name="lastName" class="form-control" formControlName="lastName"/>
-         <small class="text-danger" [hidden]="!formErrors.lastName">
-             {{formErrors.lastName}}
+         <small class="text-danger" [hidden]="!formErrors.account.lastName">
+             {{formErrors.account.lastName}}
         </small>
       </div>
       </div>
       
-      <div>
-        <image-upload
-          [max]="1"
-          [url]="'profile/' + profileForm.value.id + '/image'"
-          [class]="'btn'"
-          [headers]="getHeaders()"
-          [buttonCaption]="'btn.select' | translate"
-          [dropBoxMessage]="'text.images.drop' | translate"
-          [extensions]="['jpg','png','gif']"    
-          (uploadFinished)="imageUploadFinished($event)">
-        </image-upload>
+      <div formGroupName="address">
+          <div class="form-group">
+            <label for="address">{{"label.address" | translate}}</label>
+                   <input name="address" class="form-control" formControlName="address"/>
+             <small class="text-danger" [hidden]="!formErrors.address.address">
+                 {{formErrors.address.address}}
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="postalCode">{{"label.postalCode" | translate}}</label>
+                   <input name="postalCode" class="form-control" formControlName="postalCode"/>
+             <small class="text-danger" [hidden]="!formErrors.address.postalCode">
+                 {{formErrors.address.postalCode}}
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="city">{{"label.city" | translate}}</label>
+                   <input name="city" class="form-control" formControlName="city"/>
+             <small class="text-danger" [hidden]="!formErrors.address.city">
+                 {{formErrors.address.city}}
+            </small>
+          </div>
       </div>
       
+      
       <div class="form-group">
-        <label for="position">{{"label.account.postion" | translate}}</label>
-        <select name="postion" class="form-control" formControlName="position">
+        <label for="position">{{"label.position" | translate}}</label>
+        <select name="position" class="form-control" formControlName="position">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
-              <option value="{{positionEnum.GOALKEEPER}}" [selected]="profileForm.value?.position == positionEnum.GOALKEEPER">{{"text.account.position.goalKeeper" | translate}}</option>
-              <option value="{{positionEnum.DEFENDER}}" [selected]="profileForm.value?.position == positionEnum.DEFENDER">{{"text.account.position.defender" | translate}}</option>
-              <option value="{{positionEnum.MIDFIELDER}}" [selected]="profileForm.value?.position == positionEnum.MIDFIELDER">{{"text.account.position.midfielder" | translate}}</option>
-              <option value="{{positionEnum.FORWARD}" [selected]="profileForm.value?.position == positionEnum.FORWARD">{{"text.account.position.forward" | translate}}</option>
+              <option value="{{positionEnum.GOALKEEPER}}" [selected]="profileForm.value?.position == positionEnum.GOALKEEPER">{{"text.goalKeeper" | translate}}</option>
+              <option value="{{positionEnum.DEFENDER}}" [selected]="profileForm.value?.position == positionEnum.DEFENDER">{{"text.defender" | translate}}</option>
+              <option value="{{positionEnum.MIDFIELDER}}" [selected]="profileForm.value?.position == positionEnum.MIDFIELDER">{{"text.midfielder" | translate}}</option>
+              <option value="{{positionEnum.FORWARD}}" [selected]="profileForm.value?.position == positionEnum.FORWARD">{{"text.forward" | translate}}</option>
         </select>
-         <small class="text-danger" [hidden]="!formErrors.postion">
-             {{formErrors.postion}}
+         <small class="text-danger" [hidden]="!formErrors.position">
+             {{formErrors.position}}
         </small>
       </div>
       
@@ -73,21 +92,35 @@ import PositionEnum = ProfileDTO.PositionEnum;
         <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
       </div>
     </form>
-    <hr/>
+    </div>
+    
+    <div class="p-t-1">
+    <h2>{{'title.account.password' | translate}} <span class="pull-right glyphicon glyphicon-lock"></span></h2>
     
      <form [formGroup]="passwordForm" novalidate (ngSubmit)="submitPassword(passwordForm.value)">
+      <alert [type]="'success'" [dismissible]="false" *ngIf="updatePasswordSuccess">{{"text.password.success.change" | translate}}</alert>
+      <alert [type]="'danger'" [dismissible]="false" *ngIf="globalPasswordError">
+         <span [innerHtml]="globalPasswordError | safeHtml"></span>
+      </alert>
       <div class="form-group">
-        <label for="password">{{"label.account.password" | translate}}</label>
-               <input name="password" class="form-control" formControlName="password"/>
-         <small class="text-danger" [hidden]="!formErrors.password">
-             {{formErrors.password}}
+        <label for="oldPassword">{{"label.password" | translate}}</label>
+               <input name="oldPassword" type="password" class="form-control" formControlName="oldPassword"/>
+         <small class="text-danger" [hidden]="!passwordFormErrors.oldPassword">
+             {{passwordFormErrors.oldPassword}}
         </small>
       </div>
       <div class="form-group">
-        <label for="repeatPassword">{{"label.account.repeatPassword" | translate}}</label>
-               <input name="repeatPassword" class="form-control" formControlName="repeatPassword"/>
-         <small class="text-danger" [hidden]="!formErrors.repeatPassword">
-             {{formErrors.repeatPassword}}
+        <label for="newPassword">{{"label.password" | translate}}</label>
+               <input name="newPassword" class="form-control" type="password" formControlName="newPassword"/>
+         <small class="text-danger" [hidden]="!passwordFormErrors.newPassword">
+             {{passwordFormErrors.newPassword}}
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="repeatPassword">{{"label.repeatPassword" | translate}}</label>
+               <input name="repeatPassword" class="form-control" type="password" formControlName="repeatPassword"/>
+         <small class="text-danger" [hidden]="!passwordFormErrors.repeatPassword">
+             {{passwordFormErrors.repeatPassword}}
         </small>
       </div>
       
@@ -95,6 +128,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
         <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
       </div>
     </form>
+    </div>
       
   
     </div>
@@ -111,20 +145,41 @@ export class EditAccountFormComponent implements OnInit {
 
     globalError: string = "";
 
+    globalPasswordError: string = "";
+
     positionEnum = PositionEnum;
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
+    updateProfileSuccess: boolean = false;
 
-    formErrors = {
-        'email': '',
-        'firstName': '',
-        'lastName': '',
-        'password': '',
+    updatePasswordSuccess: boolean = false;
+
+    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
+
+    passwordFormErrors = {
+        'id': '',
+        'newPassword': '',
+        'oldPassword': '',
         'repeatPassword': '',
-        'postition': '',
     };
 
-    constructor(private _fb: FormBuilder, private _api: AccountprofilerestcontrollerApi,
+    formErrors = {
+        'address': {
+            'address': '',
+            'postalCode': '',
+            'city': '',
+        },
+        'account': {
+            'firstName': '',
+            'lastName': '',
+            'username': '',
+        },
+        'position': '',
+        'phone': '',
+        'mobilePhone': '',
+    };
+
+    constructor(private _fb: FormBuilder, private _api: AccountprofilerestcontrollerApi, private _accountApi: AccountrestcontrollerApi,
                 private _validationService: ValidationService, private _errorHandler: ErrorHandlerService) {
     }
 
@@ -139,7 +194,7 @@ export class EditAccountFormComponent implements OnInit {
             address: this._fb.group({
                 address: ['', []],
                 city: ['', []],
-                postalCode: ['', [Validators.pattern("^[0-9]$")]],
+                postalCode: ['', [Validators.pattern("^[0-9]+$")]],
             }),
             phone: ['', [Validators.pattern("^[0-9+]{9,13}$")]],
             mobilePhone: ['', [Validators.pattern("^[0-9+]{9,13}$")]],
@@ -162,13 +217,15 @@ export class EditAccountFormComponent implements OnInit {
 
             },
             e => {
-                this._errorHandler.handle(e, "/account/profile/edit");
+                this._errorHandler.handle(e, "account/profile/edit/" + this.profileId);
             }
         );
 
         this.passwordForm = this._fb.group({
-            password: ['', [<any>Validators.pattern("^[0-9a-zA-Z\._-]{5,15}$")]],
-            repeatPassword: ['', [<any>Validators.required, equalsValidator("password")]],
+            id: [this.profileId, [<any>Validators.required]],
+            oldPassword: ['', [<any>Validators.required]],
+            newPassword: ['', [<any>Validators.required, <any>Validators.pattern("^[0-9a-zA-Z\._-]{5,15}$")]],
+            repeatPassword: ['', [<any>Validators.required, equalsValidator("newPassword")]],
         });
 
         //Set listener
@@ -180,49 +237,39 @@ export class EditAccountFormComponent implements OnInit {
         //Set listener
         this.passwordForm.valueChanges
             .subscribe(data => {
-                this._validationService.onValueChanged(this.passwordForm, this.formErrors);
+                this._validationService.onValueChanged(this.passwordForm, this.passwordFormErrors);
             });
     }
 
-    imageUploadFinished() {
-
-    }
-
     submitPassword(model: any) {
-        this.globalError = '';
+        this.globalPasswordError = '';
+        this.updatePasswordSuccess = false;
 
         //Mark all controls as dirty, since the form has been submitted
         this._validationService.markControlsAsDirty(this.passwordForm);
         //trigger the validation
-        this._validationService.onValueChanged(this.passwordForm, this.formErrors);
+        this._validationService.onValueChanged(this.passwordForm, this.passwordFormErrors);
 
         if (this.passwordForm.valid) {
-            /**
-             this._api..(model, SecUtil.getJwtHeaders()).subscribe(
-             r => {
-            this.globalError = '';
-            console.log("Posted");
-          },
-             error => {
-            this.globalError = this._errorHandler.handle(error);
-            this.error.trigger();
-          },
-             () => {
-            this._router.navigate(['/matches']);
-          }
-             )**/
+            this._accountApi.changePassword(model, SecUtil.getJwtHeaders()).subscribe(
+                r => {
+                    this.globalPasswordError = '';
+                    this.updatePasswordSuccess = true;
+                    console.log("Posted");
+                },
+                error => {
+                    this.globalPasswordError = this._errorHandler.handle(error);
+                }
+            );
 
         } else {
             console.log("invalid form: " + this.passwordForm);
         }
     }
 
-    getHeaders() {
-        return SecUtil.getJwtHeaders();
-    }
-
     submitProfile(model: any) {
         this.globalError = '';
+        this.updateProfileSuccess = false;
 
         //Mark all controls as dirty, since the form has been submitted
         this._validationService.markControlsAsDirty(this.profileForm);
@@ -230,19 +277,17 @@ export class EditAccountFormComponent implements OnInit {
         this._validationService.onValueChanged(this.profileForm, this.formErrors);
 
         if (this.profileForm.valid) {
-            /**this._api.updateMatch(model, SecUtil.getJwtHeaders()).subscribe(
+            this._api.updateProfile(model, SecUtil.getJwtHeaders()).subscribe(
              r => {
-            this.globalError = '';
-            console.log("Posted");
-          },
-             error => {
-            this.globalError = this._errorHandler.handle(error);
-            this.error.trigger();
-          },
-             () => {
-            this._router.navigate(['/matches']);
-          }
-             )**/
+                 this.globalError = '';
+                 this.updateProfileSuccess = true;
+                 this.success.trigger();
+                 console.log("Posted");
+             },
+                error => {
+                    this.globalError = this._errorHandler.handle(error);
+                    this.error.trigger();
+                });
 
         } else {
             console.log("invalid form: " + this.profileForm);

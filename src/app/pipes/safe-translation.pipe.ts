@@ -3,7 +3,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {TranslationService} from "../services/translation.service";
 
 @Pipe({
-    name: 'htmlTranslate'
+    name: 'safeHtml'
 })
 export class SafeTranslationPipe implements PipeTransform {
     constructor(private _sanitizer: DomSanitizer, private _translate: TranslationService) {

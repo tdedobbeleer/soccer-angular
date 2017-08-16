@@ -173,6 +173,14 @@ body {
     text-align: right;
 }
 
+.p-t-1 {
+    padding-top: 10px;
+}
+
+.p-b-1 {
+    padding-bottom: 10px;
+}
+
 .m-t-1 {
     margin-top: 10px;
 }
@@ -224,9 +232,8 @@ header h3 {
 }
 
 .comment {
-    padding-top: 5px;
+    padding: 10px 0 10px 10px;
     margin-left: 5%;
-    border-top: 1px solid #BCE8F1
 }
 
 .addCommentDiv, .editCommentDiv, .addCommentBtn {
