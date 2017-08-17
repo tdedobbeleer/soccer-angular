@@ -33,7 +33,6 @@ import {CommentsrestcontrollerApi} from "./ws/soccer/api/CommentsrestcontrollerA
 import {CommentComponent} from "./components/comment/comment.component";
 import {BASE_PATH} from "./ws/soccer/variables";
 import {MatchFormComponent} from "./components/match-form/match-form.component";
-import {TeamFormComponent} from "./components/team-form/team-form.component";
 import {CreateMatchComponent} from "./components/create-match/create-match.component";
 import {TeamsrestcontrollerApi} from "./ws/soccer/api/TeamsrestcontrollerApi";
 import {FailWhaleComponent} from "./components/fail-whale/fail-whale.component";
@@ -125,7 +124,6 @@ const appRoutes: Routes = [
         PaginationComponent,
         CommentComponent,
         MatchFormComponent,
-        TeamFormComponent,
         CreateMatchComponent,
         FailWhaleComponent,
         MotmPollsComponent,

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Input} from '@angular/core';
+import {Component, OnInit, ViewChild, Input} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {AddressDTO} from "../../ws/soccer/model/AddressDTO";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
@@ -31,13 +31,13 @@ import {Util} from "../../classes/util";
       </div>
         
       <div class="form-group"> 
-        <input name="useExistingAddress" type="checkbox" formControlName="useExistingAddress"/>
+        <input name="useExistingAddress" type="checkbox" formControlName="useExistingAddress" (change)="onUseExistingAddressChange()"/>
         <label for="useExistingAddress">{{"label.team.useExistingAddress" | translate}}</label>
       </div>
       
        <div class="form-group" *ngIf="teamForm.value.useExistingAddress">
         <label for="address">{{"label.team.address" | translate}}</label>
-        <select name="existingAddress" class="form-control" formControlName="selectedAddress" (change)="setAddress()">
+        <select name="existingAddress" class="form-control" formControlName="selectedAddress" (change)="onSelectAddressChange()">
               <option value="null" disabled [selected]="true">{{'text.select' | translate}}</option>
               <option *ngFor="let a of addressList" [ngValue]="a" [selected]="teamForm.value?.address?.id == a.id">{{a.address}} {{a.postalCode}} {{a.city}}</option>
         </select>
@@ -224,7 +224,14 @@ export class EditTeamFormComponent implements OnInit {
         }
     }
 
-    private setAddress() {
+    private onUseExistingAddressChange() {
+        if (!this.teamForm.value.useExistingAddress) {
+            //If new address is used, empty the id
+            this.teamForm.controls['address'].patchValue({id: ''});
+        }
+    }
+
+    private onSelectAddressChange() {
         let address: AddressDTO = this.teamForm.value.selectedAddress;
         if (address && this.teamForm.value.useExistingAddress) {
             this.teamForm.controls['address'].patchValue(address);
