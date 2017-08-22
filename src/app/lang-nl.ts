@@ -90,6 +90,7 @@ export const LANG_NL_TRANS = {
     'label.team.useExistingAddress': 'Bestaand adres gebruiken',
     'label.team.useGoogleLink': 'Gebruik deze kaart',
     'label.team.address': 'Lijst van bestaande adressen',
+    'label.optional': 'Optioneel',
     'text.select' : 'Selecteer',
     'btn.login': 'Inloggen',
     'btn.reactions': 'Reacties',

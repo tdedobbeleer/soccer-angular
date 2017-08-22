@@ -91,6 +91,7 @@ export const LANG_EN_TRANS = {
     'label.team.useExistingAddress': 'Use existing address',
     'label.team.useGoogleLink': 'Use this google map',
     'label.team.address': 'List of existing addresses',
+    'label.optional': 'Optional',
     'btn.login': 'Login',
     'btn.reactions': 'Reactions',
     'btn.submit': 'Submit',

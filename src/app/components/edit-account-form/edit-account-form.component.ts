@@ -51,21 +51,21 @@ import PositionEnum = ProfileDTO.PositionEnum;
       
       <div formGroupName="address">
           <div class="form-group">
-            <label for="address">{{"label.address" | translate}}</label>
+            <label for="address">{{"label.address" | translate}} <small>({{'label.optional' | translate}})</small></label>
                    <input name="address" class="form-control" formControlName="address"/>
              <small class="text-danger" [hidden]="!formErrors.address.address">
                  {{formErrors.address.address}}
             </small>
           </div>
           <div class="form-group">
-            <label for="postalCode">{{"label.postalCode" | translate}}</label>
+            <label for="postalCode">{{"label.postalCode" | translate}} <small>({{'label.optional' | translate}})</small></label>
                    <input name="postalCode" class="form-control" formControlName="postalCode"/>
              <small class="text-danger" [hidden]="!formErrors.address.postalCode">
                  {{formErrors.address.postalCode}}
             </small>
           </div>
           <div class="form-group">
-            <label for="city">{{"label.city" | translate}}</label>
+            <label for="city">{{"label.city" | translate}} <small>({{'label.optional' | translate}})</small></label>
                    <input name="city" class="form-control" formControlName="city"/>
              <small class="text-danger" [hidden]="!formErrors.address.city">
                  {{formErrors.address.city}}
@@ -75,7 +75,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
       
       
       <div class="form-group">
-        <label for="position">{{"label.position" | translate}}</label>
+        <label for="position">{{"label.position" | translate}} <small>({{'label.optional' | translate}})</small></label>
         <select name="position" class="form-control" formControlName="position">
               <option value="null" disabled selected>{{'text.select' | translate}}</option>
               <option value="{{positionEnum.GOALKEEPER}}" [selected]="profileForm.value?.position == positionEnum.GOALKEEPER">{{"text.goalKeeper" | translate}}</option>
