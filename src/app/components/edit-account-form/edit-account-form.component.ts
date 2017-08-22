@@ -88,6 +88,15 @@ import PositionEnum = ProfileDTO.PositionEnum;
         </small>
       </div>
       
+      <div class="form-group"> 
+        <input name="doodleNotifications" type="checkbox" formControlName="doodleNotifications"/>
+        <label for="doodleNotifications">{{"label.profile.doodleNotifications" | translate}}</label>
+      </div>
+      <div class="form-group"> 
+        <input name="newsNotifications" type="checkbox" formControlName="newsNotifications"/>
+        <label for="newsNotifications">{{"label.profile.newsNotifications" | translate}}</label>
+      </div>
+      
       <div class="form-group box-footer">
         <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
       </div>
@@ -177,6 +186,8 @@ export class EditAccountFormComponent implements OnInit {
         'position': '',
         'phone': '',
         'mobilePhone': '',
+        'doodleNotifications': '',
+        'newsNotifications': '',
     };
 
     constructor(private _fb: FormBuilder, private _api: AccountprofilerestcontrollerApi, private _accountApi: AccountrestcontrollerApi,
@@ -198,7 +209,9 @@ export class EditAccountFormComponent implements OnInit {
             }),
             phone: ['', [Validators.pattern("^[0-9+]{9,13}$")]],
             mobilePhone: ['', [Validators.pattern("^[0-9+]{9,13}$")]],
-            position: ['', []]
+            position: ['', []],
+            doodleNotifications: ['', []],
+            newsNotifications: ['', []]
         });
 
         this._api.getProfile(this.profileId, SecUtil.getJwtHeaders()).subscribe(
@@ -208,6 +221,8 @@ export class EditAccountFormComponent implements OnInit {
                     phone: profile.phone,
                     mobilePhone: profile.mobilePhone,
                     position: profile.position,
+                    doodleNotifications: profile.doodleNotifications,
+                    newsNotifications: profile.newsNotifications,
                 });
 
                 this.profileForm.controls['account'].patchValue(profile.account);

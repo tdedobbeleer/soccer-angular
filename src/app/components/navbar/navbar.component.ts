@@ -63,6 +63,7 @@ _________________________________________________________ -->
             <ul class="nav navbar-nav navbar-left">
                 <li><a [routerLink]="['/messages']" routerLinkActive="active">{{'nav.messages' | translate}}</a></li>
                 <li><a [routerLink]="['/matches']" routerLinkActive="active">{{'nav.matches' | translate}}</a></li>
+                <li><a [routerLink]="['/statistics']" routerLinkActive="active">{{'nav.statistics' | translate}}</a></li>
                 <li><a [routerLink]="['/manofthematch']" routerLinkActive="active">{{'nav.manOfTheMatch' | translate}}</a></li>
                 <li><a [routerLink]="['/teams']" routerLinkActive="active">{{'nav.teams' | translate}}</a></li>
                 <li><a [routerLink]="['/doodles']" routerLinkActive="active">{{'nav.doodle' | translate}}</a></li>

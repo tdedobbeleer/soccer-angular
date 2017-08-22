@@ -10,15 +10,16 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
     selector: 'app-match',
     styles: [`    
     /* visited link */
-    .expand:visited, .expand:hover, .expand:active, .expand:focus {
-        background-color: white;
+    .expand .expand:visited, .expand:hover, .expand:active, .expand:focus {
+        background-color: whitesmoke;
         border: 0;
     }
     .expand {
         border: 0;
     }
     .box.match {
-        padding-bottom: 0px;
+        padding-bottom: 10px;
+        background-color: whitesmoke;
     }
   `],
     template: `
@@ -49,11 +50,18 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                                   <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                   </button>
-                                  <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match" (click)="deleteMatch()">
+                                  <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match" (click)="showDelete=true">
                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                   </button>
                               </div>
                          </div>
+                         <div *ngIf="showDelete" class="m-t-1">
+                             <b>{{"text.verification.delete.match" | translate}}</b> 
+                            <span class="btn-group btn-group-xs">
+                              <button class="btn btn-xs" (click)="deleteMatch()"><b>{{"text.yes" | translate}}</b></button>
+                              <button class="btn btn-xs" (click)="showDelete = false"><b>{{"text.no" | translate}}</b></button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,7 +82,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                 </div>
             </div>
         </div>
-        <a href="javascript:void(0)" class="btn btn-block btn-default expand" (click)="showDetails = !showDetails;showMap = false;">
+        <a href="javascript:void(0)" class="btn btn-block expand" *ngIf="match.goals.length > 0" (click)="showDetails = !showDetails;showMap = false;">
             <span *ngIf="!showDetails" class="glyphicon glyphicon-menu-down"></span>
             <span *ngIf="showDetails" class="glyphicon glyphicon-menu-up"></span>
         </a>
@@ -84,6 +92,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
 export class MatchComponent implements OnInit {
     @Input() match: MatchDTO;
 
+    showDelete: boolean;
     deleted: boolean;
     showDetails: boolean;
     showMap: boolean;

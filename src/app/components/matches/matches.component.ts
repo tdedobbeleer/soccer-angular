@@ -1,8 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
 import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
-import {Observable} from "rxjs";
 import {SecUtil} from "../../classes/sec-util";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 
@@ -13,7 +11,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
     <div class="container">
         <ul class="breadcrumb">
             <li>
-                <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Home</a>
+                <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
             </li>
             <li>
                 {{'nav.matches' | translate }}
@@ -33,7 +31,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
         </div>
         <div *ngIf="loaded">
           <app-next-match></app-next-match>
-          <app-season *ngFor="let season of seasons" [season]="season.season" [matches]="season.matches"></app-season>
+          <app-season *ngFor="let season of seasons; let index = index" [season]="season" [show]="index == 0"></app-season>
         </div>
         <div class="box" *ngIf="loaded && seasons?.length == 0">
             <p>{{"text.seasons.empty" | translate}}</p>
@@ -43,11 +41,10 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
     styles: []
 })
 export class MatchesComponent implements OnInit {
-    seasons: Array<Season> = [];
+    seasons: SeasonDTO[];
     loaded: boolean = false;
 
-    constructor(private _matchesApi: MatchesrestcontrollerApi,
-                private _seasonsApi: SeasonsrestcontrollerApi,
+    constructor(private _seasonsApi: SeasonsrestcontrollerApi,
                 private _errorHandler: ErrorHandlerService) {
     }
 
@@ -58,24 +55,16 @@ export class MatchesComponent implements OnInit {
 
     private init() {
         this._seasonsApi.getSeasons()
-            .subscribe(r => {
-                Observable.from(r).flatMap(
-                    s => {
-                        return this._matchesApi.matchesForSeason(s.id, SecUtil.getJwtHeaders())
-                            .map(m => {
-                                return {season: s, matches: m};
-                            })
-                    }
-                )
-                    .subscribe(seasonObject => {
-                        this.seasons.push(seasonObject);
-                        this.loaded = true;
-                        },
-                        e => {
-                            this.loaded = true;
-                            this._errorHandler.handle(e);
-                    })
-            });
+            .subscribe(
+                s => {
+                    this.seasons = s;
+                    this.loaded = true;
+                },
+                e => {
+                    this._errorHandler.handle(e);
+                    this.loaded = true;
+                }
+            );
     }
 
     isAdmin() {

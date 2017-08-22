@@ -27,8 +27,13 @@ import {SecUtil} from "../../classes/sec-util";
         </div>
       </div>
     </div>
-      <div>
-          <table  *ngIf="teamDTOList?.length > 0" class="table table-responsive table-striped">
+    <div class="box">
+      <div class="table-responsive">
+          <table  *ngIf="teamDTOList?.length > 0" class="table">
+          <thead>
+          <tr><th>{{'text.team' | translate}}</th><th>{{'text.address' | translate}}</th><th></th></tr>
+          
+          </thead>
            <tbody>
           <template ngFor let-team [ngForOf]="teamDTOList">
             <tr>
@@ -58,6 +63,7 @@ import {SecUtil} from "../../classes/sec-util";
         
         </tbody>
           </table>
+          </div>
           <div class="box" *ngIf="teamDTOList?.length == 0">
               <p>{{"text.teams.empty" | translate}}</p>
           </div>

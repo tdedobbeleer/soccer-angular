@@ -76,6 +76,9 @@ import {EditTeamFormComponent} from "./components/edit-team-form/edit-team-form.
 import {CreateTeamFormComponent} from "./components/create-team-form/create-team-form.component";
 import {CreateTeamComponent} from "./components/create-team/create-team.component";
 import {EditTeamComponent} from "./components/edit-team/edit-team.component";
+import {StatisticsListComponent} from "./components/statistics-list/statistics-list.component";
+import {StatisticsrestcontrollerApi} from "./ws/soccer/api/StatisticsrestcontrollerApi";
+import {DataTablesModule} from "angular-datatables";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -86,6 +89,7 @@ const appRoutes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationFormComponent},
     {path: 'matches', component: MatchesComponent},
+    {path: 'statistics', component: StatisticsListComponent},
     {path: 'team', component: PlayerListComponent},
     {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'doodles', component: DoodleListComponent},
@@ -154,8 +158,10 @@ const appRoutes: Routes = [
         CreateTeamFormComponent,
         CreateTeamComponent,
         EditTeamComponent,
+        StatisticsListComponent,
     ],
     imports: [
+        DataTablesModule,
         ReCaptchaModule,
         BrowserModule,
         FormsModule,
@@ -171,6 +177,7 @@ const appRoutes: Routes = [
     ],
     providers: [
         {provide: BASE_PATH, useValue: environment.api_url},
+        StatisticsrestcontrollerApi,
         NewsrestcontrollerApi,
         MatchesrestcontrollerApi,
         SeasonsrestcontrollerApi,

@@ -1,4 +1,5 @@
 export * from './AccountDTO';
+export * from './AccountStatisticDTO';
 export * from './AddressDTO';
 export * from './AuthenticationRequestDTO';
 export * from './CommentDTO';
