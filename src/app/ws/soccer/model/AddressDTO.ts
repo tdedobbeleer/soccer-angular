@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import * as models from './models';
-
 export interface AddressDTO {
     address?: string;
 
     city?: string;
+
+    fullAddress?: boolean;
 
     googleLink?: string;
 

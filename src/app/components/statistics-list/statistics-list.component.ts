@@ -13,6 +13,14 @@ import {DataTableDirective} from "angular-datatables";
     selector: 'app-statistics-list',
     template: `
     <div class="container">
+        <ul class="breadcrumb">
+            <li>
+                <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+            </li>
+            <li>
+                {{'nav.statistics' | translate }}
+            </li>
+        </ul>
         <div class="box">
             <form class="form-inline">
                 <div class="form-group">
@@ -29,13 +37,13 @@ import {DataTableDirective} from "angular-datatables";
                         {{'text.name' | translate}}
                     </th>
                     <th class="text-center">
-                        {{'text.matches.goals' | translate}}
+                        {{'text.statistics.goals' | translate}}
                     </th>
                     <th class="text-center">
-                        {{'text.matches.assists' | translate}}
+                        {{'text.statistics.assists' | translate}}
                     </th>
                     <th class="text-center">
-                        {{'text.matches.played' | translate}}
+                        {{'text.statistics.played' | translate}}
                     </th>
                 </tr>
                 </thead>

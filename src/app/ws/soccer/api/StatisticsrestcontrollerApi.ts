@@ -44,7 +44,7 @@ export class StatisticsrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get statictics
      * @param id id
      */
@@ -62,7 +62,7 @@ export class StatisticsrestcontrollerApi {
 
     /**
      * Get statictics
-     *
+     * 
      * @param id id
      */
     public getStaticticsWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {

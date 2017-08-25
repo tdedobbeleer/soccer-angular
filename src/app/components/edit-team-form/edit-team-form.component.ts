@@ -203,6 +203,13 @@ export class EditTeamFormComponent implements OnInit {
         }
     }
 
+    onUseExistingAddressChange() {
+        if (!this.teamForm.value.useExistingAddress) {
+            //If new address is used, empty the id
+            this.teamForm.controls['address'].patchValue({id: ''});
+        }
+    }
+
     private onGoogleLinkChange() {
         if (this.teamForm.value.useGoogleLink) {
             this.teamForm.controls['address'].patchValue({
@@ -221,13 +228,6 @@ export class EditTeamFormComponent implements OnInit {
         }
         else {
             this.showMap = false;
-        }
-    }
-
-    private onUseExistingAddressChange() {
-        if (!this.teamForm.value.useExistingAddress) {
-            //If new address is used, empty the id
-            this.teamForm.controls['address'].patchValue({id: ''});
         }
     }
 

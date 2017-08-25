@@ -62,7 +62,7 @@ export class MotmPollsComponent implements OnInit {
 
     getPage(page) {
         this.loading = true;
-        this._api.getAllMatchPollsUsingGET(page, 5, "", SecUtil.getJwtHeaders()).subscribe(p => {
+        this._api.getMatchPolls(page, 5, "", SecUtil.getJwtHeaders()).subscribe(p => {
             this.motmPage = p;
             this.loading = true;
             this.currentPage = page;

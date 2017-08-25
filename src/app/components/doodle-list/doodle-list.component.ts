@@ -12,7 +12,7 @@ import {SecUtil} from "../../classes/sec-util";
       <ul class="breadcrumb">
           <li><a href="#" [routerLink]="['/']" routerLinkActive="active">{{'nav.home' | translate}}</a>
           </li>
-          <li>{{'nav.doodles' | translate}}</li>
+          <li>{{'nav.doodle' | translate}}</li>
       </ul>
   </div>
   <div class="m-t-1 container">

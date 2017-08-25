@@ -9,20 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 /* tslint:disable:no-unused-variable member-ordering */
-
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { Http, Headers, URLSearchParams }                    from '@angular/http';
-import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { Response, ResponseContentType }                     from '@angular/http';
-
-import { Observable }                                        from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
-import * as models                                           from '../model/models';
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import {Inject, Injectable, Optional} from "@angular/core";
+import {
+    Http,
+    Headers,
+    URLSearchParams,
+    RequestMethod,
+    RequestOptions,
+    RequestOptionsArgs,
+    Response
+} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import * as models from "../model/models";
+import {BASE_PATH} from "../variables";
+import {Configuration} from "../configuration";
 
 
 @Injectable()
@@ -42,14 +44,30 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * 
-     * @summary getAllMatchPolls
+     *
+     * @summary Get match poll by id
+     * @param id id
+     */
+    public getMatchPollById(id: number, extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
+        return this.getMatchPollByIdWithHttpInfo(id, extraHttpRequestParams)
+            .map((response: Response) => {
+                if (response.status === 204) {
+                    return undefined;
+                } else {
+                    return response.json() || {};
+                }
+            });
+    }
+
+    /**
+     *
+     * @summary Get all match polls
      * @param page page
      * @param size size
      * @param sort sort
      */
-    public getAllMatchPollsUsingGET(page: number, size?: number, sort?: string, extraHttpRequestParams?: any): Observable<models.PageDTOMatchPollDTO> {
-        return this.getAllMatchPollsUsingGETWithHttpInfo(page, size, sort, extraHttpRequestParams)
+    public getMatchPolls(page: number, size?: number, sort?: string, extraHttpRequestParams?: any): Observable<models.PageDTOMatchPollDTO> {
+        return this.getMatchPollsWithHttpInfo(page, size, sort, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -60,29 +78,13 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * 
-     * @summary getMatchPoll
-     * @param id id
-     */
-    public getMatchPollUsingGET(id: number, extraHttpRequestParams?: any): Observable<models.MatchPollDTO> {
-        return this.getMatchPollUsingGETWithHttpInfo(id, extraHttpRequestParams)
-            .map((response: Response) => {
-                if (response.status === 204) {
-                    return undefined;
-                } else {
-                    return response.json() || {};
-                }
-            });
-    }
-
-    /**
-     * 
-     * @summary postMatchPoll
+     *
+     * @summary Vote
      * @param id id
      * @param vote vote
      */
-    public postMatchPollUsingPOST(id: number, vote: models.MultipleChoiceVoteDTOlong, extraHttpRequestParams?: any): Observable<models.MultipleChoiceVoteDTOlong> {
-        return this.postMatchPollUsingPOSTWithHttpInfo(id, vote, extraHttpRequestParams)
+    public matchPollVote(id: number, vote: models.MultipleChoiceVoteDTOlong, extraHttpRequestParams?: any): Observable<models.MultipleChoiceVoteDTOlong> {
+        return this.matchPollVoteWithHttpInfo(id, vote, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -93,12 +95,12 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * 
-     * @summary refreshMatchPoll
+     *
+     * @summary Refresh match poll
      * @param id id
      */
-    public refreshMatchPollUsingPUT(id: number, extraHttpRequestParams?: any): Observable<Array<models.AccountDTO>> {
-        return this.refreshMatchPollUsingPUTWithHttpInfo(id, extraHttpRequestParams)
+    public refreshMatchPoll(id: number, extraHttpRequestParams?: any): Observable<Array<models.AccountDTO>> {
+        return this.refreshMatchPollWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -109,12 +111,12 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * 
-     * @summary resetPoll
+     *
+     * @summary Reset match poll
      * @param id id
      */
-    public resetPollUsingPUT(id: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
-        return this.resetPollUsingPUTWithHttpInfo(id, extraHttpRequestParams)
+    public resetMatchPoll(id: number, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.resetMatchPollWithHttpInfo(id, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -126,20 +128,59 @@ export class PollrestcontrollerApi {
 
 
     /**
-     * getAllMatchPolls
-     * 
+     * Get match poll by id
+     *
+     * @param id id
+     */
+    public getMatchPollByIdWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+        const path = this.basePath + '/api/v1/matchPoll/${id}'
+                .replace('${' + 'id' + '}', String(id));
+
+        let queryParameters = new URLSearchParams();
+        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getMatchPollById.');
+        }
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        // to determine the Accept header
+        let produces: string[] = [
+            '*/*'
+        ];
+
+        let requestOptions: RequestOptionsArgs = new RequestOptions({
+            method: RequestMethod.Get,
+            headers: headers,
+            search: queryParameters,
+            withCredentials:this.configuration.withCredentials
+        });
+        // https://github.com/swagger-api/swagger-codegen/issues/4037
+        if (extraHttpRequestParams) {
+            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
+        }
+
+        return this.http.request(path, requestOptions);
+    }
+
+    /**
+     * Get all match polls
+     *
      * @param page page
      * @param size size
      * @param sort sort
      */
-    public getAllMatchPollsUsingGETWithHttpInfo(page: number, size?: number, sort?: string, extraHttpRequestParams?: any): Observable<Response> {
+    public getMatchPollsWithHttpInfo(page: number, size?: number, sort?: string, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/matchPoll';
 
         let queryParameters = new URLSearchParams();
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // verify required parameter 'page' is not null or undefined
         if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling getAllMatchPollsUsingGET.');
+            throw new Error('Required parameter page was null or undefined when calling getMatchPolls.');
         }
         if (page !== undefined) {
             queryParameters.set('page', <any>page);
@@ -178,51 +219,12 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * getMatchPoll
-     * 
-     * @param id id
-     */
-    public getMatchPollUsingGETWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
-        const path = this.basePath + '/api/v1/matchPoll/${id}'
-                    .replace('${' + 'id' + '}', String(id));
-
-        let queryParameters = new URLSearchParams();
-        let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getMatchPollUsingGET.');
-        }
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-
-        // to determine the Accept header
-        let produces: string[] = [
-            '*/*'
-        ];
-
-        let requestOptions: RequestOptionsArgs = new RequestOptions({
-            method: RequestMethod.Get,
-            headers: headers,
-            search: queryParameters,
-            withCredentials:this.configuration.withCredentials
-        });
-        // https://github.com/swagger-api/swagger-codegen/issues/4037
-        if (extraHttpRequestParams) {
-            requestOptions = (<any>Object).assign(requestOptions, extraHttpRequestParams);
-        }
-
-        return this.http.request(path, requestOptions);
-    }
-
-    /**
-     * postMatchPoll
+     * Vote
      * 
      * @param id id
      * @param vote vote
      */
-    public postMatchPollUsingPOSTWithHttpInfo(id: number, vote: models.MultipleChoiceVoteDTOlong, extraHttpRequestParams?: any): Observable<Response> {
+    public matchPollVoteWithHttpInfo(id: number, vote: models.MultipleChoiceVoteDTOlong, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/matchPoll/${id}/vote'
                     .replace('${' + 'id' + '}', String(id));
 
@@ -230,11 +232,11 @@ export class PollrestcontrollerApi {
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling postMatchPollUsingPOST.');
+            throw new Error('Required parameter id was null or undefined when calling matchPollVote.');
         }
         // verify required parameter 'vote' is not null or undefined
         if (vote === null || vote === undefined) {
-            throw new Error('Required parameter vote was null or undefined when calling postMatchPollUsingPOST.');
+            throw new Error('Required parameter vote was null or undefined when calling matchPollVote.');
         }
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -264,11 +266,11 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * refreshMatchPoll
+     * Refresh match poll
      * 
      * @param id id
      */
-    public refreshMatchPollUsingPUTWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+    public refreshMatchPollWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/matchPoll/match/${id}/refresh'
                     .replace('${' + 'id' + '}', String(id));
 
@@ -276,7 +278,7 @@ export class PollrestcontrollerApi {
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling refreshMatchPollUsingPUT.');
+            throw new Error('Required parameter id was null or undefined when calling refreshMatchPoll.');
         }
         // to determine the Content-Type header
         let consumes: string[] = [
@@ -303,11 +305,11 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     * resetPoll
+     * Reset match poll
      * 
      * @param id id
      */
-    public resetPollUsingPUTWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
+    public resetMatchPollWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/poll/${id}/reset'
                     .replace('${' + 'id' + '}', String(id));
 
@@ -315,7 +317,7 @@ export class PollrestcontrollerApi {
         let headers = new Headers(this.defaultHeaders.toJSON()); // https://github.com/angular/angular/issues/6845
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling resetPollUsingPUT.');
+            throw new Error('Required parameter id was null or undefined when calling resetMatchPoll.');
         }
         // to determine the Content-Type header
         let consumes: string[] = [

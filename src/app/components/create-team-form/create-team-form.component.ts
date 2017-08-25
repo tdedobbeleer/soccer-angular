@@ -174,6 +174,13 @@ export class CreateTeamFormComponent implements OnInit {
         }
     }
 
+    onUseExistingAddressChange() {
+        if (!this.teamForm.value.useExistingAddress) {
+            //If new address is used, empty the id
+            this.teamForm.controls['address'].patchValue({id: ''});
+        }
+    }
+
     private checkAddress() {
         let address: AddressDTO = this.teamForm.value.address;
         if (!this.teamForm.value.useExistingAddress && address.address &&
@@ -184,13 +191,6 @@ export class CreateTeamFormComponent implements OnInit {
         }
         else {
             this.showMap = false;
-        }
-    }
-
-    private onUseExistingAddressChange() {
-        if (!this.teamForm.value.useExistingAddress) {
-            //If new address is used, empty the id
-            this.teamForm.controls['address'].patchValue({id: ''});
         }
     }
 
