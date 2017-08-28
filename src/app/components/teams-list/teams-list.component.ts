@@ -76,6 +76,7 @@ import {SecUtil} from "../../classes/sec-util";
 export class TeamsListComponent implements OnInit {
   teamDTOList: TeamDTO[];
   showMap: any[] = [];
+    loading: boolean;
 
     constructor(private _api: TeamsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
   }
@@ -85,7 +86,14 @@ export class TeamsListComponent implements OnInit {
   }
 
   ngOnInit() {
-      this._api.getTeams().subscribe(l => this.teamDTOList = l, e => this._errorHandler.handle(e));
+      this.loading = true;
+      this._api.getTeams().subscribe(l => {
+          this.teamDTOList = l;
+          this.loading = false;
+      }, e => {
+          this.loading = false;
+          this._errorHandler.handle(e);
+      });
   }
 
 }
