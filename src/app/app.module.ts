@@ -79,6 +79,7 @@ import {EditTeamComponent} from "./components/edit-team/edit-team.component";
 import {StatisticsListComponent} from "./components/statistics-list/statistics-list.component";
 import {StatisticsrestcontrollerApi} from "./ws/soccer/api/StatisticsrestcontrollerApi";
 import {DataTablesModule} from "angular-datatables";
+import {LoadingComponent} from "./components/loading/loading.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -159,6 +160,7 @@ const appRoutes: Routes = [
         CreateTeamComponent,
         EditTeamComponent,
         StatisticsListComponent,
+        LoadingComponent,
     ],
     imports: [
         DataTablesModule,

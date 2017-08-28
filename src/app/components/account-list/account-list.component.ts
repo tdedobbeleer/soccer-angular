@@ -17,8 +17,9 @@ import {SecUtil} from "../../classes/sec-util";
   </div>
   <div class="m-t-1 container">
   <div>
+  <app-loading [loading]="loading"></app-loading>
   <alert [type]="'danger'" [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
-  <table class="table table-responsive table-striped">
+  <table class="table table-responsive table-striped" *ngIf="!loading">
         <tr>
             <th>Id</th>
             <th>{{"account.username" | translate}}</th>
@@ -61,16 +62,20 @@ import {SecUtil} from "../../classes/sec-util";
 export class AccountListComponent implements OnInit {
     accountList: AccountDTO[];
     globalError: any;
+    loading: boolean;
 
     constructor(private _api: AccountrestcontrollerApi, private _loginService: LoginService, private _errorService: ErrorHandlerService) {
     }
 
     ngOnInit() {
+        this.loading = true;
         this._api.getAccounts(SecUtil.getJwtHeaders()).subscribe(
             a => {
                 this.accountList = a;
+                this.loading = false;
             },
             (error: Response) => {
+                this.loading = false;
                 this._errorService.handle(error);
             }
         )

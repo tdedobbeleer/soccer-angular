@@ -33,9 +33,11 @@ import {LoginService} from "../../services/login.service";
               <div *ngIf="f.submitted && !password.valid" class="help-block">{{validation.password.required | translate}}</div>
           </div>
           <div class="form-group">
+              <!--
               <label>                            
                 <input type="checkbox" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"/> {{'label.rememberMe' | translate}}
               </label>
+              -->
               <div>
                 <a [routerLink]="['/register']" routerLinkActive="active">{{'nav.register' | translate}}</a>
               </div>

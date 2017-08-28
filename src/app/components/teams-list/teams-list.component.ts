@@ -27,7 +27,8 @@ import {SecUtil} from "../../classes/sec-util";
         </div>
       </div>
     </div>
-    <div class="box">
+    <app-loading [loading]="loading"></app-loading>
+    <div class="box" *ngIf="!loading">
       <div class="table-responsive">
           <table  *ngIf="teamDTOList?.length > 0" class="table">
           <thead>
@@ -64,7 +65,7 @@ import {SecUtil} from "../../classes/sec-util";
         </tbody>
           </table>
           </div>
-          <div class="box" *ngIf="teamDTOList?.length == 0">
+          <div *ngIf="teamDTOList?.length == 0">
               <p>{{"text.teams.empty" | translate}}</p>
           </div>
       </div>

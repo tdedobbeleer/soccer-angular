@@ -37,7 +37,9 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
   <div class="container">
     <div class="row m-t-1">
         <div class="col-md-12">
-            <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
+            <app-loading [loading]="loading"></app-loading>
+            <div *ngIf="!loading">
+            <app-pagination (onClick)="getPage($event)" [page]="newsPage"></app-pagination>
             <div id="blog-homepage" ng-show="!loading">
                 <div id="default">
                     <div class="news-div">
@@ -47,7 +49,8 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
                     </div>
                 </div>
             </div>
-            <app-pagination (onClick)="getPage($event)" [page]="newsPage" *ngIf="!loading"></app-pagination>
+            <app-pagination (onClick)="getPage($event)" [page]="newsPage"></app-pagination>
+            </div>
         </div>
     </div>
   </div> 
@@ -72,9 +75,13 @@ export class MessagesComponent implements OnInit {
   }
 
   getPage(page: number) {
+    this.loading = true;
     this._api.getNewsPage(page, this.searchTerm, 10, SecUtil.getJwtHeaders())
         .subscribe(
-            n => this.newsPage = n,
+            n => {
+              this.newsPage = n;
+              this.loading = false;
+            },
             err => this._errorHandler.handle(err));
   }
 

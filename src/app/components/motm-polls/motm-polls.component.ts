@@ -16,13 +16,15 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       </ul>
   </div>
   <div class="m-t-1 container">
+      <app-loading [loading]="loading"></app-loading>
       <div class="box" *ngIf="motmPage?.totalPages == 0">
          <p>{{"text.motm.empty" | translate}}</p>
       </div>
+      <div  *ngIf="!loading">
       <div class="row m-b-1">
-          <app-pagination (onClick)="getPage($event)" [page]="motmPage" *ngIf="!loading"></app-pagination>
+          <app-pagination (onClick)="getPage($event)" [page]="motmPage"></app-pagination>
       </div>
-      <div *ngIf="!loading && motmPage?.list.length == 0">
+      <div *ngIf="motmPage?.list.length == 0">
         <div class="alert alert-warning">
             {{'text.no.match.polls' | translate}}
         </div>
@@ -35,7 +37,8 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       </div>
       <div class="clearfix"></div>
       <div class="row m-t-1">
-          <app-pagination (onClick)="getPage($event)" [page]="motmPage" *ngIf="!loading"></app-pagination>
+          <app-pagination (onClick)="getPage($event)" [page]="motmPage"></app-pagination>
+      </div>
       </div>
   </div>
   `,
@@ -56,7 +59,6 @@ export class MotmPollsComponent implements OnInit {
     }
 
     private init() {
-        this.loading = true;
         this.getPage(this.currentPage);
     }
 
@@ -64,7 +66,7 @@ export class MotmPollsComponent implements OnInit {
         this.loading = true;
         this._api.getMatchPolls(page, 5, "", SecUtil.getJwtHeaders()).subscribe(p => {
             this.motmPage = p;
-            this.loading = true;
+                this.loading = false;
             this.currentPage = page;
             },
             e => {

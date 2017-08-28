@@ -9,6 +9,8 @@ import PositionEnum = ProfileDTO.PositionEnum;
     selector: 'app-player-list',
     template: `
   <div class="container">
+    <app-loading [loading]="loading"></app-loading>
+    <div *ngIf="!loading">
     <div class="row">
     <div class="col-md-12">
     <div id="carousel-team" class="carousel slide" data-ride="carousel">
@@ -44,6 +46,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
         <app-player *ngFor="let p of unknown" [profile]="p"></app-player>
     </div>
   </div>
+  </div>
     
   `,
     styles: []
@@ -54,12 +57,14 @@ export class PlayerListComponent implements OnInit {
     defenders: ProfileDTO[] = [];
     midfielders: ProfileDTO[] = [];
     unknown: ProfileDTO[] = [];
+    loading: boolean;
 
 
     constructor(private _api: AccountprofilerestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
+        this.loading = true;
         this._api.getAllProfiles(SecUtil.getJwtHeaders()).subscribe(
             list => {
                 list.forEach(p => {
@@ -80,9 +85,11 @@ export class PlayerListComponent implements OnInit {
                             this.unknown.push(p);
                             break;
                     }
-                })
+                });
+                this.loading = false;
             },
             e => {
+                this.loading = false;
                 this._errorHandler.handle(e);
             }
         )

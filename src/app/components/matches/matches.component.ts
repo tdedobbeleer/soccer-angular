@@ -29,11 +29,12 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             </div>
           </div>
         </div>
-        <div *ngIf="loaded">
+        <app-loading [loading]="loading"></app-loading>
+        <div *ngIf="!loading">
           <app-next-match></app-next-match>
           <app-season *ngFor="let season of seasons; let index = index" [season]="season" [show]="index == 0"></app-season>
         </div>
-        <div class="box" *ngIf="loaded && seasons?.length == 0">
+        <div class="box" *ngIf="seasons?.length == 0">
             <p>{{"text.seasons.empty" | translate}}</p>
         </div>
     </div>
@@ -42,7 +43,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 })
 export class MatchesComponent implements OnInit {
     seasons: SeasonDTO[];
-    loaded: boolean = false;
+    loading: boolean;
 
     constructor(private _seasonsApi: SeasonsrestcontrollerApi,
                 private _errorHandler: ErrorHandlerService) {
@@ -54,15 +55,16 @@ export class MatchesComponent implements OnInit {
     }
 
     private init() {
+        this.loading = true;
         this._seasonsApi.getSeasons()
             .subscribe(
                 s => {
                     this.seasons = s;
-                    this.loaded = true;
+                    this.loading = false;
                 },
                 e => {
                     this._errorHandler.handle(e);
-                    this.loaded = true;
+                    this.loading = false;
                 }
             );
     }
