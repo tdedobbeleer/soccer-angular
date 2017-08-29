@@ -28,46 +28,12 @@ import {SecUtil} from "../../classes/sec-util";
       </div>
     </div>
     <app-loading [loading]="loading"></app-loading>
-    <div class="box" *ngIf="!loading">
-      <div class="table-responsive">
-          <table  *ngIf="teamDTOList?.length > 0" class="table">
-          <thead>
-          <tr><th>{{'text.team' | translate}}</th><th>{{'text.address' | translate}}</th><th></th></tr>
-          
-          </thead>
-           <tbody>
-          <template ngFor let-team [ngForOf]="teamDTOList">
-            <tr>
-              <td><h4>{{team.name}}</h4></td>
-                <td>
-                    <div>{{team.address?.address}}</div>
-                    <div>{{team.address?.postalCode}}&nbsp;{{team.address?.city}}</div>
-                </td>
-                <td class="text-center">
-                    <div class="btn-group">
-                      <button *ngIf="team.address?.googleLink != null" type="button" class="btn" aria-label="Show map" (click)="showMap[team.id] = !showMap[team.id]">
-                          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                      </button>
-                      <button *ngIf="isAdmin()" type="button" class="btn" aria-label="Edit team" [routerLink]="['/teams/edit/' + team.id]" routerLinkActive="active">
-                          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                      </button>
-                    </div>
-                </td>
-            </tr>
-            
-            <tr *ngIf="showMap[team.id]">
-                <td colspan="3">
-                <iframe id="mapFrame" width="100%" height="450" scrolling="no" marginheight="0" marginwidth="0" [src]="team.address?.googleLink | safe" frameborder="0"></iframe>
-                </td>
-            </tr>
-          </template>
-        
-        </tbody>
-          </table>
-          </div>
-          <div *ngIf="teamDTOList?.length == 0">
-              <p>{{"text.teams.empty" | translate}}</p>
-          </div>
+    <div *ngIf="!loading">
+        <app-team *ngFor="let team of teamDTOList" [team]="team"></app-team>
+      
+        <div class="box" *ngIf="teamDTOList?.length == 0">
+            <p>{{"text.teams.empty" | translate}}</p>
+        </div>
       </div>
     </div>
   `,

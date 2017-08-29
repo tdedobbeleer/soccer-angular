@@ -4,14 +4,19 @@ import {SecUtil} from "../../classes/sec-util";
 
 @Component({
     selector: 'app-team',
+    styles: [`    
+    .box.team {
+        padding: 10px;
+    }
+    `],
     template: `
-      <div class="box">
+      <div class="box team">
          <div class="row">
             <div class="col-md-4 col-xs-12"><h4>{{team.name}}</h4></div>
             <div class="col-md-4 col-xs-12">
                 <div class="row">
-                    <div class="col-md-1"><span class="glyphicon glyphicon-home"></span></div>
-                    <div class="col-md-11">
+                    <div class="col-md-1 col-xs-1"><span class="glyphicon glyphicon-home"></span></div>
+                    <div class="col-md-11 col-xs-11">
                         <div>{{team.address.address}}</div>
                         <div>{{team.address?.postalCode}}&nbsp;{{team.address?.city}}</div>
                     </div>
@@ -34,7 +39,6 @@ import {SecUtil} from "../../classes/sec-util";
       </div>    
     </div>
   `,
-    styles: []
 })
 export class TeamComponent implements OnInit {
     showMap: boolean;

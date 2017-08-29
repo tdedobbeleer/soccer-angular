@@ -32,10 +32,20 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                     <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
                     </div>
                     <div class="col-md-6">
-                        <div class="row text-center">
+                        <div class="row text-center hidden-xs">
                             <div class="col-md-5 col-xs-4 right"><h4>{{match?.homeTeam?.name}}</h4></div>
                             <div class="col-md-2 col-xs-4 text-center score"><h4 *ngIf="match.status != matchStatus.PLAYED">&nbsp;-&nbsp;</h4><h4 *ngIf="match.status == matchStatus.PLAYED">{{match?.htGoals}} - {{match?.atGoals}}</h4></div>
                             <div class="col-md-5 col-xs-4 left"><h4>{{match?.awayTeam?.name}}</h4></div>
+                        </div>
+                        <div class="row visible-xs">
+                            <div class="col-xs-10">
+                            <div class="row"><h4>{{match?.homeTeam?.name}}</h4></div>
+                            <div class="row"><h4>{{match?.awayTeam?.name}}</h4></div>
+                            </div>
+                            <div class="col-xs-2" *ngIf="match.status == matchStatus.PLAYED">
+                            <div class="row"><h4>{{match?.htGoals}}</h4></div>
+                            <div class="row"><h4>{{match?.atGoals}}</h4></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-12 col-sm-12">
@@ -65,6 +75,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                     </div>
                 </div>
             </div>
+            </div>
             <div class="row">
                 <div class="col-md-12 m-l-1">
                 <div *ngIf="showMap">
@@ -81,7 +92,6 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                 </div>            
                 </div>
             </div>
-        </div>
         <a href="javascript:void(0)" class="btn btn-block expand" *ngIf="match.goals.length > 0" (click)="showDetails = !showDetails;showMap = false;">
             <span *ngIf="!showDetails" class="glyphicon glyphicon-menu-down"></span>
             <span *ngIf="showDetails" class="glyphicon glyphicon-menu-up"></span>

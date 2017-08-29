@@ -120,7 +120,7 @@ export class NavbarComponent implements OnInit {
   }
 
     goto(page) {
-        this.isMenuCollapsed = false;
+        this.isMenuCollapsed = true;
         this._router.navigate([page]);
     }
 }

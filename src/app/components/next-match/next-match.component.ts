@@ -11,25 +11,43 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
     template: `
     <h3 *ngIf="match">{{'text.match.next' | translate}}</h3>
     <div class="box" *ngIf="match">
-        <div class="row visible-xs text-center">
-            <div class="col-xs-12"><h3><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h3></div>
-        </div>
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <div class="row">
                     <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs"><h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
                     <div class="col-md-7">
-                        <div class="row text-center">
+                        <div class="row text-center hidden-xs">
                             <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
                             <div class="col-md-2 col-xs-4 text-center score"><h3> - </h3></div>
                             <div class="col-md-4 col-xs-4 left"><h3>{{match?.awayTeam?.name}}</h3></div>
                         </div>
+                         <div class="row visible-xs">
+                            <div class="col-xs-8">
+                            <div class="row"><h4>{{match?.homeTeam?.name}}</h4></div>
+                            <div class="row"><h4>{{match?.awayTeam?.name}}</h4></div>
+                            </div>
+                            <div class="col-xs-4">
+                                <div *ngIf="forecast" class="text-center">
+                                  <div class="row">
+                                  <div class="col-md-12">
+                                       <img [src]="getWeatherIcon(forecast?.weather[0]?.icon) | safe"/>
+                                  </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <h4>{{this.math.floor(forecast.main.temp)}}°</h4>
+                                          {{forecast.weather[0].description}}    
+                                      </div>
+                                  </div>  
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12">
                       <div class="row text-center visible-sm visible-xs">
-                          <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
+                          <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
                       </div>
-                      <div *ngIf="forecast" class="text-center">
+                      <div *ngIf="forecast" class="text-center hidden-xs">
                           <div class="row">
                           <div class="col-md-12">
                                <img [src]="getWeatherIcon(forecast?.weather[0]?.icon) | safe"/>
