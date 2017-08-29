@@ -22,7 +22,7 @@ import {Component, OnInit} from "@angular/core";
       </accordion>
   
   
-  </div>
+    </div>
     </div>
   `,
     styles: []
