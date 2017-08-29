@@ -3,6 +3,7 @@ import {TranslationService} from "../../services/translation.service";
 import {LoginService} from "../../services/login.service";
 import {isUndefined} from "util";
 import {SecUtil} from "../../classes/sec-util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -61,13 +62,13 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation" [collapse]="isMenuCollapsed">
 
             <ul class="nav navbar-nav navbar-left">
-                <li><a [routerLink]="['/messages']" routerLinkActive="active">{{'nav.messages' | translate}}</a></li>
-                <li><a [routerLink]="['/matches']" routerLinkActive="active">{{'nav.matches' | translate}}</a></li>
-                <li><a [routerLink]="['/statistics']" routerLinkActive="active">{{'nav.statistics' | translate}}</a></li>
-                <li><a [routerLink]="['/manofthematch']" routerLinkActive="active">{{'nav.manOfTheMatch' | translate}}</a></li>
-                <li><a [routerLink]="['/teams']" routerLinkActive="active">{{'nav.teams' | translate}}</a></li>
-                <li><a [routerLink]="['/doodles']" routerLinkActive="active">{{'nav.doodle' | translate}}</a></li>
-                <li><a [routerLink]="['/team']" routerLinkActive="active">{{'nav.team' | translate}}</a></li>
+                <li><a (click)="goto('/messages')">{{'nav.messages' | translate}}</a></li>
+                <li><a (click)="goto('/matches')">{{'nav.matches' | translate}}</a></li>
+                <li><a (click)="goto('/statistics')">{{'nav.statistics' | translate}}</a></li>
+                <li><a (click)="goto('/manofthematch')">{{'nav.manOfTheMatch' | translate}}</a></li>
+                <li><a (click)="goto('/teams')">{{'nav.teams' | translate}}</a></li>
+                <li><a (click)="goto('/doodles')">{{'nav.doodle' | translate}}</a></li>
+                <li><a (click)="goto('/team')">{{'nav.team' | translate}}</a></li>
             </ul>
 
         </div>
@@ -90,7 +91,7 @@ export class NavbarComponent implements OnInit {
   private en : Lang = {locale : 'en', display: 'English'};
   private nl: Lang = {locale : 'nl', display: 'Nederlands'};
 
-  constructor(private _translate: TranslationService, private _loginService: LoginService) {
+    constructor(private _translate: TranslationService, private _loginService: LoginService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -117,6 +118,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     this._loginService.logout();
   }
+
+    goto(page) {
+        this.isMenuCollapsed = false;
+        this._router.navigate([page]);
+    }
 }
 
 export interface Lang {
