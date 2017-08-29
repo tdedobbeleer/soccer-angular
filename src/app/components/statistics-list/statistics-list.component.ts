@@ -30,8 +30,9 @@ import {DataTableDirective} from "angular-datatables";
                     </select>
                 </div>
             </form>
-            <app-loading [loading]="loading"></app-loading>
-            <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" *ngIf="!loading">
+           
+            <div>
+            <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                 <thead>
                 <tr>
                     <th class="text-center">
@@ -59,6 +60,7 @@ import {DataTableDirective} from "angular-datatables";
                 <tfoot>
                 </tfoot>
             </table>
+            </div>
         </div>
     </div>
   `,
@@ -69,7 +71,6 @@ export class StatisticsListComponent implements OnInit {
     accountStatistics: AccountStatisticDTO[];
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
-    loading: boolean;
 
     @ViewChild(DataTableDirective)
     dtElement: DataTableDirective;
@@ -78,8 +79,6 @@ export class StatisticsListComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.loading = true;
-
         this.dtOptions = {
             paging: false,
             searching: false,
@@ -116,10 +115,8 @@ export class StatisticsListComponent implements OnInit {
                     // Call the dtTrigger to rerender again
                     this.dtTrigger.next();
                 }
-                this.loading = false;
             },
             e => {
-                this.loading = false;
                 this.errorHandler.handle(e);
             }
         );

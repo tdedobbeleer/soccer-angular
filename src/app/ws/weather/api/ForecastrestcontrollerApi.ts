@@ -20,7 +20,7 @@ import * as models from "../model/models";
 @Injectable()
 export class ForecastrestcontrollerApi {
 
-    protected basePath = 'http://api.openweathermap.org';
+    protected basePath = 'https://api.openweathermap.org';
     private apiKey = 'ed947b1f42105d993e46d24c3d770be2';
     public defaultHeaders: Headers = new Headers();
 

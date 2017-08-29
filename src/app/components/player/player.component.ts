@@ -1,14 +1,15 @@
 import {Component, OnInit, Input} from "@angular/core";
 import {ProfileDTO} from "../../ws/soccer/model/ProfileDTO";
 import {SecUtil} from "../../classes/sec-util";
+import {TranslationService} from "../../services/translation.service";
 
 @Component({
     selector: 'app-player',
     template: `
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="thumbnail avatar">
-              <img *ngIf="profile.image?.url" src="{{profile.image?.url | safe}}">
-              <img *ngIf="!profile.image?.url" src="https://placeholdit.imgix.net/~text?txtsize=24&txt={{'profile.image.unavailable | translate'}}&w=200&h=200" alt="">
+              <img *ngIf="profile.image?.url" [attr.src]="profile.image?.url | safe">
+              <img *ngIf="!profile.image?.url" [attr.src]="getPlaceHolderImg() | safe" alt="">
            
             <div class="caption">
                 <div *ngIf="!isLoggedIn()"><h4>{{profile.account.firstName}}</h4></div>
@@ -28,10 +29,14 @@ import {SecUtil} from "../../classes/sec-util";
 export class PlayerComponent implements OnInit {
     @Input() profile: ProfileDTO;
 
-    constructor() {
+    constructor(private _trans: TranslationService) {
     }
 
     ngOnInit() {
+    }
+
+    getPlaceHolderImg() {
+        return "https://placeholdit.imgix.net/~text?txtsize=24&txt=" + this._trans.instant('text.profile.image.unavailable') + "&w=200&h=200";
     }
 
     isLoggedIn() {

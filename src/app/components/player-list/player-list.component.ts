@@ -26,23 +26,23 @@ import PositionEnum = ProfileDTO.PositionEnum;
     </div>
     </div>
     <div class="team-row row well" *ngIf="goalkeepers">
-        <h3 class="text-center">{{'title.players.goalkeepers' | translate}}</h3>
+        <h3 class="text-center">{{'text.goalKeepers' | translate}}</h3>
         <app-player *ngFor="let p of goalkeepers" [profile]="p"></app-player>
     </div>
     <div class="team-row row well" *ngIf="defenders">
-        <h3 class="text-center">{{'title.players.defenders' | translate}}</h3>
+        <h3 class="text-center">{{'text.defenders' | translate}}</h3>
         <app-player *ngFor="let p of defenders" [profile]="p"></app-player>
     </div>
     <div class="team-row row well" *ngIf="midfielders">
-        <h3 class="text-center">{{'title.players.midfielders' | translate}}</h3>
+        <h3 class="text-center">{{'text.midfielders' | translate}}</h3>
         <app-player *ngFor="let p of midfielders" [profile]="p"></app-player>
     </div>
     <div class="team-row row well" *ngIf="forwards">
-        <h3 class="text-center">{{'title.players.forwards' | translate}}</h3>
+        <h3 class="text-center">{{'text.forwards' | translate}}</h3>
         <app-player *ngFor="let p of forwards" [profile]="p"></app-player>
     </div>
     <div class="team-row row well" *ngIf="unknown">
-        <h3 class="text-center">{{'title.players.unknown' | translate}}</h3>
+        <h3 class="text-center">{{'text.unknown' | translate}}</h3>
         <app-player *ngFor="let p of unknown" [profile]="p"></app-player>
     </div>
   </div>
