@@ -40,7 +40,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             <app-loading [loading]="loading"></app-loading>
             <div *ngIf="!loading">
             <app-pagination (onClick)="getPage($event)" [page]="newsPage"></app-pagination>
-            <div id="blog-homepage" ng-show="!loading">
+            <div id="blog-homepage" *ngIf="!loading">
                 <div id="default">
                     <div class="news-div">
                       <app-message

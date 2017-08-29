@@ -24,12 +24,12 @@ import {Router} from "@angular/router";
                 </li>
  
                 <li *ngIf="!isLoggedIn">
-                    <a [routerLink]="['/login']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
+                    <a (click)="login()"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
                 </li>
 
                 <li><a [routerLink]="['/faq']" routerLinkActive="active">{{'nav.faq' | translate}}</a></li>
                 <!-- <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a> -->
-                <li><a [routerLink]="['/about']" routerLinkActive="active">{{'nav.about' | translate}}</a></li>
+                <!-- <li><a [routerLink]="['/about']" routerLinkActive="active">{{'nav.about' | translate}}</a></li> -->
             </ul>
         </div>
     </div>
@@ -119,10 +119,14 @@ export class NavbarComponent implements OnInit {
     this._loginService.logout();
   }
 
-    goto(page) {
-        this.isMenuCollapsed = true;
-        this._router.navigate([page]);
-    }
+  goto(page) {
+    this.isMenuCollapsed = true;
+    this._router.navigate([page]);
+  }
+
+  login() {
+    this._router.navigate(['/login'], {queryParams: {redirectUrl: this._router.url}});
+  }
 }
 
 export interface Lang {

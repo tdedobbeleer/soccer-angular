@@ -88,6 +88,7 @@ import {StatisticsrestcontrollerApi} from "./ws/soccer/api/Statisticsrestcontrol
 import {DataTablesModule} from "angular-datatables";
 import {LoadingComponent} from "./components/loading/loading.component";
 import {FaqComponent} from "./components/faq/faq.component";
+import {MessageItemComponent} from "./components/message-item/message-item.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -95,6 +96,7 @@ const appRoutes: Routes = [
     {path: 'faq', component: FaqComponent},
     {path: 'failwhale', component: FailWhaleComponent},
     {path: 'messages', component: MessagesComponent},
+    {path: 'messages/:id', component: MessageItemComponent},
     {path: 'teams', component: TeamsListComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegistrationFormComponent},
@@ -171,6 +173,7 @@ const appRoutes: Routes = [
         StatisticsListComponent,
         LoadingComponent,
         FaqComponent,
+        MessageItemComponent,
     ],
     imports: [
         DataTablesModule,

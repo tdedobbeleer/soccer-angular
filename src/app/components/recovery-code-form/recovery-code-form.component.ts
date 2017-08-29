@@ -7,6 +7,7 @@ import {equalsValidator} from "../../functions/equals-validator";
 import {PasswordRecoveryDTO} from "../../ws/soccer/model/PasswordRecoveryDTO";
 import {Response} from "@angular/http";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-recovery-code-form',
@@ -43,14 +44,14 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
         </small>
       </div>
        <div class="form-group">
-        <label for="password">{{"label.recovery.password" | translate}}</label>
+        <label for="password">{{"label.password" | translate}}</label>
          <input type="password" name="password" class="form-control" [formControl]="recoveryForm.controls.password"/>
          <small class="text-danger" [hidden]="!formErrors.password">
              {{formErrors.password}}
         </small>
       </div>
        <div class="form-group">
-        <label for="repeatPassword">{{"label.recovery.repeatPassword" | translate}}</label>
+        <label for="repeatPassword">{{"label.repeatPassword" | translate}}</label>
          <input type="password" name="repeatPassword" class="form-control" [formControl]="recoveryForm.controls.repeatPassword"/>
          <small class="text-danger" [hidden]="!formErrors.repeatPassword">
              {{formErrors.repeatPassword}}
@@ -82,20 +83,24 @@ export class RecoveryCodeFormComponent implements OnInit {
 
     @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
 
-  constructor(private _fb: FormBuilder, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
+  constructor(private _fb: FormBuilder, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService, private _route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.recoveryForm = this._fb.group({
-      code: ['', [<any>Validators.required]],
-      email: ['', [<any>Validators.email]],
-      password: ['', [<any>Validators.pattern("^[0-9a-zA-Z\._-]{5,15}$")]],
-      repeatPassword: ['', [<any>Validators.required, equalsValidator("password")]],
-    });
-
-    //Set listener
-    this.recoveryForm.valueChanges
-        .subscribe(data => this._validationService.onValueChanged(this.recoveryForm, this.formErrors));
+    this._route
+        .queryParams
+        .subscribe(params => {
+          // Defaults to 0 if no query param provided.
+          this.recoveryForm = this._fb.group({
+            code: [params['code'], [<any>Validators.required]],
+            email: [params['email'], [<any>Validators.email]],
+            password: ['', [<any>Validators.pattern("^[0-9a-zA-Z\._-]{5,15}$")]],
+            repeatPassword: ['', [<any>Validators.required, equalsValidator("password")]],
+          });
+          //Set listener
+          this.recoveryForm.valueChanges
+              .subscribe(data => this._validationService.onValueChanged(this.recoveryForm, this.formErrors));
+        });
   }
 
   submit(model: PasswordRecoveryDTO) {

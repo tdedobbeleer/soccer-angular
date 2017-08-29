@@ -15,6 +15,7 @@ import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
 import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
 import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
+import {environment} from "../../../environments/environment";
 import StatusEnum = MatchDTO.StatusEnum;
 
 @Component({
@@ -72,14 +73,14 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div *ngIf="matchForm.value?.status == statusEnum.PLAYED">         
         <div class="form-group">
         <label for="htGoals">{{"label.match.htGoals" | translate}}</label>
-        <input name="htGoals" class="form-control" formControlName="htGoals"/>
+        <input name="htGoals" class="form-control" formControlName="htGoals" (keyup)="onGoalsChange(matchForm.value.homeTeam, matchForm.value.htGoals)"/>
          <small class="text-danger" [hidden]="!formErrors.htGoals">
              {{formErrors.htGoals}}
         </small>
         </div>
         <div class="form-group">
         <label for="atGoals">{{"label.match.atGoals" | translate}}</label>
-        <input name="atGoals" class="form-control" formControlName="atGoals"/>
+        <input name="atGoals" class="form-control" formControlName="atGoals" (keyup)="onGoalsChange(matchForm.value.awayTeam, matchForm.value.atGoals)"/>
          <small class="text-danger" [hidden]="!formErrors.atGoals">
              {{formErrors.atGoals}}
         </small>
@@ -136,7 +137,7 @@ export class EditMatchFormComponent implements OnInit {
 
     @Input() matchId?: any;
 
-    homeTeamName: string = "SVK";
+    defaultTeamId: number = environment.defaultTeamId;
 
     matchForm: FormGroup;
 
@@ -207,8 +208,8 @@ export class EditMatchFormComponent implements OnInit {
         this.matchForm.valueChanges
             .subscribe(data => {
                 this._validationService.onValueChanged(this.matchForm, this.formErrors);
-                this.onGoalsChange(this.matchForm.value.homeTeam, this.matchForm.value.htGoals);
-                this.onGoalsChange(this.matchForm.value.awayTeam, this.matchForm.value.atGoals);
+                //this.onGoalsChange(this.matchForm.value.homeTeam, this.matchForm.value.htGoals);
+                //this.onGoalsChange(this.matchForm.value.awayTeam, this.matchForm.value.atGoals);
             });
 
 
@@ -227,7 +228,7 @@ export class EditMatchFormComponent implements OnInit {
     }
 
     hasGoals(model: MatchDTO) {
-        return model.homeTeam.name == this.homeTeamName && model.goals.length > 0;
+        return model.goals.length > 0;
     }
 
     setGoals(goals: GoalDTO[]) {
@@ -241,7 +242,7 @@ export class EditMatchFormComponent implements OnInit {
     };
 
     onGoalsChange(team: TeamDTO, nrg: any) {
-        if (team.name == this.homeTeamName && nrg !== '') {
+        if (team.id == this.defaultTeamId && nrg !== '') {
             let nrOfGoals = this.goals.length;
             if (nrOfGoals > nrg) {
                 const removeTotal = nrOfGoals - nrg;
