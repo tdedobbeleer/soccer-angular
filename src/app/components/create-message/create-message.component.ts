@@ -14,7 +14,7 @@ import {Component, OnInit} from "@angular/core";
         </div>
         
       <div class="col-md-12">
-        <app-message-form [content]="" [header]="" [update]="false"></app-message-form>
+        <app-message-form></app-message-form>
       </div>
   </div>
 

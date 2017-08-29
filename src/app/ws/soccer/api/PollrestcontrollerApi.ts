@@ -44,7 +44,7 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get match poll by id
      * @param id id
      */
@@ -60,7 +60,7 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get all match polls
      * @param page page
      * @param size size
@@ -78,7 +78,7 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Vote
      * @param id id
      * @param vote vote
@@ -95,7 +95,7 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Refresh match poll
      * @param id id
      */
@@ -111,7 +111,7 @@ export class PollrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Reset match poll
      * @param id id
      */
@@ -129,7 +129,7 @@ export class PollrestcontrollerApi {
 
     /**
      * Get match poll by id
-     *
+     * 
      * @param id id
      */
     public getMatchPollByIdWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {
@@ -168,7 +168,7 @@ export class PollrestcontrollerApi {
 
     /**
      * Get all match polls
-     *
+     * 
      * @param page page
      * @param size size
      * @param sort sort

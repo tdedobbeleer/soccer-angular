@@ -138,6 +138,7 @@ export const LANG_EN_TRANS = {
     'btn.refresh': 'Refresh',
     'text.match.next': 'Next match',
     'validation.username.required': "Email is required",
+    'validation.type.required': "Please select a type",
     'validation.password.required': "Password is required",
     'validation.email.email': "Please specify a valid email address",
     'validation.required': "This field cannot be empty",

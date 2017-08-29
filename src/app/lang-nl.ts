@@ -139,6 +139,7 @@ export const LANG_NL_TRANS = {
     'text.match.next': 'Volgende match',
     'validation.username.required': "Email adres is vereist",
     'validation.password.required': "Wachtwoord is vereist",
+    'validation.type.required': "Gelieve een type te selecteren",
     'validation.email.email': "Gelieve een correct email adres op te geven",
     'validation.required': "Mag niet leeg zijn",
     'validation.password.pattern': "Minimaal 5 tekens, maximaal 15. Toegelaten karakters: letters, cijfers, punten, dashes en underscores",
