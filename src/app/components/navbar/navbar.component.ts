@@ -27,7 +27,7 @@ import {SecUtil} from "../../classes/sec-util";
                 </li>
 
                 <li><a [routerLink]="['/faq']" routerLinkActive="active">{{'nav.faq' | translate}}</a></li>
-                <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a>
+                <!-- <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a> -->
                 <li><a [routerLink]="['/about']" routerLinkActive="active">{{'nav.about' | translate}}</a></li>
             </ul>
         </div>
@@ -43,7 +43,7 @@ _________________________________________________________ -->
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" href="https://www.svk-oh.be">
+            <a class="navbar-brand home" [routerLink]="['/']" routerLinkActive="active">
                 <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="hidden-xs">
                 <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
             </a>

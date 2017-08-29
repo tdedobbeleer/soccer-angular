@@ -2,7 +2,14 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
-import {AlertModule, BsDropdownModule, CollapseModule, DatepickerModule, TimepickerModule} from "ngx-bootstrap";
+import {
+    AlertModule,
+    BsDropdownModule,
+    CollapseModule,
+    DatepickerModule,
+    TimepickerModule,
+    AccordionModule
+} from "ngx-bootstrap";
 import {AppComponent} from "./app.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
@@ -80,10 +87,12 @@ import {StatisticsListComponent} from "./components/statistics-list/statistics-l
 import {StatisticsrestcontrollerApi} from "./ws/soccer/api/StatisticsrestcontrollerApi";
 import {DataTablesModule} from "angular-datatables";
 import {LoadingComponent} from "./components/loading/loading.component";
+import {FaqComponent} from "./components/faq/faq.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
     {path: 'not-found', component: NotFoundComponent},
+    {path: 'faq', component: FaqComponent},
     {path: 'failwhale', component: FailWhaleComponent},
     {path: 'messages', component: MessagesComponent},
     {path: 'teams', component: TeamsListComponent},
@@ -161,6 +170,7 @@ const appRoutes: Routes = [
         EditTeamComponent,
         StatisticsListComponent,
         LoadingComponent,
+        FaqComponent,
     ],
     imports: [
         DataTablesModule,
@@ -175,6 +185,7 @@ const appRoutes: Routes = [
         CollapseModule.forRoot(),
         DatepickerModule.forRoot(),
         ImageUploadModule.forRoot(),
+        AccordionModule.forRoot(),
         RouterModule.forRoot(appRoutes)
     ],
     providers: [
