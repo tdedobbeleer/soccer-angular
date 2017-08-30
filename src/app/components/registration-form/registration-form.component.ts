@@ -23,9 +23,11 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
             {{'nav.register' | translate }}
         </li>
     </ul>
- <alert [type]="'success'" [dismissible]="false" [hidden]="!success">
+ <div class="box" [hidden]="!success">
+  <alert [type]="'success'" [dismissible]="false">
     <span [innerHtml]="'text.registration.succes' | safeHtml"></span>
-</alert>
+  </alert>
+</div>
 <div class="box" [hidden]="success">
      <div class="error-div">
         <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
