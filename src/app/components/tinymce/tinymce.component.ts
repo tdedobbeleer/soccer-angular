@@ -27,7 +27,7 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
             skin_url: '/assets/skins/lightgray',
             setup: editor => {
                 this.editor = editor;
-                this.setContent(editor);
+                this.setContent();
                 editor.on('keyup', () => {
                     const content = editor.getContent();
                     this.zone.run(() => {
@@ -36,8 +36,8 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
                     });
                 });
             },
-            init_instance_callback: (editor: any) => {
-                this.setContent(editor);
+            init_instance_callback: () => {
+                this.setContent();
             }
         });
     }
@@ -46,9 +46,9 @@ export class TinymceComponent implements AfterViewInit, OnDestroy {
         tinymce.remove(this.editor);
     }
 
-    private setContent(editor) {
+    setContent() {
         if (this.editor && this.content) {
-            editor.setContent(this.content);
+            this.editor.setContent(this.content);
         }
     }
 
