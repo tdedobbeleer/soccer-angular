@@ -9,20 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 /* tslint:disable:no-unused-variable member-ordering */
-
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { Http, Headers, URLSearchParams }                    from '@angular/http';
-import { RequestMethod, RequestOptions, RequestOptionsArgs } from '@angular/http';
-import { Response, ResponseContentType }                     from '@angular/http';
-
-import { Observable }                                        from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
-import * as models                                           from '../model/models';
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import {Inject, Injectable, Optional} from "@angular/core";
+import {
+    Http,
+    Headers,
+    URLSearchParams,
+    RequestMethod,
+    RequestOptions,
+    RequestOptionsArgs,
+    Response
+} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import * as models from "../model/models";
+import {BASE_PATH} from "../variables";
+import {Configuration} from "../configuration";
 
 
 @Injectable()
@@ -45,9 +47,10 @@ export class PasswordrecoveryrestcontrollerApi {
      * 
      * @summary Get a password recovery code
      * @param passwordRecoveryDTO passwordRecoveryDTO
+     * @param captchaResponse captchaResponse
      */
-    public forgotPassword(passwordRecoveryDTO: models.PasswordRecoveryDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
-        return this.forgotPasswordWithHttpInfo(passwordRecoveryDTO, extraHttpRequestParams)
+    public forgotPassword(passwordRecoveryDTO: models.PasswordRecoveryDTO, captchaResponse: string, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
+        return this.forgotPasswordWithHttpInfo(passwordRecoveryDTO, captchaResponse, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -78,8 +81,9 @@ export class PasswordrecoveryrestcontrollerApi {
      * Get a password recovery code
      * 
      * @param passwordRecoveryDTO passwordRecoveryDTO
+     * @param captchaResponse captchaResponse
      */
-    public forgotPasswordWithHttpInfo(passwordRecoveryDTO: models.PasswordRecoveryDTO, extraHttpRequestParams?: any): Observable<Response> {
+    public forgotPasswordWithHttpInfo(passwordRecoveryDTO: models.PasswordRecoveryDTO, captchaResponse: string, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/accounts/password/recovery';
 
         let queryParameters = new URLSearchParams();
@@ -88,6 +92,14 @@ export class PasswordrecoveryrestcontrollerApi {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
             throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling forgotPassword.');
         }
+        // verify required parameter 'captchaResponse' is not null or undefined
+        if (captchaResponse === null || captchaResponse === undefined) {
+            throw new Error('Required parameter captchaResponse was null or undefined when calling forgotPassword.');
+        }
+        if (captchaResponse !== undefined) {
+            queryParameters.set('captchaResponse', <any>captchaResponse);
+        }
+
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'

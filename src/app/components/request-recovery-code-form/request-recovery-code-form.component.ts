@@ -6,6 +6,9 @@ import {PasswordrecoveryrestcontrollerApi} from "../../ws/soccer/api/Passwordrec
 import {PasswordRecoveryDTO} from "../../ws/soccer/model/PasswordRecoveryDTO";
 import {Response} from "@angular/http";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
+import {environment} from "../../../environments/environment";
+import {ReCaptchaComponent} from "angular2-recaptcha";
+import {TranslationService} from "../../services/translation.service";
 
 @Component({
   selector: 'app-request-recovery-code-form',
@@ -19,8 +22,8 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
             {{'nav.recovery.request' | translate }}
         </li>
     </ul>
-
-<div class="box">  
+  <div class="col-md-6 col-md-offset-3">
+  <div class="box">  
      <alert [type]="'success'" [hidden]="!success">
          <span [innerHtml]="'text.recovery.request.success' | safeHtml"></span>
     </alert>
@@ -37,6 +40,14 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
              {{formErrors.email}}
         </small>
       </div>
+      <div class="form-group">
+        <re-captcha (captchaResponse)="handleCaptchaResponse($event)"></re-captcha>
+        <input type="hidden" [formControl]="recoveryForm.controls.captchaResponse"/>
+         <small class="text-danger" [hidden]="!formErrors.captchaResponse">
+             {{formErrors.captchaResponse}}
+        </small>
+      </div>
+       
            
        
       <div class="form-group box-footer">
@@ -45,13 +56,15 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
       </div>
     </form>
     </div>
-    </div>
+  </div>
+  </div>
   `,
   styles: []
 })
 export class RequestRecoveryCodeFormComponent implements OnInit {
   formErrors = {
     'email': '',
+    'captchaResponse': '',
   };
 
   recoveryForm : FormGroup;
@@ -60,12 +73,27 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
   globalError : any;
 
   @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
+  @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
-  constructor(private _fb: FormBuilder, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {}
+  constructor(private _fb: FormBuilder, private _translationService: TranslationService, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
+  }
 
   ngOnInit() {
     this.recoveryForm = this._fb.group({
       email: ['', [<any>Validators.email]],
+      captchaResponse: ['', [<any>Validators.required]],
+    });
+
+    //Setup recaptcha
+    this.captcha.site_key = environment.recaptcha_public_key;
+    this.captcha.language = this._translationService.currentLang();
+    this.captcha.reset();
+
+    this._translationService.langUpdated.subscribe(l => {
+      /**
+       * Workaround, recaptcha language is not dynamically set.
+       */
+      location.reload();
     });
 
     //Set listener
@@ -84,7 +112,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
     this.success = false;
 
     if (this.recoveryForm.valid) {
-      this._api.forgotPassword(dto).subscribe(
+      this._api.forgotPassword(dto, this.recoveryForm.controls['captchaResponse'].value).subscribe(
           r => {
             this.success = true;
           },
@@ -99,6 +127,10 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
       )
     }
 
+  }
+
+  handleCaptchaResponse(event: any) {
+    this.recoveryForm.patchValue({captchaResponse: event});
   }
 
 }

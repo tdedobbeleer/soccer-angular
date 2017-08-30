@@ -31,7 +31,7 @@ import {Util} from "../../classes/util";
       </div>
         
       <div class="form-group"> 
-        <input name="useExistingAddress" type="checkbox" formControlName="useExistingAddress" (change)="onUseExistingAddressChange()"/>
+        <input name="useExistingAddress" id="useExistingAddress" type="checkbox" formControlName="useExistingAddress" (change)="onUseExistingAddressChange()"/>
         <label for="useExistingAddress">{{"label.team.useExistingAddress" | translate}}</label>
       </div>
       
@@ -71,7 +71,7 @@ import {Util} from "../../classes/util";
           </div>
           </div>
            <div class="form-group" *ngIf="showMap">
-            <input name="useGoogleLink" type="checkbox" formControlName="useGoogleLink" (change)="onGoogleLinkChange()"/>
+            <input name="useGoogleLink" id="useGoogleLink" type="checkbox" formControlName="useGoogleLink" (change)="onGoogleLinkChange()"/>
              <label for="useGoogleLink">{{"label.team.useGoogleLink" | translate}}</label>
           </div>
           <div *ngIf="showMap">

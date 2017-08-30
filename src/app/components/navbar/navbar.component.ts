@@ -18,7 +18,7 @@ import {Router} from "@angular/router";
                 <li *ngIf="isLoggedIn" class="dropdown" dropdown>
                     <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="glyphicon glyphicon-user"></span>&nbsp;{{user.firstName}} <b class="caret"></b></a>
                     <ul class="dropdown-menu" *dropdownMenu>
-                        <li><a [routerLink]="['/account/profile/edit/' + user.id ]" routerLinkActive="active">{{'nav.profile' | translate}}</a></li>
+                        <li><a [routerLink]="['/accounts/profile/edit/' + user.id ]" routerLinkActive="active">{{'nav.profile' | translate}}</a></li>
                         <li><a (click)="logout()">{{'nav.logout' | translate}}</a></li>                        
                     </ul>
                 </li>

@@ -21,10 +21,10 @@ import {ActivatedRoute} from "@angular/router";
             {{'nav.recovery.use' | translate }}
         </li>
     </ul>
- <alert [type]="'success'" [dismissible]="false" [hidden]="!success">
-    <span [innerHtml]="'text.registration.succes' | safeHtml"></span>
-</alert>
-<div class="box" [hidden]="success">
+<div class="box">
+     <alert [type]="'success'" [dismissible]="false" [hidden]="!success">
+        <span [innerHtml]="'text.password.success.change' | safeHtml"></span>
+    </alert>
      <div class="error-div">
         <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
      </div>
@@ -56,8 +56,8 @@ import {ActivatedRoute} from "@angular/router";
          <small class="text-danger" [hidden]="!formErrors.repeatPassword">
              {{formErrors.repeatPassword}}
         </small>
-      </div>      
-       
+      </div>
+      
       <div class="form-group box-footer">
         <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
@@ -97,7 +97,8 @@ export class RecoveryCodeFormComponent implements OnInit {
             password: ['', [<any>Validators.pattern("^[0-9a-zA-Z\._-]{5,15}$")]],
             repeatPassword: ['', [<any>Validators.required, equalsValidator("password")]],
           });
-          //Set listener
+
+            //Set listener
           this.recoveryForm.valueChanges
               .subscribe(data => this._validationService.onValueChanged(this.recoveryForm, this.formErrors));
         });
@@ -126,5 +127,4 @@ export class RecoveryCodeFormComponent implements OnInit {
       )
     }
   }
-
 }

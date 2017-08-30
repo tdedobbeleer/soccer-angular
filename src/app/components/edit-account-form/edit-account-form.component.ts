@@ -89,11 +89,11 @@ import PositionEnum = ProfileDTO.PositionEnum;
       </div>
       
       <div class="form-group"> 
-        <input name="doodleNotifications" type="checkbox" formControlName="doodleNotifications"/>
+        <input name="doodleNotifications" id="doodleNotifications" type="checkbox" formControlName="doodleNotifications"/>
         <label for="doodleNotifications">{{"label.profile.doodleNotifications" | translate}}</label>
       </div>
       <div class="form-group"> 
-        <input name="newsNotifications" type="checkbox" formControlName="newsNotifications"/>
+        <input name="newsNotifications" id="newsNotifications" type="checkbox" formControlName="newsNotifications"/>
         <label for="newsNotifications">{{"label.profile.newsNotifications" | translate}}</label>
       </div>
       

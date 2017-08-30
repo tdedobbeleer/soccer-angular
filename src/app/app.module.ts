@@ -89,6 +89,8 @@ import {DataTablesModule} from "angular-datatables";
 import {LoadingComponent} from "./components/loading/loading.component";
 import {FaqComponent} from "./components/faq/faq.component";
 import {MessageItemComponent} from "./components/message-item/message-item.component";
+import {ActivateAccountFormComponent} from "./components/activate-account-form/activate-account-form.component";
+import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -102,7 +104,6 @@ const appRoutes: Routes = [
     {path: 'manofthematch', component: MotmPollsComponent},
     {path: 'doodles', component: DoodleListComponent},
     {path: 'unavailable', component: ServiceUnavailableComponent},
-    {path: 'account/profile/edit/:id', component: EditAccountComponent},
     {path: 'messages', component: MessagesComponent},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/:id', component: MessageItemComponent},
@@ -111,6 +112,8 @@ const appRoutes: Routes = [
     {path: 'teams/create', component: CreateTeamComponent, canActivate: [AuthGuardAdminService]},
     {path: 'teams/edit/:id', component: EditTeamComponent, canActivate: [AuthGuardAdminService]},
     {path: 'accounts', component: AccountListComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'accounts/:id/activate', component: ActivateAccountComponent, canActivate: [AuthGuardAdminService]},
+    {path: 'accounts/profile/edit/:id', component: EditAccountComponent},
     {path: 'matches', component: MatchesComponent},
     {path: 'matches/create', component: CreateMatchComponent, canActivate: [AuthGuardAdminService]},
     {path: 'matches/edit/:id', component: EditMatchComponent, canActivate: [AuthGuardAdminService]},
@@ -174,6 +177,8 @@ const appRoutes: Routes = [
         LoadingComponent,
         FaqComponent,
         MessageItemComponent,
+        ActivateAccountFormComponent,
+        ActivateAccountComponent,
     ],
     imports: [
         DataTablesModule,
