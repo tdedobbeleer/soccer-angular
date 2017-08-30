@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit, Input, EventEmitter} from "@angular/core";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {Router} from "@angular/router";
@@ -10,7 +10,8 @@ import {ValidationService} from "../../services/validation.service";
 @Component({
     selector: 'app-edit-message-form',
     template: `
- <div class="box">  
+ <div class="box">
+    <div>
     <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
     <form [formGroup]="messageForm" novalidate (ngSubmit)="submit(messageForm.value, messageForm.valid)">
       <div class="form-group">
@@ -22,7 +23,7 @@ import {ValidationService} from "../../services/validation.service";
       </div>
       <div class="form-group">
         <label for="content">{{"label.message.content" | translate}}</label>
-        <app-tinymce [elementId]="'contentTinyMce'" (onEditorKeyup)="tinyMceCallback($event)" [content]="content"></app-tinymce>
+        <app-tinymce [elementId]="'contentTinyMce'" (onEditorKeyup)="tinyMceCallback($event)" [contentEvent]="contentUpdated"></app-tinymce>
         <small class="text-danger" [hidden]="!formErrors.content">
              {{formErrors.content}}
         </small>
@@ -33,13 +34,15 @@ import {ValidationService} from "../../services/validation.service";
       </div>
     </form>
     </div>
+    </div>
   `,
     styles: []
 })
 export class EditMessageFormComponent implements OnInit {
 
     @Input() messageId: number;
-    @Input() content: any;
+
+    contentUpdated: EventEmitter<string> = new EventEmitter();
 
     messageForm: FormGroup;
 
@@ -68,7 +71,7 @@ export class EditMessageFormComponent implements OnInit {
                     header: r.header,
                     id: r.id,
                 });
-                this.content = r.content;
+                this.contentUpdated.emit(r.content);
             },
             error => {
                 this._errorHandler.handle(error, "/messages/edit/" + this.messageId);
