@@ -7,7 +7,7 @@ import {TranslationService} from "../../services/translation.service";
     selector: 'app-player',
     template: `
     <div class="col-sm-4 col-lg-4 col-md-4">
-        <div class="thumbnail avatar">
+        <div class="thumbnail avatar" [style.height]="isLoggedIn() ? '427px' : '100%'">
               <img *ngIf="profile.image?.url" [attr.src]="profile.image?.url | safe">
               <img *ngIf="!profile.image?.url" [attr.src]="getPlaceHolderImg() | safe" alt="">
            

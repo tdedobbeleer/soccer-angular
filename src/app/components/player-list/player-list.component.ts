@@ -12,8 +12,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
     <app-loading [loading]="loading"></app-loading>
     <div *ngIf="!loading">
     <div class="row">
-    <div class="col-md-12">
-    <div id="carousel-team" class="carousel slide" data-ride="carousel">
+    <div id="carousel-team" class="carousel slide hidden-xs hidden-sm" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="item active thumbnail">
@@ -22,7 +21,6 @@ import PositionEnum = ProfileDTO.PositionEnum;
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
     <div class="team-row row well" *ngIf="goalkeepers">
