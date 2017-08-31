@@ -16,15 +16,15 @@ import {SecUtil} from "../../classes/sec-util";
       </ul>
   </div>
   <div class="m-t-1 container">
-  <div>
+  <div class="box">
   <app-loading [loading]="loading"></app-loading>
   <alert [type]="'danger'" [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
   <table class="table table-responsive table-striped" *ngIf="!loading">
         <tr>
             <th>Id</th>
-            <th>{{"account.username" | translate}}</th>
-            <th>{{"account.name" | translate}}</th>
-            <th>{{"account.role" | translate}}</th>
+            <th>{{"label.email" | translate}}</th>
+            <th>{{"label.name" | translate}}</th>
+            <th>{{"label.role" | translate}}</th>
             <th></th>
         </tr>
         <tr *ngFor="let account of accountList">

@@ -61,8 +61,8 @@ import {isNullOrUndefined} from "util";
           <a class="pull-right" data-toggle="tooltip" data-container="body"
              (click)="showModified = !showModified"
              title="{{'tooltip.doodle.time' | translate}}" aria-hidden="true">
-            <span *ngIf="!showModified">{{'tooltip.doodle.show.dates' | translate}}</span>
-            <span *ngIf="showModified">{{'tooltip.doodle.hide.dates' | translate}}</span>
+            <span *ngIf="!showModified">{{'text.doodle.show.dates' | translate}}</span>
+            <span *ngIf="showModified">{{'text.doodle.hide.dates' | translate}}</span>
           </a>
     </div>
     </div>
