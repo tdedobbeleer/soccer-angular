@@ -27,7 +27,7 @@ import {Router} from "@angular/router";
                     <a (click)="login()"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
                 </li>
 
-                <li><a [routerLink]="['/faq']" routerLinkActive="active">{{'nav.faq' | translate}}</a></li>
+                <li><a (click)="goto('/faq')">{{'nav.faq' | translate}}</a></li>
                 <!-- <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a> -->
                 <!-- <li><a [routerLink]="['/about']" routerLinkActive="active">{{'nav.about' | translate}}</a></li> -->
             </ul>
@@ -62,13 +62,13 @@ _________________________________________________________ -->
         <div class="navbar-collapse collapse" id="navigation" [collapse]="isMenuCollapsed">
 
             <ul class="nav navbar-nav navbar-left">
-                <li><a (click)="goto('/messages')">{{'nav.messages' | translate}}</a></li>
-                <li><a (click)="goto('/matches')">{{'nav.matches' | translate}}</a></li>
-                <li><a (click)="goto('/statistics')">{{'nav.statistics' | translate}}</a></li>
-                <li><a (click)="goto('/manofthematch')">{{'nav.manOfTheMatch' | translate}}</a></li>
-                <li><a (click)="goto('/teams')">{{'nav.teams' | translate}}</a></li>
-                <li><a (click)="goto('/doodles')">{{'nav.doodle' | translate}}</a></li>
-                <li><a (click)="goto('/team')">{{'nav.team' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/messages')"><a (click)="goto('/messages')">{{'nav.messages' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/matches')"><a (click)="goto('/matches')">{{'nav.matches' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/statistics')"><a (click)="goto('/statistics')">{{'nav.statistics' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/manofthematch')"><a (click)="goto('/manofthematch')">{{'nav.manOfTheMatch' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/teams')"><a (click)="goto('/teams')">{{'nav.teams' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/doodles')"><a (click)="goto('/doodles')">{{'nav.doodle' | translate}}</a></li>
+                <li [ngClass]="getActiveClass('/team')"><a (click)="goto('/team')">{{'nav.team' | translate}}</a></li>
             </ul>
 
         </div>
@@ -125,8 +125,15 @@ export class NavbarComponent implements OnInit {
   }
 
   login() {
+      this.isMenuCollapsed = true;
     this._router.navigate(['/login'], {queryParams: {redirectUrl: this._router.url}});
   }
+
+    getActiveClass(route: string) {
+        if (this._router.url == route) {
+            return "active";
+        }
+    }
 }
 
 export interface Lang {
