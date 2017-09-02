@@ -83,6 +83,7 @@ export class StatisticsListComponent implements OnInit {
             paging: false,
             searching: false,
             info: false,
+            order: [[1, "desc"]],
         };
 
         this._seasonsApi.getSeasons()
