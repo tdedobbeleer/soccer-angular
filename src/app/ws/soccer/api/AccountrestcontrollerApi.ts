@@ -109,7 +109,7 @@ export class AccountrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Activate account for the first time
      * @param id id
      * @param sendMail sendMail
@@ -126,7 +126,7 @@ export class AccountrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Get Account
      * @param id id
      */
@@ -326,7 +326,7 @@ export class AccountrestcontrollerApi {
 
     /**
      * Activate account for the first time
-     *
+     * 
      * @param id id
      * @param sendMail sendMail
      */
@@ -374,7 +374,7 @@ export class AccountrestcontrollerApi {
 
     /**
      * Get Account
-     *
+     * 
      * @param id id
      */
     public getAccountWithHttpInfo(id: number, extraHttpRequestParams?: any): Observable<Response> {

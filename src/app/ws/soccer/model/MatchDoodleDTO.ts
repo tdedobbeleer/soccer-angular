@@ -9,8 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import * as models from './models';
+import * as models from "./models";
 
 export interface MatchDoodleDTO {
     date?: string;
@@ -18,6 +17,8 @@ export interface MatchDoodleDTO {
     description?: string;
 
     doodle?: models.DoodleDTO;
+
+    hour?: string;
 
     id?: number;
 

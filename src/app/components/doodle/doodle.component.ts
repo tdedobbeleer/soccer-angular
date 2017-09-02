@@ -12,7 +12,7 @@ import {isNullOrUndefined} from "util";
     selector: 'app-doodle',
     template: `
     <div class="panel panel-default">
-      <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}}
+      <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}} - {{matchDoodle.hour}}
       </div>
       <div class="panel-body">
         <alert [type]="'danger'" *ngIf="error">{{'text.doodle.error' | translate}}</alert>

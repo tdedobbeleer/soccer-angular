@@ -31,7 +31,7 @@ import {DataTableDirective} from "angular-datatables";
                 </div>
             </form>
            
-            <div>
+            <div class="table-responsive">
             <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                 <thead>
                 <tr>

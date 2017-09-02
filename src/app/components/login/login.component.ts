@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {LoginService} from "../../services/login.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-login',
@@ -38,6 +39,10 @@ import {LoginService} from "../../services/login.service";
                 <input type="checkbox" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"/> {{'label.rememberMe' | translate}}
               </label>
               -->
+              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+              <input type="checkbox" id="rememberUserName" name="rememberUserName" [(ngModel)]="model.rememberUserName" #password="ngModel" />
+              <label for="rememberUserName">{{'label.rememberUserName' | translate}}</label>
+              </div>
               <div>
                 <a [routerLink]="['/register']" routerLinkActive="active">{{'nav.register' | translate}}</a>
               </div>
@@ -58,9 +63,14 @@ import {LoginService} from "../../services/login.service";
 })
 export class LoginComponent implements OnInit {
 
-  model: any = {};
+  model: any = {
+    username: "",
+    password: "",
+    rememberUserName: false,
+  };
   loading = false;
   error = '';
+  lastUserName = "lastUserName";
 
   constructor(
       private service : LoginService,
@@ -69,16 +79,18 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // reset login status
-    //this.authenticationService.logout();
+    this.model.username = this.getLastUserName();
+    this.model.rememberUserName = !isNullOrUndefined(this.model.username);
   }
 
   login() {
     this.loading = true;
-    this.service.login(this.model.username, this.model.password, this.model.rememberMe)
+    this.service.login(this.model.username, this.model.password, false)
         .subscribe(
             isLoggedIn => {
           if (isLoggedIn) {
+            //On success, save username
+            this.setLastUserName(this.model.rememberUserName ? this.model.username : undefined);
             //redirect if needed
             this.route.queryParamMap
                 .map(params => params.get('redirectUrl') || '').subscribe(p => {
@@ -98,5 +110,18 @@ export class LoginComponent implements OnInit {
   private handleLoginError() {
     this.error = 'Username or password is incorrect';
     this.loading = false;
+  }
+
+  setLastUserName(username) {
+    if (!isNullOrUndefined(username)) {
+      localStorage.setItem(this.lastUserName, username);
+    }
+    else {
+      localStorage.removeItem(this.lastUserName);
+    }
+  }
+
+  getLastUserName() {
+    return localStorage.getItem(this.lastUserName);
   }
 }
