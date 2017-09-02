@@ -128,7 +128,7 @@ export class DoodleComponent implements OnInit {
     }
 
     getPresenceClass(presence: PresenceDTO) {
-        console.log("Cretaing presence class");
+        //console.log("Creating presence class");
         if (!isNullOrUndefined(presence)) {
             switch (presence.type) {
                 case PresenceDTO.TypeEnum.NOTFILLEDIN:
