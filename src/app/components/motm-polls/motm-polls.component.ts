@@ -29,11 +29,13 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
             {{'text.no.match.polls' | translate}}
         </div>
       </div>
-      <div  *ngFor="let poll of motmPage?.list">
-        <div class="clearfix" *ngIf="$index % 2 == 0"></div>
+      <div class="row">
+      <div  *ngFor="let poll of motmPage?.list; let i = index">
         <div class="col-md-6">
             <app-motm-poll [poll]="poll"></app-motm-poll>
         </div>
+        <div [ngClass]="{clearfix: (i+1)%2==0}"></div>
+      </div>
       </div>
       <div class="clearfix"></div>
       <div class="row m-t-1">
