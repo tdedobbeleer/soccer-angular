@@ -141,7 +141,7 @@ export const LANG_NL_TRANS = {
     'label.account.sendMail': 'Verstuur een email naar de gebruiker',
     'label.role': 'rol',
     'label.name': 'naam',
-    'label.rememberUserName': 'Onthou mijn e-mail adres',
+    'label.rememberUserName': 'Onthoud mijn e-mail adres',
     'text.select' : 'Selecteer',
     'btn.login': 'Inloggen',
     'btn.reactions': 'Reacties',

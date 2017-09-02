@@ -31,7 +31,7 @@ import {ValidationService} from "../../services/validation.service";
       </div>       
       <div class="form-group">
           <div class="radio">
-              <input type="radio" name="type" id="radio1" value="POST_AND_SEND" checked="checked" formControlName="type">
+              <input type="radio" name="type" id="radio1" value="POST_AND_SEND" formControlName="type">
               <label for="radio1">
                   {{"label.message.sendAndPost" | translate}}
               </label>
@@ -81,7 +81,7 @@ export class MessageFormComponent implements OnInit {
         this.messageForm = this._fb.group({
             header: ['', [<any>Validators.required]],
             content: ['', [<any>Validators.required]],
-            type: ['', [<any>Validators.required]]
+            type: ['POST_AND_SEND', [<any>Validators.required]]
         });
     }
 
