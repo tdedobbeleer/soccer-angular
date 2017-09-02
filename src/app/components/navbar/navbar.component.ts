@@ -44,7 +44,7 @@ _________________________________________________________ -->
     <div class="container">
         <div class="navbar-header">
 
-            <a class="navbar-brand home" [routerLink]="['/']" routerLinkActive="active">
+            <a class="navbar-brand home" href="https://www.svk-oh.be">
                 <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="hidden-xs">
                 <img src="../../../assets/images/svk-weblogo-themed.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
             </a>
