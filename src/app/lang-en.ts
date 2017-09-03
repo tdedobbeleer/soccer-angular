@@ -69,6 +69,8 @@ export const LANG_EN_TRANS = {
     'text.doodle.hide.dates': 'Hide dates',
     'text.doodle.show.dates': 'Show dates',
     'text.doodle.modified': 'Changed on',
+    'text.doodle.reserves': 'Reserves',
+    'text.doodle.reserve.info': '<small><b>Attention!</b> You\'re marked as a reserve.</small>',
     'title.faq': 'Frequently asked questions',
     'text.faq': 'How does this site work?',
     'title.faq1': 'I\'m a new member, what should I do?',

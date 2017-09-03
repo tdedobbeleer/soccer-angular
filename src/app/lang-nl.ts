@@ -69,6 +69,8 @@ export const LANG_NL_TRANS = {
     'text.doodle.hide.dates': 'Verberg data',
     'text.doodle.show.dates': 'Toon data',
     'text.doodle.modified': 'Gewijzigd op',
+    'text.doodle.reserves': 'Reserve spelers',
+    'text.doodle.reserve.info': '<small><b>Opgelet!</b> Je bent een reserve speler.</small>',
     'title.faq': 'Vaak gestelde vragen',
     'text.faq': 'Hoe werkt deze website?',
     'title.faq1': 'Ik ben een nieuw lid, wat moet ik doen?',
