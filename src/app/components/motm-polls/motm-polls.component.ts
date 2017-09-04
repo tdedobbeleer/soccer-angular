@@ -24,11 +24,6 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
       <div class="row m-b-1">
           <app-pagination (onClick)="getPage($event)" [page]="motmPage"></app-pagination>
       </div>
-      <div *ngIf="motmPage?.list.length == 0">
-        <div class="alert alert-warning">
-            {{'text.no.match.polls' | translate}}
-        </div>
-      </div>
       <div class="row">
       <div  *ngFor="let poll of motmPage?.list; let i = index">
         <div class="col-md-6">

@@ -71,6 +71,8 @@ export const LANG_NL_TRANS = {
     'text.doodle.modified': 'Gewijzigd op',
     'text.doodle.reserves': 'Reserve spelers',
     'text.doodle.reserve.info': '<small><b>Opgelet!</b> Je bent een reserve speler.</small>',
+    'text.messages.empty': 'Geen berichten gevonden.',
+    'text.statistics.empty': 'Geen statistieken gevonden.',
     'title.faq': 'Vaak gestelde vragen',
     'text.faq': 'Hoe werkt deze website?',
     'title.faq1': 'Ik ben een nieuw lid, wat moet ik doen?',
