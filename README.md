@@ -1,51 +1,66 @@
-# Angular soccer
+Soccer Angular 2 GUI 
+===================
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is a GUI built for using the [Soccer API](https://github.com/tdedobbeleer/soccer-ws). This guide will explain how to deploy the code on [Firebase](https://firebase.google.com) and maybe explain how this GUI works. Maybe.
 
-## Code scaffolding
+----------
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+# Table of Contents
 
-## Build
+[1. Local deploy](#local-deploy)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+[2. Firebase deploy](#firebase-deploy)
 
-## Running unit tests
+##Local deploy (Debian environment)
+### Install prerequisites
+First of all, you need nodejs. Just download the latest stable version. At the time, version 7 was the preferred version:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - & sudo apt-get install -y nodejs
+ 
+ Install npm:
 
-## Running end-to-end tests
+    sudo apt-get install npm
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+Install Angular CLI. Make sure you have the same version or higher than used by the project. Check the package.json file to know which version you need:
 
-## Deploying to Github Pages
+    sudo npm install -g angular/cli@$version
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
+Now, you should be able to run the server:
 
-## Further help
+    ng serve
 
-To get more help on the `angular/cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+That's it.
 
-## Local environment
-Debian env:
-- curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - & sudo apt-get install -y nodejs
-- sudo apt-get install npm
-- sudo npm install npm@latest -g (latest nodejs version)
-- sudo npm install -g angular/cli@latest
+### First aid
+If you switch CLI's, you'd better remove the node_modules folder to remove all dependencies. Use `npm install` to reinstall dependencies.
+To update all dependencies at once, you can use npm-check-updates. Handy for updating dependencies:
 
-Install dependencies:
-- npm install
+    sudo npm install -g npm-check-updates
+    ncu -u
 
-Update all dependencies at once
-- sudo npm install -g npm-check-updates
-- ncu -u
+## Firebase deploy
+### Prerequisites
+Make sure you have the following tools installed:
 
-Run the server
-- ng serve
+ - Angular CLI
 
-## Accident help
-If ng serve does not work, update all depenencies, throw away the node modules folder and use the npm install commando again. Using the latest packages should always work.
+### How to begin
+If you don't have a Google account, which is very unlikely, create one first. Then go to [Firebase](https://firebase.google.com) and create your first project. There is no GUI to deploy the code (yet), so next up is using the firebase CLI.
+
+### Deploy code using the Firebase CLI
+Install the [Firebase CLI](https://firebase.google.com/docs/cli/) first and I suggest you read the docs as well.
+Then, log into Firebase:
+
+    firebase login
+    
+Next, select the project you are using:
+
+    firebase use $project_name
+    
+If you want to deploy, make sure you are in the main dir, build the app and deploy to Firebase:
+
+    ng build --aot --prod --environment=$environment && firebase deploy --only hosting
+
+> **Note:**
+> The environment is specified because the app knows the default, quality and production environment. You can add more environments if needed (in src/environments). These environments contain settings per environment (duh).
