@@ -12,7 +12,7 @@ This is a GUI built for using the [Soccer API](https://github.com/tdedobbeleer/s
 
 [2. Firebase deploy](#firebase-deploy)
 
-##Local deploy (Debian environment)
+## Local deploy (Debian environment)
 ### Install prerequisites
 First of all, you need nodejs. Just download the latest stable version. At the time, version 7 was the preferred version:
 
