@@ -6,7 +6,7 @@ import {Component, OnInit} from "@angular/core";
   <div id="copyright">
       <div class="container">
           <div class="col-md-6">
-            <a class="pull-left" href="https://github.com/Goddy">
+            <a class="pull-left" href="https://github.com/tdedobbeleer">
                 <img src="../../../assets/images/GitHub-Mark-Light-64px.png" alt="Obaju logo" class="hidden-xs">
                 <img src="../../../assets/images/GitHub-Mark-Light-32px.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Go to homepage</span>
             </a>
