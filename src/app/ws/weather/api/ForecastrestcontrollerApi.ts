@@ -15,13 +15,14 @@ import {
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import * as models from "../model/models";
+import {environment} from "../../../../environments/environment";
 
 
 @Injectable()
 export class ForecastrestcontrollerApi {
 
     protected basePath = 'https://api.openweathermap.org';
-    private apiKey = 'ed947b1f42105d993e46d24c3d770be2';
+    private apiKey = environment.weather_api_key;
     public defaultHeaders: Headers = new Headers();
 
     constructor(protected http: Http) {

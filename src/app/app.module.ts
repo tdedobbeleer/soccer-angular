@@ -91,6 +91,7 @@ import {FaqComponent} from "./components/faq/faq.component";
 import {MessageItemComponent} from "./components/message-item/message-item.component";
 import {ActivateAccountFormComponent} from "./components/activate-account-form/activate-account-form.component";
 import {ActivateAccountComponent} from "./components/activate-account/activate-account.component";
+import {FootballDatarestcontrollerApi} from "./ws/football-data/api/FootballDatarestcontrollerApi";
 
 const appRoutes: Routes = [
     {path: '', component: MessagesComponent},
@@ -212,6 +213,7 @@ const appRoutes: Routes = [
         DoodlerestcontrollerApi,
         PasswordrecoveryrestcontrollerApi,
         AccountprofilerestcontrollerApi,
+        FootballDatarestcontrollerApi,
         AuthGuardService,
         AuthGuardAdminService,
         LoginService,
