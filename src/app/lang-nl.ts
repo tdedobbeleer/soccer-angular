@@ -49,6 +49,7 @@ export const LANG_NL_TRANS = {
     'text.no': 'nee',
     'text.profile.image.unavailable': 'Geen afbeelding',
     'text.no.votes': 'Er werden nog geen stemmen uitgebracht.',
+    'text.no.comments': 'Er zijn nog geen reacties.',
     'text.verification.delete.news': 'Ben je zeker dat je dit bericht wilt verwijderen?',
     'text.verification.delete.match': 'Match verwijderen?',
     'text.team.success.create': 'Het team werd succesvol aangemaakt',

@@ -37,6 +37,9 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
   <div class="container">
     <div class="row m-t-1">
         <div class="col-md-12">
+            <div class="box" *ngIf="newsPage?.totalPages == 0">
+               <p>{{"text.messages.empty" | translate}}</p>
+            </div>
             <app-loading [loading]="loading"></app-loading>
             <div *ngIf="!loading">
             <app-pagination (onClick)="getPage($event)" [page]="newsPage"></app-pagination>

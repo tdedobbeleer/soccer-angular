@@ -21,7 +21,11 @@ import {DataTableDirective} from "angular-datatables";
                 {{'nav.statistics' | translate }}
             </li>
         </ul>
-        <div class="box">
+      
+        <div class="box" *ngIf="seasons?.length == 0">
+            <p>{{'text.statistics.empty' | translate}}</p>
+        </div>
+        <div class="box" *ngIf="seasons?.length > 0">
             <form class="form-inline">
                 <div class="form-group">
                     <label for="season">{{"label.match.season" | translate}}</label>

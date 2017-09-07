@@ -61,6 +61,11 @@ import {SecUtil} from "../../classes/sec-util";
         <div class="m-t-1" *ngIf="showAllComments">
             <app-comment *ngFor="let c of message?.comments" [comment]="c" [messageId]="message.id"></app-comment>
         </div>
+        <div class="comment" *ngIf="showAllComments && message?.comments?.length == 0">
+          <div class="m-t-1 row">
+              <div class="col-md-10"><i class="fa fa-2x fa-comment">&nbsp;</i><b>{{'text.no.comments' | translate}}</b></div>
+          </div>
+        </div>
       </div>
     </div>
   `,
