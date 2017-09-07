@@ -16,7 +16,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
           </span>
           </div>
           <div class="col-md-2">
-           <span class="btn-group pull-right" *ngIf="showBtns && isLoggedIn() && (getUser().username == comment?.postedBy?.username || isAdmin())">
+           <span class="btn-group pull-right" *ngIf="showBtns && isLoggedIn() && (getUser().id == comment?.postedBy?.id || isAdmin())">
                   <button type="button" class="btn btn-warning" aria-label="Delete comment" (click)="deleteComment(comment)">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </button>

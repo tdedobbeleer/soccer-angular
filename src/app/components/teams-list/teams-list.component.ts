@@ -18,7 +18,7 @@ import {SecUtil} from "../../classes/sec-util";
     </ul>
     <div class="row">
       <div class="col-md-1 col-md-offset-11 m-b-1">
-      <div class="pull-right">
+      <div class="pull-right m-b-1">
        <span class="btn-group" *ngIf="isAdmin()">
              <button type="button" class="btn btn-lg btn-danger" aria-label="Create team" [routerLink]="['/teams/create']" routerLinkActive="active">
                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

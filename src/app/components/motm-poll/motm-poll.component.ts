@@ -185,16 +185,18 @@ export class MotmPollComponent implements OnInit {
         //trigger the validation
         this._validationService.onValueChanged(this.pollForm, this.formErrors);
 
-        this._api.matchPollVote(poll.id, {answer: account.id}, SecUtil.getJwtHeaders()).subscribe(
-            p => {
-                this._api.getMatchPollById(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
-                this.voteSuccess = true;
-            },
-            error => {
-                this.globalError = this._errorHandler.handle(error, "manofthematch");
-                this.error.trigger();
-            }
-        )
+        if (this.pollForm.valid) {
+            this._api.matchPollVote(poll.id, {answer: account.id}, SecUtil.getJwtHeaders()).subscribe(
+                p => {
+                    this._api.getMatchPollById(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
+                    this.voteSuccess = true;
+                },
+                error => {
+                    this.globalError = this._errorHandler.handle(error, "manofthematch");
+                    this.error.trigger();
+                }
+            )
+        }
     }
 
     getPercentage(votes: string, totalVotes: string): any {
