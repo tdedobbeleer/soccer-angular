@@ -73,14 +73,14 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div *ngIf="matchForm.value?.status == statusEnum.PLAYED">         
         <div class="form-group">
         <label for="htGoals">{{"label.match.htGoals" | translate}}</label>
-        <input name="htGoals" class="form-control" formControlName="htGoals" (keyup)="onGoalsChange(matchForm.value.homeTeam, matchForm.value.htGoals)"/>
+        <input name="htGoals" type="number" class="form-control" formControlName="htGoals" (keyup)="onGoalsChange(matchForm.value.homeTeam, matchForm.value.htGoals)"/>
          <small class="text-danger" [hidden]="!formErrors.htGoals">
              {{formErrors.htGoals}}
         </small>
         </div>
         <div class="form-group">
         <label for="atGoals">{{"label.match.atGoals" | translate}}</label>
-        <input name="atGoals" class="form-control" formControlName="atGoals" (keyup)="onGoalsChange(matchForm.value.awayTeam, matchForm.value.atGoals)"/>
+        <input name="atGoals" type="number" class="form-control" formControlName="atGoals" (keyup)="onGoalsChange(matchForm.value.awayTeam, matchForm.value.atGoals)"/>
          <small class="text-danger" [hidden]="!formErrors.atGoals">
              {{formErrors.atGoals}}
         </small>

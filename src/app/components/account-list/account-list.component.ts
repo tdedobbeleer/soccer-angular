@@ -19,6 +19,7 @@ import {SecUtil} from "../../classes/sec-util";
   <div class="box">
   <app-loading [loading]="loading"></app-loading>
   <alert [type]="'danger'" [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
+  <div class="table-responsive">
   <table class="table table-responsive table-striped" *ngIf="!loading">
         <tr>
             <th>Id</th>
@@ -37,16 +38,16 @@ import {SecUtil} from "../../classes/sec-util";
             </td>
             <td>
                 <div class="btn-group">
-                <button *ngIf="account.role == 'USER'" type="button" class="btn btn-circle" aria-label="Elevate" title="{{'tooltip.accounts.elevate' | translate}}" (click)="changeRole(account)">
+                <button *ngIf="account.role == 'USER'" type="button" class="btn" aria-label="Elevate" title="{{'tooltip.accounts.elevate' | translate}}" (click)="changeRole(account)">
                     <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                 </button>
-                <button *ngIf="account.role == 'ADMIN'" type="button" class="btn btn-circle" aria-label="Downgrade" title="{{'tooltip.accounts.downgrade' | translate}}" (click)="changeRole(account)">
+                <button *ngIf="account.role == 'ADMIN'" type="button" class="btn" aria-label="Downgrade" title="{{'tooltip.accounts.downgrade' | translate}}" (click)="changeRole(account)">
                     <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                 </button>
-                <button *ngIf="account.activated" type="button" class="btn btn-circle" aria-label="Activate" title="{{'tooltip.accounts.activate' | translate}}" (click)="changeActivation(account)">
+                <button *ngIf="account.activated" type="button" class="btn" aria-label="Activate" title="{{'tooltip.accounts.activate' | translate}}" (click)="changeActivation(account)">
                     <span class="glyphicon glyphicon glyphicon-off" aria-hidden="true"></span>
                 </button>
-                <button *ngIf="!account.activated" type="button" class="btn btn-circle" aria-label="Disable" title="{{'tooltip.accounts.disable' | translate}}" (click)="changeActivation(account)">
+                <button *ngIf="!account.activated" type="button" class="btn" aria-label="Disable" title="{{'tooltip.accounts.disable' | translate}}" (click)="changeActivation(account)">
                     <span class="glyphicon glyphicon glyphicon-off red" aria-hidden="true"></span>
                 </button>
               </div>
@@ -54,6 +55,7 @@ import {SecUtil} from "../../classes/sec-util";
         </tr>
         
     </table>
+    </div>
     </div>
   </div>
   `,

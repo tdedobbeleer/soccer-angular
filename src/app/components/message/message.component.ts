@@ -20,7 +20,7 @@ import {SecUtil} from "../../classes/sec-util";
             </span>
         </h4>
         <hr>
-        <span align="left" [innerHTML]="message.content | safeHtml"></span>
+        <span class="message-content" [innerHTML]="message.content | safeHtml"></span>
       
         <div class="author-category">Posted by
             {{message.postedBy.name}} on

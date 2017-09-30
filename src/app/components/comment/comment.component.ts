@@ -11,8 +11,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
         <div *ngIf="!showEditComment" class="row" (mouseover)="showBtns = true" (mouseleave)="showBtns = false">
           <div class="col-md-10">
           <i class="fa fa-2x fa-comment"></i>
-          <span>{{comment?.content}} -
-              {{'text.by' | translate}}&nbsp;{{comment?.postedBy?.name}}&nbsp;{{'text.on' | translate}}&nbsp;{{comment?.postDate}}
+          <span class="comment-content">{{comment?.content}}&nbsp;-&nbsp;{{'text.by' | translate}}&nbsp;{{comment?.postedBy?.name}}&nbsp;{{'text.on' | translate}}&nbsp;{{comment?.postDate}}
           </span>
           </div>
           <div class="col-md-2">
