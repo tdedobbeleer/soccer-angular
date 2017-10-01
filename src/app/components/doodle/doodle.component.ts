@@ -42,7 +42,7 @@ import {isNullOrUndefined} from "util";
         <div class="pull-right" *ngIf="matchDoodle?.doodle?.currentPresence?.type === presenceEnum.RESERVE" [innerHtml]="'text.doodle.reserve.info' | safeHtml"></div>
       </div>
       <div class="panel-body list" *ngIf="showUsers">
-        <div *ngIf="isAdmin()"class="btn-group">
+        <div *ngIf="isAdmin()"class="btn-group m-b-1 text-center-sm">
             <button class="btn btn-success" *ngIf="!force" (click)="force = true" data-toggle="tooltip" title="{{'tooltip.doodle.adminMode' | translate}}">{{'text.doodle.adminMode.enable' | translate}}</button>
             <button class="btn btn-warning" *ngIf="force" (click)="force = false" data-toggle="tooltip" title="{{'tooltip.doodle.adminMode' | translate}}">{{'text.doodle.adminMode.disable' | translate}}</button>
             <a class="btn btn-default" (click)="showModified = !showModified"
