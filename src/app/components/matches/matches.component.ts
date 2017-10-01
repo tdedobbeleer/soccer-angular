@@ -19,7 +19,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
         </ul>
         
         <div class="row">
-          <div class="col-md-1 col-md-offset-11">
+          <div class="col-md-1 col-md-offset-11 m-b-1">
           <div class="pull-right">
            <span class="btn-group" *ngIf="isAdmin()">
                 <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
