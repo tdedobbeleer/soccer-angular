@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../services/validation.service";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {notCurrentAccountValidator} from "../../functions/not-current-account-validator";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-motm-poll',
@@ -19,10 +20,10 @@ import {notCurrentAccountValidator} from "../../functions/not-current-account-va
                           <h3 class="text-center">{{poll.matchDescription}}</h3>
                           <p class="text-center">{{poll.matchDate}}</p>
                               <div class="btn-group" role="group" *ngIf="isAdmin()">
-                                  <button (click)="showRefreshPoll = true; showResetPoll = false" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="{{'title.motmPoll.refresh' | translate}}">
+                                  <button (click)="showRefreshPoll = true; showResetPoll = false" type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="{{'tooltip.motm.renew' | translate}}">
                                       {{'btn.refresh' | translate}}
                                   </button>
-                                  <button (click)="showResetPoll = true; showRefreshPoll = false;" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="{{'title.motmPoll.reset' | translate}}">
+                                  <button (click)="showResetPoll = true; showRefreshPoll = false;" type="button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="{{'tooltip.motm.reset' | translate}}">
                                       {{'btn.reset' | translate}}
                                   </button>
                               </div>
@@ -58,7 +59,7 @@ import {notCurrentAccountValidator} from "../../functions/not-current-account-va
 
                               <div class="input-group-btn">
                                   <button (click)="vote(pollForm.value, poll)" class="btn btn-success"><span
-                                          class="glyphicon glyphicon-bell"></span> {{'text.vote' | translate}}
+                                          class="glyphicon glyphicon-bell"></span>&nbsp;{{'text.vote' | translate}}
                                   </button>
                               </div>
                           </div>
@@ -70,13 +71,18 @@ import {notCurrentAccountValidator} from "../../functions/not-current-account-va
                           </div>
                       </div>
                       
+                      <div class="panel-body text-center" *ngIf="poll.status == 'OPEN' && !isLoggedIn()">
+                          <button class="btn btn-sm btn-success" (click)="login()"><span
+                                          class="glyphicon glyphicon-lock"></span>&nbsp;{{'text.vote.login' | translate}}</button>
+                      </div>
+                      
                       <div class="panel-footer">
                           <div *ngIf="poll.totalVotes > 0">
                               <div *ngFor="let x of poll?.votes; let i = index">
                                   <div *ngIf="i < 4 || show">
                                       {{x.account.name}}
                                       <span *ngIf="x.votes != 1">({{x.votes}} {{'text.votes' | translate}})</span>
-                                      <span *ngIf="x.votes == 1">({{x.votes}} {{'text.votes' | translate}})</span>
+                                      <span *ngIf="x.votes == 1">({{x.votes}} {{'text.vote' | translate}})</span>
   
                                       <div class="progress">
                                           <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="getPercentage(x.votes, poll.totalVotes)"
@@ -125,7 +131,7 @@ export class MotmPollComponent implements OnInit {
         'id': '',
     };
 
-    constructor(private _api: PollrestcontrollerApi, private _fb: FormBuilder, private _errorHandler: ErrorHandlerService, private _validationService: ValidationService) {
+    constructor(private _router: Router, private _api: PollrestcontrollerApi, private _fb: FormBuilder, private _errorHandler: ErrorHandlerService, private _validationService: ValidationService) {
     }
 
     ngOnInit() {
@@ -138,6 +144,10 @@ export class MotmPollComponent implements OnInit {
             .subscribe(data => {
                 this._validationService.onValueChanged(this.pollForm, this.formErrors);
             });
+    }
+
+    login() {
+        this._router.navigate(['/login'], {queryParams: {redirectUrl: "manofthematch"}});
     }
 
     isLoggedIn(): boolean {

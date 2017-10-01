@@ -1,5 +1,4 @@
 import {Component, OnInit, Input} from "@angular/core";
-import {LoginService} from "../../services/login.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {DoodlerestcontrollerApi} from "../../ws/soccer/api/DoodlerestcontrollerApi";
 import {MatchDoodleDTO} from "../../ws/soccer/model/MatchDoodleDTO";
@@ -98,7 +97,7 @@ export class DoodleComponent implements OnInit {
     error: any = "";
     presenceEnum = PresenceDTO.TypeEnum;
 
-    constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService, private _loginService: LoginService) {
+    constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
