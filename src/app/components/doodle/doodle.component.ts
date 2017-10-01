@@ -10,7 +10,7 @@ import {isNullOrUndefined} from "util";
 @Component({
     selector: 'app-doodle',
     template: `
-    <div class="panel panel-default">
+    <div class="panel panel-default" [ngClass]="{'panel-warning': force }">
       <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}} - {{matchDoodle.hour}}
       </div>
       <div class="panel-body">
@@ -42,6 +42,15 @@ import {isNullOrUndefined} from "util";
         <div class="pull-right" *ngIf="matchDoodle?.doodle?.currentPresence?.type === presenceEnum.RESERVE" [innerHtml]="'text.doodle.reserve.info' | safeHtml"></div>
       </div>
       <div class="panel-body list" *ngIf="showUsers">
+        <div *ngIf="isAdmin()"class="btn-group">
+            <button class="btn btn-success" *ngIf="!force" (click)="force = true" data-toggle="tooltip" title="{{'tooltip.doodle.adminMode' | translate}}">{{'text.doodle.adminMode.enable' | translate}}</button>
+            <button class="btn btn-warning" *ngIf="force" (click)="force = false" data-toggle="tooltip" title="{{'tooltip.doodle.adminMode' | translate}}">{{'text.doodle.adminMode.disable' | translate}}</button>
+            <a class="btn btn-default" (click)="showModified = !showModified"
+             aria-hidden="true">
+            <span *ngIf="!showModified">{{'text.doodle.show.dates' | translate}}</span>
+            <span *ngIf="showModified">{{'text.doodle.hide.dates' | translate}}</span>
+          </a>
+        </div>
         <div class="doodle-list" *ngFor="let presence of matchDoodle?.doodle?.presences">
             <span class="doodle-list-name">
               <div>{{presence.account.name}}</div>
@@ -78,14 +87,6 @@ import {isNullOrUndefined} from "util";
         </div>
     </div>
     </div>
-    <div class="panel-body" *ngIf="showUsers && isAdmin()">
-          <a class="pull-right" data-toggle="tooltip" data-container="body"
-             (click)="showModified = !showModified"
-             title="{{'tooltip.doodle.time' | translate}}" aria-hidden="true">
-            <span *ngIf="!showModified">{{'text.doodle.show.dates' | translate}}</span>
-            <span *ngIf="showModified">{{'text.doodle.hide.dates' | translate}}</span>
-          </a>
-    </div>
     </div>
   `,
     styles: []
@@ -94,6 +95,7 @@ export class DoodleComponent implements OnInit {
     @Input() matchDoodle: MatchDoodleDTO;
     showUsers: boolean = false;
     showModified: boolean = false;
+    force: boolean = false;
     error: any = "";
     presenceEnum = PresenceDTO.TypeEnum;
 
@@ -119,7 +121,7 @@ export class DoodleComponent implements OnInit {
 
     changePresence(presence: PresenceDTO) {
         if (presence.editable) {
-            this._api.changePresence(this.matchDoodle.id, presence.account.id, SecUtil.getJwtHeaders())
+            this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force ,SecUtil.getJwtHeaders())
                 .subscribe(
                     r => {
                         this._api.matchDoodle(this.matchDoodle.id, SecUtil.getJwtHeaders()).subscribe(

@@ -43,12 +43,13 @@ export class DoodlerestcontrollerApi {
 
     /**
      * 
-     * @summary Get matchdoodles
+     * @summary Change presence
      * @param id id
      * @param accountId accountId
+     * @param force force
      */
-    public changePresence(id: number, accountId: number, extraHttpRequestParams?: any): Observable<models.PresenceDTO> {
-        return this.changePresenceWithHttpInfo(id, accountId, extraHttpRequestParams)
+    public changePresence(id: number, accountId: number, force?: boolean, extraHttpRequestParams?: any): Observable<models.PresenceDTO> {
+        return this.changePresenceWithHttpInfo(id, accountId, force, extraHttpRequestParams)
             .map((response: Response) => {
                 if (response.status === 204) {
                     return undefined;
@@ -93,12 +94,13 @@ export class DoodlerestcontrollerApi {
 
 
     /**
-     * Get matchdoodles
+     * Change presence
      * 
      * @param id id
      * @param accountId accountId
+     * @param force force
      */
-    public changePresenceWithHttpInfo(id: number, accountId: number, extraHttpRequestParams?: any): Observable<Response> {
+    public changePresenceWithHttpInfo(id: number, accountId: number, force?: boolean, extraHttpRequestParams?: any): Observable<Response> {
         const path = this.basePath + '/api/v1/doodle/match/${id}/presence/${accountId}'
                     .replace('${' + 'id' + '}', String(id))
                     .replace('${' + 'accountId' + '}', String(accountId));
@@ -113,6 +115,10 @@ export class DoodlerestcontrollerApi {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling changePresence.');
         }
+        if (force !== undefined) {
+            queryParameters.set('force', <any>force);
+        }
+
         // to determine the Content-Type header
         let consumes: string[] = [
             'application/json'

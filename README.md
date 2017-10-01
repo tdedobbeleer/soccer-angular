@@ -24,7 +24,7 @@ First of all, you need nodejs. Just download the latest stable version. At the t
 
 Install Angular CLI. Make sure you have the same version or higher than used by the project. Check the package.json file to know which version you need:
 
-    sudo npm install -g angular/cli@$version
+    sudo npm install -g @angular/cli@$version
 
 Now, you should be able to run the server:
 
