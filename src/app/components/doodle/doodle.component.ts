@@ -39,6 +39,8 @@ import {isNullOrUndefined} from "util";
                                                                   aria-hidden="true"></span>
           </a>
         </div>
+        <div class="clearfix"></div>
+        <div class="pull-right" *ngIf="matchDoodle?.doodle?.currentPresence?.type === presenceEnum.RESERVE" [innerHtml]="'text.doodle.reserve.info' | safeHtml"></div>
       </div>
       <div class="panel-body list" *ngIf="showUsers">
         <div class="doodle-list" *ngFor="let presence of matchDoodle?.doodle?.presences">
@@ -56,6 +58,26 @@ import {isNullOrUndefined} from "util";
                     aria-hidden="true"></span></a>
             </span>
         </div>
+        <div class="clearfix"></div>
+        <div *ngIf="matchDoodle?.doodle?.reserves?.length > 0">
+        <hr/>
+        <h4>{{'text.doodle.reserves' | translate}}</h4>
+        <div class="doodle-list" *ngFor="let presence of matchDoodle?.doodle?.reserves">
+            <span class="doodle-list-name">
+              <div>{{presence.account.name}}</div>
+              <div *ngIf="isAdmin() && presence.modified != null && showModified"><i>({{'text.doodle.modified' | translate}}:
+                  {{presence.modified}})</i>
+              </div>
+            </span>
+            <span class="doodle-list-btn">
+            <a (click)="changePresence(presence)" data-toggle="tooltip"
+               [class.disabled]="!presence.editable"
+               data-container="body" class="btn btn-default"><span
+                    [ngClass]="getPresenceClass(presence)"
+                    aria-hidden="true"></span></a>
+            </span>
+        </div>
+    </div>
     </div>
     <div class="panel-body" *ngIf="showUsers && isAdmin()">
           <a class="pull-right" data-toggle="tooltip" data-container="body"
@@ -74,6 +96,7 @@ export class DoodleComponent implements OnInit {
     showUsers: boolean = false;
     showModified: boolean = false;
     error: any = "";
+    presenceEnum = PresenceDTO.TypeEnum;
 
     constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService, private _loginService: LoginService) {
     }
@@ -100,23 +123,14 @@ export class DoodleComponent implements OnInit {
             this._api.changePresence(this.matchDoodle.id, presence.account.id, SecUtil.getJwtHeaders())
                 .subscribe(
                     r => {
-                        //Update current presence
-                        if (this.matchDoodle.doodle.currentPresence.account.id == presence.account.id) {
-                            this.matchDoodle.doodle.currentPresence.type = r.type;
-                        }
-                        //Update all other presences
-                        this.matchDoodle.doodle.presences.forEach(p => {
-                            if (p.account.id == presence.account.id) {
-                                p.type = r.type;
+                        this._api.matchDoodle(this.matchDoodle.id, SecUtil.getJwtHeaders()).subscribe(
+                            r => {
+                                this.matchDoodle = r;
+                            },
+                            e => {
+                                this.error = this._errorHandler.handle(e);
                             }
-                        });
-
-                        //Change total
-                        if (r.type == PresenceDTO.TypeEnum.PRESENT) {
-                            this.matchDoodle.doodle.total = this.matchDoodle.doodle.total + 1;
-                        } else {
-                            this.matchDoodle.doodle.total = this.matchDoodle.doodle.total - 1;
-                        }
+                        )
                     },
                     e => {
                         //Something went terribly wrong...
@@ -134,6 +148,8 @@ export class DoodleComponent implements OnInit {
                 case PresenceDTO.TypeEnum.NOTFILLEDIN:
                     return "glyphicon glyphicon-question-sign grey";
                 case PresenceDTO.TypeEnum.PRESENT:
+                    return "glyphicon glyphicon-ok green";
+                case PresenceDTO.TypeEnum.RESERVE:
                     return "glyphicon glyphicon-ok green";
                 case PresenceDTO.TypeEnum.NOTPRESENT:
                     return "glyphicon glyphicon-remove red";

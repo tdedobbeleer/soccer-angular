@@ -9,8 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import * as models from './models';
+import * as models from "./models";
 
 export interface PresenceDTO {
     account?: models.AccountDTO;
@@ -27,6 +26,7 @@ export namespace PresenceDTO {
         NOTPRESENT = <any> 'NOT_PRESENT',
         PRESENT = <any> 'PRESENT',
         NOTFILLEDIN = <any> 'NOT_FILLED_IN',
-        ANONYMOUS = <any> 'ANONYMOUS'
+        ANONYMOUS = <any> 'ANONYMOUS',
+        RESERVE = <any> 'RESERVE'
     }
 }

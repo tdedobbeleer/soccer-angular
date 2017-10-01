@@ -9,8 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import * as models from './models';
+import * as models from "./models";
 
 export interface DoodleDTO {
     created?: Date;
@@ -22,6 +21,8 @@ export interface DoodleDTO {
     modified?: Date;
 
     presences?: Array<models.PresenceDTO>;
+
+    reserves?: Array<models.PresenceDTO>;
 
     stringCreated?: string;
 
