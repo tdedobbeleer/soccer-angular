@@ -8,7 +8,8 @@ import {isNullOrUndefined} from "util";
     template: `
     <app-navbar></app-navbar>
     <div id="all">
-        <div id="content" (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')">
+        <!-- removed: (touchstart)="swipe($event, 'start')" (touchend)="swipe($event, 'end')" -->
+        <div id="content">
             <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>
