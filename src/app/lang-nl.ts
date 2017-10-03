@@ -23,7 +23,7 @@ export const LANG_NL_TRANS = {
     'text.matches.empty': 'Geen matchen gevonden voor dit seizoen.',
     'text.doodles.empty': 'Geen doodles gevonden.',
     'text.motm.empty': 'Geen \"Man van de match\" polls gevonden.',
-    'text.registration.succes': 'De registratie is gelukt.</br>Uw account zal nu geactiveerd moeten worden door de beheerder. U wordt op de hoogte gebracht van deze actie.</br>Daarna kan u rechts boven inloggen.</br></br>Veel plezier op deze website!',
+    'text.registration.succes': '<h4>De registratie is gelukt.</h4></br>Uw account zal nu geactiveerd moeten worden door de beheerder. U wordt op de hoogte gebracht van deze actie.</br>Daarna kan u rechts boven inloggen.</br></br>Veel plezier op deze website!',
     'text.recovery.request.email.failed' : 'De email kon niet verstuurd worden. Gelieve later opnieuw te proberen.',
     'text.recovery.request.success' : 'Er werd een email verzonden met de wachtwoord reset code. Gelieve je inbox te raadplegen.',
     'text.service.unavailable': "De server is momenteel down wegens onderhoud. Gelieve later opnieuw te proberen.",

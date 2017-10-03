@@ -23,7 +23,7 @@ export const LANG_EN_TRANS = {
     'text.matches.empty': 'No matches for season found.',
     'text.doodles.empty': 'No doodles found.',
     'text.motm.empty': 'No \"Man of the match\" polls found.',
-    'text.registration.succes': 'The registration was successful.</br>Your account will have to be activated by the administrator. You will be notified of this action.</br>Afterwards, you can try to login.</br></br>Have a lot of fun on this website!',
+    'text.registration.succes': '<h4>The registration was successful.</h4></br>Your account will have to be activated by the administrator. You will be notified of this action.</br>Afterwards, you can try to login.</br></br>Have a lot of fun on this website!',
     'text.recovery.request.email.failed' : 'Could not send email, please try again later.',
     'text.recovery.request.success' : 'An email with the recovery code has been sent. Please check your inbox.',
     'text.service.unavailable': "The server is temporarily down. Please try again later.",

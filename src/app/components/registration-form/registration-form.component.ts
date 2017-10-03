@@ -10,6 +10,7 @@ import {Response} from "@angular/http";
 import {equalsValidator} from "../../functions/equals-validator";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
+import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 
 @Component({
     selector: 'app-registration-form',
@@ -23,12 +24,12 @@ import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
             {{'nav.register' | translate }}
         </li>
     </ul>
- <div class="box" [hidden]="!success">
-  <alert [type]="'success'" [dismissible]="false">
-    <span [innerHtml]="'text.registration.succes' | safeHtml"></span>
-  </alert>
-</div>
-<div class="box" [hidden]="success">
+<div class="box">
+     <div class="success-div">
+      <alert [type]="'success'" [dismissible]="false" *ngIf="success">
+        <span [innerHtml]="'text.registration.succes' | safeHtml"></span>
+      </alert>
+     </div>
      <div class="error-div">
         <alert [type]="'danger'" [dismissible]="false"  [hidden]="!globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
      </div>
@@ -95,6 +96,7 @@ export class RegistrationFormComponent implements OnInit {
 
     @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective) succesf: FocusOnSuccessDirective;
 
     formErrors = {
         'firstName': '',
@@ -147,6 +149,7 @@ export class RegistrationFormComponent implements OnInit {
                     console.log("Registration success");
                     this.success = true;
                     this.globalError = false;
+                    this.succesf.trigger()
                 },
                 (error: Response) => {
                     this.globalError = this._errorService.handle(error, "/registration");
