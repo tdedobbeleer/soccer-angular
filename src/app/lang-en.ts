@@ -56,6 +56,7 @@ export const LANG_EN_TRANS = {
     'text.no': 'no',
     'text.no.votes': 'No one voted yet.',
     'text.no.comments': 'No reactions yet.',
+    'text.comment': 'Reaction',
     'text.verification.delete.news': 'Are you sure you want to delete this message?',
     'text.verification.delete.match': 'Delete match?',
     'text.team.success.create': 'The team was succesfully created',

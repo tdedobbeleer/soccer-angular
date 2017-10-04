@@ -135,8 +135,9 @@ header h3 {
 }
 
 .comment {
-    padding: 10px 0 10px 10px;
+    padding: 0px 0 0px 10px;
     margin-left: 5%;
+    line-height: 1;
 }
 
 /* Maps

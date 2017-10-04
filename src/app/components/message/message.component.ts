@@ -12,13 +12,15 @@ import {SecUtil} from "../../classes/sec-util";
   template: `
     <div class="post" *ngIf="!deleted">
       <div>
-        <h4>
-            <span>{{message.header}}</span>
+        <div class="row">
+            <div class="col-md-10 text-center"><h4>{{message.header}}</h4></div>
+            <div class="col-md-2">
             <span class="pull-right">
-                <a class="commentBtn" (click)="showAllComments = !showAllComments">
-                {{'btn.reactions' | translate}}&nbsp;<span class="badge">{{message?.comments.length}}</span></a>
+                <a class="commentBtn" (click)="showAllComments = !showAllComments"><h5>
+                {{'btn.reactions' | translate}}&nbsp;<span class="badge">{{message?.comments.length}}</span></h5></a>
             </span>
-        </h4>
+            </div>
+        </div>
         <hr>
         <span class="message-content" [innerHTML]="message.content | safeHtml"></span>
       
@@ -42,17 +44,7 @@ import {SecUtil} from "../../classes/sec-util";
               <button class="btn btn-xs" (click)="showDeleteNews = false"><b>{{"text.no" | translate}}</b></button>
             </span>
         </div>
-      
-        <div class="pull-right">
-        <span class="btn-group m-t-1" *ngIf="isLoggedIn() && showAllComments">
-            <button type="button" class="btn btn-info" aria-label="Create comment" (click)="showCreateComment = !showCreateComment">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            </button>
-        </span>  
-        </div>
-      </div>
-       <div class="clearfix"></div>
-      <div class="m-t-1">
+        <div class="m-t-1">
         <div *ngIf="showCreateComment">
           <span class="m-t-1">
               <app-comment-form (onSubmit)="createComment($event)" [comment]="getNewComment(message.id)"></app-comment-form>    
@@ -61,12 +53,22 @@ import {SecUtil} from "../../classes/sec-util";
         <div class="m-t-1" *ngIf="showAllComments">
             <app-comment *ngFor="let c of message?.comments" [comment]="c" [messageId]="message.id"></app-comment>
         </div>
-        <div class="comment" *ngIf="showAllComments && message?.comments?.length == 0">
+        <div class="comment" *ngIf="!showCreateComment && showAllComments && message?.comments?.length == 0">
           <div class="m-t-1 row">
               <div class="col-md-10"><i class="fa fa-2x fa-comment">&nbsp;</i><b>{{'text.no.comments' | translate}}</b></div>
           </div>
         </div>
       </div>
+      
+        <div class="pull-right">
+        <span class="btn-group m-t-1" *ngIf="isLoggedIn() && showAllComments">
+            <button type="button" class="btn btn-info" aria-label="Create comment" (click)="showCreateComment = !showCreateComment">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+        </span>  
+        </div>
+      </div>   
+         <div class="clearfix"></div>
     </div>
   `,
   styles: []

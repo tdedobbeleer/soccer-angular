@@ -26,7 +26,7 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
           </div>
         
         </div>
-        <span class="m-t-1" *ngIf="showEditComment && isLoggedIn() && getUser().username == comment?.postedBy?.username">
+        <span class="m-t-1" *ngIf="showEditComment && isLoggedIn() && (isAdmin() || getUser().username == comment?.postedBy?.username)">
             <app-comment-form (onSubmit)="updateComment($event)" [comment]="comment"></app-comment-form>    
         </span>
     </div>
