@@ -9,11 +9,20 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(jpg|jpeg|gif|png|ico|css|js)",
+        "source": "**/*.@(jpg|jpeg|gif|png|ico)",
         "headers": [
           {
             "key": "Cache-Control",
             "value": "max-age=2592000"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
           }
         ]
       }
