@@ -46,6 +46,10 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
                     <div class="col-md-2 col-xs-12 col-sm-12">
                       <div class="row text-center visible-sm visible-xs">
                           <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
+                          <h5>
+                              <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
+                              <span *ngIf="!match.address?.googleLink"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
+                          </h5>
                       </div>
                       <div *ngIf="forecast" class="text-center hidden-xs">
                           <div class="row">
@@ -68,7 +72,18 @@ import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
             <div class="col-md-12 col-xs-12">
                <div class="text-center">
                     <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
+                    <h3>
+                        <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
+                        <span *ngIf="!match.address?.googleLink"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
+                    </h3>
                </div>
+            </div>
+        </div>
+        <div class="row">
+             <div class="col-md-12 google-map">
+                <div *ngIf="showMap">
+                    <iframe id="mapFrame" width="100%" height="450" scrolling="no" marginheight="0" marginwidth="0" [src]="match.address?.googleLink | safe" frameborder="0"></iframe>
+                </div> 
             </div>
         </div>
     </div>
@@ -79,6 +94,7 @@ export class NextMatchComponent implements OnInit {
     match: MatchDTO;
     forecast: WeatherList;
     math: Math;
+    showMap: boolean = false;
 
     constructor(private _matchesApi: MatchesrestcontrollerApi,
                 private _forecastApi: ForecastrestcontrollerApi,

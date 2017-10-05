@@ -77,7 +77,7 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
             </div>
             </div>
             <div class="row">
-                <div class="col-md-12 m-l-1">
+                <div class="col-md-12 google-map">
                 <div *ngIf="showMap">
                     <iframe id="mapFrame" width="100%" height="450" scrolling="no" marginheight="0" marginwidth="0" [src]="match.address?.googleLink | safe" frameborder="0"></iframe>
                 </div>

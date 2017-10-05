@@ -148,6 +148,11 @@ header h3 {
     padding-bottom: 10px;
 }
 
+.google-map {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 /** Avatar **/
 .kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
     margin: 0;
