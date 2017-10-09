@@ -25,6 +25,15 @@
             "value": "max-age=86400"
           }
         ]
+      },
+      {
+        "source": "**/*",
+        "headers": [
+          {
+            "key": "X-Frame-Options",
+            "value": "SAMEORIGIN"
+          }
+        ]
       }
     ]
   }
