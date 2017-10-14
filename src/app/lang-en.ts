@@ -156,7 +156,7 @@ export const LANG_EN_TRANS = {
     'label.account.sendMail': 'Send email to the user',
     'label.role': 'role',
     'label.name': 'name',
-    'label.rememberUserName': 'Remember mmy email address',
+    'label.rememberUserName': 'Remember my email address',
     'btn.login': 'Login',
     'btn.reactions': 'Reactions',
     'btn.submit': 'Submit',
