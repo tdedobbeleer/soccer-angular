@@ -28,7 +28,7 @@ import {TranslationService} from "../../services/translation.service";
       <h4>{{account?.firstName}} {{account?.lastName}} ({{account?.username}})</h4>
       <hr/>
       <div class="form-group"> 
-        <input name="sendMail" id="sendMail" type="checkbox" formControlName="sendMail" checked />
+        <input name="sendMail" id="sendMail" type="checkbox" formControlName="sendMail"/>
         <label for="sendMail">{{"label.account.sendMail" | translate}}</label>
       </div>
       
@@ -70,7 +70,7 @@ export class ActivateAccountFormComponent implements OnInit {
         );
 
         this.activateForm = this._fb.group({
-            sendMail: [false, ''],
+            sendMail: [true, ''],
         });
 
         //Set listener
