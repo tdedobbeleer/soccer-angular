@@ -28,7 +28,7 @@ import {TranslationService} from "../../services/translation.service";
       <h4>{{account?.firstName}} {{account?.lastName}} ({{account?.username}})</h4>
       <hr/>
       <div class="form-group"> 
-        <input name="sendMail" id="sendMail" type="checkbox" formControlName="sendMail" />
+        <input name="sendMail" id="sendMail" type="checkbox" formControlName="sendMail" checked />
         <label for="sendMail">{{"label.account.sendMail" | translate}}</label>
       </div>
       
