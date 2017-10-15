@@ -79,7 +79,8 @@ import {Util} from "../../classes/util";
           </div>
       </div>
        <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
+        </button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/teams']">{{"btn.cancel" | translate}}</a>
       </div>
@@ -96,6 +97,7 @@ export class EditTeamFormComponent implements OnInit {
     createSuccess: boolean = false;
     googleLink: string;
     addressList: AddressDTO[];
+    isLoading: boolean = false;
 
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
     @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
@@ -185,6 +187,7 @@ export class EditTeamFormComponent implements OnInit {
         this._validationService.onValueChanged(this.teamForm, this.formErrors);
 
         if (this.teamForm.valid) {
+            this.isLoading = true;
             this._api.updateTeam(model, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this.globalError = '';
@@ -196,6 +199,9 @@ export class EditTeamFormComponent implements OnInit {
                     this.globalError = this._errorHandler.handle(error);
                     this.error.trigger();
                 },
+                () => {
+                    this.isLoading = false;
+                }
             )
 
         } else {

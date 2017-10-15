@@ -134,7 +134,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
       </div>
       
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
       </div>
     </form>
     </div>
@@ -161,6 +161,8 @@ export class EditAccountFormComponent implements OnInit {
     updateProfileSuccess: boolean = false;
 
     updatePasswordSuccess: boolean = false;
+
+    isLoading: boolean = false;
 
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
     @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
@@ -233,7 +235,7 @@ export class EditAccountFormComponent implements OnInit {
             },
             e => {
                 this._errorHandler.handle(e, "account/profile/edit/" + this.profileId);
-            }
+            },
         );
 
         this.passwordForm = this._fb.group({
@@ -266,6 +268,7 @@ export class EditAccountFormComponent implements OnInit {
         this._validationService.onValueChanged(this.passwordForm, this.passwordFormErrors);
 
         if (this.passwordForm.valid) {
+            this.isLoading = true;
             this._accountApi.changePassword(model, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this.globalPasswordError = '';
@@ -274,6 +277,9 @@ export class EditAccountFormComponent implements OnInit {
                 },
                 error => {
                     this.globalPasswordError = this._errorHandler.handle(error);
+                },
+                () => {
+                    this.isLoading = false;
                 }
             );
 

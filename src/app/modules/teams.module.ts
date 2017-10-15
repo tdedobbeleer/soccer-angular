@@ -11,6 +11,7 @@ import {EditTeamFormComponent} from "../components/edit-team-form/edit-team-form
 import {CreateTeamFormComponent} from "../components/create-team-form/create-team-form.component";
 import {TeamComponent} from "../components/team/team.component";
 import {TeamsrestcontrollerApi} from "../ws/soccer/api/TeamsrestcontrollerApi";
+import {LaddaModule} from "angular2-ladda";
 
 const routes: Routes = [
     {path: '', component: TeamsListComponent},
@@ -25,6 +26,12 @@ const routes: Routes = [
         SharedModule,
         AlertModule.forRoot(),
         RouterModule.forChild(routes),
+        LaddaModule.forRoot({
+            style: "expand-right",
+            spinnerSize: 20,
+            spinnerColor: "white",
+            spinnerLines: 12
+        }),
     ],
     declarations: [
         EditTeamFormComponent,

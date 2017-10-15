@@ -79,7 +79,8 @@ import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directi
 
 
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
+        </button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/login']">{{"btn.cancel" | translate}}</a>
       </div>
@@ -93,6 +94,7 @@ export class RegistrationFormComponent implements OnInit {
     registrationForm: FormGroup;
     success: boolean = false;
     globalError: any;
+    isLoading: boolean = false;
 
     @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
@@ -144,6 +146,7 @@ export class RegistrationFormComponent implements OnInit {
         this._validationService.onValueChanged(this.registrationForm, this.formErrors);
 
         if (this.registrationForm.valid) {
+            this.isLoading = true;
             this._api.createAccount(model, this.registrationForm.controls['captchaResponse'].value).subscribe(
                 r => {
                     console.log("Registration success");
@@ -156,7 +159,7 @@ export class RegistrationFormComponent implements OnInit {
                     this.error.trigger();
                 },
                 () => {
-                    console.log("completed");
+                    this.isLoading = false;
                 }
             )
         }

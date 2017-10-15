@@ -15,6 +15,7 @@ import {NavbarComponent} from "./components/navbar/navbar.component";
 import {AlertModule, BsDropdownModule, CollapseModule, AccordionModule} from "ngx-bootstrap";
 import {ImageUploadModule} from "angular2-image-upload";
 import {BrowserModule} from "@angular/platform-browser";
+import {LaddaModule} from "angular2-ladda";
 
 const appRoutes: Routes = [
     {path: '', loadChildren: './modules/message.module#MessageModule'},
@@ -44,7 +45,13 @@ const appRoutes: Routes = [
         ImageUploadModule.forRoot(),
         AccordionModule.forRoot(),
         SharedModule.forRoot(),
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(appRoutes),
+        LaddaModule.forRoot({
+            style: "expand-right",
+            spinnerSize: 20,
+            spinnerColor: "white",
+            spinnerLines: 12
+        }),
     ],
     declarations: [
         LoginComponent,

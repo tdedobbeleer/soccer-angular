@@ -17,6 +17,7 @@ import {SeasonsrestcontrollerApi} from "../ws/soccer/api/SeasonsrestcontrollerAp
 import {MatchesrestcontrollerApi} from "../ws/soccer/api/MatchesrestcontrollerApi";
 import {ForecastrestcontrollerApi} from "../ws/weather/api/ForecastrestcontrollerApi";
 import {TeamsrestcontrollerApi} from "../ws/soccer/api/TeamsrestcontrollerApi";
+import {LaddaModule} from "angular2-ladda";
 
 const routes: Routes = [
     {path: '', component: MatchesComponent},
@@ -33,6 +34,12 @@ const routes: Routes = [
         DatepickerModule.forRoot(),
         AlertModule.forRoot(),
         RouterModule.forChild(routes),
+        LaddaModule.forRoot({
+            style: "expand-right",
+            spinnerSize: 20,
+            spinnerColor: "white",
+            spinnerLines: 12
+        }),
     ],
     declarations: [
         MatchComponent,

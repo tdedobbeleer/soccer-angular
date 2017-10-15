@@ -100,6 +100,7 @@ export const LANG_NL_TRANS = {
     'title.faq5': 'Wat als ik nog andere vragen heb?',
     'text.faq5': 'Dan mag je zeker de beheerder emailen!',
     'hello world': 'hello world',
+    'nav.team.edit': 'Wijzig team',
     'nav.messages': 'Berichten',
     'nav.login' : 'Inloggen',
     'nav.home' : 'Home',

@@ -31,6 +31,7 @@
     "@ngtools/webpack": "^1.5.5",
     "angular-datatables": "^4.2.0",
     "angular2-image-upload": "^0.6.6",
+    "angular2-ladda": "^1.2.2",
     "angular2-recaptcha": "0.6.0",
     "core-js": "^2.4.1",
     "datatables.net": "^1.10.15",

@@ -59,7 +59,7 @@ import {ActivatedRoute} from "@angular/router";
       </div>
       
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/login']">{{"btn.cancel" | translate}}</a>
       </div>
@@ -73,6 +73,7 @@ export class RecoveryCodeFormComponent implements OnInit {
   recoveryForm: FormGroup;
   success: boolean = false;
   globalError: any;
+    isLoading: boolean = false;
 
   formErrors = {
     'code': '',
@@ -111,6 +112,7 @@ export class RecoveryCodeFormComponent implements OnInit {
     this._validationService.onValueChanged(this.recoveryForm, this.formErrors);
 
     if (this.recoveryForm.valid) {
+        this.isLoading = true;
       this._api.useRecoveryCode(model).subscribe(
           r => {
             console.log("Registration success");
@@ -122,7 +124,7 @@ export class RecoveryCodeFormComponent implements OnInit {
               this.errorFocus.trigger();
           },
           () => {
-            console.log("completed");
+              this.isLoading = false;
           }
       )
     }

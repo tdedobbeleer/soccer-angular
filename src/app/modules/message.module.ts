@@ -16,6 +16,7 @@ import {CommentFormComponent} from "../components/comment-form/comment-form.comp
 import {CommentComponent} from "../components/comment/comment.component";
 import {MessageComponent} from "../components/message/message.component";
 import {AlertModule} from "ngx-bootstrap";
+import {LaddaModule} from "angular2-ladda";
 
 const routes: Routes = [
     {path: '', component: MessagesComponent},
@@ -32,6 +33,12 @@ const routes: Routes = [
         SharedModule,
         AlertModule.forRoot(),
         RouterModule.forChild(routes),
+        LaddaModule.forRoot({
+            style: "expand-right",
+            spinnerSize: 20,
+            spinnerColor: "white",
+            spinnerLines: 12
+        }),
     ],
     declarations: [
         MessagesComponent,

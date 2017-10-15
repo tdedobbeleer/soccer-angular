@@ -124,7 +124,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       
        
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/profile']">{{"btn.cancel" | translate}}</a>
       </div>
@@ -144,6 +144,8 @@ export class EditMatchFormComponent implements OnInit {
     statusEnum = StatusEnum;
 
     globalError: string = "";
+
+    isLoading: boolean = false;
 
     teams: TeamDTO[];
     seasons: SeasonDTO[];
@@ -271,6 +273,7 @@ export class EditMatchFormComponent implements OnInit {
         this._validationService.onValueChanged(this.matchForm, this.formErrors);
 
         if (this.matchForm.valid) {
+            this.isLoading = true;
             this._api.updateMatch(model, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this.globalError = '';
@@ -281,6 +284,7 @@ export class EditMatchFormComponent implements OnInit {
                     this.error.trigger();
                 },
                 () => {
+                    this.isLoading = false;
                     this._router.navigate(['/matches']);
                 }
             )

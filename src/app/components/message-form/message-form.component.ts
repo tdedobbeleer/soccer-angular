@@ -54,7 +54,7 @@ import {ValidationService} from "../../services/validation.service";
        </div>
        
       <div class="box-footer">
-      <button type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+      <button type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
       </div>
     </form>
     </div>
@@ -64,6 +64,7 @@ import {ValidationService} from "../../services/validation.service";
 export class MessageFormComponent implements OnInit {
     public messageForm: FormGroup;
     public submitted: boolean;
+    isLoading: boolean = false;
 
     globalError: any = "";
 
@@ -93,6 +94,7 @@ export class MessageFormComponent implements OnInit {
         this._validationService.onValueChanged(this.messageForm, this.formErrors);
 
         if (isValid) {
+            this.isLoading = true;
             this._api.postNews(model, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this._router.navigate(["/messages"]);
@@ -101,7 +103,7 @@ export class MessageFormComponent implements OnInit {
                     this.globalError = this._errorHandler.handle(error, "/messages/create");
                 },
                 () => {
-                    console.log("completed");
+                    this.isLoading = false;
                 }
             )
         }

@@ -30,7 +30,7 @@ import {ValidationService} from "../../services/validation.service";
         <input type="hidden" class="form-control" formControlName="content">
       </div>       
       <div class="box-footer">
-      <button type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+      <button type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
       </div>
     </form>
     </div>
@@ -47,6 +47,8 @@ export class EditMessageFormComponent implements OnInit {
     messageForm: FormGroup;
 
     globalError: any = "";
+
+    isLoading: boolean = true;
 
     formErrors = {
         header: "",
@@ -97,6 +99,7 @@ export class EditMessageFormComponent implements OnInit {
         this._validationService.onValueChanged(this.messageForm, this.formErrors);
 
         if (isValid) {
+            this.isLoading = true;
             this._api.updateNews(model, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this._router.navigate(["/messages"]);
@@ -105,7 +108,7 @@ export class EditMessageFormComponent implements OnInit {
                     this.globalError = this._errorHandler.handle(error, "/messages/edit/" + this.messageId);
                 },
                 () => {
-                    console.log("completed");
+                    this.isLoading = false;
                 }
             )
         }

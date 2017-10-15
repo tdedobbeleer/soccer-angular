@@ -104,6 +104,7 @@ export const LANG_EN_TRANS = {
     'label.match.goals': 'Goals',
     'text.select' : 'Select',
     'hello world': 'hello world',
+    'nav.team.edit': 'Edit team',
     'nav.messages': 'Messages',
     'nav.login' : 'Login',
     'nav.home' : 'Home',

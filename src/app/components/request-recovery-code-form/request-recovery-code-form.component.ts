@@ -46,12 +46,10 @@ import {TranslationService} from "../../services/translation.service";
          <small class="text-danger" [hidden]="!formErrors.captchaResponse">
              {{formErrors.captchaResponse}}
         </small>
-      </div>
-       
-           
-       
+      </div>       
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
+        </button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/login']">{{"btn.cancel" | translate}}</a>
       </div>
     </form>
@@ -71,6 +69,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
   success : boolean = false;
   emailError : boolean;
   globalError : any;
+  isLoading: boolean = false;
 
   @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
@@ -112,6 +111,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
     this.success = false;
 
     if (this.recoveryForm.valid) {
+      this.isLoading = true;
       this._api.forgotPassword(dto, this.recoveryForm.controls['captchaResponse'].value).subscribe(
           r => {
             this.success = true;
@@ -124,6 +124,9 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
             }
             this.errorFocus.trigger();
           },
+          () => {
+            this.isLoading = false;
+          }
       )
     }
 

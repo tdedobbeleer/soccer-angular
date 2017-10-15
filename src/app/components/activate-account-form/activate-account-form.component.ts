@@ -34,7 +34,8 @@ import {TranslationService} from "../../services/translation.service";
       
        
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary">{{"btn.submit" | translate}}</button>
+        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
+        </button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/']">{{"btn.cancel" | translate}}</a>
       </div>
       </form>
@@ -48,6 +49,7 @@ export class ActivateAccountFormComponent implements OnInit {
     activateForm: FormGroup;
     globalError: string = "";
     activateSuccess: boolean;
+    isLoading: boolean = false;
 
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
     @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
@@ -90,6 +92,7 @@ export class ActivateAccountFormComponent implements OnInit {
         this._validationService.onValueChanged(this.activateForm, this.formErrors);
 
         if (this.activateForm.valid) {
+            this.isLoading = true;
             this._api.firstTimeActivation(this.accountId, model.sendMail, SecUtil.getJwtHeaders()).subscribe(
                 r => {
                     this.globalError = '';
@@ -105,6 +108,9 @@ export class ActivateAccountFormComponent implements OnInit {
                     }
                     this.error.trigger();
                 },
+                () => {
+                    this.isLoading = false;
+                }
             )
 
         }
