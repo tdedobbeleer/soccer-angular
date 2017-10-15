@@ -16,7 +16,7 @@ import {Component, OnInit} from "@angular/core";
       <hr>
   
       <accordion>
-        <accordion-group *ngFor="let item of [1,2,3,4]" [panelClass]="'panel-primary'" heading="{{getText('title.faq', item) | translate }}">
+        <accordion-group *ngFor="let item of [1,2,3,4,5]" [panelClass]="'panel-primary'" heading="{{getText('title.faq', item) | translate }}">
           <span [innerHtml]="getText('text.faq', item) | safeHtml"></span>
         </accordion-group>
       </accordion>
