@@ -26,8 +26,8 @@ import {isNullOrUndefined} from "util";
                   class="glyphicon glyphicon-user"></span> <span
                   class="count-badge">{{matchDoodle.doodle.total}}</span>
           </a>
-          <a (click)="changePresence(matchDoodle.doodle.currentPresence)" data-toggle="tooltip" *ngIf="isLoggedIn()"
-               data-container="body" title="{{'tooltip.doodle.changePresence' | translate}}"
+          <a (click)="changePresence(matchDoodle.doodle.currentPresence, 'current')" data-toggle="tooltip" *ngIf="isLoggedIn()"
+               data-container="body" title="{{'tooltip.doodle.changePresence' | translate}}" [ladda]="loading['current']"
                data-placement="top" class="btn btn-default"><span
                     [ngClass]="getPresenceClass(matchDoodle.doodle.currentPresence)"
                     aria-hidden="true"></span>
@@ -59,7 +59,7 @@ import {isNullOrUndefined} from "util";
               </div>
             </span>
             <span class="doodle-list-btn">
-            <a (click)="changePresence(presence)" data-toggle="tooltip"
+            <a (click)="changePresence(presence, presence.account.id)" data-toggle="tooltip" [ladda]="loading[presence.account.id]"
                [class.disabled]="!presence.editable"
                data-container="body" class="btn btn-default"><span
                     [ngClass]="getPresenceClass(presence)"
@@ -78,7 +78,7 @@ import {isNullOrUndefined} from "util";
               </div>
             </span>
             <span class="doodle-list-btn">
-            <a (click)="changePresence(presence)" data-toggle="tooltip"
+            <a (click)="changePresence(presence, presence.account.id)" data-toggle="tooltip" [ladda]="loading[presence.account.id]"
                [class.disabled]="!presence.editable"
                data-container="body" class="btn btn-default"><span
                     [ngClass]="getPresenceClass(presence)"
@@ -98,6 +98,7 @@ export class DoodleComponent implements OnInit {
     force: boolean = false;
     error: any = "";
     presenceEnum = PresenceDTO.TypeEnum;
+    loading: boolean[] = [];
 
     constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }
@@ -119,8 +120,9 @@ export class DoodleComponent implements OnInit {
         this._router.navigate(['/login'], {queryParams: {redirectUrl: "doodles"}});
     }
 
-    changePresence(presence: PresenceDTO) {
+    changePresence(presence: PresenceDTO, i) {
         if (presence.editable) {
+            this.loading[i] = true;
             this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force ,SecUtil.getJwtHeaders())
                 .subscribe(
                     r => {
@@ -136,6 +138,9 @@ export class DoodleComponent implements OnInit {
                     e => {
                         //Something went terribly wrong...
                         this.error = this._errorHandler.handle(e);
+                    },
+                    () => {
+                        this.loading[i] = false;
                     }
                 )
         }
