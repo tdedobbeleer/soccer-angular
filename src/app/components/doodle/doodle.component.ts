@@ -122,7 +122,9 @@ export class DoodleComponent implements OnInit {
 
     changePresence(presence: PresenceDTO, i) {
         if (presence.editable) {
-            this.loading[i] = true;
+            let timeoutId = setTimeout(() => {
+                this.loading[i] = true;
+            }, 1000);
             this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force ,SecUtil.getJwtHeaders())
                 .subscribe(
                     r => {
@@ -140,6 +142,7 @@ export class DoodleComponent implements OnInit {
                         this.error = this._errorHandler.handle(e);
                     },
                     () => {
+                        clearTimeout(timeoutId);
                         this.loading[i] = false;
                     }
                 )
