@@ -12,10 +12,10 @@ before_script:
    - npm install -g --silent @angular/cli
 
 script:
-   - ng build --aot --prod
+   - ng build --aot --prod --environment=p
 
-after_success:
-  - firebase deploy --token $FIREBASE_TOKEN --non-interactive # firebase deploy after angular-cli build
+#after_success:
+#  - firebase deploy --token $FIREBASE_TOKEN --non-interactive # firebase deploy after angular-cli build
 
 notifications:
   email:
