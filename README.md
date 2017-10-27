@@ -1,6 +1,8 @@
 Soccer Angular 2 GUI 
 ===================
 
+[![Build Status](https://travis-ci.org/tdedobbeleer/soccer-angular.svg?branch=master)](https://travis-ci.org/tdedobbeleer/soccer-angular)
+<br>
 
 This is a GUI built for using the [Soccer API](https://github.com/tdedobbeleer/soccer-ws). This guide will explain how to deploy the code on [Firebase](https://firebase.google.com) and maybe explain how this GUI works. Maybe.
 
