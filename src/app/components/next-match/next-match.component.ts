@@ -10,7 +10,7 @@ import {SecUtil} from "../../classes/sec-util";
 @Component({
     selector: 'app-next-match',
     template: `
-    <h3 *ngIf="match && match.status != 'PLAYED'">{{'text.match.next' | translate}}</h3>
+    <h3 *ngIf="match && match.status != matchStatus.PLAYED">{{'text.match.next' | translate}}</h3>
     <div class="box" *ngIf="match">
         <div class="row">
             <div class="col-md-12 col-xs-12">
@@ -19,15 +19,15 @@ import {SecUtil} from "../../classes/sec-util";
                     <div class="col-md-7">
                         <div class="row text-center hidden-xs">
                             <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
-                            <div class="col-md-2 col-xs-4 text-center score" *ngIf="match.status != 'PLAYED'"><h3> - </h3></div>
-                            <div class="col-md-2 col-xs-4 text-center score" *ngIf="match.status == 'PLAYED'">
+                            <div class="col-md-2 col-xs-4 text-center score" *ngIf="match.status != matchStatus.PLAYED"><h3> - </h3></div>
+                            <div class="col-md-2 col-xs-4 text-center score" *ngIf="match.status == matchStatus.PLAYED">
                             <h3>{{match.htGoals}} - {{match.atGoals}}</h3></div>
                             <div class="col-md-4 col-xs-4 left"><h3>{{match?.awayTeam?.name}}</h3></div>
                         </div>
                          <div class="row visible-xs">
                             <div class="col-xs-8">
-                            <div class=""><h4>{{match?.homeTeam?.name}} <span class="pull-right" *ngIf="match.status == 'PLAYED'">{{match.htGoals}}</span></h4></div>
-                            <div class=""><h4>{{match?.awayTeam?.name}} <span class="pull-right" *ngIf="match.status == 'PLAYED'">{{match.atGoals}}</span></h4></div>
+                            <div class=""><h4>{{match?.homeTeam?.name}} <span class="pull-right" *ngIf="match.status == matchStatus.PLAYED">{{match.htGoals}}</span></h4></div>
+                            <div class=""><h4>{{match?.awayTeam?.name}} <span class="pull-right" *ngIf="match.status == matchStatus.PLAYED">{{match.atGoals}}</span></h4></div>
                             </div>
                             <div class="col-xs-4">
                                 <div *ngIf="forecast" class="text-center">
@@ -106,7 +106,7 @@ export class NextMatchComponent implements OnInit {
     match: MatchDTO;
     forecast: WeatherList;
     math: Math;
-    showMap: boolean = false;
+    matchStatus = MatchDTO.StatusEnum;
 
     constructor(private _matchesApi: MatchesrestcontrollerApi,
                 private _forecastApi: ForecastrestcontrollerApi,
