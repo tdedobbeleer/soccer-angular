@@ -52,6 +52,9 @@ If you don't have a Google account, which is very unlikely, create one first. Th
 
 ### Deploy code using the Firebase CLI
 Install the [Firebase CLI](https://firebase.google.com/docs/cli/) first and I suggest you read the docs as well.
+    
+    sudo npm install -g firebase-tools
+
 Then, log into Firebase:
 
     firebase login
