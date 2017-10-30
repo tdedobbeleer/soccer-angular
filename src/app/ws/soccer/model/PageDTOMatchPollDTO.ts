@@ -9,10 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import * as models from './models';
+import * as models from "./models";
 
 export interface PageDTOMatchPollDTO {
+    currentPage?: number;
+
     hasNext?: boolean;
 
     hasPrevious?: boolean;
