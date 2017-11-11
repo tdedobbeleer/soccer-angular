@@ -4,7 +4,7 @@ import {Component, OnInit, Input} from "@angular/core";
     selector: 'app-loading',
     template: `
     <div class="text-center" *ngIf="loading">
-        <img src="../../../assets/images/loading-ball.gif">
+        <img src="assets/images/loading-ball.gif">
     </div>
   `,
     styles: []

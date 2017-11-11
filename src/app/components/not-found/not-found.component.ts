@@ -16,7 +16,7 @@ import {Component, OnInit} from "@angular/core";
                     <div class="box">
     
                         <p class="text-center">
-                            <img src="../../../assets/images/svk-weblogo-themed.png">
+                            <img src="assets/images/svk-weblogo-themed.png">
                         </p>
     
                         <h3>{{'title.error.404' | translate}}</h3>
