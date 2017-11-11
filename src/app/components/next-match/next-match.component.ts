@@ -10,8 +10,15 @@ import {SecUtil} from "../../classes/sec-util";
 @Component({
     selector: 'app-next-match',
     template: `
-    <h3 *ngIf="match && match.status != matchStatus.PLAYED">{{'text.match.next' | translate}}</h3>
-    <div class="box" *ngIf="match">
+        <div class="text-center" *ngIf="match">
+            <h3 *ngIf="match?.status != matchStatus.PLAYED">{{'text.match.next' | translate}}
+                <span *ngIf="match?.status == matchStatus.CANCELLED" class="red" data-toggle="tooltip"
+                      data-placement="top"
+                      title="{{match?.statusText}}">&nbsp;({{'text.match.status.cancelled' | translate}}!)</span>
+            </h3>
+
+        </div>
+        <div class="box" *ngIf="match" [ngClass]="{'cancelled': match?.status == matchStatus.CANCELLED }">
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <div class="row">
@@ -100,7 +107,12 @@ import {SecUtil} from "../../classes/sec-util";
         </div>
     </div>
   `,
-    styles: []
+    styles: [`
+        .box.cancelled {
+            border: solid 1px indianred;
+        }
+    `
+    ]
 })
 export class NextMatchComponent implements OnInit {
     match: MatchDTO;

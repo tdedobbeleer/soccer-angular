@@ -69,6 +69,16 @@ import StatusEnum = MatchDTO.StatusEnum;
              {{formErrors.status}}
         </small>
       </div>
+
+        <div *ngIf="matchForm.value?.status == statusEnum.CANCELLED">
+            <div class="form-group">
+                <label for="statusText">{{"label.match.statusText" | translate}}</label>
+                <textarea name="statusText" class="form-control" formControlName="statusText"></textarea>
+                <small class="text-danger" [hidden]="!formErrors.statusText">
+                    {{formErrors.statusText}}
+                </small>
+            </div>
+        </div>
        
       <div *ngIf="matchForm.value?.status == statusEnum.PLAYED">         
         <div class="form-group">
@@ -163,6 +173,7 @@ export class EditMatchFormComponent implements OnInit {
         'date': '',
         'hour': '',
         'status': '',
+        'statusText': '',
         'atGoals': '',
         'htGoals': '',
         'goals': '',
@@ -183,6 +194,7 @@ export class EditMatchFormComponent implements OnInit {
             date: ['', [<any>Validators.required]],
             hour: ['', [<any>Validators.required]],
             status: ['', [<any>Validators.required]],
+            statusText: ['', []],
             goals: [this._fb.array([])],
             atGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]],
             htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]]
@@ -196,6 +208,7 @@ export class EditMatchFormComponent implements OnInit {
                 this.matchForm.patchValue({date: match.date});
                 this.matchForm.patchValue({hour: match.hour});
                 this.matchForm.patchValue({status: match.status});
+                this.matchForm.patchValue({statusText: match.statusText});
                 this.matchForm.patchValue({atGoals: match.atGoals});
                 this.matchForm.patchValue({htGoals: match.htGoals});
                 //Set the goals

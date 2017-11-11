@@ -7,5 +7,6 @@ export const environment = {
     production: false,
     defaultTeamId: 1,
     api_url: "http://localhost:8080",
+    weather_api_key: "ed947b1f42105d993e46d24c3d770be2",
     recaptcha_public_key: "6Le0aCkUAAAAACGypCCASAYNfjf2f6SLu8O5V2vf"
 };

@@ -34,10 +34,25 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                     <div class="col-md-6">
                         <div class="row text-center hidden-xs">
                             <div class="col-md-5 col-xs-4 right"><h4>{{match?.homeTeam?.name}}</h4></div>
-                            <div class="col-md-2 col-xs-4 text-center score"><h4 *ngIf="match.status != matchStatus.PLAYED">&nbsp;-&nbsp;</h4><h4 *ngIf="match.status == matchStatus.PLAYED">{{match?.htGoals}} - {{match?.atGoals}}</h4></div>
+                            <div class="col-md-2 col-xs-4 text-center score">
+                                <h4 *ngIf="match.status != matchStatus.PLAYED">&nbsp;-&nbsp;</h4>
+                                <h4 *ngIf="match.status == matchStatus.PLAYED">{{match?.htGoals}} -
+                                    {{match?.atGoals}}</h4></div>
                             <div class="col-md-5 col-xs-4 left"><h4>{{match?.awayTeam?.name}}</h4></div>
                         </div>
+                        <div class="row hidden-xs text-center m-t-1" *ngIf="match?.status == matchStatus.CANCELLED">
+                            <span class="red" data-toggle="tooltip" data-placement="top"
+                                  title="{{match?.statusText}}"><b>{{'text.match.status.cancelled' | translate}}</b></span>
+                        </div>
                         <div class="row visible-xs">
+                            <div class="row text-center" *ngIf="match?.status == matchStatus.CANCELLED">
+                                <div class="col-xs-12">
+                                    <span class="red" data-toggle="tooltip" data-placement="top"
+                                          title="{{match?.statusText}}">
+                                        <h4>{{'text.match.status.cancelled' | translate}}</h4>
+                                    </span>
+                                </div>
+                            </div>
                             <div class="col-xs-10">
                             <div class="row"><h4>{{match?.homeTeam?.name}}</h4></div>
                             <div class="row"><h4>{{match?.awayTeam?.name}}</h4></div>

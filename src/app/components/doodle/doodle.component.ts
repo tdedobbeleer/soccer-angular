@@ -10,13 +10,17 @@ import {isNullOrUndefined} from "util";
 @Component({
     selector: 'app-doodle',
     template: `
-    <div class="panel panel-default" [ngClass]="{'panel-warning': force }">
+        <div class="panel panel-default"
+             [ngClass]="{'panel-warning': force, 'panel-danger': matchDoodle?.matchStatus == matchStatus.CANCELLED && !force }"
+             [ngClass]="{ }">
       <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}} - {{matchDoodle.hour}}
       </div>
       <div class="panel-body">
         <alert [type]="'danger'" *ngIf="error">{{'text.doodle.error' | translate}}</alert>
         <div class="doodle-title">
           <h3>{{matchDoodle.description}}
+              <span *ngIf="matchDoodle?.matchStatus == matchStatus.CANCELLED"
+                    class="red">&nbsp;({{'text.match.status.cancelled' | translate}}!)</span>
           </h3>
         </div>
         <div class="doodle-badge btn-group btn-group-lg">
@@ -99,6 +103,8 @@ export class DoodleComponent implements OnInit {
     error: any = "";
     presenceEnum = PresenceDTO.TypeEnum;
     loading: boolean[] = [];
+
+    matchStatus = MatchDoodleDTO.MatchStatusEnum;
 
     constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService) {
     }

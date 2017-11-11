@@ -136,6 +136,7 @@ export const LANG_EN_TRANS = {
     'label.match.awayTeam': 'Away team',
     'label.match.homeTeam': 'Home team',
     'label.match.season': 'Season',
+    'label.match.statusText': 'Reason for cancellation',
     'label.rememberMe': 'Stay logged in',
     'label.message.sendAndPost': 'Send message to active members and post on this website',
     'label.message.sendOnly': 'Send to active members',

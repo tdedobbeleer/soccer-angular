@@ -133,6 +133,7 @@ export const LANG_NL_TRANS = {
     'label.match.awayTeam': 'Uitploeg',
     'label.match.homeTeam': 'ThuisPloeg',
     'label.match.season': 'Seizoen',
+    'label.match.statusText': 'Reden voor afgelasting',
     'label.rememberMe': 'Ingelogd blijven',
     'label.message.sendAndPost': 'Stuur dit bericht naar actieve leden en post op deze website',
     'label.message.sendOnly': 'Stuur dit bericht naar alle actieve leden',

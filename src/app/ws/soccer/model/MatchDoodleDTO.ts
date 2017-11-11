@@ -23,4 +23,14 @@ export interface MatchDoodleDTO {
 
     id?: number;
 
+    matchStatus?: MatchDoodleDTO.MatchStatusEnum;
+
+}
+
+export namespace MatchDoodleDTO {
+    export enum MatchStatusEnum {
+        PLAYED = <any> 'PLAYED',
+        NOTPLAYED = <any> 'NOT_PLAYED',
+        CANCELLED = <any> 'CANCELLED'
+    }
 }

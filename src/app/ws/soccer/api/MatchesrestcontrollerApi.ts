@@ -58,8 +58,8 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * 
-     * @summary Update match
+     *
+     * @summary Delete match
      * @param matchDTO matchDTO
      */
     public deleteMatch(matchDTO: models.MatchDTO, extraHttpRequestParams?: any): Observable<models.ResponseEntity> {
@@ -210,7 +210,7 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     * Update match
+     * Delete match
      * 
      * @param matchDTO matchDTO
      */
