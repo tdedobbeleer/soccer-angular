@@ -97,7 +97,7 @@ import {isNullOrUndefined} from "util";
 })
 export class DoodleComponent implements OnInit {
     @Input() matchDoodle: MatchDoodleDTO;
-    showUsers: boolean = false;
+    @Input() showUsers: boolean = false;
     showModified: boolean = false;
     force: boolean = false;
     error: any = "";

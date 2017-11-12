@@ -26,7 +26,6 @@ export interface MatchDoodleDTO {
     matchStatus?: MatchDoodleDTO.MatchStatusEnum;
 
 }
-
 export namespace MatchDoodleDTO {
     export enum MatchStatusEnum {
         PLAYED = <any> 'PLAYED',

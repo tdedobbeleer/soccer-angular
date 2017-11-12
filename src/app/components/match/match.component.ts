@@ -69,6 +69,10 @@ import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
                       </div>
                       <div class="text-center">
                           <div class="btn-group">
+                              <button *ngIf="match.doodleId" type="button" class="btn btn-sm" aria-label="Doodle"
+                                      [routerLink]="['/doodles', match.doodleId]">
+                                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                              </button>
                                   <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map" (click)="showMap = !showMap;showDetails = false;" >
                                       <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                   </button>

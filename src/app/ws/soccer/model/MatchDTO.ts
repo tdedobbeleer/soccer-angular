@@ -31,14 +31,14 @@ export interface MatchDTO {
     date?: string;
 
     /**
+     * Match doodle id
+     */
+    doodleId?: number;
+
+    /**
      * Goals of this match, orederd
      */
     goals?: Array<models.GoalDTO>;
-
-    /**
-     * Match doodle
-     */
-    hasDoodle?: boolean;
 
     /**
      * Name of the hometeam

@@ -58,7 +58,7 @@ export class MatchesrestcontrollerApi {
     }
 
     /**
-     *
+     * 
      * @summary Delete match
      * @param matchDTO matchDTO
      */
