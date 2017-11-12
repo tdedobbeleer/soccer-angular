@@ -18,7 +18,7 @@
         ]
       },
       {
-        "source": "**/*.@(css|js)",
+        "source": "**/*.@(css)",
         "headers": [
           {
             "key": "Cache-Control",
