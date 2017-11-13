@@ -92,7 +92,7 @@ import {SecUtil} from "../../classes/sec-util";
         <div class="row">
         <div class="text-center">
                   <div class="btn-group">
-                      <button *ngIf="match.doodleId" type="button" class="btn btn-sm" aria-label="Doodle"
+                      <button *ngIf="match.doodleId && isAdmin()" type="button" class="btn btn-sm" aria-label="Doodle"
                               [routerLink]="['/doodles', match.doodleId]">
                           <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       </button>
