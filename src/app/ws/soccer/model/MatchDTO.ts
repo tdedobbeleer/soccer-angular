@@ -9,8 +9,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
-import * as models from './models';
+import * as models from "./models";
 
 export interface MatchDTO {
     address?: models.AddressDTO;
@@ -31,14 +30,14 @@ export interface MatchDTO {
     date?: string;
 
     /**
-     * Match doodle id
-     */
-    doodleId?: number;
-
-    /**
      * Goals of this match, orederd
      */
     goals?: Array<models.GoalDTO>;
+
+    /**
+     * Match doodle
+     */
+    hasDoodle?: boolean;
 
     /**
      * Name of the hometeam
