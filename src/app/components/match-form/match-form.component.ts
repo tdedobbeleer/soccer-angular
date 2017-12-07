@@ -22,7 +22,7 @@ import StatusEnum = MatchDTO.StatusEnum;
   
   <div class="box">
     <div class="success-div">
-        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">{{"text.match.success.create" | translate}}</alert>
+        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">{{"text.match.create.success" | translate}}</alert>
     </div>
     <div class="error-div">
          <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
