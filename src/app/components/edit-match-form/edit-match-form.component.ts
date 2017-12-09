@@ -112,7 +112,12 @@ import StatusEnum = MatchDTO.StatusEnum;
       
       <div class="form-group">
         <label for="date">{{"label.match.date" | translate}}</label>
-        <datepicker [ngModel]="dt" (ngModelChange)="updateDateValue(dt)" [ngModelOptions]="{standalone: true}"></datepicker>
+          <input type="text"
+                 class="form-control"
+                 #dp="bsDatepicker"
+                 value="{{ dt | date:'dd/MM/yyyy' }}"
+                 [bsConfig]="{ containerClass: 'theme-blue' }"
+                 bsDatepicker [(bsValue)]="dt" (bsValueChange)="updateDateValue()">
         <input type="hidden" formControlName="date">
          <small class="text-danger" [hidden]="!formErrors.date">
              {{formErrors.date}}
@@ -122,7 +127,8 @@ import StatusEnum = MatchDTO.StatusEnum;
         <label for="time">{{"label.match.time" | translate}}</label>
         <div class="row">
             <div class="col-md-8 col-xs-12">
-                <timepicker [(ngModel)]="ti" (ngModelChange)="updateTimeValue(ti)" [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker [(ngModel)]="ti" (ngModelChange)="updateTimeValue()"
+                            [ngModelOptions]="{standalone: true}"></timepicker>
                  <small class="text-danger" [hidden]="!formErrors.hour">
                      {{formErrors.hour}}
                 </small>
@@ -216,6 +222,9 @@ export class EditMatchFormComponent implements OnInit {
 
                 this.ti = Util.parseTime(match.date, match.hour);
                 this.dt = Util.toDate(match.date);
+
+                this.updateDateValue();
+                this.updateTimeValue();
             }
         );
 
@@ -234,12 +243,16 @@ export class EditMatchFormComponent implements OnInit {
 
     }
 
-    updateTimeValue(time: Date) {
-        this.matchForm.patchValue({hour: Util.addZero(time.getHours()) + ':' + Util.addZero(time.getMinutes())});
+    updateTimeValue() {
+        let t = Util.addZero(this.ti.getHours()) + ':' + Util.addZero(this.ti.getMinutes());
+        console.log("Patching value time to " + t);
+        this.matchForm.patchValue({hour: t});
     }
 
-    updateDateValue(date: Date) {
-        this.matchForm.patchValue({date: Util.parseDate(date)});
+    updateDateValue() {
+        let t = Util.parseDate(this.dt);
+        console.log("Patching value date to " + t);
+        this.matchForm.patchValue({date: t});
     }
 
     hasGoals(model: MatchDTO) {

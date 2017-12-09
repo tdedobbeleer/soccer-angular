@@ -15,6 +15,7 @@ import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 import StatusEnum = MatchDTO.StatusEnum;
+import {BsDatepickerConfig} from "ngx-bootstrap";
 
 @Component({
     selector: 'app-match-form',
@@ -62,7 +63,12 @@ import StatusEnum = MatchDTO.StatusEnum;
       
       <div class="form-group">
         <label for="date">{{"label.match.date" | translate}}</label>
-        <datepicker [ngModel]="dt" (ngModelChange)="updateDateValue(dt)" [ngModelOptions]="{standalone: true}"></datepicker>
+          <input type="text"
+                 class="form-control"
+                 #dp="bsDatepicker"
+                 value="{{ dt | date:'dd/MM/yyyy' }}"
+                 bsDatepicker [(bsValue)]="dt" (bsValueChange)="updateDateValue()"
+                 [bsConfig]="{ containerClass: 'theme-blue' }">
         <input type="hidden"formControlName="date">
          <small class="text-danger" [hidden]="!formErrors.date">
              {{formErrors.date}}
@@ -72,7 +78,8 @@ import StatusEnum = MatchDTO.StatusEnum;
         <label for="time">{{"label.match.time" | translate}}</label>
         <div class="row">
             <div class="col-md-8 col-xs-12">
-                <timepicker [(ngModel)]="ti" (ngModelChange)="updateTimeValue(ti)" [ngModelOptions]="{standalone: true}"></timepicker>
+                <timepicker [(ngModel)]="ti" (ngModelChange)="updateTimeValue()"
+                            [ngModelOptions]="{standalone: true}"></timepicker>
                  <small class="text-danger" [hidden]="!formErrors.hour">
                      {{formErrors.hour}}
                 </small>
@@ -132,10 +139,10 @@ export class MatchFormComponent implements OnInit {
             hour: ['', [<any>Validators.required]],
         });
         this.dt = new Date();
-        this.ti = Util.parseTime(Util.parseDate(new Date()), "20:00");
+        this.ti = Util.parseTime(Util.parseDate(new Date()), "20:30");
         //Set the date and time
-        this.updateDateValue(this.dt);
-        this.updateTimeValue(this.ti);
+        this.updateDateValue();
+        this.updateTimeValue();
         this.loaded = true;
 
         //Set listener
@@ -148,12 +155,16 @@ export class MatchFormComponent implements OnInit {
 
     }
 
-    updateTimeValue(time: Date) {
-        this.matchForm.patchValue({hour: Util.addZero(time.getHours()) + ':' + Util.addZero(time.getMinutes())});
+    updateTimeValue() {
+        let t = Util.addZero(this.ti.getHours()) + ':' + Util.addZero(this.ti.getMinutes());
+        console.log("Patching value time to " + t);
+        this.matchForm.patchValue({hour: t});
     }
 
-    updateDateValue(date: Date) {
-        this.matchForm.patchValue({date: Util.parseDate(date)});
+    updateDateValue() {
+        let t = Util.parseDate(this.dt);
+        console.log("Patching value date to " + t);
+        this.matchForm.patchValue({date: t});
     }
 
     submit(model: MatchDTO) {

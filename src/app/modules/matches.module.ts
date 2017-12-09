@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {Routes, RouterModule} from "@angular/router";
 import {AuthGuardAdminService} from "../services/auth-guard-admin.service";
 import {SharedModule} from "./shared.module";
-import {AlertModule, DatepickerModule, TimepickerModule} from "ngx-bootstrap";
+import {AlertModule, BsDatepickerModule, DatepickerModule, TimepickerModule} from "ngx-bootstrap";
 import {EditMatchComponent} from "../components/edit-match/edit-match.component";
 import {CreateMatchComponent} from "../components/create-match/create-match.component";
 import {MatchesComponent} from "../components/matches/matches.component";
@@ -31,7 +31,7 @@ const routes: Routes = [
         CommonModule,
         SharedModule,
         TimepickerModule.forRoot(),
-        DatepickerModule.forRoot(),
+        BsDatepickerModule.forRoot(),
         AlertModule.forRoot(),
         RouterModule.forChild(routes),
         LaddaModule.forRoot({
