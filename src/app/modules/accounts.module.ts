@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {Routes, RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {AuthGuardAdminService} from "../services/auth-guard-admin.service";
 import {SharedModule} from "./shared.module";
 import {AlertModule} from "ngx-bootstrap";
@@ -38,8 +38,7 @@ const routes: Routes = [
         ActivateAccountFormComponent,
         ActivateAccountComponent,
 
-    ],
-    providers: []
+    ]
 })
 export class AccountsModule {
 }

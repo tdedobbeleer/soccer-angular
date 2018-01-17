@@ -1,14 +1,12 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {Validators, FormGroup, FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {ValidationService} from "../../services/validation.service";
-import {PasswordrecoveryrestcontrollerApi} from "../../ws/soccer/api/PasswordrecoveryrestcontrollerApi";
-import {PasswordRecoveryDTO} from "../../ws/soccer/model/PasswordRecoveryDTO";
-import {Response} from "@angular/http";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {environment} from "../../../environments/environment";
 import {ReCaptchaComponent} from "angular2-recaptcha";
 import {TranslationService} from "../../services/translation.service";
+import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from "../../ws/soccer";
 
 @Component({
   selector: 'app-request-recovery-code-form',
@@ -74,7 +72,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
   @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
   @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
-  constructor(private _fb: FormBuilder, private _translationService: TranslationService, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
+    constructor(private _fb: FormBuilder, private _translationService: TranslationService, private _api: PasswordRecoveryRestControllerService, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
   }
 
   ngOnInit() {

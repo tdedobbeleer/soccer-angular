@@ -1,11 +1,9 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {Routes, RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "./shared.module";
 import {AlertModule} from "ngx-bootstrap";
-import {SeasonsrestcontrollerApi} from "../ws/soccer/api/SeasonsrestcontrollerApi";
 import {StatisticsListComponent} from "../components/statistics-list/statistics-list.component";
-import {StatisticsrestcontrollerApi} from "../ws/soccer/api/StatisticsrestcontrollerApi";
 
 const routes: Routes = [
     {path: '', component: StatisticsListComponent},
@@ -22,10 +20,6 @@ const routes: Routes = [
     declarations: [
         StatisticsListComponent,
 
-    ],
-    providers: [
-        StatisticsrestcontrollerApi,
-        SeasonsrestcontrollerApi,
     ]
 })
 export class StatisticsModule {

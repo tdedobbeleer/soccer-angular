@@ -1,21 +1,20 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
-import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Util} from "../../classes/util";
 import {ValidationService} from "../../services/validation.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SecUtil} from "../../classes/sec-util";
-import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
-import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import StatusEnum = MatchDTO.StatusEnum;
-import {BsDatepickerConfig} from "ngx-bootstrap";
+import {
+    AccountDTO,
+    AccountRestControllerService,
+    MatchDTO,
+    MatchesRestControllerService,
+    SeasonDTO,
+    SeasonsRestControllerService,
+    TeamDTO,
+    TeamsRestControllerService
+} from "../../ws/soccer";
 
 @Component({
     selector: 'app-match-form',
@@ -125,8 +124,8 @@ export class MatchFormComponent implements OnInit {
         'hour': '',
     };
 
-    constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi,
-                private _seasonApi: SeasonsrestcontrollerApi, private _accountApi: AccountrestcontrollerApi,
+    constructor(private _fb: FormBuilder, private _api: MatchesRestControllerService, private _teamApi: TeamsRestControllerService,
+                private _seasonApi: SeasonsRestControllerService, private _accountApi: AccountRestControllerService,
                 private _validationService: ValidationService, private _errorHandler: ErrorHandlerService) {
     }
 
@@ -151,7 +150,7 @@ export class MatchFormComponent implements OnInit {
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
         this._seasonApi.getSeasons().subscribe(s => this.seasons = s);
-        this._accountApi.getAccounts(SecUtil.getJwtHeaders()).subscribe(a => this.accounts = a);
+        this._accountApi.getAccounts().subscribe(a => this.accounts = a);
 
     }
 
@@ -179,7 +178,8 @@ export class MatchFormComponent implements OnInit {
 
         if (this.matchForm.valid) {
             this.isLoading = true;
-            this._api.createMatch(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.createMatch(model).subscribe(
                 r => {
                     this.globalError = '';
                     this.createSuccess = true;

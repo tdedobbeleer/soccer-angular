@@ -1,14 +1,11 @@
-import {Component, OnInit, ViewChild, Input} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {ProfileDTO} from "../../ws/soccer/model/ProfileDTO";
-import {AccountprofilerestcontrollerApi} from "../../ws/soccer/api/AccountprofilerestcontrollerApi";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../services/validation.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SecUtil} from "../../classes/sec-util";
 import {equalsValidator} from "../../functions/equals-validator";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
+import {AccountProfileRestControllerService, AccountRestControllerService, ProfileDTO} from "../../ws/soccer";
 import PositionEnum = ProfileDTO.PositionEnum;
 
 @Component({
@@ -192,7 +189,7 @@ export class EditAccountFormComponent implements OnInit {
         'newsNotifications': '',
     };
 
-    constructor(private _fb: FormBuilder, private _api: AccountprofilerestcontrollerApi, private _accountApi: AccountrestcontrollerApi,
+    constructor(private _fb: FormBuilder, private _api: AccountProfileRestControllerService, private _accountApi: AccountRestControllerService,
                 private _validationService: ValidationService, private _errorHandler: ErrorHandlerService) {
     }
 
@@ -216,7 +213,8 @@ export class EditAccountFormComponent implements OnInit {
             newsNotifications: ['', []]
         });
 
-        this._api.getProfile(this.profileId, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getProfile(this.profileId).subscribe(
             profile => {
                 this.profileForm.patchValue({
                     id: profile.id,
@@ -269,7 +267,7 @@ export class EditAccountFormComponent implements OnInit {
 
         if (this.passwordForm.valid) {
             this.isLoading = true;
-            this._accountApi.changePassword(model, SecUtil.getJwtHeaders()).subscribe(
+            this._accountApi.changePassword(model).subscribe(
                 r => {
                     this.globalPasswordError = '';
                     this.updatePasswordSuccess = true;
@@ -298,7 +296,8 @@ export class EditAccountFormComponent implements OnInit {
         this._validationService.onValueChanged(this.profileForm, this.formErrors);
 
         if (this.profileForm.valid) {
-            this._api.updateProfile(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.updateProfile(model).subscribe(
              r => {
                  this.globalError = '';
                  this.updateProfileSuccess = true;

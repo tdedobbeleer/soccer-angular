@@ -1,16 +1,14 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {DoodlerestcontrollerApi} from "../../ws/soccer/api/DoodlerestcontrollerApi";
-import {MatchDoodleDTO} from "../../ws/soccer/model/MatchDoodleDTO";
-import {PresenceDTO} from "../../ws/soccer/model/PresenceDTO";
 import {Router} from "@angular/router";
 import {SecUtil} from "../../classes/sec-util";
 import {isNullOrUndefined} from "util";
+import {DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-doodle',
     template: `
-        <div class="panel panel-default"
+        <div class="panel panel-default" *ngIf="matchDoodle"
              [ngClass]="{'panel-warning': force, 'panel-danger': matchDoodle?.matchStatus == matchStatus.CANCELLED && !force }"
              [ngClass]="{ }">
       <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}} - {{matchDoodle.hour}}
@@ -106,7 +104,7 @@ export class DoodleComponent implements OnInit {
 
     matchStatus = MatchDoodleDTO.MatchStatusEnum;
 
-    constructor(private _router: Router, private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _router: Router, private _api: DoodleRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -131,10 +129,11 @@ export class DoodleComponent implements OnInit {
             let timeoutId = setTimeout(() => {
                 this.loading[i] = true;
             }, 500);
-            this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force ,SecUtil.getJwtHeaders())
+
+            this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force)
                 .subscribe(
                     r => {
-                        this._api.matchDoodle(this.matchDoodle.id, SecUtil.getJwtHeaders()).subscribe(
+                        this._api.matchDoodle(this.matchDoodle.id).subscribe(
                             r => {
                                 this.matchDoodle = r;
                             },

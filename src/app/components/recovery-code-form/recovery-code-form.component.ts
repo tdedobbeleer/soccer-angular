@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {PasswordrecoveryrestcontrollerApi} from "../../ws/soccer/api/PasswordrecoveryrestcontrollerApi";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../services/validation.service";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {equalsValidator} from "../../functions/equals-validator";
-import {PasswordRecoveryDTO} from "../../ws/soccer/model/PasswordRecoveryDTO";
-import {Response} from "@angular/http";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {ActivatedRoute} from "@angular/router";
+import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from "../../ws/soccer";
 
 @Component({
   selector: 'app-recovery-code-form',
@@ -84,7 +82,7 @@ export class RecoveryCodeFormComponent implements OnInit {
 
     @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
 
-  constructor(private _fb: FormBuilder, private _api: PasswordrecoveryrestcontrollerApi, private _validationService: ValidationService, private _errorService: ErrorHandlerService, private _route: ActivatedRoute) {
+    constructor(private _fb: FormBuilder, private _api: PasswordRecoveryRestControllerService, private _validationService: ValidationService, private _errorService: ErrorHandlerService, private _route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -113,7 +111,7 @@ export class RecoveryCodeFormComponent implements OnInit {
 
     if (this.recoveryForm.valid) {
         this.isLoading = true;
-      this._api.useRecoveryCode(model).subscribe(
+        this._api.useRecoveryCode(model).subscribe(
           r => {
             console.log("Registration success");
             this.success = true;

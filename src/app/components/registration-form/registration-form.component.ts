@@ -1,16 +1,14 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormGroup, Validators, FormBuilder} from "@angular/forms";
-import {RegistrationDTO} from "../../ws/soccer/model/RegistrationDTO";
-import {RegistrationrestcontrollerApi} from "../../ws/soccer/api/RegistrationrestcontrollerApi";
-import {environment} from "../../../environments/environment";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReCaptchaComponent} from "angular2-recaptcha";
 import {TranslationService} from "../../services/translation.service";
 import {ValidationService} from "../../services/validation.service";
-import {Response} from "@angular/http";
 import {equalsValidator} from "../../functions/equals-validator";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
+import {RegistrationDTO, RegistrationRestControllerService} from "../../ws/soccer";
+import {environment} from "../../../environments/environment";
 
 @Component({
     selector: 'app-registration-form',
@@ -109,7 +107,7 @@ export class RegistrationFormComponent implements OnInit {
         'captchaResponse': ''
     };
 
-    constructor(private _fb: FormBuilder, private _api: RegistrationrestcontrollerApi, private _translationService: TranslationService, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
+    constructor(private _fb: FormBuilder, private _api: RegistrationRestControllerService, private _translationService: TranslationService, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
     }
 
     ngOnInit() {

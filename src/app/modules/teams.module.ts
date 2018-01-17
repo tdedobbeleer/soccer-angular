@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {Routes, RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {AuthGuardAdminService} from "../services/auth-guard-admin.service";
 import {SharedModule} from "./shared.module";
 import {AlertModule} from "ngx-bootstrap";
@@ -10,7 +10,6 @@ import {EditTeamComponent} from "../components/edit-team/edit-team.component";
 import {EditTeamFormComponent} from "../components/edit-team-form/edit-team-form.component";
 import {CreateTeamFormComponent} from "../components/create-team-form/create-team-form.component";
 import {TeamComponent} from "../components/team/team.component";
-import {TeamsrestcontrollerApi} from "../ws/soccer/api/TeamsrestcontrollerApi";
 import {LaddaModule} from "angular2-ladda";
 
 const routes: Routes = [
@@ -40,9 +39,6 @@ const routes: Routes = [
         EditTeamComponent,
         TeamComponent,
         TeamsListComponent,
-    ],
-    providers: [
-        TeamsrestcontrollerApi,
     ]
 })
 export class TeamsModule {

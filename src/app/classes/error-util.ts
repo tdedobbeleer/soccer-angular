@@ -1,5 +1,5 @@
-import {ValidationErrorDetailDTO} from "../ws/soccer/model/ValidationErrorDetailDTO";
-import {ValidationErrorDTO} from "../ws/soccer/model/ValidationErrorDTO";
+import {ValidationErrorDetailDTO, ValidationErrorDTO} from "../ws/soccer";
+
 export class ErrorUtil {
 
     static getValidationError(error: ValidationErrorDetailDTO, lang: String) {

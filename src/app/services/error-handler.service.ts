@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
 import {Router} from "@angular/router";
 import {ErrorUtil} from "../classes/error-util";
 import {TranslationService} from "./translation.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable()
 export class ErrorHandlerService {
@@ -10,8 +10,8 @@ export class ErrorHandlerService {
     constructor(private _router: Router, private _translationService: TranslationService) {
     }
 
-    handle(error: Response | any, url = "/") {
-        if (error instanceof Response) {
+    handle(error: HttpErrorResponse | any, url = "/") {
+        if (error instanceof HttpErrorResponse) {
             switch (error.status) {
                 case 401:
                     this._router.navigate(['/login'], {queryParams: {redirectUrl: url}});
@@ -20,7 +20,7 @@ export class ErrorHandlerService {
                     this._router.navigate(['/login'], {queryParams: {redirectUrl: url}});
                     break;
                 case 400:
-                    let d = error.json();
+                    let d = error.error;
                     return ErrorUtil.getValidationError(d, this._translationService.currentLang());
                 case 503:
                     this._router.navigate(['/unavailable']);

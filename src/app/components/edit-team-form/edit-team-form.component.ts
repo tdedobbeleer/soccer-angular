@@ -1,15 +1,12 @@
-import {Component, OnInit, ViewChild, Input} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {AddressDTO} from "../../ws/soccer/model/AddressDTO";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 import {ValidationService} from "../../services/validation.service";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {SecUtil} from "../../classes/sec-util";
 import {isNullOrUndefined} from "util";
 import {Util} from "../../classes/util";
+import {AddressDTO, TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
 
 @Component({
   selector: 'app-edit-team-form',
@@ -113,7 +110,7 @@ export class EditTeamFormComponent implements OnInit {
         },
     };
 
-    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -141,7 +138,8 @@ export class EditTeamFormComponent implements OnInit {
             }),
         });
 
-        this._api.getTeam(this.teamId, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getTeam(this.teamId).subscribe(
             t => {
                 this.teamForm.patchValue({
                     id : t.id,
@@ -188,7 +186,8 @@ export class EditTeamFormComponent implements OnInit {
 
         if (this.teamForm.valid) {
             this.isLoading = true;
-            this._api.updateTeam(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.updateTeam(model).subscribe(
                 r => {
                     this.globalError = '';
                     this.createSuccess = true;

@@ -1,21 +1,22 @@
-import {Component, OnInit, ViewChild, Input} from "@angular/core";
-import {SecUtil} from "../../classes/sec-util";
-import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {Util} from "../../classes/util";
-import {Validators, FormBuilder, FormArray, FormGroup} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
-import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {ValidationService} from "../../services/validation.service";
-import {GoalDTO} from "../../ws/soccer/model/GoalDTO";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
-import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {environment} from "../../../environments/environment";
+import {
+    AccountDTO,
+    AccountRestControllerService,
+    GoalDTO,
+    MatchDTO,
+    MatchesRestControllerService,
+    SeasonDTO,
+    SeasonsRestControllerService,
+    TeamDTO,
+    TeamsRestControllerService
+} from "../../ws/soccer";
 import StatusEnum = MatchDTO.StatusEnum;
 
 @Component({
@@ -185,8 +186,8 @@ export class EditMatchFormComponent implements OnInit {
         'goals': '',
     };
 
-    constructor(private _fb: FormBuilder, private _api: MatchesrestcontrollerApi, private _teamApi: TeamsrestcontrollerApi,
-                private _seasonApi: SeasonsrestcontrollerApi, private _accountApi: AccountrestcontrollerApi,
+    constructor(private _fb: FormBuilder, private _api: MatchesRestControllerService, private _teamApi: TeamsRestControllerService,
+                private _seasonApi: SeasonsRestControllerService, private _accountApi: AccountRestControllerService,
                 private _validationService: ValidationService, private _errorHandler: ErrorHandlerService,
                 private _router: Router) {
     }
@@ -206,7 +207,8 @@ export class EditMatchFormComponent implements OnInit {
             htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]]
         });
 
-        this._api.getMatch(this.matchId, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getMatch(this.matchId).subscribe(
             match => {
                 this.matchForm.patchValue({homeTeam: match.homeTeam});
                 this.matchForm.patchValue({awayTeam: match.awayTeam});
@@ -239,7 +241,7 @@ export class EditMatchFormComponent implements OnInit {
 
         this._teamApi.getTeams().subscribe(t => this.teams = t);
         this._seasonApi.getSeasons().subscribe(s => this.seasons = s);
-        this._accountApi.getAccounts(SecUtil.getJwtHeaders()).subscribe(a => this.accounts = a);
+        this._accountApi.getAccounts().subscribe(a => this.accounts = a);
 
     }
 
@@ -300,7 +302,8 @@ export class EditMatchFormComponent implements OnInit {
 
         if (this.matchForm.valid) {
             this.isLoading = true;
-            this._api.updateMatch(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.updateMatch(model).subscribe(
                 r => {
                     this.globalError = '';
                     console.log("Posted");

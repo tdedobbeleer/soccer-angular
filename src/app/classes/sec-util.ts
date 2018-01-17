@@ -1,6 +1,7 @@
-import {Headers} from "@angular/http";
 import {isNullOrUndefined, isUndefined} from "util";
 import {EventEmitter} from "@angular/core";
+import {Configuration} from "../ws/soccer";
+
 export class SecUtil {
     private static LOCAL_STORAGE_USER: string = 'currentUser';
     public static userUpdated: EventEmitter<any> = new EventEmitter();
@@ -31,18 +32,13 @@ export class SecUtil {
         this.userUpdated.emit(user);
     }
 
-    static getJwtHeaders() {
-        if (this.isLoggedIn()) {
-            let token = this.getUser().token;
-            return this.getHeaders(token);
+    static setApiKey(config: Configuration) {
+        let user = this.getUser();
+        if (user) {
+            config.apiKeys["X-Auth-Token"] = user.token;
         }
-        return undefined;
-    }
-
-    private static getHeaders(token: string) {
-        let headers: Headers = new Headers();
-        headers.append('X-Auth-Token', token);
-        headers.append("Content-Type", "application/json");
-        return {headers: headers};
+        else {
+            config.apiKeys = {};
+        }
     }
 }

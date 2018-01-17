@@ -1,16 +1,13 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {CommentsrestcontrollerApi} from "../../ws/soccer/api/CommentsrestcontrollerApi";
-import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
+import {Component, Input, OnInit} from "@angular/core";
 import {LoginService} from "../../services/login.service";
-import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
 import {SecUtil} from "../../classes/sec-util";
+import {CommentDTO, CommentsRestControllerService, NewsDTO, NewsRestControllerService} from "../../ws/soccer";
 
 @Component({
   selector: 'app-message',
-  template: `
-    <div class="post" *ngIf="!deleted">
+    template: `
+        <div class="post" *ngIf="message && !deleted">
       <div>
         <div class="row">
             <div class="col-md-10 text-center"><h4>{{message.header}}</h4></div>
@@ -81,8 +78,8 @@ export class MessageComponent implements OnInit {
   showDeleteNews: boolean = false;
   deleted: boolean = false;
 
-  constructor(private _api: CommentsrestcontrollerApi, private _messagesApi: NewsrestcontrollerApi, private _loginService: LoginService,
-              private _errorHandler: ErrorHandlerService) {
+    constructor(private _api: CommentsRestControllerService, private _messagesApi: NewsRestControllerService, private _loginService: LoginService,
+                private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
@@ -105,7 +102,7 @@ export class MessageComponent implements OnInit {
   }
 
   deleteMessage() {
-    this._messagesApi.deleteNews(this.message.id, SecUtil.getJwtHeaders()).subscribe(
+      this._messagesApi.deleteNews(this.message.id).subscribe(
         r => {
           this.deleted = true;
         },
@@ -117,7 +114,8 @@ export class MessageComponent implements OnInit {
 
   createComment(comment: CommentDTO) {
     this.showCreateComment = false;
-      this._api.postComment(comment.id, comment, SecUtil.getJwtHeaders())
+
+      this._api.postComment(comment.id, comment)
         .subscribe(r => {
           console.log("success");
               this.message.comments.push(r);

@@ -1,9 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
-import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
-import {SecUtil} from "../../classes/sec-util";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {ActivatedRoute} from "@angular/router";
+import {NewsDTO, NewsRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-message-item',
@@ -29,13 +27,14 @@ export class MessageItemComponent implements OnInit {
     message: NewsDTO;
     loading: boolean;
 
-    constructor(private _api: NewsrestcontrollerApi, private _errorHandler: ErrorHandlerService, private _route: ActivatedRoute) {
+    constructor(private _api: NewsRestControllerService, private _errorHandler: ErrorHandlerService, private _route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.loading = true;
         this._route.params.subscribe(params => {
-            this._api.getNews(params['id'], SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.getNews(params['id']).subscribe(
                 n => {
                     this.message = n;
                     this.loading = false;

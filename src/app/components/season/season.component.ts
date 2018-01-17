@@ -1,10 +1,7 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
-import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
+import {Component, Input, OnInit} from "@angular/core";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {isNullOrUndefined} from "util";
-import {SecUtil} from "../../classes/sec-util";
+import {MatchDTO, MatchesRestControllerService, SeasonDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-season',
@@ -27,7 +24,7 @@ export class SeasonComponent implements OnInit {
 
     matches: MatchDTO[];
 
-    constructor(private _matchesApi: MatchesrestcontrollerApi,
+    constructor(private _matchesApi: MatchesRestControllerService,
                 private _errorHandler: ErrorHandlerService) {
     }
 
@@ -39,7 +36,7 @@ export class SeasonComponent implements OnInit {
 
     getMatches() {
         if (isNullOrUndefined(this.matches)) {
-            this._matchesApi.matchesForSeason(this.season.id, SecUtil.getJwtHeaders()).subscribe(
+            this._matchesApi.matchesForSeason(this.season.id).subscribe(
                 m => {
                     this.matches = m;
                 },

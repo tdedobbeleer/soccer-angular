@@ -3,7 +3,7 @@ import {AppComponent} from "./app.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import {LoginComponent} from "./components/login/login.component";
-import {Routes, RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {FailWhaleComponent} from "./components/fail-whale/fail-whale.component";
 import {RegistrationFormComponent} from "./components/registration-form/registration-form.component";
 import {ServiceUnavailableComponent} from "./components/service-unavailable/service-unavailable.component";
@@ -12,10 +12,12 @@ import {PlayerListComponent} from "./components/player-list/player-list.componen
 import {FaqComponent} from "./components/faq/faq.component";
 import {SharedModule} from "./modules/shared.module";
 import {NavbarComponent} from "./components/navbar/navbar.component";
-import {AlertModule, BsDropdownModule, CollapseModule, AccordionModule} from "ngx-bootstrap";
+import {AccordionModule, AlertModule, BsDropdownModule, CollapseModule} from "ngx-bootstrap";
 import {ImageUploadModule} from "angular2-image-upload";
 import {BrowserModule} from "@angular/platform-browser";
 import {LaddaModule} from "angular2-ladda";
+import {ApiModule, Configuration} from "./ws/soccer";
+import {environment} from "../environments/environment";
 
 const appRoutes: Routes = [
     {path: '', loadChildren: './modules/message.module#MessageModule'},
@@ -46,12 +48,16 @@ const appRoutes: Routes = [
         AccordionModule.forRoot(),
         SharedModule.forRoot(),
         RouterModule.forRoot(appRoutes),
+        ApiModule.forRoot(() => new Configuration({
+            basePath: environment.api_url,
+            apiKeys: {}
+        })),
         LaddaModule.forRoot({
             style: "expand-right",
             spinnerSize: 20,
             spinnerColor: "white",
             spinnerLines: 12
-        }),
+        })
     ],
     declarations: [
         LoginComponent,
@@ -64,9 +70,7 @@ const appRoutes: Routes = [
         ServiceUnavailableComponent,
         PlayerComponent,
         PlayerListComponent,
-        FaqComponent,
-    ],
-    providers: [
+        FaqComponent
     ],
     bootstrap: [AppComponent]
 })

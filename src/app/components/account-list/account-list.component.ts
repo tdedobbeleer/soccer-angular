@@ -1,10 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
-import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {Response} from "@angular/http";
 import {LoginService} from "../../services/login.service";
-import {SecUtil} from "../../classes/sec-util";
+import {AccountDTO, AccountRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-account-list',
@@ -66,12 +63,13 @@ export class AccountListComponent implements OnInit {
     globalError: any;
     loading: boolean;
 
-    constructor(private _api: AccountrestcontrollerApi, private _loginService: LoginService, private _errorService: ErrorHandlerService) {
+    constructor(private _api: AccountRestControllerService, private _loginService: LoginService, private _errorService: ErrorHandlerService) {
     }
 
     ngOnInit() {
         this.loading = true;
-        this._api.getAccounts(SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getAccounts().subscribe(
             a => {
                 this.accountList = a;
                 this.loading = false;
@@ -84,7 +82,7 @@ export class AccountListComponent implements OnInit {
     }
 
     changeActivation(account: AccountDTO) {
-        this._api.changeActivation(account.id, !account.activated, SecUtil.getJwtHeaders()).subscribe(
+        this._api.changeActivation(account.id, !account.activated).subscribe(
             r => {
                 account.activated = !account.activated;
             },
@@ -96,7 +94,7 @@ export class AccountListComponent implements OnInit {
 
     changeRole(account: AccountDTO) {
         if (account.role == "ADMIN") {
-            this._api.demote(account.id, SecUtil.getJwtHeaders()).subscribe(
+            this._api.demote(account.id).subscribe(
                 r => {
                     account.role = "USER";
                 },
@@ -106,7 +104,7 @@ export class AccountListComponent implements OnInit {
             )
         }
         else {
-            this._api.elevate(account.id, SecUtil.getJwtHeaders()).subscribe(
+            this._api.elevate(account.id).subscribe(
                 r => {
                     account.role = "ADMIN";
                 },

@@ -1,6 +1,6 @@
-import {Component, OnInit, Input, EventEmitter, Output} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CommentDTO} from "../../ws/soccer";
 
 @Component({
   selector: 'app-comment-form',

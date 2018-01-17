@@ -1,8 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {SecUtil} from "../../classes/sec-util";
+import {TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
 
 @Component({
   selector: 'app-teams-list',
@@ -44,7 +43,7 @@ export class TeamsListComponent implements OnInit {
   showMap: any[] = [];
     loading: boolean;
 
-    constructor(private _api: TeamsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _api: TeamsRestControllerService, private _errorHandler: ErrorHandlerService) {
   }
 
   isAdmin() {

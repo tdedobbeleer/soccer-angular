@@ -1,11 +1,10 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {Routes, RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {SharedModule} from "./shared.module";
 import {AlertModule} from "ngx-bootstrap";
 import {RequestRecoveryCodeFormComponent} from "../components/request-recovery-code-form/request-recovery-code-form.component";
 import {RecoveryCodeFormComponent} from "../components/recovery-code-form/recovery-code-form.component";
-import {PasswordrecoveryrestcontrollerApi} from "../ws/soccer/api/PasswordrecoveryrestcontrollerApi";
 import {LaddaModule} from "angular2-ladda";
 
 const routes: Routes = [
@@ -30,9 +29,6 @@ const routes: Routes = [
     declarations: [
         RequestRecoveryCodeFormComponent,
         RecoveryCodeFormComponent,
-    ],
-    providers: [
-        PasswordrecoveryrestcontrollerApi,
     ]
 })
 export class PasswordModule {

@@ -1,12 +1,11 @@
 import {Injectable} from "@angular/core";
-import {AuthenticationRequestDTO} from "../ws/soccer/model/AuthenticationRequestDTO";
-import {AuthenticationcontrollerApi} from "../ws/soccer/api/AuthenticationcontrollerApi";
 import {Observable} from "rxjs";
 import {SecUtil} from "../classes/sec-util";
+import {AuthenticationControllerService, AuthenticationRequestDTO, Configuration} from "../ws/soccer";
 
 @Injectable()
 export class LoginService {
-    constructor(private _api: AuthenticationcontrollerApi) {
+    constructor(private _api: AuthenticationControllerService, private configuration: Configuration) {
 
     }
 
@@ -14,14 +13,17 @@ export class LoginService {
         //Check if the user is truly loggedIn
         if (SecUtil.isLoggedIn()) {
             //Test if the user can be authenticated
-            this._api.isFullyAuthenticated(SecUtil.getJwtHeaders())
+            SecUtil.setApiKey(this.configuration);
+            this._api.isFullyAuthenticated()
                 .subscribe(
                     r => {
                         console.log("User is logged in");
                     },
                     err => {
                         SecUtil.setUser(undefined);
-                });
+                        SecUtil.setApiKey(this.configuration);
+                    }
+                );
 
         }
     }
@@ -34,6 +36,7 @@ export class LoginService {
                 let token = response && response.token;
                 if (token) {
                     SecUtil.setUser(response);
+                    SecUtil.setApiKey(this.configuration);
                     // return true to indicate successful login
                     return true;
                 } else {

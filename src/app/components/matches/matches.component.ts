@@ -1,8 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
-import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
 import {SecUtil} from "../../classes/sec-util";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {SeasonDTO, SeasonsRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-matches',
@@ -45,7 +44,7 @@ export class MatchesComponent implements OnInit {
     seasons: SeasonDTO[];
     loading: boolean;
 
-    constructor(private _seasonsApi: SeasonsrestcontrollerApi,
+    constructor(private _seasonsApi: SeasonsRestControllerService,
                 private _errorHandler: ErrorHandlerService) {
     }
 

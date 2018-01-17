@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
+import {Component, Input, OnInit} from "@angular/core";
 import {SecUtil} from "../../classes/sec-util";
+import {TeamDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-team',
