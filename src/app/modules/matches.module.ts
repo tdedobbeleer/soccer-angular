@@ -24,6 +24,14 @@ const routes: Routes = [
     {path: 'edit/:id', component: EditMatchComponent, canActivate: [AuthGuardAdminService]},
 ];
 
+export function forecastApiConfig() {
+    return new ForecastApiConfiguration({
+        accessToken: environment.weather_api_key,
+        basePath: environment.weather_api_url,
+        country: environment.weather_api_country
+    });
+}
+
 @NgModule({
 
     imports: [
@@ -33,11 +41,7 @@ const routes: Routes = [
         BsDatepickerModule.forRoot(),
         AlertModule.forRoot(),
         RouterModule.forChild(routes),
-        ForecastApiModule.forRoot(() => new ForecastApiConfiguration({
-            accessToken: environment.weather_api_key,
-            basePath: environment.weather_api_url,
-            country: environment.weather_api_country
-        })),
+        ForecastApiModule.forRoot(forecastApiConfig),
         LaddaModule.forRoot({
             style: "expand-right",
             spinnerSize: 20,

@@ -38,6 +38,13 @@ const appRoutes: Routes = [
     {path: '**', redirectTo: 'not-found'}
 ];
 
+export function apiConfig() {
+    return new Configuration({
+        basePath: environment.api_url,
+        apiKeys: {}
+    });
+}
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -48,10 +55,7 @@ const appRoutes: Routes = [
         AccordionModule.forRoot(),
         SharedModule.forRoot(),
         RouterModule.forRoot(appRoutes),
-        ApiModule.forRoot(() => new Configuration({
-            basePath: environment.api_url,
-            apiKeys: {}
-        })),
+        ApiModule.forRoot(apiConfig),
         LaddaModule.forRoot({
             style: "expand-right",
             spinnerSize: 20,
