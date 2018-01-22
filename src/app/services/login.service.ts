@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {SecUtil} from "../classes/sec-util";
 import {AuthenticationControllerService, AuthenticationRequestDTO, Configuration} from "../ws/soccer";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class LoginService {
@@ -30,8 +31,9 @@ export class LoginService {
 
     login(username: string, password: string, rememberMe: boolean): Observable<boolean> {
         let r: AuthenticationRequestDTO = {username: username, password: password, rememberMe: rememberMe};
-        return this._api.authenticate(r)
-            .map(response => {
+
+        return this._api.authenticate(r).pipe(
+            map(response => {
                 // login successful if there's a jwt token in the response
                 let token = response && response.token;
                 if (token) {
@@ -43,7 +45,9 @@ export class LoginService {
                     // return false to indicate failed login
                     return false;
                 }
-            });
+            })
+        );
+
     }
 
     logout(): void {
