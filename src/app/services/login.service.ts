@@ -52,5 +52,6 @@ export class LoginService {
 
     logout(): void {
         SecUtil.setUser(undefined);
+        SecUtil.setApiKey(this.configuration);
     }
 }
