@@ -61,6 +61,7 @@ export const LANG_NL_TRANS = {
     'text.verification.delete.news': 'Ben je zeker dat je dit bericht wilt verwijderen?',
     'text.verification.delete.match': 'Match verwijderen?',
     'text.team.success.create': 'Het team werd succesvol aangemaakt',
+    'text.team.success.update': 'Het team werd succesvol gewijzigd',
     'text.votes': 'stemmen',
     'text.vote': 'stem',
     'text.vote.login': 'Inloggen om te stemmen',

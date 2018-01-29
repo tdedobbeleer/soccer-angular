@@ -7,13 +7,17 @@ import {ErrorHandlerService} from "../../services/error-handler.service";
 import {isNullOrUndefined} from "util";
 import {Util} from "../../classes/util";
 import {AddressDTO, TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/concat';
 
 @Component({
   selector: 'app-edit-team-form',
   template: `
       <div class="box">
     <div class="success-div">
-        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">{{"text.team.success.create" | translate}}</alert>
+        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">
+            {{"text.team.success.update" | translate}}
+        </alert>
     </div>
     <div class="error-div">
          <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
@@ -114,15 +118,6 @@ export class EditTeamFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._api.getTeamAddresses().subscribe(
-            r => {
-                this.addressList = r;
-            },
-            e => {
-                this._errorHandler.handle(e);
-            }
-        );
-
         this.teamForm = this._fb.group({
             useGoogleLink: [false, []],
             useExistingAddress: [true, []],
@@ -138,40 +133,53 @@ export class EditTeamFormComponent implements OnInit {
             }),
         });
 
+        Observable.concat(this._api.getTeamAddresses().map(
+            r => {
+                this.addressList = r;
+            }
+        )).subscribe(
+            () => {
 
-        this._api.getTeam(this.teamId).subscribe(
-            t => {
-                this.teamForm.patchValue({
-                    id : t.id,
-                    name : t.name,
-                    selectedAddress : t.address,
-                    useGoogleLink : !isNullOrUndefined(t.address.googleLink)
-
-                });
-
-                this.teamForm.controls['address'].patchValue({
-                    id: t.address.id,
-                    address: t.address.address,
-                    city: t.address.city,
-                    postalCode: t.address.postalCode,
-                    googleLink: t.address.googleLink
-                });
             },
             e => {
                 this._errorHandler.handle(e);
+            },
+            () => {
+                this._api.getTeam(this.teamId).subscribe(
+                    t => {
+                        this.teamForm.patchValue({
+                            id: t.id,
+                            name: t.name,
+                            selectedAddress: t.address,
+                            useGoogleLink: !isNullOrUndefined(t.address.googleLink)
+
+                        });
+
+                        this.teamForm.controls['address'].patchValue({
+                            id: t.address.id,
+                            address: t.address.address,
+                            city: t.address.city,
+                            postalCode: t.address.postalCode,
+                            googleLink: t.address.googleLink
+                        });
+                    },
+                    e => {
+                        this._errorHandler.handle(e);
+                    }
+                );
+
+                //Set listener
+                this.teamForm.valueChanges
+                    .subscribe(data => {
+                        this._validationService.onValueChanged(this.teamForm, this.formErrors);
+                        this.checkAddress();
+                        this.createSuccess = false;
+                    });
+
+                //Trigger checkaddress
+                this.checkAddress();
             }
         );
-
-        //Set listener
-        this.teamForm.valueChanges
-            .subscribe(data => {
-                this._validationService.onValueChanged(this.teamForm, this.formErrors);
-                this.checkAddress();
-                this.createSuccess = false;
-            });
-
-        //Trigger checkaddress
-        this.checkAddress();
     }
 
     submit(model: TeamDTO) {

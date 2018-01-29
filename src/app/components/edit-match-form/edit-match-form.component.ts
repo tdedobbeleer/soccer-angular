@@ -17,6 +17,8 @@ import {
     TeamDTO,
     TeamsRestControllerService
 } from "../../ws/soccer";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/concat';
 import StatusEnum = MatchDTO.StatusEnum;
 
 @Component({
@@ -26,8 +28,8 @@ import StatusEnum = MatchDTO.StatusEnum;
     <div class="error-div">
          <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
     </div>
-    
-    <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm.value)">
+
+    <form [formGroup]="matchForm" novalidate (ngSubmit)="submit(matchForm?.value)">
       <div class="form-group">
         <label for="homeTeam">{{"label.match.homeTeam" | translate}}</label>
         <select name="homeTeam" class="form-control" formControlName="homeTeam">
@@ -143,7 +145,7 @@ import StatusEnum = MatchDTO.StatusEnum;
       <div class="form-group box-footer">
         <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
         <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
-        <a id="btnCancel" class="btn btn-default" [routerLink]="['/profile']">{{"btn.cancel" | translate}}</a>
+          <a id="btnCancel" class="btn btn-default" [routerLink]="['/matches']">{{"btn.cancel" | translate}}</a>
       </div>
       </form>
       </div>
@@ -167,6 +169,8 @@ export class EditMatchFormComponent implements OnInit {
     teams: TeamDTO[];
     seasons: SeasonDTO[];
     accounts: AccountDTO[];
+
+    lastKnownGoals = this._fb.array([]);
 
     @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
 
@@ -207,41 +211,44 @@ export class EditMatchFormComponent implements OnInit {
             htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]]
         });
 
+        Observable.concat(this._teamApi.getTeams().map(t => this.teams = t),
+            this._seasonApi.getSeasons().map(s => this.seasons = s),
+            this._accountApi.getAccounts().map(a => this.accounts = a)).subscribe(
+            () => console.log("loaded"),
+            (e) => {
+                console.log(e)
+            },
+            () => {
+                this._api.getMatch(this.matchId).subscribe(
+                    match => {
+                        this.matchForm.patchValue({homeTeam: match.homeTeam});
+                        this.matchForm.patchValue({awayTeam: match.awayTeam});
+                        this.matchForm.patchValue({season: match.season});
+                        this.matchForm.patchValue({date: match.date});
+                        this.matchForm.patchValue({hour: match.hour});
+                        this.matchForm.patchValue({status: match.status});
+                        this.matchForm.patchValue({statusText: match.statusText});
+                        this.matchForm.patchValue({atGoals: match.atGoals});
+                        this.matchForm.patchValue({htGoals: match.htGoals});
+                        //Set the goals
+                        this.setGoals(match.goals);
 
-        this._api.getMatch(this.matchId).subscribe(
-            match => {
-                this.matchForm.patchValue({homeTeam: match.homeTeam});
-                this.matchForm.patchValue({awayTeam: match.awayTeam});
-                this.matchForm.patchValue({season: match.season});
-                this.matchForm.patchValue({date: match.date});
-                this.matchForm.patchValue({hour: match.hour});
-                this.matchForm.patchValue({status: match.status});
-                this.matchForm.patchValue({statusText: match.statusText});
-                this.matchForm.patchValue({atGoals: match.atGoals});
-                this.matchForm.patchValue({htGoals: match.htGoals});
-                //Set the goals
-                this.setGoals(match.goals);
+                        this.ti = Util.parseTime(match.date, match.hour);
+                        this.dt = Util.toDate(match.date);
 
-                this.ti = Util.parseTime(match.date, match.hour);
-                this.dt = Util.toDate(match.date);
+                        this.updateDateValue();
+                        this.updateTimeValue();
+                    }
+                );
 
-                this.updateDateValue();
-                this.updateTimeValue();
-            }
-        );
-
-        //Set listener
-        this.matchForm.valueChanges
-            .subscribe(data => {
-                this._validationService.onValueChanged(this.matchForm, this.formErrors);
-                //this.onGoalsChange(this.matchForm.value.homeTeam, this.matchForm.value.htGoals);
-                //this.onGoalsChange(this.matchForm.value.awayTeam, this.matchForm.value.atGoals);
+                //Set listener
+                this.matchForm.valueChanges
+                    .subscribe(data => {
+                        this._validationService.onValueChanged(this.matchForm, this.formErrors);
+                        //this.onGoalsChange(this.matchForm.value.homeTeam, this.matchForm.value.htGoals);
+                        //this.onGoalsChange(this.matchForm.value.awayTeam, this.matchForm.value.atGoals);
+                    });
             });
-
-
-        this._teamApi.getTeams().subscribe(t => this.teams = t);
-        this._seasonApi.getSeasons().subscribe(s => this.seasons = s);
-        this._accountApi.getAccounts().subscribe(a => this.accounts = a);
 
     }
 
@@ -274,19 +281,21 @@ export class EditMatchFormComponent implements OnInit {
     onGoalsChange(team: TeamDTO, nrg: any) {
         if (team.id == this.defaultTeamId && nrg !== '') {
             let nrOfGoals = this.goals.length;
-            if (nrOfGoals > nrg) {
-                const removeTotal = nrOfGoals - nrg;
-                let indexToRemove = nrOfGoals - 1;
-                for (let _i = 0; _i < removeTotal; _i++) {
-                    this.goals.removeAt(indexToRemove);
-                    indexToRemove--;
-                }
-            } else if (nrOfGoals < nrg) {
-                const add = nrg - nrOfGoals;
-                let order = nrOfGoals++;
-                for (let _i = 0; _i < add; _i++) {
-                    this.goals.push(this._fb.group({order: order, assist: null, scorer: null}));
-                    order++;
+            if (nrg !== null && nrg != undefined) {
+                if (nrOfGoals > nrg) {
+                    const removeTotal = nrOfGoals - nrg;
+                    let indexToRemove = nrOfGoals - 1;
+                    for (let _i = 0; _i < removeTotal; _i++) {
+                        this.goals.removeAt(indexToRemove);
+                        indexToRemove--;
+                    }
+                } else if (nrOfGoals < nrg) {
+                    const add = nrg - nrOfGoals;
+                    let order = nrOfGoals++;
+                    for (let _i = 0; _i < add; _i++) {
+                        this.goals.push(this._fb.group({order: order, assist: null, scorer: null}));
+                        order++;
+                    }
                 }
             }
         }

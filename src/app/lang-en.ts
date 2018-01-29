@@ -60,6 +60,7 @@ export const LANG_EN_TRANS = {
     'text.verification.delete.news': 'Are you sure you want to delete this message?',
     'text.verification.delete.match': 'Delete match?',
     'text.team.success.create': 'The team was succesfully created',
+    'text.team.success.update': 'The team was succesfully updated',
     'text.votes': 'votes',
     'text.vote': 'vote',
     'text.vote.login': 'Login to vote',
