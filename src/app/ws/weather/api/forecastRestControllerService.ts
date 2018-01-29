@@ -69,6 +69,10 @@ export class ForecastRestControllerService {
         );
     }
 
+    getWeatherIcon(iconName) {
+        return "https://openweathermap.org/img/w/" + iconName + ".png"
+    }
+
     /**
      * @param consumes string[] mime-types
      * @return true: consumes contains 'multipart/form-data', false: otherwise

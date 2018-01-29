@@ -157,7 +157,7 @@ export class NextMatchComponent implements OnInit {
     }
 
     getWeatherIcon(iconName) {
-        return "http://openweathermap.org/img/w/" + iconName + ".png"
+        return this._forecastApi.getWeatherIcon(iconName);
     }
 
     isAdmin() {
