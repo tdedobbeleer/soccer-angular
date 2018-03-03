@@ -46,7 +46,7 @@ export class EditMessageFormComponent implements OnInit {
 
     globalError: any = "";
 
-    isLoading: boolean = true;
+    isLoading: boolean = false;
 
     formErrors = {
         header: "",
