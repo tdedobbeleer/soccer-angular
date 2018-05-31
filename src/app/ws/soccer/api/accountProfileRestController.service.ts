@@ -41,17 +41,29 @@ export class AccountProfileRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Get all Account profiles
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getAllProfiles(observe?: 'body', reportProgress?: boolean): Observable<Array<ProfileDTO>>;
-
     public getAllProfiles(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProfileDTO>>>;
-
     public getAllProfiles(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProfileDTO>>>;
-
     public getAllProfiles(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -87,17 +99,14 @@ export class AccountProfileRestControllerService {
 
     /**
      * Get Account profile
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getProfile(id: number, observe?: 'body', reportProgress?: boolean): Observable<ProfileDTO>;
-
     public getProfile(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfileDTO>>;
-
     public getProfile(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfileDTO>>;
-
     public getProfile(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getProfile.');
@@ -136,18 +145,15 @@ export class AccountProfileRestControllerService {
 
     /**
      * Post image
-     *
+     * 
      * @param id id
      * @param image image
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public postProfileImage(id: number, image: Blob, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public postProfileImage(id: number, image: Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public postProfileImage(id: number, image: Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public postProfileImage(id: number, image: Blob, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling postProfileImage.');
@@ -208,17 +214,14 @@ export class AccountProfileRestControllerService {
 
     /**
      * Update Account profile
-     *
+     * 
      * @param profileDTO profileDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public updateProfile(profileDTO: ProfileDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public updateProfile(profileDTO: ProfileDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public updateProfile(profileDTO: ProfileDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public updateProfile(profileDTO: ProfileDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (profileDTO === null || profileDTO === undefined) {
             throw new Error('Required parameter profileDTO was null or undefined when calling updateProfile.');
@@ -258,20 +261,6 @@ export class AccountProfileRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

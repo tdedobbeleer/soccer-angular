@@ -42,18 +42,30 @@ export class NewsRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Delete news
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public deleteNews(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public deleteNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public deleteNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public deleteNews(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteNews.');
@@ -92,17 +104,14 @@ export class NewsRestControllerService {
 
     /**
      * Get news
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getNews(id: number, observe?: 'body', reportProgress?: boolean): Observable<NewsDTO>;
-
     public getNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewsDTO>>;
-
     public getNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewsDTO>>;
-
     public getNews(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getNews.');
@@ -141,7 +150,7 @@ export class NewsRestControllerService {
 
     /**
      * Get news
-     *
+     * 
      * @param page page
      * @param searchTerm searchTerm
      * @param size size
@@ -149,11 +158,8 @@ export class NewsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageDTONewsDTO>;
-
     public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTONewsDTO>>;
-
     public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTONewsDTO>>;
-
     public getNewsPage(page: number, searchTerm?: string, size?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (page === null || page === undefined) {
             throw new Error('Required parameter page was null or undefined when calling getNewsPage.');
@@ -204,17 +210,14 @@ export class NewsRestControllerService {
 
     /**
      * Post news
-     *
+     * 
      * @param newsDTO newsDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public postNews(newsDTO: NewsDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public postNews(newsDTO: NewsDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public postNews(newsDTO: NewsDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public postNews(newsDTO: NewsDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (newsDTO === null || newsDTO === undefined) {
             throw new Error('Required parameter newsDTO was null or undefined when calling postNews.');
@@ -258,17 +261,14 @@ export class NewsRestControllerService {
 
     /**
      * Update news
-     *
+     * 
      * @param newsDTO newsDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public updateNews(newsDTO: NewsDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public updateNews(newsDTO: NewsDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public updateNews(newsDTO: NewsDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public updateNews(newsDTO: NewsDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (newsDTO === null || newsDTO === undefined) {
             throw new Error('Required parameter newsDTO was null or undefined when calling updateNews.');
@@ -308,20 +308,6 @@ export class NewsRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

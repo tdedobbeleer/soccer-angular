@@ -40,18 +40,30 @@ export class StatisticsRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Get statictics
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getStatictics(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountStatisticDTO>>;
-
     public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
-
     public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
-
     public getStatictics(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getStatictics.');
@@ -86,20 +98,6 @@ export class StatisticsRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

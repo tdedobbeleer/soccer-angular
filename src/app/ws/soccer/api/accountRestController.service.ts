@@ -43,19 +43,31 @@ export class AccountRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Change activation status
-     *
+     * 
      * @param id id
      * @param status status
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public changeActivation(id: number, status: boolean, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public changeActivation(id: number, status: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public changeActivation(id: number, status: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public changeActivation(id: number, status: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling changeActivation.');
@@ -104,17 +116,14 @@ export class AccountRestControllerService {
 
     /**
      * Change password
-     *
+     * 
      * @param passwordDTO passwordDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public changePassword(passwordDTO: PasswordDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public changePassword(passwordDTO: PasswordDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public changePassword(passwordDTO: PasswordDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public changePassword(passwordDTO: PasswordDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordDTO === null || passwordDTO === undefined) {
             throw new Error('Required parameter passwordDTO was null or undefined when calling changePassword.');
@@ -158,17 +167,14 @@ export class AccountRestControllerService {
 
     /**
      * Demote user
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public demote(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public demote(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public demote(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public demote(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling demote.');
@@ -208,17 +214,14 @@ export class AccountRestControllerService {
 
     /**
      * Elevate user
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public elevate(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public elevate(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public elevate(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public elevate(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling elevate.');
@@ -258,18 +261,15 @@ export class AccountRestControllerService {
 
     /**
      * Activate account for the first time
-     *
+     * 
      * @param id id
      * @param sendMail sendMail
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public firstTimeActivation(id: number, sendMail: boolean, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public firstTimeActivation(id: number, sendMail: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public firstTimeActivation(id: number, sendMail: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public firstTimeActivation(id: number, sendMail: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling firstTimeActivation.');
@@ -318,17 +318,14 @@ export class AccountRestControllerService {
 
     /**
      * Get Account
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getAccount(id: number, observe?: 'body', reportProgress?: boolean): Observable<AccountDTO>;
-
     public getAccount(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AccountDTO>>;
-
     public getAccount(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AccountDTO>>;
-
     public getAccount(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getAccount.');
@@ -367,16 +364,13 @@ export class AccountRestControllerService {
 
     /**
      * Get Accounts
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getAccounts(observe?: 'body', reportProgress?: boolean): Observable<Array<AccountDTO>>;
-
     public getAccounts(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
-
     public getAccounts(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
-
     public getAccounts(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -408,20 +402,6 @@ export class AccountRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

@@ -41,18 +41,30 @@ export class MatchesRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Create match
-     *
+     * 
      * @param dto dto
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public createMatch(dto: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
     public createMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
     public createMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-
     public createMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (dto === null || dto === undefined) {
             throw new Error('Required parameter dto was null or undefined when calling createMatch.');
@@ -96,13 +108,14 @@ export class MatchesRestControllerService {
 
     /**
      * Delete match
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public deleteMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
+    public deleteMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
     public deleteMatch(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteMatch.');
@@ -139,22 +152,16 @@ export class MatchesRestControllerService {
         );
     }
 
-    public deleteMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Get match
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
     public getMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
     public getMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-
     public getMatch(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getMatch.');
@@ -193,16 +200,13 @@ export class MatchesRestControllerService {
 
     /**
      * Get poll for match
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public latestMatchPoll(observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-
     public latestMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-
     public latestMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-
     public latestMatchPoll(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -238,17 +242,14 @@ export class MatchesRestControllerService {
 
     /**
      * Get poll for match
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public matchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-
     public matchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-
     public matchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-
     public matchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchPoll.');
@@ -287,17 +288,14 @@ export class MatchesRestControllerService {
 
     /**
      * Get matches for season
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public matchesForSeason(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<MatchDTO>>;
-
     public matchesForSeason(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
-
     public matchesForSeason(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
-
     public matchesForSeason(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchesForSeason.');
@@ -336,16 +334,13 @@ export class MatchesRestControllerService {
 
     /**
      * Get next match
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public nextMatchPoll(observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
     public nextMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
     public nextMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-
     public nextMatchPoll(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -381,17 +376,14 @@ export class MatchesRestControllerService {
 
     /**
      * Update match
-     *
+     * 
      * @param dto dto
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public updateMatch(dto: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
     public updateMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
     public updateMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-
     public updateMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (dto === null || dto === undefined) {
             throw new Error('Required parameter dto was null or undefined when calling updateMatch.');
@@ -431,20 +423,6 @@ export class MatchesRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

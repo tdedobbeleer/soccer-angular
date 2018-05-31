@@ -41,19 +41,31 @@ export class PasswordRecoveryRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Get a password recovery code
-     *
+     * 
      * @param passwordRecoveryDTO passwordRecoveryDTO
      * @param captchaResponse captchaResponse
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
             throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling forgotPassword.');
@@ -106,17 +118,14 @@ export class PasswordRecoveryRestControllerService {
 
     /**
      * Set a new password using recovery code
-     *
+     * 
      * @param passwordRecoveryDTO passwordRecoveryDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
             throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling useRecoveryCode.');
@@ -156,20 +165,6 @@ export class PasswordRecoveryRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

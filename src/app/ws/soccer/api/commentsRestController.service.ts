@@ -41,19 +41,31 @@ export class CommentsRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Get news
-     *
+     * 
      * @param id id
      * @param commentId commentId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public deleteComment(id: number, commentId: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public deleteComment(id: number, commentId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public deleteComment(id: number, commentId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public deleteComment(id: number, commentId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteComment.');
@@ -95,18 +107,15 @@ export class CommentsRestControllerService {
 
     /**
      * Get news
-     *
+     * 
      * @param id id
      * @param commentDTO commentDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public editComment(id: number, commentDTO: CommentDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public editComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public editComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public editComment(id: number, commentDTO: CommentDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling editComment.');
@@ -153,18 +162,15 @@ export class CommentsRestControllerService {
 
     /**
      * Post news
-     *
+     * 
      * @param id id
      * @param commentDTO commentDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public postComment(id: number, commentDTO: CommentDTO, observe?: 'body', reportProgress?: boolean): Observable<CommentDTO>;
-
     public postComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
-
     public postComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
-
     public postComment(id: number, commentDTO: CommentDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling postComment.');
@@ -207,20 +213,6 @@ export class CommentsRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

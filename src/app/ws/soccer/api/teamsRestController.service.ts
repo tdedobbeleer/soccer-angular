@@ -42,18 +42,30 @@ export class TeamsRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Create a new team
-     *
+     * 
      * @param teamDTO teamDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public createTeam(teamDTO: TeamDTO, observe?: 'body', reportProgress?: boolean): Observable<TeamDTO>;
-
     public createTeam(teamDTO: TeamDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
-
     public createTeam(teamDTO: TeamDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
-
     public createTeam(teamDTO: TeamDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (teamDTO === null || teamDTO === undefined) {
             throw new Error('Required parameter teamDTO was null or undefined when calling createTeam.');
@@ -97,17 +109,14 @@ export class TeamsRestControllerService {
 
     /**
      * Delete a team
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public deleteTeam(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public deleteTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public deleteTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public deleteTeam(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteTeam.');
@@ -146,17 +155,14 @@ export class TeamsRestControllerService {
 
     /**
      * Get team by id
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getTeam(id: number, observe?: 'body', reportProgress?: boolean): Observable<TeamDTO>;
-
     public getTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
-
     public getTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
-
     public getTeam(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getTeam.');
@@ -195,16 +201,13 @@ export class TeamsRestControllerService {
 
     /**
      * Get all addresses
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getTeamAddresses(observe?: 'body', reportProgress?: boolean): Observable<Array<AddressDTO>>;
-
     public getTeamAddresses(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AddressDTO>>>;
-
     public getTeamAddresses(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AddressDTO>>>;
-
     public getTeamAddresses(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -240,16 +243,13 @@ export class TeamsRestControllerService {
 
     /**
      * Get teams
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getTeams(observe?: 'body', reportProgress?: boolean): Observable<Array<TeamDTO>>;
-
     public getTeams(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TeamDTO>>>;
-
     public getTeams(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TeamDTO>>>;
-
     public getTeams(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -285,17 +285,14 @@ export class TeamsRestControllerService {
 
     /**
      * Update a team
-     *
+     * 
      * @param teamDTO teamDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public updateTeam(teamDTO: TeamDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
     public updateTeam(teamDTO: TeamDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
     public updateTeam(teamDTO: TeamDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     public updateTeam(teamDTO: TeamDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (teamDTO === null || teamDTO === undefined) {
             throw new Error('Required parameter teamDTO was null or undefined when calling updateTeam.');
@@ -335,20 +332,6 @@ export class TeamsRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

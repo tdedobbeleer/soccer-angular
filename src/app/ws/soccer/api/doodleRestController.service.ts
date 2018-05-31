@@ -42,8 +42,23 @@ export class DoodleRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Change presence
-     *
+     * 
      * @param id id
      * @param accountId accountId
      * @param force force
@@ -51,11 +66,8 @@ export class DoodleRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public changePresence(id: number, accountId: number, force?: boolean, observe?: 'body', reportProgress?: boolean): Observable<PresenceDTO>;
-
     public changePresence(id: number, accountId: number, force?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PresenceDTO>>;
-
     public changePresence(id: number, accountId: number, force?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PresenceDTO>>;
-
     public changePresence(id: number, accountId: number, force?: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling changePresence.');
@@ -104,17 +116,14 @@ export class DoodleRestControllerService {
 
     /**
      * Get matchdoodles
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public matchDoodle(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDoodleDTO>;
-
     public matchDoodle(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDoodleDTO>>;
-
     public matchDoodle(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDoodleDTO>>;
-
     public matchDoodle(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchDoodle.');
@@ -153,18 +162,15 @@ export class DoodleRestControllerService {
 
     /**
      * Get matchdoodles
-     *
+     * 
      * @param page page
      * @param size size
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public matchDoodlesPage(page: number, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageDTOMatchDoodleDTO>;
-
     public matchDoodlesPage(page: number, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTOMatchDoodleDTO>>;
-
     public matchDoodlesPage(page: number, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTOMatchDoodleDTO>>;
-
     public matchDoodlesPage(page: number, size?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (page === null || page === undefined) {
             throw new Error('Required parameter page was null or undefined when calling matchDoodlesPage.');
@@ -208,20 +214,6 @@ export class DoodleRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

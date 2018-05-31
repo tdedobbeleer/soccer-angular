@@ -39,16 +39,16 @@ import {TeamsRestControllerService} from './api/teamsRestController.service';
         TeamsRestControllerService]
 })
 export class ApiModule {
-    constructor(@Optional() @SkipSelf() parentModule: ApiModule) {
-        if (parentModule) {
-            throw new Error('ApiModule is already loaded. Import your base AppModule only.');
-        }
-    }
-
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
         return {
             ngModule: ApiModule,
             providers: [{provide: Configuration, useFactory: configurationFactory}]
+        }
+    }
+
+    constructor(@Optional() @SkipSelf() parentModule: ApiModule) {
+        if (parentModule) {
+            throw new Error('ApiModule is already loaded. Import your base AppModule only.');
         }
     }
 }

@@ -41,17 +41,29 @@ export class ErrorRestControllerService {
     }
 
     /**
+     * @param consumes string[] mime-types
+     * @return true: consumes contains 'multipart/form-data', false: otherwise
+     */
+    private canConsumeForm(consumes: string[]): boolean {
+        const form = 'multipart/form-data';
+        for (let consume of consumes) {
+            if (form === consume) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Get example 400 error
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public get400Error(observe?: 'body', reportProgress?: boolean): Observable<ValidationErrorDetailDTO>;
-
     public get400Error(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ValidationErrorDetailDTO>>;
-
     public get400Error(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ValidationErrorDetailDTO>>;
-
     public get400Error(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -87,16 +99,13 @@ export class ErrorRestControllerService {
 
     /**
      * Get example 500 error
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public get500Error(observe?: 'body', reportProgress?: boolean): Observable<ErrorDetailDTO>;
-
     public get500Error(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ErrorDetailDTO>>;
-
     public get500Error(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ErrorDetailDTO>>;
-
     public get500Error(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -128,20 +137,6 @@ export class ErrorRestControllerService {
                 reportProgress: reportProgress
             }
         );
-    }
-
-    /**
-     * @param consumes string[] mime-types
-     * @return true: consumes contains 'multipart/form-data', false: otherwise
-     */
-    private canConsumeForm(consumes: string[]): boolean {
-        const form = 'multipart/form-data';
-        for (let consume of consumes) {
-            if (form === consume) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }
