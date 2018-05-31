@@ -26,9 +26,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class PasswordRecoveryRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -49,10 +49,6 @@ export class PasswordRecoveryRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
@@ -104,6 +100,9 @@ export class PasswordRecoveryRestControllerService {
         );
     }
 
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+
     /**
      * Set a new password using recovery code
      *
@@ -112,10 +111,6 @@ export class PasswordRecoveryRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
-    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
-    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
@@ -157,6 +152,9 @@ export class PasswordRecoveryRestControllerService {
             }
         );
     }
+
+    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

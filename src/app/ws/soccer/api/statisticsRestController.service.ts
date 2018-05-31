@@ -25,9 +25,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class StatisticsRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -47,10 +47,6 @@ export class StatisticsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getStatictics(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountStatisticDTO>>;
-
-    public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
-
-    public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
 
     public getStatictics(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -87,6 +83,9 @@ export class StatisticsRestControllerService {
             }
         );
     }
+
+    public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
+    public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
 
     /**
      * @param consumes string[] mime-types

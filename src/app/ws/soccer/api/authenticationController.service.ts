@@ -26,9 +26,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class AuthenticationControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -48,10 +48,6 @@ export class AuthenticationControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
-
-    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-
-    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
 
     public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (authenticationRequestDTO === null || authenticationRequestDTO === undefined) {
@@ -94,6 +90,9 @@ export class AuthenticationControllerService {
         );
     }
 
+    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+
     /**
      * Is fully authenticated
      *
@@ -101,10 +100,6 @@ export class AuthenticationControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public isFullyAuthenticated(observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
-    public isFullyAuthenticated(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
-    public isFullyAuthenticated(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public isFullyAuthenticated(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -138,6 +133,9 @@ export class AuthenticationControllerService {
             }
         );
     }
+
+    public isFullyAuthenticated(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public isFullyAuthenticated(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

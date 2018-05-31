@@ -27,9 +27,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class DoodleRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -51,10 +51,6 @@ export class DoodleRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public changePresence(id: number, accountId: number, force?: boolean, observe?: 'body', reportProgress?: boolean): Observable<PresenceDTO>;
-
-    public changePresence(id: number, accountId: number, force?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PresenceDTO>>;
-
-    public changePresence(id: number, accountId: number, force?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PresenceDTO>>;
 
     public changePresence(id: number, accountId: number, force?: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -102,6 +98,9 @@ export class DoodleRestControllerService {
         );
     }
 
+    public changePresence(id: number, accountId: number, force?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PresenceDTO>>;
+    public changePresence(id: number, accountId: number, force?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PresenceDTO>>;
+
     /**
      * Get matchdoodles
      *
@@ -110,10 +109,6 @@ export class DoodleRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public matchDoodle(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDoodleDTO>;
-
-    public matchDoodle(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDoodleDTO>>;
-
-    public matchDoodle(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDoodleDTO>>;
 
     public matchDoodle(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -151,6 +146,9 @@ export class DoodleRestControllerService {
         );
     }
 
+    public matchDoodle(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDoodleDTO>>;
+    public matchDoodle(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDoodleDTO>>;
+
     /**
      * Get matchdoodles
      *
@@ -160,10 +158,6 @@ export class DoodleRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public matchDoodlesPage(page: number, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageDTOMatchDoodleDTO>;
-
-    public matchDoodlesPage(page: number, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTOMatchDoodleDTO>>;
-
-    public matchDoodlesPage(page: number, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTOMatchDoodleDTO>>;
 
     public matchDoodlesPage(page: number, size?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (page === null || page === undefined) {
@@ -209,6 +203,9 @@ export class DoodleRestControllerService {
             }
         );
     }
+
+    public matchDoodlesPage(page: number, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTOMatchDoodleDTO>>;
+    public matchDoodlesPage(page: number, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTOMatchDoodleDTO>>;
 
     /**
      * @param consumes string[] mime-types

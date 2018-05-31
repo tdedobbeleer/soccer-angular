@@ -24,9 +24,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class SeasonsRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -46,10 +46,6 @@ export class SeasonsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public createSeason(seasonDTO: SeasonDTO, observe?: 'body', reportProgress?: boolean): Observable<SeasonDTO>;
-
-    public createSeason(seasonDTO: SeasonDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SeasonDTO>>;
-
-    public createSeason(seasonDTO: SeasonDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SeasonDTO>>;
 
     public createSeason(seasonDTO: SeasonDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (seasonDTO === null || seasonDTO === undefined) {
@@ -92,6 +88,9 @@ export class SeasonsRestControllerService {
         );
     }
 
+    public createSeason(seasonDTO: SeasonDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SeasonDTO>>;
+    public createSeason(seasonDTO: SeasonDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SeasonDTO>>;
+
     /**
      * Get all seasons
      *
@@ -99,10 +98,6 @@ export class SeasonsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getSeasons(observe?: 'body', reportProgress?: boolean): Observable<Array<SeasonDTO>>;
-
-    public getSeasons(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<SeasonDTO>>>;
-
-    public getSeasons(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<SeasonDTO>>>;
 
     public getSeasons(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -136,6 +131,9 @@ export class SeasonsRestControllerService {
             }
         );
     }
+
+    public getSeasons(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<SeasonDTO>>>;
+    public getSeasons(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<SeasonDTO>>>;
 
     /**
      * @param consumes string[] mime-types

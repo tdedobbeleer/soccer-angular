@@ -30,9 +30,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class PollRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -52,10 +52,6 @@ export class PollRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getMatchPollById(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-
-    public getMatchPollById(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-
-    public getMatchPollById(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
 
     public getMatchPollById(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -93,6 +89,9 @@ export class PollRestControllerService {
         );
     }
 
+    public getMatchPollById(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
+    public getMatchPollById(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
+
     /**
      * Get all match polls
      *
@@ -103,10 +102,6 @@ export class PollRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'body', reportProgress?: boolean): Observable<PageDTOMatchPollDTO>;
-
-    public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTOMatchPollDTO>>;
-
-    public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTOMatchPollDTO>>;
 
     public getMatchPolls(page: number, size?: number, sort?: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (page === null || page === undefined) {
@@ -156,6 +151,9 @@ export class PollRestControllerService {
         );
     }
 
+    public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTOMatchPollDTO>>;
+    public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTOMatchPollDTO>>;
+
     /**
      * Vote
      *
@@ -165,10 +163,6 @@ export class PollRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'body', reportProgress?: boolean): Observable<MultipleChoiceVoteDTOlong>;
-
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MultipleChoiceVoteDTOlong>>;
-
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MultipleChoiceVoteDTOlong>>;
 
     public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -214,6 +208,9 @@ export class PollRestControllerService {
         );
     }
 
+    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MultipleChoiceVoteDTOlong>>;
+    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MultipleChoiceVoteDTOlong>>;
+
     /**
      * Refresh match poll
      *
@@ -222,10 +219,6 @@ export class PollRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public refreshMatchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountDTO>>;
-
-    public refreshMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
-
-    public refreshMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
 
     public refreshMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -264,6 +257,9 @@ export class PollRestControllerService {
         );
     }
 
+    public refreshMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
+    public refreshMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
+
     /**
      * Reset match poll
      *
@@ -272,10 +268,6 @@ export class PollRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public resetMatchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
-    public resetMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
-    public resetMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public resetMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -313,6 +305,9 @@ export class PollRestControllerService {
             }
         );
     }
+
+    public resetMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public resetMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

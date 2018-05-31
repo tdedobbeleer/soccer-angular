@@ -1,5 +1,5 @@
 export interface ConfigurationParameters {
-    apiKeys?: { [ key: string ]: string };
+    apiKeys?: { [key: string]: string };
     username?: string;
     password?: string;
     accessToken?: string | (() => string);
@@ -8,7 +8,7 @@ export interface ConfigurationParameters {
 }
 
 export class Configuration {
-    apiKeys?: { [ key: string ]: string };
+    apiKeys?: { [key: string]: string };
     username?: string;
     password?: string;
     accessToken?: string | (() => string);

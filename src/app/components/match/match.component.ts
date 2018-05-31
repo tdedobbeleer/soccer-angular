@@ -140,7 +140,7 @@ export class MatchComponent implements OnInit {
 
     deleteMatch() {
 
-        this._api.deleteMatch(this.match).subscribe(
+        this._api.deleteMatch(this.match.id).subscribe(
             () => {
                 this.deleted = true
             },

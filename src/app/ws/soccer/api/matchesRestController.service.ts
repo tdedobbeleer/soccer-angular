@@ -26,9 +26,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class MatchesRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -48,10 +48,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public createMatch(dto: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
-    public createMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
-    public createMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
 
     public createMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (dto === null || dto === undefined) {
@@ -94,22 +90,25 @@ export class MatchesRestControllerService {
         );
     }
 
+    public createMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
+    public createMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
+
     /**
      * Delete match
      *
-     * @param matchDTO matchDTO
+     * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteMatch(matchDTO: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public deleteMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
 
-    public deleteMatch(matchDTO: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
 
-    public deleteMatch(matchDTO: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public deleteMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
-    public deleteMatch(matchDTO: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (matchDTO === null || matchDTO === undefined) {
-            throw new Error('Required parameter matchDTO was null or undefined when calling deleteMatch.');
+    public deleteMatch(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling deleteMatch.');
         }
 
         let headers = this.defaultHeaders;
@@ -132,12 +131,8 @@ export class MatchesRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set("Content-Type", httpContentTypeSelected);
-        }
 
-        return this.httpClient.delete<ResponseEntity>(`${this.basePath}/api/v1/matches`,
+        return this.httpClient.delete<ResponseEntity>(`${this.basePath}/api/v1/matches/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -155,10 +150,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
-    public getMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
-    public getMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
 
     public getMatch(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -196,6 +187,9 @@ export class MatchesRestControllerService {
         );
     }
 
+    public getMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
+    public getMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
+
     /**
      * Get poll for match
      *
@@ -203,10 +197,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public latestMatchPoll(observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-
-    public latestMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-
-    public latestMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
 
     public latestMatchPoll(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -241,6 +231,9 @@ export class MatchesRestControllerService {
         );
     }
 
+    public latestMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
+    public latestMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
+
     /**
      * Get poll for match
      *
@@ -249,10 +242,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public matchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-
-    public matchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-
-    public matchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
 
     public matchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -290,6 +279,9 @@ export class MatchesRestControllerService {
         );
     }
 
+    public matchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
+    public matchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
+
     /**
      * Get matches for season
      *
@@ -298,10 +290,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public matchesForSeason(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<MatchDTO>>;
-
-    public matchesForSeason(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
-
-    public matchesForSeason(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
 
     public matchesForSeason(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -339,6 +327,9 @@ export class MatchesRestControllerService {
         );
     }
 
+    public matchesForSeason(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
+    public matchesForSeason(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
+
     /**
      * Get next match
      *
@@ -346,10 +337,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public nextMatchPoll(observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
-    public nextMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
-    public nextMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
 
     public nextMatchPoll(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -384,6 +371,9 @@ export class MatchesRestControllerService {
         );
     }
 
+    public nextMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
+    public nextMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
+
     /**
      * Update match
      *
@@ -392,10 +382,6 @@ export class MatchesRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public updateMatch(dto: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-
-    public updateMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-
-    public updateMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
 
     public updateMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (dto === null || dto === undefined) {
@@ -437,6 +423,9 @@ export class MatchesRestControllerService {
             }
         );
     }
+
+    public updateMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
+    public updateMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
 
     /**
      * @param consumes string[] mime-types

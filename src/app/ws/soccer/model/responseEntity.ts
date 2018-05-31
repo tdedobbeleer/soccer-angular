@@ -16,7 +16,6 @@ export interface ResponseEntity {
     statusCode?: ResponseEntity.StatusCodeEnum;
     statusCodeValue?: number;
 }
-
 export namespace ResponseEntity {
     export type StatusCodeEnum =
         '100'

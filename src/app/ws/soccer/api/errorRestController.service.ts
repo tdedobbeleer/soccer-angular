@@ -26,9 +26,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class ErrorRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -47,10 +47,6 @@ export class ErrorRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public get400Error(observe?: 'body', reportProgress?: boolean): Observable<ValidationErrorDetailDTO>;
-
-    public get400Error(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ValidationErrorDetailDTO>>;
-
-    public get400Error(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ValidationErrorDetailDTO>>;
 
     public get400Error(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -85,6 +81,9 @@ export class ErrorRestControllerService {
         );
     }
 
+    public get400Error(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ValidationErrorDetailDTO>>;
+    public get400Error(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ValidationErrorDetailDTO>>;
+
     /**
      * Get example 500 error
      *
@@ -92,10 +91,6 @@ export class ErrorRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public get500Error(observe?: 'body', reportProgress?: boolean): Observable<ErrorDetailDTO>;
-
-    public get500Error(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ErrorDetailDTO>>;
-
-    public get500Error(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ErrorDetailDTO>>;
 
     public get500Error(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -129,6 +124,9 @@ export class ErrorRestControllerService {
             }
         );
     }
+
+    public get500Error(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ErrorDetailDTO>>;
+    public get500Error(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ErrorDetailDTO>>;
 
     /**
      * @param consumes string[] mime-types

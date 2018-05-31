@@ -26,9 +26,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class RegistrationRestControllerService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -49,10 +49,6 @@ export class RegistrationRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (registrationDTO === null || registrationDTO === undefined) {
@@ -103,6 +99,9 @@ export class RegistrationRestControllerService {
             }
         );
     }
+
+    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types
