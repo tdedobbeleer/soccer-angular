@@ -50,6 +50,10 @@ export class NewsRestControllerService {
      */
     public deleteNews(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
 
+    public deleteNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public deleteNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+
     public deleteNews(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteNews.');
@@ -86,9 +90,6 @@ export class NewsRestControllerService {
         );
     }
 
-    public deleteNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Get news
      *
@@ -97,6 +98,10 @@ export class NewsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getNews(id: number, observe?: 'body', reportProgress?: boolean): Observable<NewsDTO>;
+
+    public getNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewsDTO>>;
+
+    public getNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewsDTO>>;
 
     public getNews(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -134,9 +139,6 @@ export class NewsRestControllerService {
         );
     }
 
-    public getNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewsDTO>>;
-    public getNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewsDTO>>;
-
     /**
      * Get news
      *
@@ -147,6 +149,10 @@ export class NewsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageDTONewsDTO>;
+
+    public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTONewsDTO>>;
+
+    public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTONewsDTO>>;
 
     public getNewsPage(page: number, searchTerm?: string, size?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (page === null || page === undefined) {
@@ -196,9 +202,6 @@ export class NewsRestControllerService {
         );
     }
 
-    public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTONewsDTO>>;
-    public getNewsPage(page: number, searchTerm?: string, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTONewsDTO>>;
-
     /**
      * Post news
      *
@@ -207,6 +210,10 @@ export class NewsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public postNews(newsDTO: NewsDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public postNews(newsDTO: NewsDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public postNews(newsDTO: NewsDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public postNews(newsDTO: NewsDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (newsDTO === null || newsDTO === undefined) {
@@ -249,9 +256,6 @@ export class NewsRestControllerService {
         );
     }
 
-    public postNews(newsDTO: NewsDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public postNews(newsDTO: NewsDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Update news
      *
@@ -260,6 +264,10 @@ export class NewsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public updateNews(newsDTO: NewsDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public updateNews(newsDTO: NewsDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public updateNews(newsDTO: NewsDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public updateNews(newsDTO: NewsDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (newsDTO === null || newsDTO === undefined) {
@@ -301,9 +309,6 @@ export class NewsRestControllerService {
             }
         );
     }
-
-    public updateNews(newsDTO: NewsDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public updateNews(newsDTO: NewsDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

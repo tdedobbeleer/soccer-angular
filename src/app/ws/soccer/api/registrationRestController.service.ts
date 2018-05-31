@@ -50,6 +50,10 @@ export class RegistrationRestControllerService {
      */
     public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
 
+    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+
     public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (registrationDTO === null || registrationDTO === undefined) {
             throw new Error('Required parameter registrationDTO was null or undefined when calling createAccount.');
@@ -99,9 +103,6 @@ export class RegistrationRestControllerService {
             }
         );
     }
-
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

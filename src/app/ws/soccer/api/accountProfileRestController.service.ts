@@ -48,6 +48,10 @@ export class AccountProfileRestControllerService {
      */
     public getAllProfiles(observe?: 'body', reportProgress?: boolean): Observable<Array<ProfileDTO>>;
 
+    public getAllProfiles(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProfileDTO>>>;
+
+    public getAllProfiles(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProfileDTO>>>;
+
     public getAllProfiles(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -81,9 +85,6 @@ export class AccountProfileRestControllerService {
         );
     }
 
-    public getAllProfiles(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProfileDTO>>>;
-    public getAllProfiles(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProfileDTO>>>;
-
     /**
      * Get Account profile
      *
@@ -92,6 +93,10 @@ export class AccountProfileRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getProfile(id: number, observe?: 'body', reportProgress?: boolean): Observable<ProfileDTO>;
+
+    public getProfile(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfileDTO>>;
+
+    public getProfile(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfileDTO>>;
 
     public getProfile(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -129,9 +134,6 @@ export class AccountProfileRestControllerService {
         );
     }
 
-    public getProfile(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfileDTO>>;
-    public getProfile(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfileDTO>>;
-
     /**
      * Post image
      *
@@ -141,6 +143,10 @@ export class AccountProfileRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public postProfileImage(id: number, image: Blob, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public postProfileImage(id: number, image: Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public postProfileImage(id: number, image: Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public postProfileImage(id: number, image: Blob, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -200,9 +206,6 @@ export class AccountProfileRestControllerService {
         );
     }
 
-    public postProfileImage(id: number, image: Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public postProfileImage(id: number, image: Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Update Account profile
      *
@@ -211,6 +214,10 @@ export class AccountProfileRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public updateProfile(profileDTO: ProfileDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public updateProfile(profileDTO: ProfileDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public updateProfile(profileDTO: ProfileDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public updateProfile(profileDTO: ProfileDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (profileDTO === null || profileDTO === undefined) {
@@ -252,9 +259,6 @@ export class AccountProfileRestControllerService {
             }
         );
     }
-
-    public updateProfile(profileDTO: ProfileDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public updateProfile(profileDTO: ProfileDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

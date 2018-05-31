@@ -50,6 +50,10 @@ export class TeamsRestControllerService {
      */
     public createTeam(teamDTO: TeamDTO, observe?: 'body', reportProgress?: boolean): Observable<TeamDTO>;
 
+    public createTeam(teamDTO: TeamDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
+
+    public createTeam(teamDTO: TeamDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
+
     public createTeam(teamDTO: TeamDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (teamDTO === null || teamDTO === undefined) {
             throw new Error('Required parameter teamDTO was null or undefined when calling createTeam.');
@@ -91,9 +95,6 @@ export class TeamsRestControllerService {
         );
     }
 
-    public createTeam(teamDTO: TeamDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
-    public createTeam(teamDTO: TeamDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
-
     /**
      * Delete a team
      *
@@ -102,6 +103,10 @@ export class TeamsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public deleteTeam(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public deleteTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public deleteTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public deleteTeam(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -139,9 +144,6 @@ export class TeamsRestControllerService {
         );
     }
 
-    public deleteTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Get team by id
      *
@@ -150,6 +152,10 @@ export class TeamsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getTeam(id: number, observe?: 'body', reportProgress?: boolean): Observable<TeamDTO>;
+
+    public getTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
+
+    public getTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
 
     public getTeam(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -187,9 +193,6 @@ export class TeamsRestControllerService {
         );
     }
 
-    public getTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
-    public getTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
-
     /**
      * Get all addresses
      *
@@ -197,6 +200,10 @@ export class TeamsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getTeamAddresses(observe?: 'body', reportProgress?: boolean): Observable<Array<AddressDTO>>;
+
+    public getTeamAddresses(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AddressDTO>>>;
+
+    public getTeamAddresses(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AddressDTO>>>;
 
     public getTeamAddresses(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -231,9 +238,6 @@ export class TeamsRestControllerService {
         );
     }
 
-    public getTeamAddresses(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AddressDTO>>>;
-    public getTeamAddresses(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AddressDTO>>>;
-
     /**
      * Get teams
      *
@@ -241,6 +245,10 @@ export class TeamsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public getTeams(observe?: 'body', reportProgress?: boolean): Observable<Array<TeamDTO>>;
+
+    public getTeams(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TeamDTO>>>;
+
+    public getTeams(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TeamDTO>>>;
 
     public getTeams(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -275,9 +283,6 @@ export class TeamsRestControllerService {
         );
     }
 
-    public getTeams(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TeamDTO>>>;
-    public getTeams(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TeamDTO>>>;
-
     /**
      * Update a team
      *
@@ -286,6 +291,10 @@ export class TeamsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public updateTeam(teamDTO: TeamDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public updateTeam(teamDTO: TeamDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public updateTeam(teamDTO: TeamDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public updateTeam(teamDTO: TeamDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (teamDTO === null || teamDTO === undefined) {
@@ -327,9 +336,6 @@ export class TeamsRestControllerService {
             }
         );
     }
-
-    public updateTeam(teamDTO: TeamDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public updateTeam(teamDTO: TeamDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

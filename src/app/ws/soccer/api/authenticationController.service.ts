@@ -49,6 +49,10 @@ export class AuthenticationControllerService {
      */
     public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'body', reportProgress?: boolean): Observable<any>;
 
+    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+
+    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+
     public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (authenticationRequestDTO === null || authenticationRequestDTO === undefined) {
             throw new Error('Required parameter authenticationRequestDTO was null or undefined when calling authenticate.');
@@ -90,9 +94,6 @@ export class AuthenticationControllerService {
         );
     }
 
-    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public authenticate(authenticationRequestDTO: AuthenticationRequestDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-
     /**
      * Is fully authenticated
      *
@@ -100,6 +101,10 @@ export class AuthenticationControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public isFullyAuthenticated(observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public isFullyAuthenticated(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public isFullyAuthenticated(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public isFullyAuthenticated(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -133,9 +138,6 @@ export class AuthenticationControllerService {
             }
         );
     }
-
-    public isFullyAuthenticated(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public isFullyAuthenticated(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

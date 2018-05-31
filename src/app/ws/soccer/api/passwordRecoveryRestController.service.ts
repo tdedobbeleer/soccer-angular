@@ -50,6 +50,10 @@ export class PasswordRecoveryRestControllerService {
      */
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
 
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+
     public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
             throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling forgotPassword.');
@@ -100,9 +104,6 @@ export class PasswordRecoveryRestControllerService {
         );
     }
 
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Set a new password using recovery code
      *
@@ -111,6 +112,10 @@ export class PasswordRecoveryRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
@@ -152,9 +157,6 @@ export class PasswordRecoveryRestControllerService {
             }
         );
     }
-
-    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     /**
      * @param consumes string[] mime-types

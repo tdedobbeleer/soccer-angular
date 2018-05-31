@@ -50,6 +50,10 @@ export class CommentsRestControllerService {
      */
     public deleteComment(id: number, commentId: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
 
+    public deleteComment(id: number, commentId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public deleteComment(id: number, commentId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+
     public deleteComment(id: number, commentId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteComment.');
@@ -89,9 +93,6 @@ export class CommentsRestControllerService {
         );
     }
 
-    public deleteComment(id: number, commentId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteComment(id: number, commentId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Get news
      *
@@ -101,6 +102,10 @@ export class CommentsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public editComment(id: number, commentDTO: CommentDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+
+    public editComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+
+    public editComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
 
     public editComment(id: number, commentDTO: CommentDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -146,9 +151,6 @@ export class CommentsRestControllerService {
         );
     }
 
-    public editComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public editComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-
     /**
      * Post news
      *
@@ -158,6 +160,10 @@ export class CommentsRestControllerService {
      * @param reportProgress flag to report request and response progress.
      */
     public postComment(id: number, commentDTO: CommentDTO, observe?: 'body', reportProgress?: boolean): Observable<CommentDTO>;
+
+    public postComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
+
+    public postComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
 
     public postComment(id: number, commentDTO: CommentDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
@@ -202,9 +208,6 @@ export class CommentsRestControllerService {
             }
         );
     }
-
-    public postComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
-    public postComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
 
     /**
      * @param consumes string[] mime-types

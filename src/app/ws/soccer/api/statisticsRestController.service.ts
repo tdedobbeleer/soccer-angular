@@ -48,6 +48,10 @@ export class StatisticsRestControllerService {
      */
     public getStatictics(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountStatisticDTO>>;
 
+    public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
+
+    public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
+
     public getStatictics(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getStatictics.');
@@ -83,9 +87,6 @@ export class StatisticsRestControllerService {
             }
         );
     }
-
-    public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
-    public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
 
     /**
      * @param consumes string[] mime-types
