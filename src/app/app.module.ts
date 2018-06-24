@@ -18,6 +18,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {LaddaModule} from "angular2-ladda";
 import {ApiModule, Configuration} from "./ws/soccer";
 import {environment} from "../environments/environment";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const appRoutes: Routes = [
     {path: '', loadChildren: './modules/message.module#MessageModule'},
@@ -48,6 +49,7 @@ export function apiConfig() {
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AlertModule.forRoot(),
         BsDropdownModule.forRoot(),
         CollapseModule.forRoot(),

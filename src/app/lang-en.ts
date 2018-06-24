@@ -83,6 +83,7 @@ export const LANG_EN_TRANS = {
     'text.doodle.reserves': 'Players on standby',
     'text.doodle.reserve.info': '<small><b>Attention!</b> You\'re on standby.</small>',
     'text.messages.empty': 'No messages found.',
+    'text.message.postedBy': 'Posted by',
     'text.statistics.empty': 'No statistics found.',
     'title.faq': 'Frequently asked questions',
     'text.faq': 'Right! What\'s all this then?',

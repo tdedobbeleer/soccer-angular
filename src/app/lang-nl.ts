@@ -83,6 +83,7 @@ export const LANG_NL_TRANS = {
     'text.doodle.reserves': 'Spelers op standby',
     'text.doodle.reserve.info': '<small><b>Opgelet!</b> Je bent standby voor deze match.</small>',
     'text.messages.empty': 'Geen berichten gevonden.',
+    'text.message.postedBy': 'Gepost door',
     'text.statistics.empty': 'Geen statistieken gevonden.',
     'title.faq': 'Vaak gestelde vragen',
     'text.faq': 'Wat is dit allemaal?',

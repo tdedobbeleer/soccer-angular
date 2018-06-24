@@ -36,7 +36,7 @@ const routes: Routes = [
             spinnerSize: 20,
             spinnerColor: "white",
             spinnerLines: 12
-        }),
+        })
     ],
     declarations: [
         MessagesComponent,
