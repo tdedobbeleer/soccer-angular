@@ -79,7 +79,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                               <i class="fa fa-facebook fa-2x facebook"></i>
                             </button>
                             <button class="btn btn-link" shareButton="whatsapp" [url]="messageUrl"
-                                    [title]="message.header" [description]="shortMessage">
+                                    [description]="message.header">
                                 <i class="fa fa-whatsapp fa-2x whatsapp"></i>
                             </button>
                             <button class="btn btn-link" shareButton="email" [url]="messageUrl" [title]="message.header"
@@ -150,7 +150,7 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
       this.messageUrl = this.document.location.origin + "/messages/" + this.message.id;
-      this.shortMessage = this.stripHtml(this.message.content.length > 30 ? this.message.content.substring(0, 30) + ' ...' : this.message.content);
+      this.shortMessage = this.stripHtml(this.message.content.length > 100 ? this.message.content.substring(0, 100) + ' ...' : this.message.content);
   }
 
     toggleShareState() {
