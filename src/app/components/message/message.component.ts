@@ -5,7 +5,6 @@ import {SecUtil} from "../../classes/sec-util";
 import {CommentDTO, CommentsRestControllerService, NewsDTO, NewsRestControllerService} from "../../ws/soccer";
 import {DOCUMENT} from "@angular/common";
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-message',
@@ -73,23 +72,29 @@ import {DomSanitizer} from "@angular/platform-browser";
           <div class="row m-t-1">
               <div class="col-md-12">
                   <div class="text-center">
-                      <div>
+                      <div id="messageBtns">
                           <span [@shareState]="shareStateStatus">
-                            <a style="color: #3b5998;"
-                               href="https://www.facebook.com/sharer/sharer.php?u={{messageUrl}}" target="_blank"><span
-                                    class="fa fa-facebook fa-2x"></span></a>&nbsp;
-                            <a class="hidden-lg" style="color:#25d366;" data-href="{{messageUrl}}"
-                               [href]="sanitizer.bypassSecurityTrustUrl('whatsapp://send?text=' + message.header + ' (' + messageUrl +')' )"
-                               data-action="share/whatsapp/share" target="_blank"><span
-                                    class="fa fa-whatsapp fa-2x"></span></a>&nbsp;
-                            <a href="mailto:?&subject={{message.header}}&body={{messageUrl}}"><span
-                                    class="fa fa-envelope fa-2x"></span></a>
+                            <button class="btn btn-link" shareButton="facebook" [url]="messageUrl"
+                                    [title]="message.header" [description]="shortMessage">
+                              <i class="fa fa-facebook fa-2x facebook"></i>
+                            </button>
+                            <button class="btn btn-link" shareButton="whatsapp" [url]="messageUrl"
+                                    [title]="message.header" [description]="shortMessage">
+                                <i class="fa fa-whatsapp fa-2x whatsapp"></i>
+                            </button>
+                            <button class="btn btn-link" shareButton="email" [url]="messageUrl" [title]="message.header"
+                                    [description]="shortMessage">
+                                <i class="fa fa-envelope-o fa-2x email"></i>
+                            </button>
                           </span>
-                          <span title="Share" class="fa fa-share-alt fa-2x" (click)="toggleShareState()"
-                                *ngIf="shareStateStatus == 'inactive'"></span>&nbsp;&nbsp;
-                          <span class="commentBtn" (click)="showAllComments = !showAllComments"><span
-                                  class="fa fa-comments fa-2x"></span>&nbsp;<span
-                                  class="badge">{{message?.comments.length}}</span></span>
+                          <button class="btn btn-link" title="Share" (click)="toggleShareState()"
+                                  *ngIf="shareStateStatus == 'inactive'">
+                              <i class="fa fa-share-alt fa-2x"></i>
+                          </button>
+                          <button class="btn btn-link commentBtn" (click)="showAllComments = !showAllComments">
+                              <i class="fa fa-comments fa-2x"></i><i
+                                  class="badge">{{message?.comments.length}}</i>
+                          </button>
                       </div>
                   </div>
               </div>
@@ -98,7 +103,27 @@ import {DomSanitizer} from "@angular/platform-browser";
          <div class="clearfix"></div>
     </div>
   `,
-    styles: [],
+    styles: [
+            `
+            #messageBtns .btn {
+                padding: 1px;
+                color: #333;
+            }
+
+            .facebook {
+                color: #3b5998;
+            }
+
+            .whatsapp {
+                color: #25d366;
+            }
+
+            .email {
+                color: #337ab7;
+            }
+
+        `
+    ],
     animations: [
         trigger('shareState', [
             state('active', style({opacity: 1})),
@@ -116,14 +141,16 @@ export class MessageComponent implements OnInit {
   showDeleteNews: boolean = false;
   deleted: boolean = false;
     messageUrl: string;
+    shortMessage: string;
     shareStateStatus: string = 'inactive';
 
-    constructor(public sanitizer: DomSanitizer, @Inject(DOCUMENT) private document: any, private _api: CommentsRestControllerService, private _messagesApi: NewsRestControllerService, private _loginService: LoginService,
+    constructor(@Inject(DOCUMENT) private document: any, private _api: CommentsRestControllerService, private _messagesApi: NewsRestControllerService, private _loginService: LoginService,
                 private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
       this.messageUrl = this.document.location.origin + "/messages/" + this.message.id;
+      this.shortMessage = this.stripHtml(this.message.content.length > 30 ? this.message.content.substring(0, 30) + ' ...' : this.message.content);
   }
 
     toggleShareState() {
@@ -169,4 +196,8 @@ export class MessageComponent implements OnInit {
               this._errorHandler.handle(error, "messages");
         })
   }
+
+    private stripHtml(code: string) {
+        return code.replace(/<.*?>/g, '');
+    }
 }

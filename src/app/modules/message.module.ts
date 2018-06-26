@@ -15,6 +15,7 @@ import {CommentComponent} from "../components/comment/comment.component";
 import {MessageComponent} from "../components/message/message.component";
 import {AlertModule} from "ngx-bootstrap";
 import {LaddaModule} from "angular2-ladda";
+import {ShareModule} from "@ngx-share/core";
 
 const routes: Routes = [
     {path: '', component: MessagesComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
         SharedModule,
         AlertModule.forRoot(),
         RouterModule.forChild(routes),
+        ShareModule.forRoot(),
         LaddaModule.forRoot({
             style: "expand-right",
             spinnerSize: 20,

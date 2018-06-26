@@ -26,6 +26,8 @@
     "@angular/platform-browser": "^5.1.0",
     "@angular/platform-browser-dynamic": "^5.1.0",
     "@angular/router": "^5.1.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0",
+    "@ngx-share/core": "^5.3.1",
     "angular-datatables": "^5.0.0",
     "angular2-image-upload": "^1.0.0-rc.0",
     "angular2-ladda": "^1.2.2",
