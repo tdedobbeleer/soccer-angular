@@ -16,13 +16,13 @@ This is a GUI built for using the [Soccer API](https://github.com/tdedobbeleer/s
 
 ## Local deploy (Debian environment)
 ### Install prerequisites
-First of all, you need nodejs. Just download the latest stable version. At the time, version 7 was the preferred version:
+First of all, you need nodejs. Use the nvm script tool:
 
-    curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash - & sudo apt-get install -y nodejs
+    https://github.com/creationix/nvm
  
- Install npm:
-
-    sudo apt-get install npm
+ Install npm & node:
+ 
+    nvm install $version (eg: 10.5.0)   
 
 Install Angular CLI. Make sure you have the same version or higher than used by the project. Check the package.json file to know which version you need:
 
