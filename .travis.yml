@@ -12,8 +12,8 @@ node_js:
    - node # will use latest node
 
 before_script: # commands to run before the build step
-   - npm install -g --silent @angular/cli
-   - npm install -g --silent firebase-tools # installs firebase to run firebase deploy
+   - npm install -g -dd @angular/cli
+   - npm install -g -dd firebase-tools # installs firebase to run firebase deploy
 
 script: # the build step
    - ng build --aot --prod
