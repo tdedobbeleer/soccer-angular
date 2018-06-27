@@ -82,10 +82,14 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                                     [description]="message.header">
                                 <i class="fa fa-whatsapp fa-2x whatsapp"></i>
                             </button>
-                            <button class="btn btn-link" shareButton="email" [url]="messageUrl" [title]="message.header"
+                            <button class="hidden-lg btn btn-link" shareButton="email" [url]="messageUrl"
+                                    [title]="message.header"
                                     [description]="shortMessage">
                                 <i class="fa fa-envelope-o fa-2x email"></i>
                             </button>
+                            <button class="visible-lg-inline btn btn-link"><a
+                                    [href]="'mailto:?&subject=' + this.message.header + '&body=' + this.shortMessage + '%0D%0A' + this.messageUrl"><i
+                                    class="fa fa-envelope-o fa-2x email"></i></a></button>
                           </span>
                           <button class="btn btn-link" title="Share" (click)="toggleShareState()"
                                   *ngIf="shareStateStatus == 'inactive'">
@@ -144,19 +148,20 @@ export class MessageComponent implements OnInit {
     shortMessage: string;
     shareStateStatus: string = 'inactive';
 
-    constructor(@Inject(DOCUMENT) private document: any, private _api: CommentsRestControllerService, private _messagesApi: NewsRestControllerService, private _loginService: LoginService,
+    constructor(@Inject(DOCUMENT) private _document: any, private _api: CommentsRestControllerService, private _messagesApi: NewsRestControllerService, private _loginService: LoginService,
                 private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
-      this.messageUrl = this.document.location.origin + "/messages/" + this.message.id;
+      this.messageUrl = this._document.location.origin + "/messages/" + this.message.id;
       this.shortMessage = this.stripHtml(this.message.content.length > 100 ? this.message.content.substring(0, 100) + ' ...' : this.message.content);
   }
 
     toggleShareState() {
         this.shareStateStatus = this.shareStateStatus == 'active' ? 'inactive' : "active";
     }
-  isAdmin() {
+
+    isAdmin() {
     return SecUtil.isAdmin();
   }
 
