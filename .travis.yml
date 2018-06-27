@@ -1,23 +1,29 @@
 language: node_js
 
-node_js:
-   - node
+cache:
+  directories:
+    - node_modules
 
 branches:
    only:
       - master # will only build for master branch commits
 
-before_script:
-   #- npm install -g --silent firebase-tools # installs firebase to run firebase deploy
+node_js:
+   - node # will use latest node
+
+before_script: # commands to run before the build step
    - npm install -g --silent @angular/cli
+   - npm install -g --silent firebase-tools # installs firebase to run firebase deploy
 
-script:
-   - ng build --aot --prod --environment=p
-
-#after_success:
-#  - firebase deploy --token $FIREBASE_TOKEN --non-interactive # firebase deploy after angular-cli build
+script: # the build step
+   - ng build --aot --prod
+after_success:
+  - firebase use q --token $FIREBASE_TOKEN --non-interactive
+  - firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # test build
+  - test $TRAVIS_BRANCH = "master" && firebase use p --token $FIREBASE_TOKEN --non-interactive
+  - test $TRAVIS_BRANCH = "master" && firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # prod build
 
 notifications:
-  email:
+  email: # only receive email when the build status changes (someone broke the build!)
     on_failure: change
     on_success: change
