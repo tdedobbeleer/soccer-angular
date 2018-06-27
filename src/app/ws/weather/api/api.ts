@@ -1,1 +1,1 @@
-export * from './ForecastrestcontrollerApi';
+export * from './forecastRestControllerService';

@@ -1,10 +1,7 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
+import {Component, Input, OnInit} from "@angular/core";
 import {SecUtil} from "../../classes/sec-util";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {Router} from "@angular/router";
-import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
+import {MatchDTO, MatchesRestControllerService, MatchPollDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-match',
@@ -130,7 +127,7 @@ export class MatchComponent implements OnInit {
 
     poll : MatchPollDTO;
 
-    constructor(private _api: MatchesrestcontrollerApi, private _errorHandler: ErrorHandlerService, private _router: Router) {
+    constructor(private _api: MatchesRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -142,7 +139,8 @@ export class MatchComponent implements OnInit {
     }
 
     deleteMatch() {
-        this._api.deleteMatch(this.match, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.deleteMatch(this.match.id).subscribe(
             () => {
                 this.deleted = true
             },

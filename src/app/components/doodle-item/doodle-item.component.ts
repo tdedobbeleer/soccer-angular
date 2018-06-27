@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {DoodlerestcontrollerApi} from "../../ws/soccer/api/DoodlerestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {MatchDoodleDTO} from "../../ws/soccer/model/MatchDoodleDTO";
 import {ActivatedRoute} from "@angular/router";
-import {SecUtil} from "../../classes/sec-util";
+import {DoodleRestControllerService, MatchDoodleDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-doodle-item',
@@ -28,13 +26,14 @@ export class DoodleItemComponent implements OnInit {
     doodle: MatchDoodleDTO;
     loading: boolean;
 
-    constructor(private _api: DoodlerestcontrollerApi, private _errorHandler: ErrorHandlerService, private _route: ActivatedRoute) {
+    constructor(private _api: DoodleRestControllerService, private _errorHandler: ErrorHandlerService, private _route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.loading = true;
+
         this._route.params.subscribe(params => {
-            this._api.matchDoodle(params['id'], SecUtil.getJwtHeaders()).subscribe(
+            this._api.matchDoodle(params['id']).subscribe(
                 d => {
                     this.doodle = d;
                     this.loading = false;

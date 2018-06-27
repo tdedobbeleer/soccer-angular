@@ -1,14 +1,11 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormGroup, Validators, FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {ValidationService} from "../../services/validation.service";
-import {AddressDTO} from "../../ws/soccer/model/AddressDTO";
 import {Util} from "../../classes/util";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {SecUtil} from "../../classes/sec-util";
+import {AddressDTO, TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-create-team-form',
@@ -110,7 +107,7 @@ export class CreateTeamFormComponent implements OnInit {
         },
     };
 
-    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
@@ -158,7 +155,8 @@ export class CreateTeamFormComponent implements OnInit {
 
         if (this.teamForm.valid) {
             this.isLoading = true;
-            this._api.createTeam(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.createTeam(model).subscribe(
                 r => {
                     this.globalError = '';
                     this.createSuccess = true;

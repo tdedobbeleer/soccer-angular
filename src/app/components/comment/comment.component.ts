@@ -1,8 +1,7 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {CommentDTO} from "../../ws/soccer/model/CommentDTO";
-import {CommentsrestcontrollerApi} from "../../ws/soccer/api/CommentsrestcontrollerApi";
+import {Component, Input, OnInit} from "@angular/core";
 import {SecUtil} from "../../classes/sec-util";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {CommentDTO, CommentsRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-comment',
@@ -40,7 +39,7 @@ export class CommentComponent implements OnInit {
     private showEditComment: boolean;
     private showBtns: boolean;
 
-    constructor(private _errorHandler: ErrorHandlerService, private _api: CommentsrestcontrollerApi) {
+    constructor(private _errorHandler: ErrorHandlerService, private _api: CommentsRestControllerService) {
     }
 
     ngOnInit() {
@@ -59,8 +58,9 @@ export class CommentComponent implements OnInit {
     }
 
     updateComment(comment: CommentDTO) {
+
         this.showEditComment = false;
-        this._api.editComment(this.messageId, comment, SecUtil.getJwtHeaders())
+        this._api.editComment(this.messageId, comment)
             .subscribe(r => {
                 console.log("success");
                 this.comment.content = comment.content;
@@ -71,8 +71,9 @@ export class CommentComponent implements OnInit {
     }
 
     deleteComment(comment: CommentDTO) {
+
         this.showEditComment = false;
-        this._api.deleteComment(this.messageId, comment.id, SecUtil.getJwtHeaders())
+        this._api.deleteComment(this.messageId, comment.id)
             .subscribe(
                 r => {
                 console.log("success");

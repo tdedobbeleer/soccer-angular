@@ -1,13 +1,14 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {StatisticsrestcontrollerApi} from "../../ws/soccer/api/StatisticsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SeasonsrestcontrollerApi} from "../../ws/soccer/api/SeasonsrestcontrollerApi";
-import {SeasonDTO} from "../../ws/soccer/model/SeasonDTO";
-import {SecUtil} from "../../classes/sec-util";
-import {AccountStatisticDTO} from "../../ws/soccer/model/AccountStatisticDTO";
 import {isNullOrUndefined} from "util";
 import {Subject} from "rxjs/Rx";
 import {DataTableDirective} from "angular-datatables";
+import {
+    AccountStatisticDTO,
+    SeasonDTO,
+    SeasonsRestControllerService,
+    StatisticsRestControllerService
+} from "../../ws/soccer";
 
 @Component({
     selector: 'app-statistics-list',
@@ -79,7 +80,7 @@ export class StatisticsListComponent implements OnInit {
     @ViewChild(DataTableDirective)
     dtElement: DataTableDirective;
 
-    constructor(private _api: StatisticsrestcontrollerApi, private errorHandler: ErrorHandlerService, private _seasonsApi: SeasonsrestcontrollerApi) {
+    constructor(private _api: StatisticsRestControllerService, private errorHandler: ErrorHandlerService, private _seasonsApi: SeasonsRestControllerService) {
     }
 
     ngOnInit() {
@@ -104,7 +105,8 @@ export class StatisticsListComponent implements OnInit {
     }
 
     getStatisticsForSeason(seasonId: number, init: boolean) {
-        this._api.getStatictics(seasonId, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getStatictics(seasonId).subscribe(
             r => {
                 if (!init) {
                     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

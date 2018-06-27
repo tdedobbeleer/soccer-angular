@@ -1,11 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
-import {NewsDTO} from "../../ws/soccer/model/NewsDTO";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SecUtil} from "../../classes/sec-util";
 import {ValidationService} from "../../services/validation.service";
+import {NewsDTO, NewsRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-message-form',
@@ -74,7 +72,7 @@ export class MessageFormComponent implements OnInit {
         type: "",
     };
 
-    constructor(private _fb: FormBuilder, private _api: NewsrestcontrollerApi, private _router: Router, private _errorHandler: ErrorHandlerService, private _validationService: ValidationService) {
+    constructor(private _fb: FormBuilder, private _api: NewsRestControllerService, private _router: Router, private _errorHandler: ErrorHandlerService, private _validationService: ValidationService) {
     }
 
     ngOnInit() {
@@ -95,7 +93,8 @@ export class MessageFormComponent implements OnInit {
 
         if (isValid) {
             this.isLoading = true;
-            this._api.postNews(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.postNews(model).subscribe(
                 r => {
                     this._router.navigate(["/messages"]);
                 },

@@ -1,11 +1,9 @@
 import {Component, OnInit} from "@angular/core";
-import {MatchesrestcontrollerApi} from "../../ws/soccer/api/MatchesrestcontrollerApi";
-import {ForecastrestcontrollerApi} from "../../ws/weather/api/ForecastrestcontrollerApi";
 import {TranslationService} from "../../services/translation.service";
 import {Util} from "../../classes/util";
-import {WeatherList} from "../../ws/weather/model/bundled";
-import {MatchDTO} from "../../ws/soccer/model/MatchDTO";
+import {ForecastRestControllerService, WeatherList} from "../../ws/weather";
 import {SecUtil} from "../../classes/sec-util";
+import {MatchDTO, MatchesRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-next-match',
@@ -124,8 +122,8 @@ export class NextMatchComponent implements OnInit {
     math: Math;
     matchStatus = MatchDTO.StatusEnum;
 
-    constructor(private _matchesApi: MatchesrestcontrollerApi,
-                private _forecastApi: ForecastrestcontrollerApi,
+    constructor(private _matchesApi: MatchesRestControllerService,
+                private _forecastApi: ForecastRestControllerService,
                 private _translationService: TranslationService) {
         this.math = Math;
     }
@@ -159,7 +157,7 @@ export class NextMatchComponent implements OnInit {
     }
 
     getWeatherIcon(iconName) {
-        return "http://openweathermap.org/img/w/" + iconName + ".png"
+        return this._forecastApi.getWeatherIcon(iconName);
     }
 
     isAdmin() {

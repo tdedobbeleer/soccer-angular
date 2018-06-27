@@ -1,14 +1,12 @@
-import {Component, OnInit, Input, ViewChild} from "@angular/core";
-import {MatchPollDTO} from "../../ws/soccer/model/MatchPollDTO";
-import {PollrestcontrollerApi} from "../../ws/soccer/api/PollrestcontrollerApi";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {SecUtil} from "../../classes/sec-util";
-import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ValidationService} from "../../services/validation.service";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {notCurrentAccountValidator} from "../../functions/not-current-account-validator";
 import {Router} from "@angular/router";
+import {AccountDTO, MatchPollDTO, PollRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-motm-poll',
@@ -131,7 +129,7 @@ export class MotmPollComponent implements OnInit {
         'id': '',
     };
 
-    constructor(private _router: Router, private _api: PollrestcontrollerApi, private _fb: FormBuilder, private _errorHandler: ErrorHandlerService, private _validationService: ValidationService) {
+    constructor(private _router: Router, private _api: PollRestControllerService, private _fb: FormBuilder, private _errorHandler: ErrorHandlerService, private _validationService: ValidationService) {
     }
 
     ngOnInit() {
@@ -159,9 +157,10 @@ export class MotmPollComponent implements OnInit {
     }
 
     reset(poll: MatchPollDTO) {
-        this._api.resetMatchPoll(poll.id, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.resetMatchPoll(poll.id).subscribe(
             p => {
-                this._api.getMatchPollById(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
+                this._api.getMatchPollById(poll.id).subscribe(p => this.poll = p);
             },
             error => {
                 this._errorHandler.handle(error, "manofthematch");
@@ -173,9 +172,10 @@ export class MotmPollComponent implements OnInit {
     }
 
     refresh(poll: MatchPollDTO) {
-        this._api.refreshMatchPoll(poll.matchId, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.refreshMatchPoll(poll.matchId).subscribe(
             p => {
-                this._api.getMatchPollById(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
+                this._api.getMatchPollById(poll.id).subscribe(p => this.poll = p);
             },
             error => {
                 this._errorHandler.handle(error, "manofthematch");
@@ -196,9 +196,10 @@ export class MotmPollComponent implements OnInit {
         this._validationService.onValueChanged(this.pollForm, this.formErrors);
 
         if (this.pollForm.valid) {
-            this._api.matchPollVote(poll.id, {answer: account.id}, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.matchPollVote(poll.id, {answer: account.id}).subscribe(
                 p => {
-                    this._api.getMatchPollById(poll.id, SecUtil.getJwtHeaders()).subscribe(p => this.poll = p);
+                    this._api.getMatchPollById(poll.id).subscribe(p => this.poll = p);
                     this.voteSuccess = true;
                 },
                 error => {

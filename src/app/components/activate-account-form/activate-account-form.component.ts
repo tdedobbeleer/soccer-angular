@@ -1,13 +1,11 @@
-import {Component, OnInit, Input, ViewChild} from "@angular/core";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
 import {ValidationService} from "../../services/validation.service";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {AccountrestcontrollerApi} from "../../ws/soccer/api/AccountrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
-import {SecUtil} from "../../classes/sec-util";
 import {TranslationService} from "../../services/translation.service";
+import {AccountDTO, AccountRestControllerService} from "../../ws/soccer";
 
 @Component({
     selector: 'app-activate-account-form',
@@ -58,11 +56,12 @@ export class ActivateAccountFormComponent implements OnInit {
         'sendmail': '',
     };
 
-    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: AccountrestcontrollerApi, private _errorHandler: ErrorHandlerService, private _trans: TranslationService) {
+    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: AccountRestControllerService, private _errorHandler: ErrorHandlerService, private _trans: TranslationService) {
     }
 
     ngOnInit() {
-        this._api.getAccount(this.accountId, SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getAccount(this.accountId).subscribe(
             a => {
                 this.account = a;
             },
@@ -93,7 +92,8 @@ export class ActivateAccountFormComponent implements OnInit {
 
         if (this.activateForm.valid) {
             this.isLoading = true;
-            this._api.firstTimeActivation(this.accountId, model.sendMail, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.firstTimeActivation(this.accountId, model.sendMail).subscribe(
                 r => {
                     this.globalError = '';
                     this.activateSuccess = true;

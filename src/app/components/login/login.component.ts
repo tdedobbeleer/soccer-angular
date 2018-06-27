@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../services/login.service";
 import {isNullOrUndefined} from "util";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -92,8 +93,9 @@ export class LoginComponent implements OnInit {
             //On success, save username
             this.setLastUserName(this.model.rememberUserName ? this.model.username : undefined);
             //redirect if needed
-            this.route.queryParamMap
-                .map(params => params.get('redirectUrl') || '').subscribe(p => {
+              this.route.queryParamMap.pipe(
+                  map(params => params.get('redirectUrl') || '')
+              ).subscribe(p => {
               let url = p ? [p] : ['/'];
               this.router.navigate(url);
             });

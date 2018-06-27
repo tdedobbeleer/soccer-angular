@@ -1,7 +1,7 @@
-import {Component, OnInit, Input} from "@angular/core";
-import {ProfileDTO} from "../../ws/soccer/model/ProfileDTO";
+import {Component, Input, OnInit} from "@angular/core";
 import {SecUtil} from "../../classes/sec-util";
 import {TranslationService} from "../../services/translation.service";
+import {ProfileDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-player',

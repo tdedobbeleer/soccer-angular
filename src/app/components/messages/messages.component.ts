@@ -1,8 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {PageDTONewsDTO} from "../../ws/soccer/model/PageDTONewsDTO";
-import {NewsrestcontrollerApi} from "../../ws/soccer/api/NewsrestcontrollerApi";
 import {SecUtil} from "../../classes/sec-util";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {NewsRestControllerService, PageDTONewsDTO} from "../../ws/soccer";
 
 @Component({
   selector: 'app-messages',
@@ -69,7 +68,7 @@ export class MessagesComponent implements OnInit {
   searchTerm: string;
   currentPage: any = 0;
 
-  constructor(private _api: NewsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _api: NewsRestControllerService, private _errorHandler: ErrorHandlerService) {
   }
 
   ngOnInit() {
@@ -79,7 +78,8 @@ export class MessagesComponent implements OnInit {
 
   getPage(page: number) {
     this.loading = true;
-    this._api.getNewsPage(page, this.searchTerm, 10, SecUtil.getJwtHeaders())
+
+      this._api.getNewsPage(page, this.searchTerm, 10)
         .subscribe(
             n => {
               this.newsPage = n;

@@ -1,22 +1,23 @@
-import {Component, OnInit, ViewChild, Input} from "@angular/core";
-import {FormGroup, FormBuilder, Validators} from "@angular/forms";
-import {AddressDTO} from "../../ws/soccer/model/AddressDTO";
+import {Component, Input, OnInit, ViewChild} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
 import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
 import {ValidationService} from "../../services/validation.service";
-import {TeamsrestcontrollerApi} from "../../ws/soccer/api/TeamsrestcontrollerApi";
 import {ErrorHandlerService} from "../../services/error-handler.service";
-import {TeamDTO} from "../../ws/soccer/model/TeamDTO";
-import {SecUtil} from "../../classes/sec-util";
 import {isNullOrUndefined} from "util";
 import {Util} from "../../classes/util";
+import {AddressDTO, TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/concat';
 
 @Component({
   selector: 'app-edit-team-form',
   template: `
       <div class="box">
     <div class="success-div">
-        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">{{"text.team.success.create" | translate}}</alert>
+        <alert [type]="'success'" [dismissible]="false" *ngIf="createSuccess">
+            {{"text.team.success.update" | translate}}
+        </alert>
     </div>
     <div class="error-div">
          <alert [type]="'danger'" [dismissible]="false" *ngIf="globalError"><span [innerHtml]="globalError | safeHtml"></span></alert>
@@ -113,19 +114,10 @@ export class EditTeamFormComponent implements OnInit {
         },
     };
 
-    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsrestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _validationService: ValidationService, private _fb: FormBuilder, private _api: TeamsRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
-        this._api.getTeamAddresses().subscribe(
-            r => {
-                this.addressList = r;
-            },
-            e => {
-                this._errorHandler.handle(e);
-            }
-        );
-
         this.teamForm = this._fb.group({
             useGoogleLink: [false, []],
             useExistingAddress: [true, []],
@@ -141,39 +133,53 @@ export class EditTeamFormComponent implements OnInit {
             }),
         });
 
-        this._api.getTeam(this.teamId, SecUtil.getJwtHeaders()).subscribe(
-            t => {
-                this.teamForm.patchValue({
-                    id : t.id,
-                    name : t.name,
-                    selectedAddress : t.address,
-                    useGoogleLink : !isNullOrUndefined(t.address.googleLink)
+        Observable.concat(this._api.getTeamAddresses().map(
+            r => {
+                this.addressList = r;
+            }
+        )).subscribe(
+            () => {
 
-                });
-
-                this.teamForm.controls['address'].patchValue({
-                    id: t.address.id,
-                    address: t.address.address,
-                    city: t.address.city,
-                    postalCode: t.address.postalCode,
-                    googleLink: t.address.googleLink
-                });
             },
             e => {
                 this._errorHandler.handle(e);
+            },
+            () => {
+                this._api.getTeam(this.teamId).subscribe(
+                    t => {
+                        this.teamForm.patchValue({
+                            id: t.id,
+                            name: t.name,
+                            selectedAddress: t.address,
+                            useGoogleLink: !isNullOrUndefined(t.address.googleLink)
+
+                        });
+
+                        this.teamForm.controls['address'].patchValue({
+                            id: t.address.id,
+                            address: t.address.address,
+                            city: t.address.city,
+                            postalCode: t.address.postalCode,
+                            googleLink: t.address.googleLink
+                        });
+                    },
+                    e => {
+                        this._errorHandler.handle(e);
+                    }
+                );
+
+                //Set listener
+                this.teamForm.valueChanges
+                    .subscribe(data => {
+                        this._validationService.onValueChanged(this.teamForm, this.formErrors);
+                        this.checkAddress();
+                        this.createSuccess = false;
+                    });
+
+                //Trigger checkaddress
+                this.checkAddress();
             }
         );
-
-        //Set listener
-        this.teamForm.valueChanges
-            .subscribe(data => {
-                this._validationService.onValueChanged(this.teamForm, this.formErrors);
-                this.checkAddress();
-                this.createSuccess = false;
-            });
-
-        //Trigger checkaddress
-        this.checkAddress();
     }
 
     submit(model: TeamDTO) {
@@ -188,7 +194,8 @@ export class EditTeamFormComponent implements OnInit {
 
         if (this.teamForm.valid) {
             this.isLoading = true;
-            this._api.updateTeam(model, SecUtil.getJwtHeaders()).subscribe(
+
+            this._api.updateTeam(model).subscribe(
                 r => {
                     this.globalError = '';
                     this.createSuccess = true;

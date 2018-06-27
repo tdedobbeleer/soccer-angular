@@ -1,8 +1,6 @@
 import {Component, OnInit} from "@angular/core";
-import {AccountprofilerestcontrollerApi} from "../../ws/soccer/api/AccountprofilerestcontrollerApi";
-import {ProfileDTO} from "../../ws/soccer/model/ProfileDTO";
-import {SecUtil} from "../../classes/sec-util";
 import {ErrorHandlerService} from "../../services/error-handler.service";
+import {AccountProfileRestControllerService, ProfileDTO} from "../../ws/soccer";
 import PositionEnum = ProfileDTO.PositionEnum;
 
 @Component({
@@ -58,12 +56,13 @@ export class PlayerListComponent implements OnInit {
     loading: boolean;
 
 
-    constructor(private _api: AccountprofilerestcontrollerApi, private _errorHandler: ErrorHandlerService) {
+    constructor(private _api: AccountProfileRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
 
     ngOnInit() {
         this.loading = true;
-        this._api.getAllProfiles(SecUtil.getJwtHeaders()).subscribe(
+
+        this._api.getAllProfiles().subscribe(
             list => {
                 list.forEach(p => {
                     switch (p.position) {

@@ -1,7 +1,7 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {FormGroup} from "@angular/forms";
-import {AccountDTO} from "../../ws/soccer/model/AccountDTO";
 import {isNullOrUndefined} from "util";
+import {AccountDTO} from "../../ws/soccer";
 
 @Component({
     selector: 'app-goal',
