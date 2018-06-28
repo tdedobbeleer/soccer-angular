@@ -12,14 +12,15 @@ node_js:
    - node # will use latest node
 
 before_script: # commands to run before the build step
-   - npm install -g -dd @angular/cli
-   - npm install -g -dd firebase-tools # installs firebase to run firebase deploy
+   - travis_retry npm install -g -dd @angular/cli
+   - travis_retry npm install -g -dd firebase-tools # installs firebase to run firebase deploy
 
 script: # the build step
-   - ng build --aot --prod
+   - test $TRAVIS_BRANCH != "master" && ng build --aot --prod --environment=q
+   - test $TRAVIS_BRANCH = "master" && ng build --aot --prod --environment=p
 after_success:
-  - firebase use q --token $FIREBASE_TOKEN --non-interactive
-  - firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # test build
+  - test $TRAVIS_BRANCH != "master" && firebase use q --token $FIREBASE_TOKEN --non-interactive
+  - test $TRAVIS_BRANCH != "master" && firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # test build
   - test $TRAVIS_BRANCH = "master" && firebase use p --token $FIREBASE_TOKEN --non-interactive
   - test $TRAVIS_BRANCH = "master" && firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # prod build
 
