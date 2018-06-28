@@ -4,10 +4,6 @@ cache:
   directories:
     - node_modules
 
-branches:
-   only:
-      - master # will only build for master branch commits
-
 node_js:
    - node # will use latest node
 
@@ -18,10 +14,8 @@ before_script: # commands to run before the build step
 script: # the build step
    - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --aot --prod --environment=p; else ng build --aot --prod --environment=q ; fi
 after_success:
-  - test $TRAVIS_BRANCH != "master" && firebase use q --token $FIREBASE_TOKEN --non-interactive
-  - test $TRAVIS_BRANCH != "master" && firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # test build
-  - test $TRAVIS_BRANCH = "master" && firebase use p --token $FIREBASE_TOKEN --non-interactive
-  - test $TRAVIS_BRANCH = "master" && firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive # prod build
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then firebase use p --token $FIREBASE_TOKEN --non-interactive; else firebase use q --token $FIREBASE_TOKEN --non-interactive ; fi
+  - firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive
 
 notifications:
   email: # only receive email when the build status changes (someone broke the build!)
