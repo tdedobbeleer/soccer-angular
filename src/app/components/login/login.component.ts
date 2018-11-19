@@ -35,11 +35,11 @@ import {map} from "rxjs/operators";
               <div *ngIf="f.submitted && !password.valid" class="help-block">{{validation.password.required | translate}}</div>
           </div>
           <div class="form-group">
-              <!--
+              
               <label>                            
                 <input type="checkbox" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"/> {{'label.rememberMe' | translate}}
               </label>
-              -->
+             
               <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
               <input type="checkbox" id="rememberUserName" name="rememberUserName" [(ngModel)]="model.rememberUserName" #password="ngModel" />
               <label for="rememberUserName">{{'label.rememberUserName' | translate}}</label>
