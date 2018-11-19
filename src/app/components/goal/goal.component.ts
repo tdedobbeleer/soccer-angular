@@ -11,13 +11,13 @@ import {AccountDTO} from "../../ws/soccer";
         <div class="form-group col-md-3">
           
           <select [compareWith]="isSelectedScorer" class="form-control" formControlName="scorer">
-                <option [ngValue]="null" selected disabled >{{'text.match.scorer' | translate}}</option>
+                <option [ngValue]="null" selected>{{'text.match.scorer' | translate}}</option>
                 <option *ngFor="let p of players" [ngValue]="p">{{p.name}}</option>
           </select>
         </div>
         <div class="form-group col-md-3">
           <select [compareWith]="isSelectedAssist" class="form-control" formControlName="assist">
-                <option [ngValue]="null" selected disabled>{{'text.match.assist' | translate}}</option>
+                <option [ngValue]="null" selected>{{'text.match.assist' | translate}}</option>
                 <option *ngFor="let p of players" [ngValue]="p">{{p.name}}</option>
           </select>
         </div>

@@ -116,6 +116,7 @@ export const LANG_EN_TRANS = {
     'nav.statistics': 'Statistics',
     'nav.manOfTheMatch': 'Man of the match',
     'nav.teams': 'Teams',
+    'nav.teams.create' : 'Create a team',
     'nav.team': 'Our team',
     'nav.doodle': 'Doodle',
     'nav.profile': 'Profile',

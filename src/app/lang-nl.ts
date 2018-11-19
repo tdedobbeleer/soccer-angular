@@ -111,6 +111,7 @@ export const LANG_NL_TRANS = {
     'nav.matches': 'Matchen',
     'nav.manOfTheMatch': 'Man van de match',
     'nav.teams': 'Teams',
+    'nav.teams.create' : 'Maak een team aan',
     'nav.team': 'Ons team',
     'nav.doodle': 'Doodles',
     'nav.profile': 'Profiel',
