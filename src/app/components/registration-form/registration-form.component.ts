@@ -34,7 +34,7 @@ import {environment} from "../../../environments/environment";
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit(registrationForm.value)">
       <div class="form-group">
         <label for="email">{{"label.email" | translate}}</label>
-        <input name="email" class="form-control" [formControl]="registrationForm.controls.email"/>
+        <input autocomplete="username email" type="email" name="email" class="form-control" [formControl]="registrationForm.controls.email"/>
         <small class="text-danger" [hidden]="!formErrors.email">
              {{formErrors.email}}
         </small>
@@ -55,7 +55,7 @@ import {environment} from "../../../environments/environment";
       </div>
        <div class="form-group">
         <label for="password">{{"label.password" | translate}}</label>
-         <input type="password" name="password" class="form-control" [formControl]="registrationForm.controls.password"/>
+         <input autocomplete="new-password" type="password" name="password" class="form-control" [formControl]="registrationForm.controls.password"/>
          <small class="text-danger" [hidden]="!formErrors.password">
              {{formErrors.password}}
         </small>
