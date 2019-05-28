@@ -3,7 +3,7 @@ import {CommonModule} from "@angular/common";
 import {RouterModule, Routes} from "@angular/router";
 import {AuthGuardAdminService} from "../services/auth-guard-admin.service";
 import {SharedModule} from "./shared.module";
-import {AlertModule, BsDatepickerModule, TimepickerModule} from "ngx-bootstrap";
+import {AlertModule, BsDatepickerModule, TabsModule, TimepickerModule} from 'ngx-bootstrap';
 import {EditMatchComponent} from "../components/edit-match/edit-match.component";
 import {CreateMatchComponent} from "../components/create-match/create-match.component";
 import {MatchesComponent} from "../components/matches/matches.component";
@@ -43,11 +43,12 @@ export function forecastApiConfig() {
         RouterModule.forChild(routes),
         ForecastApiModule.forRoot(forecastApiConfig),
         LaddaModule.forRoot({
-            style: "expand-right",
+            style: 'expand-right',
             spinnerSize: 20,
-            spinnerColor: "white",
+            spinnerColor: 'white',
             spinnerLines: 12
         }),
+        TabsModule,
     ],
     declarations: [
         MatchComponent,
