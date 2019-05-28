@@ -22,7 +22,7 @@ export const LANG_EN_TRANS = {
     'text.seasons.empty': 'No matches found.',
     'text.matches.empty': 'No matches for season found.',
     'text.matches.played.empty' : 'No matches played yet.',
-    'text.matches.tocome.empty' : 'There are not matches to be played.',
+    'text.matches.tocome.empty' : 'There are no matches to be played.',
     'text.matches.played' : 'Played',
     'text.matches.tocome' : 'Upcoming',
     'text.doodles.empty': 'No doodles found.',
