@@ -68,17 +68,17 @@ import {MatchDTO, MatchesRestControllerService, MatchPollDTO} from "../../ws/soc
                           <div class="btn-group">
                               <button *ngIf="match.hasDoodle" type="button" class="btn btn-sm" aria-label="Doodle"
                                       [routerLink]="['/doodles', match.id]">
-                                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                  <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
                               </button>
-                                  <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map" (click)="showMap = !showMap;showDetails = false;" >
-                                      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                                  </button>
-                                  <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]">
-                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                  </button>
-                                  <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match" (click)="showDelete=true">
-                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                  </button>
+                              <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map" (click)="showMap = !showMap;showDetails = false;" >
+                                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                              </button>
+                              <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]">
+                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                              </button>
+                              <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match" (click)="showDelete=true">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                              </button>
                               </div>
                          </div>
                          <div *ngIf="showDelete" class="m-t-1">
