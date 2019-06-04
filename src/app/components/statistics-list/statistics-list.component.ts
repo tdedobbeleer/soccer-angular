@@ -84,7 +84,7 @@ export class StatisticsListComponent implements OnInit {
     dtTrigger: Subject<any> = new Subject();
     isLoggedIn: boolean;
 
-    @ViewChild(DataTableDirective)
+    @ViewChild(DataTableDirective, {static: true})
     dtElement: DataTableDirective;
 
     constructor(private _api: StatisticsRestControllerService, private errorHandler: ErrorHandlerService, private _seasonsApi: SeasonsRestControllerService) {

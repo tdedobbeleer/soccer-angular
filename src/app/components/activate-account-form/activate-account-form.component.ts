@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
-import {ValidationService} from "../../services/validation.service";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {TranslationService} from "../../services/translation.service";
-import {AccountDTO, AccountRestControllerService} from "../../ws/soccer";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ValidationService} from '../../services/validation.service';
+import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {TranslationService} from '../../services/translation.service';
+import {AccountDTO, AccountRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-activate-account-form',
@@ -49,8 +49,8 @@ export class ActivateAccountFormComponent implements OnInit {
     activateSuccess: boolean;
     isLoading: boolean = false;
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective, {static: true}) success: FocusOnSuccessDirective;
 
     formErrors = {
         'sendmail': '',

@@ -94,9 +94,9 @@ export class RegistrationFormComponent implements OnInit {
     globalError: any;
     isLoading: boolean = false;
 
-    @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) succesf: FocusOnSuccessDirective;
+    @ViewChild(ReCaptchaComponent, {static: true}) captcha: ReCaptchaComponent;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective, {static: true}) succesf: FocusOnSuccessDirective;
 
     formErrors = {
         'firstName': '',

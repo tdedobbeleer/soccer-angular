@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
-import {Util} from "../../classes/util";
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {ValidationService} from "../../services/validation.service";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {environment} from "../../../environments/environment";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Util} from '../../classes/util';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {ValidationService} from '../../services/validation.service';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {environment} from '../../../environments/environment';
 import {
     AccountDTO,
     AccountRestControllerService,
@@ -16,8 +16,8 @@ import {
     SeasonsRestControllerService,
     TeamDTO,
     TeamsRestControllerService
-} from "../../ws/soccer";
-import {Observable} from "rxjs/Observable";
+} from '../../ws/soccer';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/concat';
 import StatusEnum = MatchDTO.StatusEnum;
 
@@ -172,7 +172,7 @@ export class EditMatchFormComponent implements OnInit {
 
     lastKnownGoals = this._fb.array([]);
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
 
     dt: Date;
     ti: Date;

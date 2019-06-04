@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Util} from "../../classes/util";
-import {ValidationService} from "../../services/validation.service";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Util} from '../../classes/util';
+import {ValidationService} from '../../services/validation.service';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
 import {
     AccountDTO,
     AccountRestControllerService,
@@ -14,7 +14,7 @@ import {
     SeasonsRestControllerService,
     TeamDTO,
     TeamsRestControllerService
-} from "../../ws/soccer";
+} from '../../ws/soccer';
 
 @Component({
     selector: 'app-match-form',
@@ -110,8 +110,8 @@ export class MatchFormComponent implements OnInit {
     seasons: SeasonDTO[];
     accounts: AccountDTO[];
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) success: FocusOnErrorDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective, {static: true}) success: FocusOnErrorDirective;
 
     dt: Date;
     ti: Date;

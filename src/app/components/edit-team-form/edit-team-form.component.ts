@@ -1,13 +1,13 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import {ValidationService} from "../../services/validation.service";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {isNullOrUndefined} from "util";
-import {Util} from "../../classes/util";
-import {AddressDTO, TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
-import {Observable} from "rxjs/Observable";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
+import {ValidationService} from '../../services/validation.service';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {isNullOrUndefined} from 'util';
+import {Util} from '../../classes/util';
+import {AddressDTO, TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/concat';
 
 @Component({
@@ -100,8 +100,8 @@ export class EditTeamFormComponent implements OnInit {
     addressList: AddressDTO[];
     isLoading: boolean = false;
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective, {static: true}) success: FocusOnSuccessDirective;
 
     formErrors = {
         'name': '',

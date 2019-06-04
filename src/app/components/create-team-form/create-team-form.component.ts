@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {ValidationService} from "../../services/validation.service";
-import {Util} from "../../classes/util";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {AddressDTO, TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {ValidationService} from '../../services/validation.service';
+import {Util} from '../../classes/util';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {AddressDTO, TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-create-team-form',
@@ -93,8 +93,8 @@ export class CreateTeamFormComponent implements OnInit {
     addressList: AddressDTO[];
     isLoading: boolean = false;
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective, {static: true}) success: FocusOnSuccessDirective;
 
     formErrors = {
         'name': '',

@@ -1,11 +1,11 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../services/validation.service";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {equalsValidator} from "../../functions/equals-validator";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import {AccountProfileRestControllerService, AccountRestControllerService, ProfileDTO} from "../../ws/soccer";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ValidationService} from '../../services/validation.service';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {equalsValidator} from '../../functions/equals-validator';
+import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
+import {AccountProfileRestControllerService, AccountRestControllerService, ProfileDTO} from '../../ws/soccer';
 import PositionEnum = ProfileDTO.PositionEnum;
 
 @Component({
@@ -161,8 +161,8 @@ export class EditAccountFormComponent implements OnInit {
 
     isLoading: boolean = false;
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective) success: FocusOnSuccessDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective, {static: true}) success: FocusOnSuccessDirective;
 
     passwordFormErrors = {
         'id': '',

@@ -1,12 +1,12 @@
-import {Component, Input, OnInit, ViewChild} from "@angular/core";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SecUtil} from "../../classes/sec-util";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../services/validation.service";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {notCurrentAccountValidator} from "../../functions/not-current-account-validator";
-import {Router} from "@angular/router";
-import {AccountDTO, MatchPollDTO, PollRestControllerService} from "../../ws/soccer";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {SecUtil} from '../../classes/sec-util';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ValidationService} from '../../services/validation.service';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {notCurrentAccountValidator} from '../../functions/not-current-account-validator';
+import {Router} from '@angular/router';
+import {AccountDTO, MatchPollDTO, PollRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-motm-poll',
@@ -123,7 +123,7 @@ export class MotmPollComponent implements OnInit {
     showResetPoll: boolean;
     showRefreshPoll: boolean;
 
-    @ViewChild(FocusOnErrorDirective) error: FocusOnErrorDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
 
     formErrors = {
         'id': '',

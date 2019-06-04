@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ValidationService} from "../../services/validation.service";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {equalsValidator} from "../../functions/equals-validator";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {ActivatedRoute} from "@angular/router";
-import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from "../../ws/soccer";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ValidationService} from '../../services/validation.service';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {equalsValidator} from '../../functions/equals-validator';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {ActivatedRoute} from '@angular/router';
+import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from '../../ws/soccer';
 
 @Component({
   selector: 'app-recovery-code-form',
@@ -80,7 +80,7 @@ export class RecoveryCodeFormComponent implements OnInit {
     'repeatPassword': '',
   };
 
-    @ViewChild(FocusOnErrorDirective) errorFocus: FocusOnErrorDirective;
+    @ViewChild(FocusOnErrorDirective, {static: true}) errorFocus: FocusOnErrorDirective;
 
     constructor(private _fb: FormBuilder, private _api: PasswordRecoveryRestControllerService, private _validationService: ValidationService, private _errorService: ErrorHandlerService, private _route: ActivatedRoute) {
   }

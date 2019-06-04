@@ -21,15 +21,12 @@ module.exports = function (config) {
             'text/x-typescript': ['ts', 'tsx']
         },
         remapIstanbulReporter: {
-            reports: {
+            dir: require('path').join(__dirname, 'coverage'), reports: {
                 html: 'coverage',
                 lcovonly: './coverage/coverage.lcov'
             }
         },
-        angularCli: {
-            config: './angular-cli.json',
-            environment: 'dev'
-        },
+        
         reporters: config.angularCli && config.angularCli.codeCoverage
             ? ['progress', 'karma-remap-istanbul']
             : ['progress'],
