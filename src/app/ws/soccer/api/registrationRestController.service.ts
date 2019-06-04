@@ -30,7 +30,7 @@ export class RegistrationRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -57,21 +57,21 @@ export class RegistrationRestControllerService {
 
     /**
      * Create an account
-     *
-     * @param registrationDTO registrationDTO
+     * 
      * @param captchaResponse captchaResponse
+     * @param registrationDTO registrationDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public createAccount(registrationDTO: RegistrationDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (registrationDTO === null || registrationDTO === undefined) {
-            throw new Error('Required parameter registrationDTO was null or undefined when calling createAccount.');
-        }
+    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (captchaResponse === null || captchaResponse === undefined) {
             throw new Error('Required parameter captchaResponse was null or undefined when calling createAccount.');
+        }
+        if (registrationDTO === null || registrationDTO === undefined) {
+            throw new Error('Required parameter registrationDTO was null or undefined when calling createAccount.');
         }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
@@ -99,7 +99,7 @@ export class RegistrationRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

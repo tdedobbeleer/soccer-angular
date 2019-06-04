@@ -12,9 +12,12 @@
 /* tslint:disable:no-unused-variable member-ordering */
 
 import {Inject, Injectable, Optional} from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {CustomHttpUrlEncodingCodec} from '../encoder';
 
 import {Observable} from 'rxjs/Observable';
+
+import {ByteResponseDTO} from '../model/byteResponseDTO';
 import {MatchDTO} from '../model/matchDTO';
 import {MatchPollDTO} from '../model/matchPollDTO';
 import {ResponseEntity} from '../model/responseEntity';
@@ -30,7 +33,7 @@ export class MatchesRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -57,7 +60,7 @@ export class MatchesRestControllerService {
 
     /**
      * Create match
-     *
+     * 
      * @param dto dto
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -65,7 +68,7 @@ export class MatchesRestControllerService {
     public createMatch(dto: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
     public createMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
     public createMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-    public createMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public createMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (dto === null || dto === undefined) {
             throw new Error('Required parameter dto was null or undefined when calling createMatch.');
         }
@@ -90,7 +93,7 @@ export class MatchesRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
@@ -108,7 +111,7 @@ export class MatchesRestControllerService {
 
     /**
      * Delete match
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -116,7 +119,7 @@ export class MatchesRestControllerService {
     public deleteMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public deleteMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public deleteMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public deleteMatch(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public deleteMatch(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteMatch.');
         }
@@ -139,7 +142,6 @@ export class MatchesRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.delete<ResponseEntity>(`${this.basePath}/api/v1/matches/${encodeURIComponent(String(id))}`,
@@ -153,8 +155,331 @@ export class MatchesRestControllerService {
     }
 
     /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches1(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches1.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.head<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches2(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches2.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.post<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches3(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches3(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches3(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches3(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches3.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.put<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches4(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches4(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches4(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches4(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches4.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.patch<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches5(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches5(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches5(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches5(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches5.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatches6(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches6(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches6(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches6(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatches6.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.options<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get match
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -162,7 +487,7 @@ export class MatchesRestControllerService {
     public getMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
     public getMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
     public getMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-    public getMatch(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getMatch(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getMatch.');
         }
@@ -185,7 +510,6 @@ export class MatchesRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<MatchDTO>(`${this.basePath}/api/v1/matches/${encodeURIComponent(String(id))}`,
@@ -200,14 +524,14 @@ export class MatchesRestControllerService {
 
     /**
      * Get poll for match
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public latestMatchPoll(observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
     public latestMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
     public latestMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-    public latestMatchPoll(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public latestMatchPoll(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -227,7 +551,6 @@ export class MatchesRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<MatchPollDTO>(`${this.basePath}/api/v1/match/latest/poll`,
@@ -242,7 +565,7 @@ export class MatchesRestControllerService {
 
     /**
      * Get poll for match
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -250,7 +573,7 @@ export class MatchesRestControllerService {
     public matchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
     public matchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
     public matchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-    public matchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public matchPoll(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchPoll.');
         }
@@ -273,7 +596,6 @@ export class MatchesRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<MatchPollDTO>(`${this.basePath}/api/v1/match/${encodeURIComponent(String(id))}/poll`,
@@ -288,17 +610,75 @@ export class MatchesRestControllerService {
 
     /**
      * Get matches for season
-     *
+     * 
      * @param id id
+     * @param iSO3Country 
+     * @param iSO3Language 
+     * @param country 
+     * @param displayCountry 
+     * @param displayLanguage 
+     * @param displayName 
+     * @param displayScript 
+     * @param displayVariant 
+     * @param language 
+     * @param script 
+     * @param unicodeLocaleAttributes 
+     * @param unicodeLocaleKeys 
+     * @param variant 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public matchesForSeason(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<MatchDTO>>;
-    public matchesForSeason(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
-    public matchesForSeason(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
-    public matchesForSeason(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<MatchDTO>>;
+    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
+    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
+    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchesForSeason.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (iSO3Country !== undefined) {
+            queryParameters = queryParameters.set('ISO3Country', <any>iSO3Country);
+        }
+        if (iSO3Language !== undefined) {
+            queryParameters = queryParameters.set('ISO3Language', <any>iSO3Language);
+        }
+        if (country !== undefined) {
+            queryParameters = queryParameters.set('country', <any>country);
+        }
+        if (displayCountry !== undefined) {
+            queryParameters = queryParameters.set('displayCountry', <any>displayCountry);
+        }
+        if (displayLanguage !== undefined) {
+            queryParameters = queryParameters.set('displayLanguage', <any>displayLanguage);
+        }
+        if (displayName !== undefined) {
+            queryParameters = queryParameters.set('displayName', <any>displayName);
+        }
+        if (displayScript !== undefined) {
+            queryParameters = queryParameters.set('displayScript', <any>displayScript);
+        }
+        if (displayVariant !== undefined) {
+            queryParameters = queryParameters.set('displayVariant', <any>displayVariant);
+        }
+        if (language !== undefined) {
+            queryParameters = queryParameters.set('language', <any>language);
+        }
+        if (script !== undefined) {
+            queryParameters = queryParameters.set('script', <any>script);
+        }
+        if (unicodeLocaleAttributes) {
+            unicodeLocaleAttributes.forEach((element) => {
+                queryParameters = queryParameters.append('unicodeLocaleAttributes', <any>element);
+            })
+        }
+        if (unicodeLocaleKeys) {
+            unicodeLocaleKeys.forEach((element) => {
+                queryParameters = queryParameters.append('unicodeLocaleKeys', <any>element);
+            })
+        }
+        if (variant !== undefined) {
+            queryParameters = queryParameters.set('variant', <any>variant);
         }
 
         let headers = this.defaultHeaders;
@@ -319,11 +699,11 @@ export class MatchesRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<Array<MatchDTO>>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}`,
             {
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -334,14 +714,14 @@ export class MatchesRestControllerService {
 
     /**
      * Get next match
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public nextMatchPoll(observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
     public nextMatchPoll(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
     public nextMatchPoll(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-    public nextMatchPoll(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public nextMatchPoll(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -361,7 +741,6 @@ export class MatchesRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<MatchDTO>(`${this.basePath}/api/v1/matches/next`,
@@ -376,7 +755,7 @@ export class MatchesRestControllerService {
 
     /**
      * Update match
-     *
+     * 
      * @param dto dto
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -384,7 +763,7 @@ export class MatchesRestControllerService {
     public updateMatch(dto: MatchDTO, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
     public updateMatch(dto: MatchDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
     public updateMatch(dto: MatchDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-    public updateMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public updateMatch(dto: MatchDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (dto === null || dto === undefined) {
             throw new Error('Required parameter dto was null or undefined when calling updateMatch.');
         }
@@ -409,7 +788,7 @@ export class MatchesRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

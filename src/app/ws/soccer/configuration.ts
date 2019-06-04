@@ -1,5 +1,5 @@
 export interface ConfigurationParameters {
-    apiKeys?: { [key: string]: string };
+    apiKeys?: {[ key: string ]: string};
     username?: string;
     password?: string;
     accessToken?: string | (() => string);
@@ -8,7 +8,7 @@ export interface ConfigurationParameters {
 }
 
 export class Configuration {
-    apiKeys?: { [key: string]: string };
+    apiKeys?: {[ key: string ]: string};
     username?: string;
     password?: string;
     accessToken?: string | (() => string);
@@ -31,7 +31,7 @@ export class Configuration {
      * @param {string[]} contentTypes - the array of content types that are available for selection
      * @returns {string} the selected content-type or <code>undefined</code> if no selection could be made.
      */
-    public selectHeaderContentType(contentTypes: string[]): string | undefined {
+    public selectHeaderContentType (contentTypes: string[]): string | undefined {
         if (contentTypes.length == 0) {
             return undefined;
         }

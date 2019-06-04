@@ -30,7 +30,7 @@ export class AccountProfileRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -57,14 +57,14 @@ export class AccountProfileRestControllerService {
 
     /**
      * Get all Account profiles
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getAllProfiles(observe?: 'body', reportProgress?: boolean): Observable<Array<ProfileDTO>>;
     public getAllProfiles(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProfileDTO>>>;
     public getAllProfiles(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProfileDTO>>>;
-    public getAllProfiles(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getAllProfiles(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -84,7 +84,6 @@ export class AccountProfileRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<Array<ProfileDTO>>(`${this.basePath}/api/v1/profiles`,
@@ -99,7 +98,7 @@ export class AccountProfileRestControllerService {
 
     /**
      * Get Account profile
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -107,7 +106,7 @@ export class AccountProfileRestControllerService {
     public getProfile(id: number, observe?: 'body', reportProgress?: boolean): Observable<ProfileDTO>;
     public getProfile(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfileDTO>>;
     public getProfile(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfileDTO>>;
-    public getProfile(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getProfile(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getProfile.');
         }
@@ -130,7 +129,6 @@ export class AccountProfileRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<ProfileDTO>(`${this.basePath}/api/v1/profiles/${encodeURIComponent(String(id))}`,
@@ -145,7 +143,7 @@ export class AccountProfileRestControllerService {
 
     /**
      * Post image
-     *
+     * 
      * @param id id
      * @param image image
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -154,7 +152,7 @@ export class AccountProfileRestControllerService {
     public postProfileImage(id: number, image: Blob, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public postProfileImage(id: number, image: Blob, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public postProfileImage(id: number, image: Blob, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public postProfileImage(id: number, image: Blob, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public postProfileImage(id: number, image: Blob, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling postProfileImage.');
         }
@@ -214,7 +212,7 @@ export class AccountProfileRestControllerService {
 
     /**
      * Update Account profile
-     *
+     * 
      * @param profileDTO profileDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -222,7 +220,7 @@ export class AccountProfileRestControllerService {
     public updateProfile(profileDTO: ProfileDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public updateProfile(profileDTO: ProfileDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public updateProfile(profileDTO: ProfileDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public updateProfile(profileDTO: ProfileDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public updateProfile(profileDTO: ProfileDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (profileDTO === null || profileDTO === undefined) {
             throw new Error('Required parameter profileDTO was null or undefined when calling updateProfile.');
         }
@@ -247,7 +245,7 @@ export class AccountProfileRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

@@ -32,7 +32,7 @@ export class AccountRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -59,7 +59,7 @@ export class AccountRestControllerService {
 
     /**
      * Change activation status
-     *
+     * 
      * @param id id
      * @param status status
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -68,7 +68,7 @@ export class AccountRestControllerService {
     public changeActivation(id: number, status: boolean, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public changeActivation(id: number, status: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public changeActivation(id: number, status: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public changeActivation(id: number, status: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public changeActivation(id: number, status: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling changeActivation.');
         }
@@ -116,7 +116,7 @@ export class AccountRestControllerService {
 
     /**
      * Change password
-     *
+     * 
      * @param passwordDTO passwordDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -124,7 +124,7 @@ export class AccountRestControllerService {
     public changePassword(passwordDTO: PasswordDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public changePassword(passwordDTO: PasswordDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public changePassword(passwordDTO: PasswordDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public changePassword(passwordDTO: PasswordDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public changePassword(passwordDTO: PasswordDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (passwordDTO === null || passwordDTO === undefined) {
             throw new Error('Required parameter passwordDTO was null or undefined when calling changePassword.');
         }
@@ -149,7 +149,7 @@ export class AccountRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
@@ -167,7 +167,7 @@ export class AccountRestControllerService {
 
     /**
      * Demote user
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -175,7 +175,7 @@ export class AccountRestControllerService {
     public demote(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public demote(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public demote(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public demote(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public demote(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling demote.');
         }
@@ -214,7 +214,7 @@ export class AccountRestControllerService {
 
     /**
      * Elevate user
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -222,7 +222,7 @@ export class AccountRestControllerService {
     public elevate(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public elevate(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public elevate(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public elevate(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public elevate(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling elevate.');
         }
@@ -261,7 +261,7 @@ export class AccountRestControllerService {
 
     /**
      * Activate account for the first time
-     *
+     * 
      * @param id id
      * @param sendMail sendMail
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -270,7 +270,7 @@ export class AccountRestControllerService {
     public firstTimeActivation(id: number, sendMail: boolean, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public firstTimeActivation(id: number, sendMail: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public firstTimeActivation(id: number, sendMail: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public firstTimeActivation(id: number, sendMail: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public firstTimeActivation(id: number, sendMail: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling firstTimeActivation.');
         }
@@ -318,7 +318,7 @@ export class AccountRestControllerService {
 
     /**
      * Get Account
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -326,7 +326,7 @@ export class AccountRestControllerService {
     public getAccount(id: number, observe?: 'body', reportProgress?: boolean): Observable<AccountDTO>;
     public getAccount(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<AccountDTO>>;
     public getAccount(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<AccountDTO>>;
-    public getAccount(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getAccount(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getAccount.');
         }
@@ -349,7 +349,6 @@ export class AccountRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<AccountDTO>(`${this.basePath}/api/v1/accounts/${encodeURIComponent(String(id))}`,
@@ -364,14 +363,14 @@ export class AccountRestControllerService {
 
     /**
      * Get Accounts
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getAccounts(observe?: 'body', reportProgress?: boolean): Observable<Array<AccountDTO>>;
     public getAccounts(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
     public getAccounts(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
-    public getAccounts(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getAccounts(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -391,7 +390,6 @@ export class AccountRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<Array<AccountDTO>>(`${this.basePath}/api/v1/accounts`,

@@ -41,6 +41,7 @@ export const LANG_NL_TRANS = {
     'text.statistics.assists': 'A',
     'text.statistics.goals': 'D',
     'text.statistics.played': 'G',
+    'text.statistics.motm': 'MOTM',
     'text.name': 'Naam',
     'text.match.create.success': 'De match werd succesvol aangemaakt.',
     'text.password.success.change': 'Je wachtwoord werd succesvol gewijzigd.',

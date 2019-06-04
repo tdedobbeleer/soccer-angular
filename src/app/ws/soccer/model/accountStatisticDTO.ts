@@ -16,5 +16,6 @@ export interface AccountStatisticDTO {
     account?: AccountDTO;
     assists?: number;
     goals?: number;
+    motm?: number;
     played?: number;
 }

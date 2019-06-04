@@ -28,7 +28,7 @@ export class SeasonsRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -55,7 +55,7 @@ export class SeasonsRestControllerService {
 
     /**
      * Create a season
-     *
+     * 
      * @param seasonDTO seasonDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -63,7 +63,7 @@ export class SeasonsRestControllerService {
     public createSeason(seasonDTO: SeasonDTO, observe?: 'body', reportProgress?: boolean): Observable<SeasonDTO>;
     public createSeason(seasonDTO: SeasonDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SeasonDTO>>;
     public createSeason(seasonDTO: SeasonDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SeasonDTO>>;
-    public createSeason(seasonDTO: SeasonDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public createSeason(seasonDTO: SeasonDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (seasonDTO === null || seasonDTO === undefined) {
             throw new Error('Required parameter seasonDTO was null or undefined when calling createSeason.');
         }
@@ -88,7 +88,7 @@ export class SeasonsRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
@@ -106,14 +106,14 @@ export class SeasonsRestControllerService {
 
     /**
      * Get all seasons
-     *
+     * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
     public getSeasons(observe?: 'body', reportProgress?: boolean): Observable<Array<SeasonDTO>>;
     public getSeasons(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<SeasonDTO>>>;
     public getSeasons(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<SeasonDTO>>>;
-    public getSeasons(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getSeasons(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -133,7 +133,6 @@ export class SeasonsRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<Array<SeasonDTO>>(`${this.basePath}/api/v1/seasons`,

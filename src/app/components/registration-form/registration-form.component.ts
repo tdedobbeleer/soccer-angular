@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ReCaptchaComponent} from "angular2-recaptcha";
-import {TranslationService} from "../../services/translation.service";
-import {ValidationService} from "../../services/validation.service";
-import {equalsValidator} from "../../functions/equals-validator";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {FocusOnSuccessDirective} from "../../directives/focus-on-success.directive";
-import {RegistrationDTO, RegistrationRestControllerService} from "../../ws/soccer";
-import {environment} from "../../../environments/environment";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ReCaptchaComponent} from 'angular2-recaptcha';
+import {TranslationService} from '../../services/translation.service';
+import {ValidationService} from '../../services/validation.service';
+import {equalsValidator} from '../../functions/equals-validator';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
+import {RegistrationDTO, RegistrationRestControllerService} from '../../ws/soccer';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-registration-form',
@@ -145,7 +145,7 @@ export class RegistrationFormComponent implements OnInit {
 
         if (this.registrationForm.valid) {
             this.isLoading = true;
-            this._api.createAccount(model, this.registrationForm.controls['captchaResponse'].value).subscribe(
+            this._api.createAccount(this.registrationForm.controls['captchaResponse'].value, model).subscribe(
                 r => {
                     console.log("Registration success");
                     this.success = true;

@@ -30,7 +30,7 @@ export class CommentsRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -57,21 +57,21 @@ export class CommentsRestControllerService {
 
     /**
      * Get news
-     *
-     * @param id id
+     * 
      * @param commentId commentId
+     * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteComment(id: number, commentId: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public deleteComment(id: number, commentId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteComment(id: number, commentId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public deleteComment(id: number, commentId: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteComment.');
-        }
+    public deleteComment(commentId: number, id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public deleteComment(commentId: number, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteComment(commentId: number, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public deleteComment(commentId: number, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (commentId === null || commentId === undefined) {
             throw new Error('Required parameter commentId was null or undefined when calling deleteComment.');
+        }
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling deleteComment.');
         }
 
         let headers = this.defaultHeaders;
@@ -92,7 +92,6 @@ export class CommentsRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.delete<ResponseEntity>(`${this.basePath}/api/v1/news/${encodeURIComponent(String(id))}/comment/${encodeURIComponent(String(commentId))}`,
@@ -107,21 +106,21 @@ export class CommentsRestControllerService {
 
     /**
      * Get news
-     *
-     * @param id id
+     * 
      * @param commentDTO commentDTO
+     * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public editComment(id: number, commentDTO: CommentDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public editComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public editComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public editComment(id: number, commentDTO: CommentDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling editComment.');
-        }
+    public editComment(commentDTO: CommentDTO, id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public editComment(commentDTO: CommentDTO, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public editComment(commentDTO: CommentDTO, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public editComment(commentDTO: CommentDTO, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (commentDTO === null || commentDTO === undefined) {
             throw new Error('Required parameter commentDTO was null or undefined when calling editComment.');
+        }
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling editComment.');
         }
 
         let headers = this.defaultHeaders;
@@ -144,7 +143,7 @@ export class CommentsRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
@@ -162,21 +161,21 @@ export class CommentsRestControllerService {
 
     /**
      * Post news
-     *
-     * @param id id
+     * 
      * @param commentDTO commentDTO
+     * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postComment(id: number, commentDTO: CommentDTO, observe?: 'body', reportProgress?: boolean): Observable<CommentDTO>;
-    public postComment(id: number, commentDTO: CommentDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
-    public postComment(id: number, commentDTO: CommentDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
-    public postComment(id: number, commentDTO: CommentDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling postComment.');
-        }
+    public postComment(commentDTO: CommentDTO, id: number, observe?: 'body', reportProgress?: boolean): Observable<CommentDTO>;
+    public postComment(commentDTO: CommentDTO, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
+    public postComment(commentDTO: CommentDTO, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
+    public postComment(commentDTO: CommentDTO, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (commentDTO === null || commentDTO === undefined) {
             throw new Error('Required parameter commentDTO was null or undefined when calling postComment.');
+        }
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling postComment.');
         }
 
         let headers = this.defaultHeaders;
@@ -199,7 +198,7 @@ export class CommentsRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

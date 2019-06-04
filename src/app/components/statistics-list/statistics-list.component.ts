@@ -1,14 +1,11 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {isNullOrUndefined} from "util";
-import {Subject} from "rxjs/Rx";
-import {DataTableDirective} from "angular-datatables";
-import {
-    AccountStatisticDTO,
-    SeasonDTO,
-    SeasonsRestControllerService,
-    StatisticsRestControllerService
-} from "../../ws/soccer";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {isNullOrUndefined} from 'util';
+import {Subject} from 'rxjs/Rx';
+import {DataTableDirective} from 'angular-datatables';
+import {AccountStatisticDTO, SeasonDTO, SeasonsRestControllerService, StatisticsRestControllerService} from '../../ws/soccer';
+import {SecUtil} from '../../classes/sec-util';
+import * as FileSaver from 'file-saver';
 
 @Component({
     selector: 'app-statistics-list',
@@ -27,15 +24,19 @@ import {
             <p>{{'text.statistics.empty' | translate}}</p>
         </div>
         <div class="box" *ngIf="seasons?.length > 0">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="season">{{"label.match.season" | translate}}</label>
-                    <select #selectedSeason name="season" class="form-control" (change)="getStatisticsForSeason(selectedSeason.value, false)">
-                          <option *ngFor="let s of seasons" [value]="s.id" [selected]="seasons[0]?.id == s.id">{{s.description}}</option>
-                    </select>
-                </div>
-            </form>
-           
+            <div>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="season">{{"label.match.season" | translate}}</label>
+                        <select #selectedSeason name="season" class="form-control" (change)="getStatisticsForSeason(selectedSeason.value, false)">
+                              <option *ngFor="let s of seasons" [value]="s.id" [selected]="seasons[0]?.id == s.id">{{s.description}}</option>
+                        </select>
+                    </div>
+                    <a class="pull-right" (click)="exportStatistics()" *ngIf="isLoggedIn"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
+                </form>
+    
+                
+            </div>
             <div class="table-responsive">
             <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                 <thead>
@@ -52,6 +53,9 @@ import {
                     <th class="text-center">
                         {{'text.statistics.played' | translate}}
                     </th>
+                    <th class="text-center">
+                        {{'text.statistics.motm' | translate}}
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,6 +64,7 @@ import {
                     <td class="text-center">{{stat.goals}}</td>
                     <td class="text-center">{{stat.assists}}</td>
                     <td class="text-center">{{stat.played}}</td>
+                    <td class="text-center">{{stat.motm}}</td>
                 </tr>
                 </tbody>
                 <tfoot>
@@ -73,9 +78,11 @@ import {
 })
 export class StatisticsListComponent implements OnInit {
     seasons: SeasonDTO[];
+    season : SeasonDTO;
     accountStatistics: AccountStatisticDTO[];
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
+    isLoggedIn: boolean;
 
     @ViewChild(DataTableDirective)
     dtElement: DataTableDirective;
@@ -95,18 +102,27 @@ export class StatisticsListComponent implements OnInit {
             .subscribe(s => {
                     this.seasons = s;
                     if (!isNullOrUndefined(s) && s.length > 0) {
-                        this.getStatisticsForSeason(this.seasons[0].id, true);
+                        this.getStatisticsForSeason(this.seasons[0], true);
                     }
                 }, e => {
                     this.errorHandler.handle(e);
                 }
             );
+        this.isLoggedIn = SecUtil.isLoggedIn();
 
     }
 
-    getStatisticsForSeason(seasonId: number, init: boolean) {
+    exportStatistics() {
+        this._api.exportStatistics(this.season.id).subscribe((json) => {
+            const s = atob(json.bytes);
+            const blob = new Blob([s], {type: 'application/octet-stream'});
+            FileSaver.saveAs(blob, 'stats_' + this.season.description + '.csv');
+        });
+    }
 
-        this._api.getStatictics(seasonId).subscribe(
+    getStatisticsForSeason(season: SeasonDTO, init: boolean) {
+
+        this._api.getStatictics(season.id).subscribe(
             r => {
                 if (!init) {
                     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -122,6 +138,7 @@ export class StatisticsListComponent implements OnInit {
                     // Call the dtTrigger to rerender again
                     this.dtTrigger.next();
                 }
+                this.season = season;
             },
             e => {
                 this.errorHandler.handle(e);

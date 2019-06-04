@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {ValidationService} from "../../services/validation.service";
-import {FocusOnErrorDirective} from "../../directives/focus-on-error.directive";
-import {environment} from "../../../environments/environment";
-import {ReCaptchaComponent} from "angular2-recaptcha";
-import {TranslationService} from "../../services/translation.service";
-import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from "../../ws/soccer";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {ValidationService} from '../../services/validation.service';
+import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
+import {environment} from '../../../environments/environment';
+import {ReCaptchaComponent} from 'angular2-recaptcha';
+import {TranslationService} from '../../services/translation.service';
+import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from '../../ws/soccer';
 
 @Component({
   selector: 'app-request-recovery-code-form',
@@ -110,7 +110,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
 
     if (this.recoveryForm.valid) {
       this.isLoading = true;
-      this._api.forgotPassword(dto, this.recoveryForm.controls['captchaResponse'].value).subscribe(
+      this._api.forgotPassword(this.recoveryForm.controls['captchaResponse'].value, dto).subscribe(
           r => {
             this.success = true;
           },

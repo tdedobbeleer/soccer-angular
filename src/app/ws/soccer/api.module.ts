@@ -19,34 +19,34 @@ import {StatisticsRestControllerService} from './api/statisticsRestController.se
 import {TeamsRestControllerService} from './api/teamsRestController.service';
 
 @NgModule({
-    imports: [CommonModule, HttpClientModule],
-    declarations: [],
-    exports: [],
-    providers: [
-        AccountProfileRestControllerService,
-        AccountRestControllerService,
-        AuthenticationControllerService,
-        CommentsRestControllerService,
-        DoodleRestControllerService,
-        ErrorRestControllerService,
-        MatchesRestControllerService,
-        NewsRestControllerService,
-        PasswordRecoveryRestControllerService,
-        PollRestControllerService,
-        RegistrationRestControllerService,
-        SeasonsRestControllerService,
-        StatisticsRestControllerService,
-        TeamsRestControllerService]
+  imports:      [ CommonModule, HttpClientModule ],
+  declarations: [],
+  exports:      [],
+  providers: [
+    AccountProfileRestControllerService,
+    AccountRestControllerService,
+    AuthenticationControllerService,
+    CommentsRestControllerService,
+    DoodleRestControllerService,
+    ErrorRestControllerService,
+    MatchesRestControllerService,
+    NewsRestControllerService,
+    PasswordRecoveryRestControllerService,
+    PollRestControllerService,
+    RegistrationRestControllerService,
+    SeasonsRestControllerService,
+    StatisticsRestControllerService,
+    TeamsRestControllerService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
         return {
             ngModule: ApiModule,
-            providers: [{provide: Configuration, useFactory: configurationFactory}]
+            providers: [ { provide: Configuration, useFactory: configurationFactory } ]
         }
     }
 
-    constructor(@Optional() @SkipSelf() parentModule: ApiModule) {
+    constructor( @Optional() @SkipSelf() parentModule: ApiModule) {
         if (parentModule) {
             throw new Error('ApiModule is already loaded. Import your base AppModule only.');
         }

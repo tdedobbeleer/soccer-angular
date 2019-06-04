@@ -30,7 +30,7 @@ export class PasswordRecoveryRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -57,26 +57,82 @@ export class PasswordRecoveryRestControllerService {
 
     /**
      * Get a password recovery code
-     *
-     * @param passwordRecoveryDTO passwordRecoveryDTO
+     * 
      * @param captchaResponse captchaResponse
+     * @param passwordRecoveryDTO passwordRecoveryDTO
+     * @param iSO3Country 
+     * @param iSO3Language 
+     * @param country 
+     * @param displayCountry 
+     * @param displayLanguage 
+     * @param displayName 
+     * @param displayScript 
+     * @param displayVariant 
+     * @param language 
+     * @param script 
+     * @param unicodeLocaleAttributes 
+     * @param unicodeLocaleKeys 
+     * @param variant 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, captchaResponse: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
-            throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling forgotPassword.');
-        }
+    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (captchaResponse === null || captchaResponse === undefined) {
             throw new Error('Required parameter captchaResponse was null or undefined when calling forgotPassword.');
         }
+        if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
+            throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling forgotPassword.');
+        }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (iSO3Country !== undefined) {
+            queryParameters = queryParameters.set('ISO3Country', <any>iSO3Country);
+        }
+        if (iSO3Language !== undefined) {
+            queryParameters = queryParameters.set('ISO3Language', <any>iSO3Language);
+        }
         if (captchaResponse !== undefined) {
             queryParameters = queryParameters.set('captchaResponse', <any>captchaResponse);
+        }
+        if (country !== undefined) {
+            queryParameters = queryParameters.set('country', <any>country);
+        }
+        if (displayCountry !== undefined) {
+            queryParameters = queryParameters.set('displayCountry', <any>displayCountry);
+        }
+        if (displayLanguage !== undefined) {
+            queryParameters = queryParameters.set('displayLanguage', <any>displayLanguage);
+        }
+        if (displayName !== undefined) {
+            queryParameters = queryParameters.set('displayName', <any>displayName);
+        }
+        if (displayScript !== undefined) {
+            queryParameters = queryParameters.set('displayScript', <any>displayScript);
+        }
+        if (displayVariant !== undefined) {
+            queryParameters = queryParameters.set('displayVariant', <any>displayVariant);
+        }
+        if (language !== undefined) {
+            queryParameters = queryParameters.set('language', <any>language);
+        }
+        if (script !== undefined) {
+            queryParameters = queryParameters.set('script', <any>script);
+        }
+        if (unicodeLocaleAttributes) {
+            unicodeLocaleAttributes.forEach((element) => {
+                queryParameters = queryParameters.append('unicodeLocaleAttributes', <any>element);
+            })
+        }
+        if (unicodeLocaleKeys) {
+            unicodeLocaleKeys.forEach((element) => {
+                queryParameters = queryParameters.append('unicodeLocaleKeys', <any>element);
+            })
+        }
+        if (variant !== undefined) {
+            queryParameters = queryParameters.set('variant', <any>variant);
         }
 
         let headers = this.defaultHeaders;
@@ -99,7 +155,7 @@ export class PasswordRecoveryRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
@@ -118,7 +174,7 @@ export class PasswordRecoveryRestControllerService {
 
     /**
      * Set a new password using recovery code
-     *
+     * 
      * @param passwordRecoveryDTO passwordRecoveryDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -126,7 +182,7 @@ export class PasswordRecoveryRestControllerService {
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public useRecoveryCode(passwordRecoveryDTO: PasswordRecoveryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
             throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling useRecoveryCode.');
         }
@@ -151,7 +207,7 @@ export class PasswordRecoveryRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

@@ -2,6 +2,7 @@ export * from './accountDTO';
 export * from './accountStatisticDTO';
 export * from './addressDTO';
 export * from './authenticationRequestDTO';
+export * from './byteResponseDTO';
 export * from './commentDTO';
 export * from './doodleDTO';
 export * from './errorDetailDTO';

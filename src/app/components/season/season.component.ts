@@ -1,14 +1,17 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {isNullOrUndefined} from "util";
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {isNullOrUndefined} from 'util';
 import {MatchDoodleDTO, MatchDTO, MatchesRestControllerService, SeasonDTO} from '../../ws/soccer';
+import {TabsetComponent} from 'ngx-bootstrap';
+import {SecUtil} from '../../classes/sec-util';
+import * as FileSaver from 'file-saver';
 import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
-import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
     selector: 'app-season',
     template: `
     <div class="box">
+        <a class="pull-right" (click)="exportMatches()" *ngIf="isLoggedIn"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
     <a (click)="getMatches();show = !show"><h3>{{'title.season' | translate}} {{season?.description}}</h3></a>
     <div *ngIf="show">
         <tabset #staticTabs>
@@ -41,6 +44,7 @@ export class SeasonComponent implements OnInit {
 
     matchesPlayed: MatchDTO[];
     matchesToCome: MatchDTO[];
+    isLoggedIn: boolean;
 
     constructor(private _matchesApi: MatchesRestControllerService,
                 private _errorHandler: ErrorHandlerService) {
@@ -50,6 +54,15 @@ export class SeasonComponent implements OnInit {
         if (this.show) {
             this.getMatches();
         }
+        this.isLoggedIn = SecUtil.isLoggedIn();
+    }
+
+    exportMatches() {
+        this._matchesApi.exportMatches(this.season.id).subscribe((json) => {
+            const s = atob(json.bytes);
+            const blob = new Blob([s], {type: 'application/octet-stream'});
+            FileSaver.saveAs(blob, 'matches_' + this.season.description + '.csv');
+        });
     }
 
     getMatches() {

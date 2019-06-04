@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {SecUtil} from "../../classes/sec-util";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {CommentDTO, CommentsRestControllerService} from "../../ws/soccer";
+import {Component, Input, OnInit} from '@angular/core';
+import {SecUtil} from '../../classes/sec-util';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {CommentDTO, CommentsRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-comment',
@@ -60,7 +60,7 @@ export class CommentComponent implements OnInit {
     updateComment(comment: CommentDTO) {
 
         this.showEditComment = false;
-        this._api.editComment(this.messageId, comment)
+        this._api.editComment(comment, this.messageId)
             .subscribe(r => {
                 console.log("success");
                 this.comment.content = comment.content;

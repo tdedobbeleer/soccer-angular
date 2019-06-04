@@ -1,9 +1,9 @@
-import {Component, Inject, Input, OnInit} from "@angular/core";
-import {LoginService} from "../../services/login.service";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SecUtil} from "../../classes/sec-util";
-import {CommentDTO, CommentsRestControllerService, NewsDTO, NewsRestControllerService} from "../../ws/soccer";
-import {DOCUMENT} from "@angular/common";
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {LoginService} from '../../services/login.service';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {SecUtil} from '../../classes/sec-util';
+import {CommentDTO, CommentsRestControllerService, NewsDTO, NewsRestControllerService} from '../../ws/soccer';
+import {DOCUMENT} from '@angular/common';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -191,7 +191,7 @@ export class MessageComponent implements OnInit {
   createComment(comment: CommentDTO) {
     this.showCreateComment = false;
 
-      this._api.postComment(comment.id, comment)
+      this._api.postComment(comment, comment.id)
         .subscribe(r => {
           console.log("success");
               this.message.comments.push(r);

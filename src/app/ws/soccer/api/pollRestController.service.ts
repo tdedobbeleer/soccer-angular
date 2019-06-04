@@ -34,7 +34,7 @@ export class PollRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -61,7 +61,7 @@ export class PollRestControllerService {
 
     /**
      * Get match poll by id
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -69,7 +69,7 @@ export class PollRestControllerService {
     public getMatchPollById(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
     public getMatchPollById(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
     public getMatchPollById(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-    public getMatchPollById(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getMatchPollById(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getMatchPollById.');
         }
@@ -92,7 +92,6 @@ export class PollRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<MatchPollDTO>(`${this.basePath}/api/v1/matchPoll/${encodeURIComponent(String(id))}`,
@@ -107,7 +106,7 @@ export class PollRestControllerService {
 
     /**
      * Get all match polls
-     *
+     * 
      * @param page page
      * @param size size
      * @param sort sort
@@ -117,7 +116,7 @@ export class PollRestControllerService {
     public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'body', reportProgress?: boolean): Observable<PageDTOMatchPollDTO>;
     public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTOMatchPollDTO>>;
     public getMatchPolls(page: number, size?: number, sort?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTOMatchPollDTO>>;
-    public getMatchPolls(page: number, size?: number, sort?: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getMatchPolls(page: number, size?: number, sort?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (page === null || page === undefined) {
             throw new Error('Required parameter page was null or undefined when calling getMatchPolls.');
         }
@@ -151,7 +150,6 @@ export class PollRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<PageDTOMatchPollDTO>(`${this.basePath}/api/v1/matchPoll`,
@@ -167,7 +165,7 @@ export class PollRestControllerService {
 
     /**
      * Vote
-     *
+     * 
      * @param id id
      * @param vote vote
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
@@ -176,7 +174,7 @@ export class PollRestControllerService {
     public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'body', reportProgress?: boolean): Observable<MultipleChoiceVoteDTOlong>;
     public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MultipleChoiceVoteDTOlong>>;
     public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MultipleChoiceVoteDTOlong>>;
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchPollVote.');
         }
@@ -204,7 +202,7 @@ export class PollRestControllerService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }
@@ -222,7 +220,7 @@ export class PollRestControllerService {
 
     /**
      * Refresh match poll
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -230,7 +228,7 @@ export class PollRestControllerService {
     public refreshMatchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountDTO>>;
     public refreshMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
     public refreshMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
-    public refreshMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public refreshMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling refreshMatchPoll.');
         }
@@ -269,7 +267,7 @@ export class PollRestControllerService {
 
     /**
      * Reset match poll
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -277,7 +275,7 @@ export class PollRestControllerService {
     public resetMatchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
     public resetMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
     public resetMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public resetMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public resetMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling resetMatchPoll.');
         }

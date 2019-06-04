@@ -17,6 +17,7 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/
 import {Observable} from 'rxjs/Observable';
 
 import {AccountStatisticDTO} from '../model/accountStatisticDTO';
+import {ByteResponseDTO} from '../model/byteResponseDTO';
 
 import {BASE_PATH} from '../variables';
 import {Configuration} from '../configuration';
@@ -29,7 +30,7 @@ export class StatisticsRestControllerService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -55,8 +56,331 @@ export class StatisticsRestControllerService {
 
 
     /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics1(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics1.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.head<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics2(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics2.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.post<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics3(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics3(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics3(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics3(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics3.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.put<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics4(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics4(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics4(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics4(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics4.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.patch<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics5(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics5(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics5(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics5(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics5.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export statistics for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportStatistics6(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics6(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics6(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics6(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportStatistics6.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.options<ByteResponseDTO>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}/export`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get statictics
-     *
+     * 
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -64,7 +388,7 @@ export class StatisticsRestControllerService {
     public getStatictics(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountStatisticDTO>>;
     public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
     public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
-    public getStatictics(id: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getStatictics(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getStatictics.');
         }
@@ -87,7 +411,6 @@ export class StatisticsRestControllerService {
 
         // to determine the Content-Type header
         let consumes: string[] = [
-            'application/json'
         ];
 
         return this.httpClient.get<Array<AccountStatisticDTO>>(`${this.basePath}/api/v1/statistics/season/${encodeURIComponent(String(id))}`,

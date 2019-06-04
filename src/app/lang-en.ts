@@ -40,6 +40,7 @@ export const LANG_EN_TRANS = {
     'text.statistics.assists': 'A',
     'text.statistics.goals': 'G',
     'text.statistics.played': 'P',
+    'text.statistics.motm': 'MOTM',
     'text.name': 'Name',
     'text.match.create.success': 'The match was successfully created.',
     'text.password.success.change': 'Password successfully changed.',
