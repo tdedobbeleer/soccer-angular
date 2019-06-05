@@ -65,7 +65,7 @@ Next, select the project you are using:
     
 If you want to deploy, make sure you are in the main dir, build the app and deploy to Firebase:
 
-    ng build --aot --prod --environment=$environment && firebase deploy --only hosting
+    ng build --aot --prod --configuration=$environment && firebase deploy --only hosting
 
 > **Note:**
 > The environment is specified because the app knows the default, quality and production environment. You can add more environments if needed (in src/environments). These environments contain settings per environment (duh).
