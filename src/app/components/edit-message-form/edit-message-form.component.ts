@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {ValidationService} from "../../services/validation.service";
-import {NewsDTO, NewsRestControllerService} from "../../ws/soccer";
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {ValidationService} from '../../services/validation.service';
+import {NewsDTO, NewsRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-edit-message-form',
@@ -106,11 +106,10 @@ export class EditMessageFormComponent implements OnInit {
                 },
                 error => {
                     this.globalError = this._errorHandler.handle(error, "/messages/edit/" + this.messageId);
-                },
-                () => {
-                    this.isLoading = false;
                 }
-            )
+            ).add(() => {
+                this.isLoading = false;
+            });
         }
         console.log(model, isValid);
     }

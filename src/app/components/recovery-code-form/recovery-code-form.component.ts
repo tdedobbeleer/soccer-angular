@@ -120,11 +120,10 @@ export class RecoveryCodeFormComponent implements OnInit {
           (error: Response) => {
             this.globalError = this._errorService.handle(error, "/password/recovery");
               this.errorFocus.trigger();
-          },
-          () => {
-              this.isLoading = false;
           }
-      )
+      ).add(() => {
+            this.isLoading = false;
+      });
     }
   }
 }

@@ -79,7 +79,6 @@ import {environment} from '../../../environments/environment';
       <div class="form-group box-footer">
         <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
         </button>
-        <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
         <a id="btnCancel" class="btn btn-default" [routerLink]="['/login']">{{"btn.cancel" | translate}}</a>
       </div>
     </form>
@@ -155,11 +154,10 @@ export class RegistrationFormComponent implements OnInit {
                 (error: Response) => {
                     this.globalError = this._errorService.handle(error, "/registration");
                     this.error.trigger();
-                },
-                () => {
-                    this.isLoading = false;
                 }
-            )
+            ).add(() => {
+                this.isLoading = false;
+            });
         }
     }
 

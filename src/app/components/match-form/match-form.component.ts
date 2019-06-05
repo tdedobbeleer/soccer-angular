@@ -189,11 +189,10 @@ export class MatchFormComponent implements OnInit {
                 error => {
                     this.globalError = this._errorHandler.handle(error);
                     this.error.trigger();
-                },
-                () => {
-                    this.isLoading = false;
                 }
-            )
+            ).add(() => {
+                this.isLoading = false;
+            });
 
         } else {
             console.log("invalid form: "+ this.matchForm);

@@ -107,11 +107,10 @@ export class ActivateAccountFormComponent implements OnInit {
                         this.globalError = this._errorHandler.handle(error);
                     }
                     this.error.trigger();
-                },
-                () => {
-                    this.isLoading = false;
                 }
-            )
+            ).add(() => {
+                this.isLoading = false;
+            })
 
         }
     }

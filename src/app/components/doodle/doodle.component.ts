@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {Router} from "@angular/router";
-import {SecUtil} from "../../classes/sec-util";
-import {isNullOrUndefined} from "util";
-import {DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from "../../ws/soccer";
+import {Component, Input, OnInit} from '@angular/core';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {Router} from '@angular/router';
+import {SecUtil} from '../../classes/sec-util';
+import {isNullOrUndefined} from 'util';
+import {DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from '../../ws/soccer';
 
 @Component({
     selector: 'app-doodle',
@@ -145,16 +145,15 @@ export class DoodleComponent implements OnInit {
                     e => {
                         //Something went terribly wrong...
                         this.error = this._errorHandler.handle(e);
-                    },
-                    () => {
-                        clearTimeout(timeoutId);
-                        setTimeout(() => {
-                            this.loading[i] = false;
-                        }, 500);
                     }
-                )
-        }
+                ).add(() => {
+                clearTimeout(timeoutId);
+                setTimeout(() => {
+                    this.loading[i] = false;
+                }, 500);
+            });
 
+        }
     }
 
     getPresenceClass(presence: PresenceDTO) {

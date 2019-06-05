@@ -275,11 +275,10 @@ export class EditAccountFormComponent implements OnInit {
                 },
                 error => {
                     this.globalPasswordError = this._errorHandler.handle(error);
-                },
-                () => {
-                    this.isLoading = false;
                 }
-            );
+            ).add(() => {
+                this.isLoading = false;
+            });
 
         } else {
             console.log("invalid form: " + this.passwordForm);

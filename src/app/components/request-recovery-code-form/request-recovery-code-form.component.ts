@@ -121,11 +121,10 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
               this.globalError = this._errorService.handle(error, "/password/recovery/request");
             }
             this.errorFocus.trigger();
-          },
-          () => {
-            this.isLoading = false;
           }
-      )
+      ).add(() => {
+        this.isLoading = false;
+      });
     }
 
   }
