@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {TranslationService} from "../../services/translation.service";
-import {Util} from "../../classes/util";
-import {ForecastRestControllerService, WeatherList} from "../../ws/weather";
-import {SecUtil} from "../../classes/sec-util";
-import {MatchDTO, MatchesRestControllerService} from "../../ws/soccer";
+import {Component, OnInit} from '@angular/core';
+import {TranslationService} from '../../services/translation.service';
+import {Util} from '../../classes/util';
+import {ForecastRestControllerService, WeatherList} from '../../ws/weather';
+import {SecUtil} from '../../classes/sec-util';
+import {MatchDTO, MatchesRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-next-match',
@@ -81,7 +81,8 @@ import {MatchDTO, MatchesRestControllerService} from "../../ws/soccer";
                <div class="text-center">
                     <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
                     <h3>
-                        <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
+                        <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"
+                                                                                                title="{{'tooltip.matches.location' | translate}}"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
                         <span *ngIf="!match.address?.googleLink"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
                     </h3>
                </div>
@@ -91,10 +92,11 @@ import {MatchDTO, MatchesRestControllerService} from "../../ws/soccer";
         <div class="text-center">
                   <div class="btn-group">
                       <button *ngIf="match.hasDoodle && isAdmin()" type="button" class="btn btn-sm" aria-label="Doodle"
-                              [routerLink]="['/doodles', match.id]">
+                              [routerLink]="['/doodles', match.id]" title="{{'tooltip.matches.doodle' | translate}}">
                           <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       </button>
-                          <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]">
+                          <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" 
+                                  [routerLink]="['/matches/edit', match.id]" title="{{'tooltip.matches.edit' | translate}}">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                           </button>
                       </div>

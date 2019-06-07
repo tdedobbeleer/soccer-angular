@@ -22,10 +22,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                   <div class="author-category">{{'text.message.postedBy' | translate}}&nbsp;{{message.postedBy.name}}&nbsp;{{'text.on' | translate}}&nbsp;{{message.postDate}}
                       <span class="btn-group"
                             *ngIf="isLoggedIn() && (isAdmin() || message.postedBy.id == getUser().id)">
-                <button type="button" class="btn btn-sm" aria-label="Edit" [routerLink]="['/messages/edit/' + message.id]" routerLinkActive="active">
+                <button type="button" class="btn btn-sm" aria-label="Edit" [routerLink]="['/messages/edit/' + message.id]" routerLinkActive="active" title="{{'tooltip.news.edit' | translate}}">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </button>
-                <button type="button" class="btn btn-sm btn-warning" aria-label="Delete" (click)="showDeleteNews = !showDeleteNews">
+                <button type="button" class="btn btn-sm btn-warning" aria-label="Delete" (click)="showDeleteNews = !showDeleteNews" title="{{'tooltip.news.delete' | translate}}">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
             </span>
@@ -62,7 +62,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                   <div class="pull-right">
                 <span class="btn-group m-t-1" *ngIf="isLoggedIn() && showAllComments">
                     <button type="button" class="btn btn-info" aria-label="Create comment"
-                            (click)="showCreateComment = !showCreateComment">
+                            (click)="showCreateComment = !showCreateComment" title="{{'tooltip.comments.add' | translate}}">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </button>
                 </span>
@@ -95,7 +95,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                                   *ngIf="shareStateStatus == 'inactive'">
                               <i class="fa fa-share-alt fa-2x"></i>
                           </button>
-                          <button class="btn btn-link commentBtn" (click)="showAllComments = !showAllComments">
+                          <button class="btn btn-link commentBtn" (click)="showAllComments = !showAllComments"  title="{{'tooltip.comments' | translate}}">
                               <i class="fa fa-comments fa-2x"></i><i
                                   class="badge">{{message?.comments.length}}</i>
                           </button>

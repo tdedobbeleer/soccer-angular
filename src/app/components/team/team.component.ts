@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {SecUtil} from "../../classes/sec-util";
-import {TeamDTO} from "../../ws/soccer";
+import {Component, Input, OnInit} from '@angular/core';
+import {SecUtil} from '../../classes/sec-util';
+import {TeamDTO} from '../../ws/soccer';
 
 @Component({
     selector: 'app-team',
@@ -24,10 +24,12 @@ import {TeamDTO} from "../../ws/soccer";
             </div>
             <div class="col-md-4 col-xs-12 text-center">
             <div class="btn-group">
-              <button *ngIf="team.address?.googleLink != null" type="button" class="btn" aria-label="Show map" (click)="showMap = !showMap">
+              <button *ngIf="team.address?.googleLink != null" type="button" class="btn" 
+                      aria-label="Show map" (click)="showMap = !showMap" title="{{'tooltip.teams.location' | translate}}">
                   <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
               </button>
-              <button *ngIf="isAdmin()" type="button" class="btn" aria-label="Edit team" [routerLink]="['/teams/edit', team.id]">
+              <button *ngIf="isAdmin()" type="button" class="btn" 
+                      aria-label="Edit team" [routerLink]="['/teams/edit', team.id]" title="{{'tooltip.teams.edit' | translate}}">
                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
               </button>
             </div>

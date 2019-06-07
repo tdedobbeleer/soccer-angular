@@ -90,9 +90,10 @@ import {
       
        
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
-        <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
-        <a id="btnCancel" class="btn btn-default" [routerLink]="['/matches']">{{"btn.cancel" | translate}}</a>
+          <div class="btn-group">
+            <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
+            <a id="btnCancel" class="btn btn-default" [routerLink]="['/matches']">{{"btn.cancel" | translate}}</a>
+          </div>
       </div>
     </form>
     </div>

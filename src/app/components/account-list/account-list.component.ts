@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {LoginService} from "../../services/login.service";
-import {AccountDTO, AccountRestControllerService} from "../../ws/soccer";
+import {Component, OnInit} from '@angular/core';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {LoginService} from '../../services/login.service';
+import {AccountDTO, AccountRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-account-list',
@@ -41,11 +41,11 @@ import {AccountDTO, AccountRestControllerService} from "../../ws/soccer";
                 <button *ngIf="account.role == 'ADMIN'" type="button" class="btn" aria-label="Downgrade" title="{{'tooltip.accounts.downgrade' | translate}}" (click)="changeRole(account)">
                     <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                 </button>
-                <button *ngIf="account.activated" type="button" class="btn" aria-label="Activate" title="{{'tooltip.accounts.activate' | translate}}" (click)="changeActivation(account)">
-                    <span class="glyphicon glyphicon glyphicon-off" aria-hidden="true"></span>
+                <button *ngIf="account.activated" type="button" class="btn" aria-label="Activate" title="{{'tooltip.accounts.disable' | translate}}" (click)="changeActivation(account)">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
                 </button>
-                <button *ngIf="!account.activated" type="button" class="btn" aria-label="Disable" title="{{'tooltip.accounts.disable' | translate}}" (click)="changeActivation(account)">
-                    <span class="glyphicon glyphicon glyphicon-off red" aria-hidden="true"></span>
+                <button *ngIf="!account.activated" type="button" class="btn" aria-label="Disable" title="{{'tooltip.accounts.activate' | translate}}" (click)="changeActivation(account)">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </button>
               </div>
             </td>
@@ -56,7 +56,7 @@ import {AccountDTO, AccountRestControllerService} from "../../ws/soccer";
     </div>
   </div>
   `,
-    styles: []
+    styles: ['td {padding-top: 3px;}']
 })
 export class AccountListComponent implements OnInit {
     accountList: AccountDTO[];

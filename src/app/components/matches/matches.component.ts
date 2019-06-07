@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {SecUtil} from "../../classes/sec-util";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SeasonDTO, SeasonsRestControllerService} from "../../ws/soccer";
+import {Component, OnInit} from '@angular/core';
+import {SecUtil} from '../../classes/sec-util';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {SeasonDTO, SeasonsRestControllerService} from '../../ws/soccer';
 
 @Component({
     selector: 'app-matches',
@@ -21,7 +21,7 @@ import {SeasonDTO, SeasonsRestControllerService} from "../../ws/soccer";
           <div class="col-md-1 col-md-offset-11">
           <div class="pull-right">
            <span class="btn-group" *ngIf="isAdmin()">
-                <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active">
+                <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active" title="{{'tooltip.matches.add' | translate}}">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
             </span>  

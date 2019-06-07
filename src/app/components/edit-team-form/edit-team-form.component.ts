@@ -9,6 +9,7 @@ import {Util} from '../../classes/util';
 import {AddressDTO, TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/concat';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-edit-team-form',
@@ -80,10 +81,11 @@ import 'rxjs/add/observable/concat';
           </div>
       </div>
        <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
-        </button>
-        <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
-        <a id="btnCancel" class="btn btn-default" [routerLink]="['/teams']">{{"btn.cancel" | translate}}</a>
+           <div class="btn-group">
+                <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}
+                </button>
+                <a id="btnCancel" class="btn btn-default" [routerLink]="['/teams']">{{"btn.cancel" | translate}}</a>
+           </div>
       </div>
       </form>
       </div>

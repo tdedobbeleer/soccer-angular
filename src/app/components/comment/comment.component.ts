@@ -9,16 +9,16 @@ import {CommentDTO, CommentsRestControllerService} from '../../ws/soccer';
     <div class="comment" *ngIf="comment">
         <div *ngIf="!showEditComment" class="row" (mouseover)="showBtns = true" (mouseleave)="showBtns = false">
           <div class="col-md-10">
-          <i class="fa fa-2x fa-comment"></i>
+          <i class="fa fa-2x fa-comment"></i>&nbsp;
           <span class="comment-content">{{comment?.content}}&nbsp;-&nbsp;{{'text.by' | translate}}&nbsp;{{comment?.postedBy?.name}}&nbsp;{{'text.on' | translate}}&nbsp;{{comment?.postDate}}
           </span>
           </div>
           <div class="col-md-2">
            <span class="btn-group pull-right" *ngIf="showBtns && isLoggedIn() && (getUser().id == comment?.postedBy?.id || isAdmin())">
-                  <button type="button" class="btn btn-warning" aria-label="Delete comment" (click)="deleteComment(comment)">
+                  <button type="button" class="btn btn-warning" aria-label="Delete comment" (click)="deleteComment(comment)" title="{{'tooltip.comments.delete' | translate}}">
                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                   </button>
-                  <button type="button" class="btn" aria-label="Edit comment" (click)="showEditComment = !showEditComment">
+                  <button type="button" class="btn" aria-label="Edit comment" (click)="showEditComment = !showEditComment" title="{{'tooltip.comments.edit' | translate}}">
                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                   </button>
           </span>

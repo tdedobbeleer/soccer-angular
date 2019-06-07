@@ -1,7 +1,7 @@
-import {Component, OnInit} from "@angular/core";
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {SecUtil} from "../../classes/sec-util";
-import {TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
+import {Component, OnInit} from '@angular/core';
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {SecUtil} from '../../classes/sec-util';
+import {TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
 
 @Component({
   selector: 'app-teams-list',
@@ -19,7 +19,8 @@ import {TeamDTO, TeamsRestControllerService} from "../../ws/soccer";
       <div class="col-md-1 col-md-offset-11 m-b-1">
       <div class="pull-right m-b-1">
        <span class="btn-group" *ngIf="isAdmin()">
-             <button type="button" class="btn btn-lg btn-danger" aria-label="Create team" [routerLink]="['/teams/create']" routerLinkActive="active">
+             <button type="button" class="btn btn-lg btn-danger" aria-label="Create team" 
+                     [routerLink]="['/teams/create']" routerLinkActive="active" title="{{'tooltip.teams.add' | translate}}">
                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
              </button>
         </span>  

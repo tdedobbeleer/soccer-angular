@@ -11,7 +11,7 @@ import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
     selector: 'app-season',
     template: `
     <div class="box">
-        <a class="pull-right" (click)="exportMatches()" *ngIf="isLoggedIn"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
+        <a class="pull-right" (click)="exportMatches()" *ngIf="isLoggedIn" title="{{'tooltip.matches.download' | translate}}"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
     <a (click)="getMatches();show = !show"><h3>{{'title.season' | translate}} {{season?.description}}</h3></a>
     <div *ngIf="show">
         <tabset #staticTabs>
@@ -40,7 +40,7 @@ import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
 export class SeasonComponent implements OnInit {
     @Input() season: SeasonDTO;
     @Input() show: boolean;
-    @ViewChild('staticTabs', {static: true}) staticTabs: TabsetComponent;
+    @ViewChild('staticTabs', {static: false}) staticTabs: TabsetComponent;
 
     matchesPlayed: MatchDTO[];
     matchesToCome: MatchDTO[];

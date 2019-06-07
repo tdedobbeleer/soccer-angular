@@ -32,7 +32,7 @@ import * as FileSaver from 'file-saver';
                               <option *ngFor="let s of seasons" [value]="s.id" [selected]="seasons[0]?.id == s.id">{{s.description}}</option>
                         </select>
                     </div>
-                    <a class="pull-right" (click)="exportStatistics()" *ngIf="isLoggedIn"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
+                    <a class="pull-right" (click)="exportStatistics()" *ngIf="isLoggedIn" title="{{'tooltip.statistics.download' | translate}}"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
                 </form>
     
                 
@@ -44,16 +44,16 @@ import * as FileSaver from 'file-saver';
                     <th class="text-center">
                         {{'text.name' | translate}}
                     </th>
-                    <th class="text-center">
+                    <th class="text-center" title="{{'tooltip.statistics.goals' | translate}}">
                         {{'text.statistics.goals' | translate}}
                     </th>
-                    <th class="text-center">
+                    <th class="text-center" title="{{'tooltip.statistics.assists' | translate}}">
                         {{'text.statistics.assists' | translate}}
                     </th>
-                    <th class="text-center">
+                    <th class="text-center" title="{{'tooltip.statistics.played' | translate}}">
                         {{'text.statistics.played' | translate}}
                     </th>
-                    <th class="text-center">
+                    <th class="text-center" title="{{'tooltip.statistics.motm' | translate}}">
                         {{'text.statistics.motm' | translate}}
                     </th>
                 </tr>

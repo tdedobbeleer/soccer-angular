@@ -19,6 +19,7 @@ import {
 } from '../../ws/soccer';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/concat';
+import 'rxjs/add/operator/map';
 import StatusEnum = MatchDTO.StatusEnum;
 
 @Component({
@@ -143,9 +144,10 @@ import StatusEnum = MatchDTO.StatusEnum;
       
        
       <div class="form-group box-footer">
-        <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
-        <button id="btnReset" type="reset" class="btn btn-info">Reset</button>
-          <a id="btnCancel" class="btn btn-default" [routerLink]="['/matches']">{{"btn.cancel" | translate}}</a>
+        <div class="btn-group">
+            <button id="submit" type="submit" class="btn btn-primary" [ladda]="isLoading">{{"btn.submit" | translate}}</button>
+            <a id="btnCancel" class="btn btn-default" [routerLink]="['/matches']">{{"btn.cancel" | translate}}</a>
+        </div>
       </div>
       </form>
       </div>
@@ -211,7 +213,8 @@ export class EditMatchFormComponent implements OnInit {
             htGoals: ['', [<any>Validators.required, Validators.pattern("^[0-9]+$")]]
         });
 
-        Observable.concat(this._teamApi.getTeams().map(t => this.teams = t),
+        Observable.concat(
+            this._teamApi.getTeams().map(t => this.teams = t),
             this._seasonApi.getSeasons().map(s => this.seasons = s),
             this._accountApi.getAccounts().map(a => this.accounts = a)).subscribe(
             () => console.log("loaded"),
