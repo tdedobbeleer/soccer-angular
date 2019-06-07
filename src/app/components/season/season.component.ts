@@ -11,7 +11,11 @@ import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
     selector: 'app-season',
     template: `
     <div class="box">
-        <a class="pull-right" (click)="exportMatches()" *ngIf="isLoggedIn" title="{{'tooltip.matches.download' | translate}}"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
+        <div class="pull-right btn-group">
+            <a class="btn" (click)="exportMatches()" *ngIf="isLoggedIn" title="{{'tooltip.matches.download' | translate}}"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
+            <a class="btn" (click)="exportMatchesCalendar()" *ngIf="isLoggedIn" title="{{'tooltip.matches.calendar.download' | translate}}"><span class="glyphicon glyphicon-calendar fa-lg"></span></a>
+        </div>
+       
     <a (click)="getMatches();show = !show"><h3>{{'title.season' | translate}} {{season?.description}}</h3></a>
     <div *ngIf="show">
         <tabset #staticTabs>
@@ -62,6 +66,14 @@ export class SeasonComponent implements OnInit {
             const s = atob(json.bytes);
             const blob = new Blob([s], {type: 'application/octet-stream'});
             FileSaver.saveAs(blob, 'matches_' + this.season.description + '.csv');
+        });
+    }
+
+    exportMatchesCalendar() {
+        this._matchesApi.exportMatchesCalendar(this.season.id).subscribe((json) => {
+            const s = atob(json.bytes);
+            const blob = new Blob([s], {type: 'application/octet-stream'});
+            FileSaver.saveAs(blob, 'matches_calendar_' + this.season.description + '.ics');
         });
     }
 

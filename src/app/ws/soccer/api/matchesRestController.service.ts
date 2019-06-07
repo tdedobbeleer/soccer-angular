@@ -478,6 +478,329 @@ export class MatchesRestControllerService {
     }
 
     /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar1(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar1.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.head<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar2(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar2.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.post<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar3(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar3(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar3(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar3(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar3.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.put<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar4(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar4(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar4(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar4(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar4.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.patch<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            null,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar5(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar5(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar5(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar5(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar5.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Export matches calendar for season
+     * 
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public exportMatchesCalendar6(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar6(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar6(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar6(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar6.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys["X-Auth-Token"]) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+
+        return this.httpClient.options<ByteResponseDTO>(`${this.basePath}/api/v1/matches/season/${encodeURIComponent(String(id))}/calendar`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Get match
      * 
      * @param id id

@@ -27,6 +27,7 @@ export const LANG_NL_TRANS = {
     'tooltip.matches.location' : 'Locatie van de match',
     'tooltip.matches.details' : 'Details',
     'tooltip.matches.download' : 'Download matchen en resultaten',
+    'tooltip.matches.calendar.download' : 'Download kalender als bestand',
     'tooltip.statistics.goals' : 'Gemaakte goals',
     'tooltip.statistics.assists' : 'Assists',
     'tooltip.statistics.played' : 'Totaal aantal matchen gespeeld',

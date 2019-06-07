@@ -28,6 +28,7 @@ export const LANG_EN_TRANS = {
     'tooltip.matches.location' : 'Match location',
     'tooltip.matches.details' : 'Details',
     'tooltip.matches.download' : 'Download matches and results',
+    'tooltip.matches.calendar.download' : 'Download calendar as a file',
     'tooltip.statistics.goals' : 'Goals scored',
     'tooltip.statistics.assists' : 'Assists',
     'tooltip.statistics.played' : 'Total number of matches played',
