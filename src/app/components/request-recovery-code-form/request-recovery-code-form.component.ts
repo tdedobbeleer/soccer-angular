@@ -39,7 +39,7 @@ import {PasswordRecoveryDTO, PasswordRecoveryRestControllerService} from '../../
         </small>
       </div>
       <div class="form-group">
-        <re-captcha (captchaResponse)="handleCaptchaResponse($event)"></re-captcha>
+        <re-captcha (captchaResponse)="handleCaptchaResponse($event)" [site_key]="getKeyPublicApiKey()"></re-captcha>
         <input type="hidden" [formControl]="recoveryForm.controls.captchaResponse"/>
          <small class="text-danger" [hidden]="!formErrors.captchaResponse">
              {{formErrors.captchaResponse}}
@@ -76,13 +76,13 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
   }
 
   ngOnInit() {
+      console.log(environment);
     this.recoveryForm = this._fb.group({
       email: ['', [<any>Validators.email]],
       captchaResponse: ['', [<any>Validators.required]],
     });
 
     //Setup recaptcha
-    this.captcha.site_key = environment.recaptcha_public_key;
     this.captcha.language = this._translationService.currentLang();
     this.captcha.reset();
 
@@ -127,6 +127,10 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
       });
     }
 
+  }
+
+  getKeyPublicApiKey() {
+    return environment.recaptcha_public_key;
   }
 
   handleCaptchaResponse(event: any) {

@@ -68,7 +68,7 @@ import {environment} from '../../../environments/environment';
         </small>
       </div>
       <div class="form-group">
-        <re-captcha (captchaResponse)="handleCaptchaResponse($event)"></re-captcha>
+        <re-captcha (captchaResponse)="handleCaptchaResponse($event)" [site_key]="getKeyPublicApiKey()"></re-captcha>
         <input type="hidden" [formControl]="registrationForm.controls.captchaResponse"/>
          <small class="text-danger" [hidden]="!formErrors.captchaResponse">
              {{formErrors.captchaResponse}}
@@ -120,7 +120,6 @@ export class RegistrationFormComponent implements OnInit {
         });
 
         //Setup recaptcha
-        this.captcha.site_key = environment.recaptcha_public_key;
         this.captcha.language = this._translationService.currentLang();
         this.captcha.reset();
 
@@ -159,6 +158,10 @@ export class RegistrationFormComponent implements OnInit {
                 this.isLoading = false;
             });
         }
+    }
+
+    getKeyPublicApiKey() {
+        return environment.recaptcha_public_key;
     }
 
     handleCaptchaResponse(event: any) {
