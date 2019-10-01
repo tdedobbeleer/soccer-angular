@@ -19,7 +19,15 @@ export interface DoodleDTO {
     modified?: Date;
     presences?: Array<PresenceDTO>;
     reserves?: Array<PresenceDTO>;
+    status?: DoodleDTO.StatusEnum;
     stringCreated?: string;
     stringModfied?: string;
     total?: number;
+}
+export namespace DoodleDTO {
+    export type StatusEnum = 'OPEN' | 'CLOSED';
+    export const StatusEnum = {
+        OPEN: 'OPEN' as StatusEnum,
+        CLOSED: 'CLOSED' as StatusEnum
+    }
 }

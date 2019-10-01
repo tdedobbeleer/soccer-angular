@@ -3,7 +3,7 @@ import {ErrorHandlerService} from '../../services/error-handler.service';
 import {Router} from '@angular/router';
 import {SecUtil} from '../../classes/sec-util';
 import {isNullOrUndefined} from 'util';
-import {DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from '../../ws/soccer';
+import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from '../../ws/soccer';
 
 @Component({
     selector: 'app-doodle',
@@ -28,11 +28,21 @@ import {DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from '../../ws
                   class="glyphicon glyphicon-user"></span> <span
                   class="count-badge">{{matchDoodle.doodle.total}}</span>
           </a>
-          <a (click)="changePresence(matchDoodle.doodle.currentPresence, 'current')" data-toggle="tooltip" *ngIf="isLoggedIn()"
+          <a (click)="changePresence(matchDoodle.doodle.currentPresence, 'current')" data-toggle="tooltip" *ngIf="isLoggedIn() && isDoodleOpen()"
                data-container="body" title="{{'tooltip.doodle.changePresence' | translate}}" [ladda]="loading['current']"
                data-placement="top" class="btn btn-default"><span
                     [ngClass]="getPresenceClass(matchDoodle.doodle.currentPresence)"
                     aria-hidden="true"></span>
+          </a>
+          <a data-toggle="tooltip" *ngIf="isLoggedIn() && !isDoodleOpen()"
+               data-container="body" title="{{'tooltip.doodle.changePresence.closed' | translate}}" [ladda]="loading['current']"
+               data-placement="top" class="btn btn-warning"><span class="white"
+                    [ngClass]="getPresenceClass(matchDoodle.doodle.currentPresence)"
+                    aria-hidden="true"></span>
+              &nbsp;
+              <span
+                      class="glyphicon glyphicon-lock"
+                      aria-hidden="true"></span>
           </a>
           <a (click)="login()" data-toggle="tooltip" data-container="body" *ngIf="!isLoggedIn()"
                title="{{'tooltip.doodle.changePresence' | translate}}"
@@ -91,7 +101,7 @@ import {DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from '../../ws
     </div>
     </div>
   `,
-    styles: []
+    styles: ['.white {color: white !important;}']
 })
 export class DoodleComponent implements OnInit {
     @Input() matchDoodle: MatchDoodleDTO;
@@ -103,6 +113,7 @@ export class DoodleComponent implements OnInit {
     loading: boolean[] = [];
 
     matchStatus = MatchDoodleDTO.MatchStatusEnum;
+    doodleStatus = DoodleDTO.StatusEnum;
 
     constructor(private _router: Router, private _api: DoodleRestControllerService, private _errorHandler: ErrorHandlerService) {
     }
@@ -110,6 +121,10 @@ export class DoodleComponent implements OnInit {
     ngOnInit() {
         //this.setUserProperties();
         //this._loginService.userUpdated.subscribe(this.setUserProperties)
+    }
+
+    isDoodleOpen() {
+        return this.matchDoodle.doodle.status === this.doodleStatus.OPEN || this.isAdmin();
     }
 
     isAdmin() {
@@ -130,7 +145,7 @@ export class DoodleComponent implements OnInit {
                 this.loading[i] = true;
             }, 500);
 
-            this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force)
+            this._api.changePresence(presence.account.id, this.matchDoodle.id, this.force)
                 .subscribe(
                     r => {
                         this._api.matchDoodle(this.matchDoodle.id).subscribe(

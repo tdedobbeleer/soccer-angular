@@ -37,6 +37,7 @@ export const LANG_NL_TRANS = {
     'tooltip.teams.edit' : 'Team wijzigen',
     'tooltip.teams.add' : 'Team toevoegen',
     'tooltip.doodle.changePresence': 'Wijzig aanwezigheid',
+    'tooltip.doodle.changePresence.closed': 'De doodle is gesloten. De aanwezigheid kan niet gewijzigd worden',
     'tooltip.motm.reset': 'Verwijdert alle stemmen',
     'tooltip.motm.renew': 'Voegt spelers toe of verwijdert ze gebasseerd op de doodle (stemmen worden niet gewijzigd)',
     'tooltip.doodle.adminMode' : 'Admin modus maakt het mogelijk om de aanwezigheid te wijzigen zonder naar de reservestatus te kijken. Er zullen geen mails verzonden worden, alleen de status wordt gewijzigd.',
