@@ -130,7 +130,7 @@ export class DoodleComponent implements OnInit {
                 this.loading[i] = true;
             }, 500);
 
-            this._api.changePresence(this.matchDoodle.id, presence.account.id, this.force)
+            this._api.changePresence(presence.account.id, this.matchDoodle.id, this.force)
                 .subscribe(
                     r => {
                         this._api.matchDoodle(this.matchDoodle.id).subscribe(
