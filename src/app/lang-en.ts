@@ -38,7 +38,7 @@ export const LANG_EN_TRANS = {
     'tooltip.teams.edit' : 'Change team',
     'tooltip.teams.add' : 'Add team',
     'tooltip.doodle.changePresence': 'Change presence',
-    'tooltip.doodle.changePresence.closed': 'Doodle is closed. Cannot edit the presence',
+    'tooltip.doodle.changePresence.closed': 'Doodle is (still) closed. Cannot edit the presence',
     'tooltip.motm.reset': 'Removes all votes',
     'tooltip.motm.renew': 'Adds or removes players from list based on doodle (votes are unchanged)',
     'tooltip.doodle.adminMode' : 'Admin mode makes it possible to change presences while ignoring the reserve status. No mails will be sent, only the presence will be updated.',

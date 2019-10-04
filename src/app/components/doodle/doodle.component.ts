@@ -34,9 +34,9 @@ import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} fro
                     [ngClass]="getPresenceClass(matchDoodle.doodle.currentPresence)"
                     aria-hidden="true"></span>
           </a>
-          <a data-toggle="tooltip" *ngIf="isLoggedIn() && !isDoodleOpen()"
+          <a data-toggle="tooltip" *ngIf="isLoggedIn() && !isDoodleOpen()" disabled="disabled"
                data-container="body" title="{{'tooltip.doodle.changePresence.closed' | translate}}" [ladda]="loading['current']"
-               data-placement="top" class="btn btn-warning"><span class="white"
+               data-placement="top" class="btn btn-default"><span
                     [ngClass]="getPresenceClass(matchDoodle.doodle.currentPresence)"
                     aria-hidden="true"></span>
               &nbsp;
