@@ -11,7 +11,12 @@ import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} fro
         <div class="panel panel-default" *ngIf="matchDoodle"
              [ngClass]="{'panel-warning': force, 'panel-danger': matchDoodle?.matchStatus == matchStatus.CANCELLED && !force }"
              [ngClass]="{ }">
-      <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{matchDoodle.date}} - {{matchDoodle.hour}}
+            <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true">
+        </span>&nbsp;{{matchDoodle.date}}&nbsp;-&nbsp;{{matchDoodle.hour}}
+                <span title="{{'tooltip.doodle.status.closed' | translate}}"
+                      *ngIf="matchDoodle.doodle.status === this.doodleStatus.CLOSED && isAdmin()">
+          &nbsp;<i class="glyphicon glyphicon-eye-close"></i>
+        </span>
       </div>
       <div class="panel-body">
         <alert [type]="'danger'" *ngIf="error">{{'text.doodle.error' | translate}}</alert>

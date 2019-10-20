@@ -14,6 +14,7 @@ export const LANG_EN_TRANS = {
     'tooltip.accounts.enable' : 'Enable account',
     'tooltip.accounts.disable' : 'Disable account',
     'tooltip.doodle.presences': 'Presences',
+    'tooltip.doodle.status.closed': 'The doodle is closed or not yet open',
     'tooltip.comments.add' : 'Add comment',
     'tooltip.comments' : 'Comments',
     'tooltip.comments.edit' : 'Change comment',

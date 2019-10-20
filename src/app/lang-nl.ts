@@ -13,6 +13,7 @@ export const LANG_NL_TRANS = {
     'tooltip.accounts.enable' : 'Enable account',
     'tooltip.accounts.disable' : 'Disable account',
     'tooltip.doodle.presences': 'Aanwezigheden',
+    'tooltip.doodle.status.closed': 'De doodle is gesloten of nog niet geopend',
     'tooltip.comments.add' : 'Commentaar toevoegen',
     'tooltip.comments' : 'Commentaren',
     'tooltip.comments.edit' : 'Commentaar aanpassen',
