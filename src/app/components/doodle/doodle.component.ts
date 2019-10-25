@@ -15,7 +15,7 @@ import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} fro
         </span>&nbsp;{{matchDoodle.date}}&nbsp;-&nbsp;{{matchDoodle.hour}}
                 <span title="{{'tooltip.doodle.status.closed' | translate}}"
                       *ngIf="matchDoodle.doodle.status === this.doodleStatus.CLOSED && isAdmin()">
-          &nbsp;<i class="glyphicon glyphicon-eye-close"></i>
+          &nbsp;<i class="glyphicon glyphicon-lock"></i>
         </span>
       </div>
       <div class="panel-body">
