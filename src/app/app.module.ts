@@ -19,6 +19,7 @@ import {LaddaModule} from 'angular2-ladda';
 import {ApiModule, Configuration} from './ws/soccer';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 const appRoutes: Routes = [
     {path: '', loadChildren: () => import('./modules/message.module').then(m => m.MessageModule)},
@@ -64,7 +65,8 @@ export function apiConfig() {
             spinnerSize: 20,
             spinnerColor: "white",
             spinnerLines: 12
-        })
+        }),
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     declarations: [
         LoginComponent,
