@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {SecUtil} from "../../classes/sec-util";
+import {Component, OnInit} from '@angular/core';
+import {SecUtil} from '../../classes/sec-util';
 
 @Component({
     selector: 'app-create-team',
@@ -7,7 +7,7 @@ import {SecUtil} from "../../classes/sec-util";
     <div class="container m-t-1">
     <ul class="breadcrumb">
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Home</a>
+            <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-user"></span>&nbsp;Home</a>
         </li>
         <li>
             <a [routerLink]="['/teams']" routerLinkActive="active">{{'nav.teams' | translate }}</a>

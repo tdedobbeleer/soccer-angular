@@ -16,7 +16,7 @@ import {environment} from '../../../environments/environment';
 <div class="container m-t-1">
 <ul class="breadcrumb">
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+            <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a>
         </li>
         <li>
             {{'nav.register' | translate }}

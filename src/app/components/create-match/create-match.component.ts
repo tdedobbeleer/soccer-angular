@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-create-match',
@@ -6,7 +6,7 @@ import {Component, OnInit} from "@angular/core";
     <div class="container m-t-1">
         <ul class="breadcrumb">
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+            <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a>
         </li>
         <li>
             <a [routerLink]="['/matches']" routerLinkActive="active">{{'nav.matches' | translate }}</a>

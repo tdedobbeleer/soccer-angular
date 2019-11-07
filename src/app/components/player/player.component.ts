@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {SecUtil} from "../../classes/sec-util";
-import {TranslationService} from "../../services/translation.service";
-import {ProfileDTO} from "../../ws/soccer";
+import {Component, Input, OnInit} from '@angular/core';
+import {SecUtil} from '../../classes/sec-util';
+import {TranslationService} from '../../services/translation.service';
+import {ProfileDTO} from '../../ws/soccer';
 
 @Component({
     selector: 'app-player',
@@ -14,11 +14,11 @@ import {ProfileDTO} from "../../ws/soccer";
             <div class="caption">
                 <div *ngIf="!isLoggedIn()"><h4>{{profile.account.firstName}}</h4></div>
                 <div *ngIf="isLoggedIn()"><h4>{{profile.account.name}}</h4></div>
-                <div *ngIf="profile.account.username"><span class="glyphicon glyphicon-envelope"></span>&nbsp;{{profile.account.username}}</div>
-                <div *ngIf="profile.phone"><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;{{profile.phone}}</div>
-                <div *ngIf="profile.mobilePhone"><span class="glyphicon glyphicon-phone"></span>&nbsp;{{profile.mobilePhone}}</div>
+                <div *ngIf="profile.account.username"><span class="fa fa-envelope"></span>&nbsp;{{profile.account.username}}</div>
+                <div *ngIf="profile.phone"><span class="fa fa-phone"></span>&nbsp;{{profile.phone}}</div>
+                <div *ngIf="profile.mobilePhone"><span class="fa fa-mobile"></span>&nbsp;{{profile.mobilePhone}}</div>
                 <div *ngIf="profile.address">
-                    <span class="glyphicon glyphicon-home"></span>&nbsp;{{profile.address?.address}}<br/>{{profile.address?.postalCode}} {{profile.address?.city}}
+                    <span class="fa fa-home"></span>&nbsp;{{profile.address?.address}}<br/>{{profile.address?.postalCode}} {{profile.address?.city}}
                 </div>
             </div>
         </div>

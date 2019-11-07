@@ -15,7 +15,7 @@ import {TeamDTO} from '../../ws/soccer';
             <div class="col-md-4 col-xs-12"><h4>{{team.name}}</h4></div>
             <div class="col-md-4 col-xs-12">
                 <div class="row">
-                    <div class="col-md-1 col-xs-1"><span class="glyphicon glyphicon-home"></span></div>
+                    <div class="col-md-1 col-xs-1"><span class="fa fa-home"></span></div>
                     <div class="col-md-11 col-xs-11">
                         <div>{{team.address.address}}</div>
                         <div>{{team.address?.postalCode}}&nbsp;{{team.address?.city}}</div>
@@ -26,11 +26,11 @@ import {TeamDTO} from '../../ws/soccer';
             <div class="btn-group">
               <button *ngIf="team.address?.googleLink != null" type="button" class="btn" 
                       aria-label="Show map" (click)="showMap = !showMap" title="{{'tooltip.teams.location' | translate}}">
-                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                  <span class="fa fa-map-marker" aria-hidden="true"></span>
               </button>
               <button *ngIf="isAdmin()" type="button" class="btn" 
                       aria-label="Edit team" [routerLink]="['/teams/edit', team.id]" title="{{'tooltip.teams.edit' | translate}}">
-                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                  <span class="fa fa-edit" aria-hidden="true"></span>
               </button>
             </div>
         </div>

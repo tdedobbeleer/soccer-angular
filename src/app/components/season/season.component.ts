@@ -12,8 +12,8 @@ import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
     template: `
     <div class="box">
         <div class="pull-right btn-group">
-            <a class="btn" (click)="exportMatches()" *ngIf="isLoggedIn" title="{{'tooltip.matches.download' | translate}}"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
-            <a class="btn" (click)="exportMatchesCalendar()" *ngIf="isLoggedIn" title="{{'tooltip.matches.calendar.download' | translate}}"><span class="glyphicon glyphicon-calendar fa-lg"></span></a>
+            <a class="btn" (click)="exportMatches()" *ngIf="isLoggedIn" title="{{'tooltip.matches.download' | translate}}"><span class="fa fa-save fa-lg"></span></a>
+            <a class="btn" (click)="exportMatchesCalendar()" *ngIf="isLoggedIn" title="{{'tooltip.matches.calendar.download' | translate}}"><span class="fa fa-calendar fa-lg"></span></a>
         </div>
        
     <a (click)="getMatches();show = !show"><h3>{{'title.season' | translate}} {{season?.description}}</h3></a>

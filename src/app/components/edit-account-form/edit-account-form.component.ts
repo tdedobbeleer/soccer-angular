@@ -14,7 +14,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
 <div class="box">
     
     <div>
-    <h2>{{'title.account.details' | translate}} <span class="pull-right glyphicon glyphicon-user"></span></h2>
+    <h2>{{'title.account.details' | translate}} <span class="pull-right fa fa-user"></span></h2>
     <div class="success-div">
         <alert [type]="'success'" [dismissible]="false" *ngIf="updateProfileSuccess">{{"text.account.success.change" | translate}}</alert>
     </div>
@@ -101,7 +101,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
     </div>
     
     <div class="p-t-1">
-    <h2>{{'title.account.password' | translate}} <span class="pull-right glyphicon glyphicon-lock"></span></h2>
+    <h2>{{'title.account.password' | translate}} <span class="pull-right fa fa-lock"></span></h2>
     
      <form [formGroup]="passwordForm" novalidate (ngSubmit)="submitPassword(passwordForm.value)">
       <alert [type]="'success'" [dismissible]="false" *ngIf="updatePasswordSuccess">{{"text.password.success.change" | translate}}</alert>

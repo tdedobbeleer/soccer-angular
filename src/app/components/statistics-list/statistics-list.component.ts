@@ -13,7 +13,7 @@ import * as FileSaver from 'file-saver';
     <div class="container">
         <ul class="breadcrumb">
             <li>
-                <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+                <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a>
             </li>
             <li>
                 {{'nav.statistics' | translate }}
@@ -32,7 +32,7 @@ import * as FileSaver from 'file-saver';
                               <option *ngFor="let s of seasons" [value]="s.id" [selected]="seasons[0]?.id == s.id">{{s.description}}</option>
                         </select>
                     </div>
-                    <a class="pull-right" (click)="exportStatistics()" *ngIf="isLoggedIn" title="{{'tooltip.statistics.download' | translate}}"><span class="glyphicon glyphicon-save-file fa-lg"></span></a>
+                    <a class="pull-right" (click)="exportStatistics()" *ngIf="isLoggedIn" title="{{'tooltip.statistics.download' | translate}}"><span class="fa fa-save fa-lg"></span></a>
                 </form>
     
                 

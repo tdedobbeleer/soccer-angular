@@ -30,22 +30,22 @@ import {AccountDTO, AccountRestControllerService} from '../../ws/soccer';
             <td>{{account.username}}</td>
             <td>{{account.name}}</td>
             <td>
-                <span *ngIf="account.role == 'ADMIN'" title="{{account.role}}" class="glyphicon glyphicon-king"></span>
-                <span *ngIf="account.role == 'USER'" title="{{account.role}}" class="glyphicon glyphicon-pawn"></span>
+                <span *ngIf="account.role == 'ADMIN'" title="{{account.role}}" class="fa fa-user-plus"></span>
+                <span *ngIf="account.role == 'USER'" title="{{account.role}}" class="fa fa-user-o"></span>
             </td>
             <td>
                 <div class="btn-group">
                 <button *ngIf="account.role == 'USER'" type="button" class="btn" aria-label="Elevate" title="{{'tooltip.accounts.elevate' | translate}}" (click)="changeRole(account)">
-                    <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                    <span class="fa fa-caret-up" aria-hidden="true"></span>
                 </button>
                 <button *ngIf="account.role == 'ADMIN'" type="button" class="btn" aria-label="Downgrade" title="{{'tooltip.accounts.downgrade' | translate}}" (click)="changeRole(account)">
-                    <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                    <span class="fa fa-caret-down" aria-hidden="true"></span>
                 </button>
                 <button *ngIf="account.activated" type="button" class="btn" aria-label="Activate" title="{{'tooltip.accounts.disable' | translate}}" (click)="changeActivation(account)">
-                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span>
+                    <span class="fa fa-stop" aria-hidden="true"></span>
                 </button>
                 <button *ngIf="!account.activated" type="button" class="btn" aria-label="Disable" title="{{'tooltip.accounts.activate' | translate}}" (click)="changeActivation(account)">
-                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    <span class="fa fa-play" aria-hidden="true"></span>
                 </button>
               </div>
             </td>

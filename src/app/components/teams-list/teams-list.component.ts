@@ -9,7 +9,7 @@ import {TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
     <div class="container m-t-1">
     <ul class="breadcrumb">
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span>&nbsp;Home</a>
+            <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-user"></span>&nbsp;Home</a>
         </li>
         <li>
             {{'nav.teams' | translate }}
@@ -21,7 +21,7 @@ import {TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
        <span class="btn-group" *ngIf="isAdmin()">
              <button type="button" class="btn btn-lg btn-danger" aria-label="Create team" 
                      [routerLink]="['/teams/create']" routerLinkActive="active" title="{{'tooltip.teams.add' | translate}}">
-                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                 <span class="fa fa-plus" aria-hidden="true"></span>
              </button>
         </span>  
         </div>

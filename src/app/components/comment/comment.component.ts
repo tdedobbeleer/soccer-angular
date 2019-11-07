@@ -16,10 +16,10 @@ import {CommentDTO, CommentsRestControllerService} from '../../ws/soccer';
           <div class="col-md-2">
            <span class="btn-group pull-right" *ngIf="showBtns && isLoggedIn() && (getUser().id == comment?.postedBy?.id || isAdmin())">
                   <button type="button" class="btn btn-warning" aria-label="Delete comment" (click)="deleteComment(comment)" title="{{'tooltip.comments.delete' | translate}}">
-                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      <span class="fa fa-trash" aria-hidden="true"></span>
                   </button>
                   <button type="button" class="btn" aria-label="Edit comment" (click)="showEditComment = !showEditComment" title="{{'tooltip.comments.edit' | translate}}">
-                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                      <span class="fa fa-edit" aria-hidden="true"></span>
                   </button>
           </span>
           </div>

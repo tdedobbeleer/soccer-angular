@@ -20,7 +20,10 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
+          "/assets/css/*.css",
+          "/assets/favicon/**",
+          "/assets/skins/**",
+          "/assets/images/**",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
         ]
       }

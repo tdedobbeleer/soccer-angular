@@ -23,10 +23,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                       <span class="btn-group"
                             *ngIf="isLoggedIn() && (isAdmin() || message.postedBy.id == getUser().id)">
                 <button type="button" class="btn btn-sm" aria-label="Edit" [routerLink]="['/messages/edit/' + message.id]" routerLinkActive="active" title="{{'tooltip.news.edit' | translate}}">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    <span class="fa fa-edit" aria-hidden="true"></span>
                 </button>
                 <button type="button" class="btn btn-sm btn-warning" aria-label="Delete" (click)="showDeleteNews = !showDeleteNews" title="{{'tooltip.news.delete' | translate}}">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    <span class="fa fa-trash" aria-hidden="true"></span>
                 </button>
             </span>
 
@@ -63,7 +63,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
                 <span class="btn-group m-t-1" *ngIf="isLoggedIn() && showAllComments">
                     <button type="button" class="btn btn-info" aria-label="Create comment"
                             (click)="showCreateComment = !showCreateComment" title="{{'tooltip.comments.add' | translate}}">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <span class="fa fa-plus" aria-hidden="true"></span>
                     </button>
                 </span>
                   </div>

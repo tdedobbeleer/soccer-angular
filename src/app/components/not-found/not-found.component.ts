@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-not-found',
@@ -6,7 +6,7 @@ import {Component, OnInit} from "@angular/core";
    <div class="container">
         <div class="col-md-12">
             <ul class="breadcrumb">
-                <li><a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a></li>
+                <li><a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a></li>
                 <li>{{'title.error.404' | translate}}</li>
             </ul>
     

@@ -20,7 +20,7 @@ import {MatchDTO, MatchesRestControllerService} from '../../ws/soccer';
         <div class="row">
             <div class="col-md-12 col-xs-12">
                 <div class="row">
-                    <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs"><h4><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 hidden-xs"><h4><span class="fa fa-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}}</h4></div>
                     <div class="col-md-7">
                         <div class="row text-center hidden-xs">
                             <div class="col-md-4 col-xs-4 right"><h3>{{match?.homeTeam?.name}}</h3></div>
@@ -53,10 +53,10 @@ import {MatchDTO, MatchesRestControllerService} from '../../ws/soccer';
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12">
                       <div class="row text-center visible-sm visible-xs">
-                          <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
+                          <h5><span class="fa fa-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
                           <h5>
-                              <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
-                              <span *ngIf="!match.address?.googleLink"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
+                              <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="fa fa-map-marker" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
+                              <span *ngIf="!match.address?.googleLink"><span class="fa fa-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
                           </h5>
                       </div>
                       <div *ngIf="forecast" class="text-center hidden-xs">
@@ -79,11 +79,11 @@ import {MatchDTO, MatchesRestControllerService} from '../../ws/soccer';
         <div class="row hidden-sm hidden-xs">
             <div class="col-md-12 col-xs-12">
                <div class="text-center">
-                    <h3><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
+                    <h3><span class="fa fa-clock-o" aria-hidden="true"></span>&nbsp;{{match?.hour}}</h3>
                     <h3>
-                        <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"
+                        <a *ngIf="match.address?.googleLink" (click)="showMap = !showMap"><span class="fa fa-map-marker" aria-hidden="true"
                                                                                                 title="{{'tooltip.matches.location' | translate}}"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</a>
-                        <span *ngIf="!match.address?.googleLink"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
+                        <span *ngIf="!match.address?.googleLink"><span class="fa fa-home" aria-hidden="true"></span>&nbsp;{{match.address.address}},&nbsp;{{match.address.city}}</span>
                     </h3>
                </div>
             </div>
@@ -93,11 +93,11 @@ import {MatchDTO, MatchesRestControllerService} from '../../ws/soccer';
                   <div class="btn-group">
                       <button *ngIf="match.hasDoodle && isAdmin()" type="button" class="btn btn-sm" aria-label="Doodle"
                               [routerLink]="['/doodles', match.id]" title="{{'tooltip.matches.doodle' | translate}}">
-                          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                          <span class="fa fa-user" aria-hidden="true"></span>
                       </button>
                           <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" 
                                   [routerLink]="['/matches/edit', match.id]" title="{{'tooltip.matches.edit' | translate}}">
-                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            <span class="fa fa-edit" aria-hidden="true"></span>
                           </button>
                       </div>
                  </div>

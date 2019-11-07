@@ -57,7 +57,7 @@ import {AccountDTO, MatchPollDTO, PollRestControllerService} from '../../ws/socc
 
                               <div class="input-group-btn">
                                   <button (click)="vote(pollForm.value, poll)" class="btn btn-success"><span
-                                          class="glyphicon glyphicon-bell"></span>&nbsp;{{'text.vote' | translate}}
+                                          class="fa fa-bell"></span>&nbsp;{{'text.vote' | translate}}
                                   </button>
                               </div>
                           </div>
@@ -71,7 +71,7 @@ import {AccountDTO, MatchPollDTO, PollRestControllerService} from '../../ws/socc
                       
                       <div class="panel-body text-center" *ngIf="poll.status == 'OPEN' && !isLoggedIn()">
                           <button class="btn btn-sm btn-success" (click)="login()"><span
-                                          class="glyphicon glyphicon-lock"></span>&nbsp;{{'text.vote.login' | translate}}</button>
+                                          class="fa fa-lock"></span>&nbsp;{{'text.vote.login' | translate}}</button>
                       </div>
                       
                       <div class="panel-footer">

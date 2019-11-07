@@ -10,7 +10,7 @@ import {SeasonDTO, SeasonsRestControllerService} from '../../ws/soccer';
     <div class="container">
         <ul class="breadcrumb">
             <li>
-                <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+                <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a>
             </li>
             <li>
                 {{'nav.matches' | translate }}
@@ -22,7 +22,7 @@ import {SeasonDTO, SeasonsRestControllerService} from '../../ws/soccer';
           <div class="pull-right">
            <span class="btn-group" *ngIf="isAdmin()">
                 <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/matches/create']" routerLinkActive="active" title="{{'tooltip.matches.add' | translate}}">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="fa fa-plus" aria-hidden="true"></span>
                 </button>
             </span>  
             </div>

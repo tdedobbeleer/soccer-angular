@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {TranslationService} from "../../services/translation.service";
-import {LoginService} from "../../services/login.service";
-import {isUndefined} from "util";
-import {SecUtil} from "../../classes/sec-util";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {TranslationService} from '../../services/translation.service';
+import {LoginService} from '../../services/login.service';
+import {isUndefined} from 'util';
+import {SecUtil} from '../../classes/sec-util';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,10 +13,10 @@ import {Router} from "@angular/router";
         <div class="col-md-6" data-animate="fadeInDown"></div>
         <div class="col-md-6" data-animate="fadeInDown">
             <ul class="menu">
-                <li><a (click)="selectLang(oppositeLang)"><span class="glyphicon glyphicon-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
+                <li><a (click)="selectLang(oppositeLang)"><span class="fa fa-globe"></span>&nbsp;{{oppositeLang.display}}</a></li>
                 
                 <li *ngIf="isLoggedIn" class="dropdown" dropdown>
-                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="glyphicon glyphicon-user"></span>&nbsp;{{user.firstName}} <b class="caret"></b></a>
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" dropdownToggle><span class="fa fa-user"></span>&nbsp;{{user.firstName}} <b class="caret"></b></a>
                     <ul class="dropdown-menu" *dropdownMenu>
                         <li><a [routerLink]="['/accounts/profile/edit/' + user.id ]" routerLinkActive="active">{{'nav.profile' | translate}}</a></li>
                         <li><a (click)="logout()">{{'nav.logout' | translate}}</a></li>                        
@@ -24,11 +24,11 @@ import {Router} from "@angular/router";
                 </li>
  
                 <li *ngIf="!isLoggedIn">
-                    <a (click)="login()"><span class="glyphicon glyphicon-user"></span>&nbsp;{{'nav.login' | translate}}</a>
+                    <a (click)="login()"><span class="fa fa-user"></span>&nbsp;{{'nav.login' | translate}}</a>
                 </li>
 
                 <li><a (click)="goto('/faq')">{{'nav.faq' | translate}}</a></li>
-                <!-- <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a> -->
+                <!-- <li><a [routerLink]="['/contact']" routerLinkActive="active"><span class="fa fa-envelope" aria-hidden="true"></span>&nbsp;{{'nav.contact' | translate}}</a> -->
                 <!-- <li><a [routerLink]="['/about']" routerLinkActive="active">{{'nav.about' | translate}}</a></li> -->
             </ul>
         </div>

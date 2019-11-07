@@ -11,11 +11,11 @@ import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} fro
         <div class="panel panel-default" *ngIf="matchDoodle"
              [ngClass]="{'panel-warning': force, 'panel-danger': matchDoodle?.matchStatus == matchStatus.CANCELLED && !force }"
              [ngClass]="{ }">
-            <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true">
+            <div class="panel-heading"><span class="fa fa-calendar" aria-hidden="true">
         </span>&nbsp;{{matchDoodle.date}}&nbsp;-&nbsp;{{matchDoodle.hour}}
                 <span title="{{'tooltip.doodle.status.closed' | translate}}"
                       *ngIf="matchDoodle.doodle.status === this.doodleStatus.CLOSED && isAdmin()">
-          &nbsp;<i class="glyphicon glyphicon-lock"></i>
+          &nbsp;<i class="fa fa-lock"></i>
         </span>
       </div>
       <div class="panel-body">
@@ -30,7 +30,7 @@ import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} fro
           <a class="btn btn-default doodle-users" data-toggle="tooltip" data-container="body"
              (click)="showUsers = !showUsers"
              title="{{'tooltip.doodle.presences' | translate}}" aria-hidden="true"><span
-                  class="glyphicon glyphicon-user"></span> <span
+                  class="fa fa-user"></span> <span
                   class="count-badge">{{matchDoodle.doodle.total}}</span>
           </a>
           <a (click)="changePresence(matchDoodle.doodle.currentPresence, 'current')" data-toggle="tooltip" *ngIf="isLoggedIn() && isDoodleOpen()"
@@ -46,12 +46,12 @@ import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} fro
                     aria-hidden="true"></span>
               &nbsp;
               <span
-                      class="glyphicon glyphicon-lock"
+                      class="fa fa-lock"
                       aria-hidden="true"></span>
           </a>
           <a (click)="login()" data-toggle="tooltip" data-container="body" *ngIf="!isLoggedIn()"
                title="{{'tooltip.doodle.changePresence' | translate}}"
-               data-placement="top" class="btn btn-default"><span class="glyphicon glyphicon-lock grey"
+               data-placement="top" class="btn btn-default"><span class="fa fa-lock grey"
                                                                   aria-hidden="true"></span>
           </a>
         </div>
@@ -181,18 +181,18 @@ export class DoodleComponent implements OnInit {
         if (!isNullOrUndefined(presence)) {
             switch (presence.type) {
                 case PresenceDTO.TypeEnum.NOTFILLEDIN:
-                    return "glyphicon glyphicon-question-sign grey";
+                    return "fa fa-question grey";
                 case PresenceDTO.TypeEnum.PRESENT:
-                    return "glyphicon glyphicon-ok green";
+                    return "fa fa-check green";
                 case PresenceDTO.TypeEnum.RESERVE:
-                    return "glyphicon glyphicon-ok green";
+                    return "fa fa-check green";
                 case PresenceDTO.TypeEnum.NOTPRESENT:
-                    return "glyphicon glyphicon-remove red";
+                    return "fa fa-times red";
                 default:
-                    return "glyphicon glyphicon-lock grey";
+                    return "fa fa-lock grey";
             }
         } else {
-            return "glyphicon glyphicon-lock grey";
+            return "fa fa-lock grey";
         }
 
     }

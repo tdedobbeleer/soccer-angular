@@ -17,7 +17,7 @@ import {NewsRestControllerService, PageDTONewsDTO} from '../../ws/soccer';
        <div class="input-group">
           <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="{{'text.search' | translate}}">
           <span class="input-group-btn">
-                  <button (click)="getPage(0)" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                  <button (click)="getPage(0)" class="btn btn-primary"><span class="fa fa-search"></span></button>
           </span>
         </div>
       </div>
@@ -25,7 +25,7 @@ import {NewsRestControllerService, PageDTONewsDTO} from '../../ws/soccer';
       <div class="pull-right">
        <span class="btn-group" *ngIf="isAdmin()">
             <button type="button" class="btn btn-lg btn-danger" aria-label="Create message" [routerLink]="['/messages/create']" routerLinkActive="active" title="{{'tooltip.news.add' | translate}}">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span class="fa fa-plus" aria-hidden="true"></span>
             </button>
         </span>  
         </div>

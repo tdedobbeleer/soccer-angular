@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ErrorHandlerService} from "../../services/error-handler.service";
-import {ActivatedRoute} from "@angular/router";
-import {DoodleRestControllerService, MatchDoodleDTO} from "../../ws/soccer";
+import {ErrorHandlerService} from '../../services/error-handler.service';
+import {ActivatedRoute} from '@angular/router';
+import {DoodleRestControllerService, MatchDoodleDTO} from '../../ws/soccer';
 
 @Component({
     selector: 'app-doodle-item',
     template: `
         <div class="container">
             <ul class="breadcrumb">
-                <li><a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+                <li><a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a>
                 </li>
             </ul>
 

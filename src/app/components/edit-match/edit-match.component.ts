@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-edit-match',
@@ -7,7 +7,7 @@ import {ActivatedRoute} from "@angular/router";
     <div class="container m-t-1">
     <ul class="breadcrumb">
         <li>
-            <a [routerLink]="['/']" routerLinkActive="active"><span class="glyphicon glyphicon-home"></span>&nbsp;Home</a>
+            <a [routerLink]="['/']" routerLinkActive="active"><span class="fa fa-home"></span>&nbsp;Home</a>
         </li>
         <li>
             <a [routerLink]="['/matches']" routerLinkActive="active">{{'nav.matches' | translate }}</a>
