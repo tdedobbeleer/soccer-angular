@@ -73,7 +73,7 @@ import 'rxjs/add/operator/map';
           </div>
           </div>
            <div class="form-group" *ngIf="showMap">
-            <input name="useGoogleLink" id="useGoogleLink" type="checkbox" formControlName="useGoogleLink" (change)="onGoogleLinkChange()"/>
+               <input name="useGoogleLink" id="useGoogleLink" type="checkbox" formControlName="useGoogleLink"/>
              <label for="useGoogleLink">{{"label.team.useGoogleLink" | translate}}</label>
           </div>
           <div *ngIf="showMap">
@@ -196,6 +196,8 @@ export class EditTeamFormComponent implements OnInit {
 
         if (this.teamForm.valid) {
             this.isLoading = true;
+            //Patch google link
+            model.address.googleLink = this.teamForm.value.useGoogleLink ? this.googleLink : null;
 
             this._api.updateTeam(model).subscribe(
                 r => {
@@ -221,14 +223,6 @@ export class EditTeamFormComponent implements OnInit {
         if (!this.teamForm.value.useExistingAddress) {
             //If new address is used, empty the id
             this.teamForm.controls['address'].patchValue({id: ''});
-        }
-    }
-
-    private onGoogleLinkChange() {
-        if (this.teamForm.value.useGoogleLink) {
-            this.teamForm.controls['address'].patchValue({
-                googleLink: this.googleLink,
-            })
         }
     }
 
