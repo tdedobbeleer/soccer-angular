@@ -181,6 +181,7 @@ export const LANG_EN_TRANS = {
     'label.message.content': 'Message',
     'label.message.title': 'Title',
     'label.password': 'Password',
+    'label.current.password' : 'Current password',
     'label.repeatPassword': 'Type the password again',
     'label.firstName': 'First name',
     'label.lastName': 'Last name',

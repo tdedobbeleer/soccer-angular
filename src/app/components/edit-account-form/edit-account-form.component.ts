@@ -109,7 +109,7 @@ import PositionEnum = ProfileDTO.PositionEnum;
          <span [innerHtml]="globalPasswordError | safeHtml"></span>
       </alert>
       <div class="form-group">
-        <label for="oldPassword">{{"label.password" | translate}}</label>
+        <label for="oldPassword">{{"label.current.password" | translate}}</label>
                <input name="oldPassword" type="password" class="form-control" formControlName="oldPassword"/>
          <small class="text-danger" [hidden]="!passwordFormErrors.oldPassword">
              {{passwordFormErrors.oldPassword}}

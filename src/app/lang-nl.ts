@@ -165,6 +165,7 @@ export const LANG_NL_TRANS = {
     'label.recovery.email' : 'Email',
     'label.username' : 'Email adres',
     'label.password' : 'Wachtwoord',
+    'label.current.password' : 'Huidig wachtwoord',
     'label.match.time': 'Tijdstip',
     'label.match.date': 'Datum',
     'label.match.awayTeam': 'Uitploeg',
