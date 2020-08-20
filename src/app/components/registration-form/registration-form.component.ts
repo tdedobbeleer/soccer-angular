@@ -136,6 +136,7 @@ export class RegistrationFormComponent implements OnInit {
     }
 
     submit(model: RegistrationDTO) {
+        this.success = false;
         //Mark all controls as dirty, since the form has been submitted
         this._validationService.markControlsAsDirty(this.registrationForm);
         //trigger the validation
