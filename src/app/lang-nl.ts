@@ -112,6 +112,7 @@ export const LANG_NL_TRANS = {
     'text.error': 'Fout',
     'text.accounts.activate': 'Activeer de account. Je kan kiezen om de gebruiker om de hoogte te stellen van deze actie. ',
     'text.error.404': 'Na dagenlang zoekwerk, werd de pagina nog steeds niet gevonden. Ik hoop dat iemand ze vindt.',
+    'text.error.login': 'Username of password is incorrect',
     'text.doodle.hide.dates': 'Verberg data',
     'text.doodle.show.dates': 'Toon data',
     'text.doodle.modified': 'Gewijzigd op',

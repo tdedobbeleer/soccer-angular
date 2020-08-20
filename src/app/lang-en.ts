@@ -47,6 +47,7 @@ export const LANG_EN_TRANS = {
     'text.doodle.adminMode.disable': 'Disable admin mode',
     'text.error.unknown': 'Epic fail. Open goal, but the webmaster somehow missed it. Or the internet broke again.',
     'text.error.account.activation.not.sent': 'The activation email could not be sent.',
+    'text.error.login': 'Username or password is incorrect',
     'text.search': 'Search',
     'text.teams.empty': 'No teams found.',
     'text.seasons.empty': 'No matches found.',

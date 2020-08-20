@@ -1,48 +1,51 @@
-import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
-import {LoginService} from "../../services/login.service";
-import {isNullOrUndefined} from "util";
-import {map} from "rxjs/operators";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LoginService} from '../../services/login.service';
+import {isNullOrUndefined} from 'util';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   template: `
     <div class="container">
       <div class="col-md-12">
-      <ul class="breadcrumb">
-            <li>
-              <a [routerLink]="['/']" routerLinkActive="active">{{'nav.home' | translate}}</a>
-            </li>
-            <li>
-              {{'nav.login' | translate}}
-            </li>
+        <ul class="breadcrumb">
+          <li>
+            <a [routerLink]="['/']" routerLinkActive="active">{{'nav.home' | translate}}</a>
+          </li>
+          <li>
+            {{'nav.login' | translate}}
+          </li>
         </ul>
       </div>
-      
+
       <div class="col-md-6 col-md-offset-3">
-      <div class="box">
-      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-      
-      <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
-          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <div class="box">
+          <div *ngIf="error" class="alert alert-danger">{{'text.error.login' | translate}}</div>
+
+          <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
               <label for="username">{{'label.username' | translate}}</label>
-              <input autocomplete="username email" type="email" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-              <div *ngIf="f.submitted && !username.valid" class="help-block">{{validation.username.required | translate}}</div>
-          </div>
-          <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+              <input autocomplete="username email" type="email" class="form-control" name="username" [(ngModel)]="model.username"
+                     #username="ngModel" required/>
+              <div *ngIf="f.submitted && !username.valid" class="help-block">{{'validation.username.required' | translate}}</div>
+            </div>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
               <label for="password">{{'label.password' | translate}}</label>
-              <input autocomplete="current-password" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-              <div *ngIf="f.submitted && !password.valid" class="help-block">{{validation.password.required | translate}}</div>
-          </div>
-          <div class="form-group">
+              <input autocomplete="current-password" type="password" class="form-control" name="password" [(ngModel)]="model.password"
+                     #password="ngModel" required/>
+              <div *ngIf="f.submitted && !password.valid" class="help-block">{{'validation.password.required' | translate}}</div>
+            </div>
+            <div class="form-group">
               <!--
               <label>                            
                 <input type="checkbox" name="rememberMe" [(ngModel)]="model.rememberMe" #rememberMe="ngModel"/> {{'label.rememberMe' | translate}}
               </label>
               -->
               <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-              <input type="checkbox" id="rememberUserName" name="rememberUserName" [(ngModel)]="model.rememberUserName" #password="ngModel" />
-              <label for="rememberUserName">{{'label.rememberUserName' | translate}}</label>
+                <input type="checkbox" id="rememberUserName" name="rememberUserName" [(ngModel)]="model.rememberUserName"
+                       #password="ngModel"/>
+                <label for="rememberUserName">{{'label.rememberUserName' | translate}}</label>
               </div>
               <div>
                 <a [routerLink]="['/register']" routerLinkActive="active">{{'nav.register' | translate}}</a>
@@ -70,8 +73,8 @@ export class LoginComponent implements OnInit {
     rememberUserName: false,
   };
   loading = false;
-  error = '';
-  lastUserName = "lastUserName";
+  error = false;
+  lastUserName = 'lastUserName';
 
   constructor(
       private service : LoginService,
@@ -86,16 +89,17 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
+    this.error = false;
     this.service.login(this.model.username, this.model.password, false)
         .subscribe(
             isLoggedIn => {
-          if (isLoggedIn) {
-            //On success, save username
-            this.setLastUserName(this.model.rememberUserName ? this.model.username : undefined);
-            //redirect if needed
-              this.route.queryParamMap.pipe(
-                  map(params => params.get('redirectUrl') || '')
-              ).subscribe(p => {
+              if (isLoggedIn) {
+                //On success, save username
+                this.setLastUserName(this.model.rememberUserName ? this.model.username : undefined);
+                //redirect if needed
+                this.route.queryParamMap.pipe(
+                    map(params => params.get('redirectUrl') || '')
+                ).subscribe(p => {
               let url = p ? [p] : ['/'];
               this.router.navigate(url);
             });
@@ -110,7 +114,7 @@ export class LoginComponent implements OnInit {
   }
 
   private handleLoginError() {
-    this.error = 'Username or password is incorrect';
+    this.error = true;
     this.loading = false;
   }
 
