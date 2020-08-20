@@ -102,7 +102,7 @@ export class ActivateAccountFormComponent implements OnInit {
                 },
                 error => {
                     if (error.status == 412) {
-                        this.globalError = this._trans.instant("error.account.activation.not.sent")
+                        this.globalError = this._trans.instant('text.error.account.activation.not.sent')
                     } else {
                         this.globalError = this._errorHandler.handle(error);
                     }
