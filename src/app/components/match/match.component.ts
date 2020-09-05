@@ -61,24 +61,29 @@ import {MatchDTO, MatchesRestControllerService, MatchPollDTO} from '../../ws/soc
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-12 col-sm-12">
-                      <div class="row text-center visible-sm visible-xs">
-                          <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}</h5>
-                      </div>
-                      <div class="text-center">
-                          <div class="btn-group">
-                              <button *ngIf="match.hasDoodle" type="button" class="btn btn-sm" aria-label="Doodle"
-                                      [routerLink]="['/doodles', match.id]"  title="{{'tooltip.matches.doodle' | translate}}">
-                                  <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                              </button>
-                              <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map" (click)="showMap = !showMap;showDetails = false;"  title="{{'tooltip.matches.location' | translate}}">
-                                  <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-                              </button>
-                              <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match" [routerLink]="['/matches/edit', match.id]"  title="{{'tooltip.matches.edit' | translate}}">
-                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                              </button>
-                              <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match" (click)="showDelete=true"  title="{{'tooltip.matches.delete' | translate}}">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                              </button>
+                        <div class="row text-center visible-sm visible-xs">
+                            <h5><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;{{match?.date}} - {{match?.hour}}
+                            </h5>
+                        </div>
+                        <div class="text-center">
+                            <div class="btn-group">
+                                <button *ngIf="match.hasDoodle" type="button" class="btn btn-sm" aria-label="Doodle"
+                                        [routerLink]="['/doodles', match.id]" title="{{'tooltip.matches.doodle' | translate}}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                </button>
+                                <button *ngIf="match.address?.googleLink" type="button" class="btn btn-sm" aria-label="Map"
+                                        (click)="showMap = !showMap;showDetails = false;"
+                                        title="{{'tooltip.matches.location' | translate}}">
+                                    <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-warning" aria-label="Edit match"
+                                        [routerLink]="['/matches/edit', match.id]" title="{{'tooltip.matches.edit' | translate}}">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" *ngIf="isAdmin()" class="btn btn-sm btn-danger" aria-label="Delete match"
+                                        (click)="showDelete=true" title="{{'tooltip.matches.delete' | translate}}">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
                               </div>
                          </div>
                          <div *ngIf="showDelete" class="m-t-1">
