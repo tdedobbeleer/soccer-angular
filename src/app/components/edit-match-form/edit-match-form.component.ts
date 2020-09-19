@@ -158,7 +158,7 @@ export class EditMatchFormComponent implements OnInit {
 
     @Input() matchId?: any;
 
-    defaultTeamId: number = environment.defaultTeamId;
+    defaultTeamName: string = environment.defaultTeamName;
 
     matchForm: FormGroup;
 
@@ -282,9 +282,9 @@ export class EditMatchFormComponent implements OnInit {
     };
 
     onGoalsChange(team: TeamDTO, nrg: any) {
-        if (team.id == this.defaultTeamId && nrg !== '') {
+        if (team.name === this.defaultTeamName && nrg !== '') {
             let nrOfGoals = this.goals.length;
-            if (nrg !== null && nrg != undefined) {
+            if (nrg !== null && nrg !== undefined) {
                 if (nrOfGoals > nrg) {
                     const removeTotal = nrOfGoals - nrg;
                     let indexToRemove = nrOfGoals - 1;
