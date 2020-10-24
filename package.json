@@ -11,8 +11,8 @@
     "e2e": "protractor"
   },
   "engines": {
-    "node": "6.9.2",
-    "npm": "10.16.0"
+    "node": "v8-lts",
+    "npm": "latest"
   },
   "private": true,
   "dependencies": {
@@ -32,17 +32,17 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@ngx-share/core": "^7.1.2",
     "@types/file-saver": "^2.0.1",
-    "angular-datatables": "^7.0.0",
+    "angular-datatables": "^8.1.0",
     "angular2-image-upload": "^1.0.0-rc.0",
     "angular2-ladda": "^2.0.1",
     "angular2-recaptcha": "1.1.0",
-    "core-js": "^2.6.9",
+    "core-js": "^3.6.5",
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
     "express": "^4.17.1",
     "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "moment": "^2.24.0",
     "ngx-bootstrap": "^4.2.0",
     "rxjs": "^6.5.2",
