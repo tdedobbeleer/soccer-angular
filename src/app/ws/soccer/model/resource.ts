@@ -9,9 +9,18 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {InputStream} from './inputStream';
+import {URI} from './uRI';
+import {URL} from './uRL';
 
 
-export interface SeasonDTO {
+export interface Resource {
     description?: string;
-    id?: string;
+    file?: any;
+    filename?: string;
+    inputStream?: InputStream;
+    open?: boolean;
+    readable?: boolean;
+    uri?: URI;
+    url?: URL;
 }

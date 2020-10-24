@@ -58,15 +58,15 @@ export class NewsRestControllerService {
 
     /**
      * Delete news
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteNews(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public deleteNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public deleteNews(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteNews(id: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public deleteNews(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteNews(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public deleteNews(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteNews.');
         }
@@ -74,8 +74,8 @@ export class NewsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -84,7 +84,7 @@ export class NewsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -102,25 +102,38 @@ export class NewsRestControllerService {
     }
 
     /**
-     * Get news
-     * 
-     * @param id id
+     * Get latest news
+     *
+     * @param page page
+     * @param searchTerm searchTerm
+     * @param size size
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getNews(id: number, observe?: 'body', reportProgress?: boolean): Observable<NewsDTO>;
-    public getNews(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewsDTO>>;
-    public getNews(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewsDTO>>;
-    public getNews(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getNews.');
+    public getLatestNews(page: number, searchTerm?: string, size?: number, observe?: 'body', reportProgress?: boolean): Observable<PageDTONewsDTO>;
+    public getLatestNews(page: number, searchTerm?: string, size?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PageDTONewsDTO>>;
+    public getLatestNews(page: number, searchTerm?: string, size?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PageDTONewsDTO>>;
+    public getLatestNews(page: number, searchTerm?: string, size?: number, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+        if (page === null || page === undefined) {
+            throw new Error('Required parameter page was null or undefined when calling getLatestNews.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (page !== undefined) {
+            queryParameters = queryParameters.set('page', <any>page);
+        }
+        if (searchTerm !== undefined) {
+            queryParameters = queryParameters.set('searchTerm', <any>searchTerm);
+        }
+        if (size !== undefined) {
+            queryParameters = queryParameters.set('size', <any>size);
         }
 
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -129,7 +142,52 @@ export class NewsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [];
+
+        return this.httpClient.get<PageDTONewsDTO>(`${this.basePath}/api/v1/news/latest`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get news
+     *
+     * @param id id
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getNews(id: string, observe?: 'body', reportProgress?: boolean): Observable<NewsDTO>;
+    public getNews(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<NewsDTO>>;
+    public getNews(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<NewsDTO>>;
+    public getNews(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getNews.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (token) required
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header

@@ -111,15 +111,15 @@ export class MatchesRestControllerService {
 
     /**
      * Delete match
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public deleteMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public deleteMatch(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteMatch(id: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public deleteMatch(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteMatch(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public deleteMatch(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteMatch.');
         }
@@ -127,8 +127,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -137,7 +137,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -156,15 +156,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches.');
         }
@@ -172,8 +172,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -182,7 +182,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -201,15 +201,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches1(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches1(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches1(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches1(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches1(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches1.');
         }
@@ -217,8 +217,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -227,7 +227,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -247,15 +247,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches2(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches2(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches2(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches2(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches2(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches2.');
         }
@@ -263,8 +263,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -273,7 +273,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -294,15 +294,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches3(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches3(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches3(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches3(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches3(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches3(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches3(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches3(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches3.');
         }
@@ -310,8 +310,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -320,7 +320,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -341,15 +341,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches4(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches4(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches4(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches4(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches4(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches4(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches4(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches4(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches4.');
         }
@@ -357,8 +357,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -367,7 +367,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -388,15 +388,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches5(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches5(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches5(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches5(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches5(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches5(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches5(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches5(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches5.');
         }
@@ -404,8 +404,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -414,7 +414,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -433,15 +433,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatches6(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatches6(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatches6(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatches6(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatches6(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatches6(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatches6(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatches6(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatches6.');
         }
@@ -449,8 +449,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -459,7 +459,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -479,15 +479,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar.');
         }
@@ -495,8 +495,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -505,7 +505,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -524,15 +524,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar1(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar1(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar1(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar1(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar1(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar1.');
         }
@@ -540,8 +540,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -550,7 +550,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -570,15 +570,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar2(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar2(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar2(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar2(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar2(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar2.');
         }
@@ -586,8 +586,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -596,7 +596,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -617,15 +617,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar3(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar3(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar3(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar3(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar3(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar3(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar3(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar3(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar3.');
         }
@@ -633,8 +633,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -643,7 +643,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -664,15 +664,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar4(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar4(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar4(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar4(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar4(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar4(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar4(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar4(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar4.');
         }
@@ -680,8 +680,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -690,7 +690,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -711,15 +711,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar5(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar5(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar5(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar5(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar5(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar5(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar5(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar5(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar5.');
         }
@@ -727,8 +727,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -737,7 +737,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -756,15 +756,15 @@ export class MatchesRestControllerService {
 
     /**
      * Export matches calendar for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportMatchesCalendar6(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportMatchesCalendar6(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportMatchesCalendar6(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportMatchesCalendar6(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportMatchesCalendar6(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportMatchesCalendar6(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportMatchesCalendar6(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportMatchesCalendar6(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportMatchesCalendar6.');
         }
@@ -772,8 +772,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -782,7 +782,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -802,15 +802,15 @@ export class MatchesRestControllerService {
 
     /**
      * Get match
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMatch(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
-    public getMatch(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
-    public getMatch(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
-    public getMatch(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getMatch(id: string, observe?: 'body', reportProgress?: boolean): Observable<MatchDTO>;
+    public getMatch(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDTO>>;
+    public getMatch(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDTO>>;
+    public getMatch(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getMatch.');
         }
@@ -818,8 +818,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -828,7 +828,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -888,15 +888,15 @@ export class MatchesRestControllerService {
 
     /**
      * Get poll for match
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public matchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-    public matchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-    public matchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-    public matchPoll(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public matchPoll(id: string, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
+    public matchPoll(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
+    public matchPoll(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
+    public matchPoll(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchPoll.');
         }
@@ -904,8 +904,8 @@ export class MatchesRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -914,7 +914,7 @@ export class MatchesRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -933,28 +933,28 @@ export class MatchesRestControllerService {
 
     /**
      * Get matches for season
-     * 
+     *
      * @param id id
-     * @param iSO3Country 
-     * @param iSO3Language 
-     * @param country 
-     * @param displayCountry 
-     * @param displayLanguage 
-     * @param displayName 
-     * @param displayScript 
-     * @param displayVariant 
-     * @param language 
-     * @param script 
-     * @param unicodeLocaleAttributes 
-     * @param unicodeLocaleKeys 
-     * @param variant 
+     * @param iSO3Country
+     * @param iSO3Language
+     * @param country
+     * @param displayCountry
+     * @param displayLanguage
+     * @param displayName
+     * @param displayScript
+     * @param displayVariant
+     * @param language
+     * @param script
+     * @param unicodeLocaleAttributes
+     * @param unicodeLocaleKeys
+     * @param variant
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<MatchDTO>>;
-    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
-    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
-    public matchesForSeason(id: number, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public matchesForSeason(id: string, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'body', reportProgress?: boolean): Observable<Array<MatchDTO>>;
+    public matchesForSeason(id: string, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<MatchDTO>>>;
+    public matchesForSeason(id: string, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<MatchDTO>>>;
+    public matchesForSeason(id: string, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchesForSeason.');
         }

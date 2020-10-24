@@ -14,6 +14,6 @@ import {AddressDTO} from './addressDTO';
 
 export interface TeamDTO {
     address?: AddressDTO;
-    id?: number;
+    id?: string;
     name?: string;
 }

@@ -98,15 +98,15 @@ export class AccountProfileRestControllerService {
 
     /**
      * Get Account profile
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProfile(id: number, observe?: 'body', reportProgress?: boolean): Observable<ProfileDTO>;
-    public getProfile(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfileDTO>>;
-    public getProfile(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfileDTO>>;
-    public getProfile(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getProfile(id: string, observe?: 'body', reportProgress?: boolean): Observable<ProfileDTO>;
+    public getProfile(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProfileDTO>>;
+    public getProfile(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProfileDTO>>;
+    public getProfile(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getProfile.');
         }
@@ -114,8 +114,8 @@ export class AccountProfileRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -124,7 +124,7 @@ export class AccountProfileRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header

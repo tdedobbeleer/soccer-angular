@@ -120,6 +120,8 @@ export const LANG_NL_TRANS = {
     'text.doodle.reserve.info': '<small><b>Opgelet!</b> Je bent standby voor deze match.</small>',
     'text.messages.empty': 'Geen berichten gevonden.',
     'text.message.postedBy': 'Gepost door',
+    'text.messages.recent.empty': 'Geen recente berichten gevonden.',
+    'text.messages.older': 'Alle berichten weergeven',
     'text.statistics.empty': 'Geen statistieken gevonden.',
     'title.faq': 'Vaak gestelde vragen',
     'text.faq': 'Wat is dit allemaal?',
@@ -127,14 +129,14 @@ export const LANG_NL_TRANS = {
     'text.faq1': 'Eerst en vooral: welkom! Om toegang te krijgen tot de afgeschermde delen van de website, moet je <a href="/register">registreren</a>. Na de registratie kan de beheerder je account activeren. Daarna kan je inloggen en heb je toegang.',
     'title.faq2': 'Ben ik automatisch verzekerd wanneer ik mij heb ingeschreven via deze website?',
     'text.faq2': 'Neen! Je moet je <a' +
-    ' href="https://www.svk-oh.be/lid-worden/">inschrijven via de SVK website</a> om een volwaardig lid te worden. Indien je vervolgens elk jaar je' +
-    ' lidgeld op tijd betaald, ben je verzekerd door SVK.',
+        ' href="https://www.svk-oh.be/lid-worden/">inschrijven via de SVK website</a> om een volwaardig lid te worden. Indien je vervolgens elk jaar je' +
+        ' lidgeld op tijd betaald, ben je verzekerd door SVK.',
     'title.faq3': 'Ik ben mijn wachtwoord vergeten, wat nu?',
     'text.faq3': 'Vooral niet panikeren! Je kan dit rechtzetten door een wachtwoord reset code <a' +
-    ' href="/password/recovery/request">aan te vragen</a>. Vul je email adres in waarmee je op de website geregistreerd bent en je krijgt een email met een code (let wel op: deze is slechts een dag geldig!) om je wachtwoord opnieuw in te stellen.<br/>Als je je emailadres niet meer weet: stuur dan een mailtje naar de beheerder.',
+        ' href="/password/recovery/request">aan te vragen</a>. Vul je email adres in waarmee je op de website geregistreerd bent en je krijgt een email met een code (let wel op: deze is slechts een dag geldig!) om je wachtwoord opnieuw in te stellen.<br/>Als je je emailadres niet meer weet: stuur dan een mailtje naar de beheerder.',
     'title.faq4': 'Wat is het verschil tussen de doodle en de traingsingsdoodle?',
     'text.faq4': 'De trainingsdoodle is de doodle die gebruikt wordt voor... trainingen. De reden hiervoor is dat' +
-    ' alleen leden de doodle op deze website mogen aanpassen! Op de trainingsdoodle kan <i>iedereen</i> zich inschrijven: handig voor spelers die willen aansluiten!',
+        ' alleen leden de doodle op deze website mogen aanpassen! Op de trainingsdoodle kan <i>iedereen</i> zich inschrijven: handig voor spelers die willen aansluiten!',
     'title.faq5': 'Wat als ik nog andere vragen heb?',
     'text.faq5': 'Dan mag je zeker de beheerder emailen!',
     'hello world': 'hello world',

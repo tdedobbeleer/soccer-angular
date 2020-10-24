@@ -15,7 +15,7 @@ import {PresenceDTO} from './presenceDTO';
 export interface DoodleDTO {
     created?: Date;
     currentPresence?: PresenceDTO;
-    id?: number;
+    id?: string;
     modified?: Date;
     presences?: Array<PresenceDTO>;
     reserves?: Array<PresenceDTO>;

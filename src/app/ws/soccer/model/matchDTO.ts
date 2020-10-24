@@ -31,7 +31,7 @@ export interface MatchDTO {
      */
     date?: string;
     /**
-     * Goals of this match, orederd
+     * Goals of this match, ordered
      */
     goals?: Array<GoalDTO>;
     /**
@@ -50,11 +50,14 @@ export interface MatchDTO {
      * Goals scored by hometeam
      */
     htGoals?: number;
-    id?: number;
+    id?: string;
     /**
      * Motm poll
      */
     poll?: MatchPollDTO;
+    /**
+     * Match season
+     */
     season?: SeasonDTO;
     /**
      * Match status

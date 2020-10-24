@@ -57,15 +57,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics.');
         }
@@ -73,8 +73,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -83,7 +83,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -102,15 +102,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics1(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics1(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics1(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics1(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics1(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics1(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics1(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics1(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics1.');
         }
@@ -118,8 +118,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -128,7 +128,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -148,15 +148,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics2(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics2(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics2(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics2(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics2(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics2(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics2(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics2(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics2.');
         }
@@ -164,8 +164,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -174,7 +174,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -195,15 +195,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics3(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics3(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics3(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics3(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics3(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics3(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics3(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics3(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics3.');
         }
@@ -211,8 +211,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -221,7 +221,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -242,15 +242,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics4(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics4(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics4(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics4(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics4(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics4(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics4(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics4(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics4.');
         }
@@ -258,8 +258,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -268,7 +268,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -289,15 +289,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics5(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics5(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics5(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics5(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics5(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics5(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics5(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics5(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics5.');
         }
@@ -305,8 +305,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -315,7 +315,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -334,15 +334,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Export statistics for season
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public exportStatistics6(id: number, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
-    public exportStatistics6(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
-    public exportStatistics6(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
-    public exportStatistics6(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public exportStatistics6(id: string, observe?: 'body', reportProgress?: boolean): Observable<ByteResponseDTO>;
+    public exportStatistics6(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ByteResponseDTO>>;
+    public exportStatistics6(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ByteResponseDTO>>;
+    public exportStatistics6(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling exportStatistics6.');
         }
@@ -350,8 +350,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -360,7 +360,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -380,15 +380,15 @@ export class StatisticsRestControllerService {
 
     /**
      * Get statictics
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getStatictics(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountStatisticDTO>>;
-    public getStatictics(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
-    public getStatictics(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
-    public getStatictics(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getStatictics(id: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountStatisticDTO>>;
+    public getStatictics(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountStatisticDTO>>>;
+    public getStatictics(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountStatisticDTO>>>;
+    public getStatictics(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getStatictics.');
         }
@@ -396,8 +396,8 @@ export class StatisticsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -406,7 +406,7 @@ export class StatisticsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header

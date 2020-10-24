@@ -16,9 +16,10 @@ import {MessageComponent} from '../components/message/message.component';
 import {AlertModule} from 'ngx-bootstrap';
 import {LaddaModule} from 'angular2-ladda';
 import {ShareModule} from '@ngx-share/core';
+import {RecentMessagesComponent} from '../components/recentMessages/recent-messages.component';
 
 const routes: Routes = [
-    {path: '', component: MessagesComponent},
+    {path: '', component: RecentMessagesComponent},
     {path: 'messages', component: MessagesComponent},
     {path: 'messages/create', component: CreateMessageComponent, canActivate: [AuthGuardAdminService]},
     {path: 'messages/:id', component: MessageItemComponent},
@@ -43,6 +44,7 @@ const routes: Routes = [
     declarations: [
         MessagesComponent,
         MessageComponent,
+        RecentMessagesComponent,
         EditMessageComponent,
         EditMessageFormComponent,
         TinymceComponent,

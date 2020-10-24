@@ -9,9 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {AccountDTO} from './accountDTO';
 
 
-export interface SeasonDTO {
-    description?: string;
-    id?: string;
+export interface MultipleChoiceVoteDTOuuid {
+    account?: AccountDTO;
+    answer?: string;
 }

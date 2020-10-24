@@ -109,15 +109,15 @@ export class TeamsRestControllerService {
 
     /**
      * Delete a team
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteTeam(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public deleteTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public deleteTeam(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteTeam(id: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public deleteTeam(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteTeam(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public deleteTeam(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling deleteTeam.');
         }
@@ -125,8 +125,8 @@ export class TeamsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -135,7 +135,7 @@ export class TeamsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header
@@ -154,15 +154,15 @@ export class TeamsRestControllerService {
 
     /**
      * Get team by id
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getTeam(id: number, observe?: 'body', reportProgress?: boolean): Observable<TeamDTO>;
-    public getTeam(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
-    public getTeam(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
-    public getTeam(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getTeam(id: string, observe?: 'body', reportProgress?: boolean): Observable<TeamDTO>;
+    public getTeam(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TeamDTO>>;
+    public getTeam(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TeamDTO>>;
+    public getTeam(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getTeam.');
         }
@@ -170,8 +170,8 @@ export class TeamsRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -180,7 +180,7 @@ export class TeamsRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header

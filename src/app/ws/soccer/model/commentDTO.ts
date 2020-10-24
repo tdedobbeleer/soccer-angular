@@ -15,7 +15,7 @@ import {AccountDTO} from './accountDTO';
 export interface CommentDTO {
     content?: string;
     editable?: boolean;
-    id?: number;
+    id?: string;
     postDate?: string;
     postedBy?: AccountDTO;
 }

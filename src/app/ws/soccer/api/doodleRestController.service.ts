@@ -58,17 +58,17 @@ export class DoodleRestControllerService {
 
     /**
      * Change presence
-     * 
+     *
      * @param accountId accountId
      * @param id id
      * @param force force
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public changePresence(accountId: number, id: number, force?: boolean, observe?: 'body', reportProgress?: boolean): Observable<PresenceDTO>;
-    public changePresence(accountId: number, id: number, force?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PresenceDTO>>;
-    public changePresence(accountId: number, id: number, force?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PresenceDTO>>;
-    public changePresence(accountId: number, id: number, force?: boolean, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public changePresence(accountId: string, id: string, force?: boolean, observe?: 'body', reportProgress?: boolean): Observable<PresenceDTO>;
+    public changePresence(accountId: string, id: string, force?: boolean, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PresenceDTO>>;
+    public changePresence(accountId: string, id: string, force?: boolean, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PresenceDTO>>;
+    public changePresence(accountId: string, id: string, force?: boolean, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (accountId === null || accountId === undefined) {
             throw new Error('Required parameter accountId was null or undefined when calling changePresence.');
         }
@@ -116,15 +116,15 @@ export class DoodleRestControllerService {
 
     /**
      * Get matchdoodles
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public matchDoodle(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchDoodleDTO>;
-    public matchDoodle(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDoodleDTO>>;
-    public matchDoodle(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDoodleDTO>>;
-    public matchDoodle(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public matchDoodle(id: string, observe?: 'body', reportProgress?: boolean): Observable<MatchDoodleDTO>;
+    public matchDoodle(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchDoodleDTO>>;
+    public matchDoodle(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchDoodleDTO>>;
+    public matchDoodle(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchDoodle.');
         }
@@ -132,8 +132,8 @@ export class DoodleRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -142,7 +142,7 @@ export class DoodleRestControllerService {
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set("Accept", httpHeaderAcceptSelected);
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
         }
 
         // to determine the Content-Type header

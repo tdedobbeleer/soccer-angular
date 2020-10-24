@@ -12,7 +12,7 @@
 
 
 export interface PasswordDTO {
-    id?: number;
+    id?: string;
     newPassword?: string;
     oldPassword?: string;
 }
