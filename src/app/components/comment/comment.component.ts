@@ -34,7 +34,7 @@ import {CommentDTO, CommentsRestControllerService} from '../../ws/soccer';
 })
 export class CommentComponent implements OnInit {
     @Input() comment: CommentDTO;
-    @Input() messageId: number;
+    @Input() messageId: string;
 
     private showEditComment: boolean;
     private showBtns: boolean;

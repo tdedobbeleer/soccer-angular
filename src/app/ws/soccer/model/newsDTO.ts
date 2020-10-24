@@ -18,7 +18,7 @@ export interface NewsDTO {
     content?: string;
     editable?: boolean;
     header?: string;
-    id?: number;
+    id?: string;
     postDate?: string;
     postedBy?: AccountDTO;
     type?: NewsDTO.TypeEnum;

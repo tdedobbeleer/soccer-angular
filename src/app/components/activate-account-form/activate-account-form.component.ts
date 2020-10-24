@@ -42,7 +42,7 @@ import {AccountDTO, AccountRestControllerService} from '../../ws/soccer';
     styles: []
 })
 export class ActivateAccountFormComponent implements OnInit {
-    @Input() accountId: number;
+    @Input() accountId: string;
     account: AccountDTO;
     activateForm: FormGroup;
     globalError: string = "";

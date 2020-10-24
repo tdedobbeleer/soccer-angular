@@ -121,6 +121,8 @@ export const LANG_EN_TRANS = {
     'text.doodle.reserves': 'Players on standby',
     'text.doodle.reserve.info': '<small><b>Attention!</b> You\'re on standby.</small>',
     'text.messages.empty': 'No messages found.',
+    'text.messages.recent.empty': 'No recent messages found.',
+    'text.messages.older': 'Show all messages',
     'text.message.postedBy': 'Posted by',
     'text.statistics.empty': 'No statistics found.',
     'title.faq': 'Frequently asked questions',
@@ -129,8 +131,8 @@ export const LANG_EN_TRANS = {
     'text.faq1': 'First of all: welcome! To gain access to the restricted pages of the website, you have to <a href="/register">register</a>. After registration, the administrator can activate your account and give you access. When this is done, you can log in and you will have access.',
     'title.faq2': 'Am I automatically insured when I registered on this website?',
     'text.faq2': 'Nope! You need to <a' +
-    ' href="https://www.svk-oh.be/lid-worden/" target="_blank">register on the SVK website</a> to become a full' +
-    ' member. Pay your member fee every year on time and you will be insured by SVK.',
+        ' href="https://www.svk-oh.be/lid-worden/" target="_blank">register on the SVK website</a> to become a full' +
+        ' member. Pay your member fee every year on time and you will be insured by SVK.',
     'title.faq3': 'I forgot my password, what should I do?',
     'text.faq3': 'Do not panic! You can reset your password by <a href="/password/recovery/request">requesting a' +
     ' password reset code</a>. Fill in your email address you used to register and you will receive an email with a code (this code is valid for 1 day!) to reset your password.<br/>If you have forgotten your email address: send an email to the administrator.',

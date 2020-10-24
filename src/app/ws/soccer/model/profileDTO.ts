@@ -19,7 +19,7 @@ export interface ProfileDTO {
     address?: AddressDTO;
     description?: string;
     doodleNotifications?: boolean;
-    id?: number;
+    id?: string;
     image?: ImageDTO;
     mobilePhone?: string;
     newsNotifications?: boolean;

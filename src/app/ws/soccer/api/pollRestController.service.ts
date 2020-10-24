@@ -20,6 +20,7 @@ import {Observable} from 'rxjs/Observable';
 import {AccountDTO} from '../model/accountDTO';
 import {MatchPollDTO} from '../model/matchPollDTO';
 import {MultipleChoiceVoteDTOlong} from '../model/multipleChoiceVoteDTOlong';
+import {MultipleChoiceVoteDTOuuid} from '../model/multipleChoiceVoteDTOuuid';
 import {PageDTOMatchPollDTO} from '../model/pageDTOMatchPollDTO';
 import {ResponseEntity} from '../model/responseEntity';
 
@@ -61,15 +62,15 @@ export class PollRestControllerService {
 
     /**
      * Get match poll by id
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMatchPollById(id: number, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
-    public getMatchPollById(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
-    public getMatchPollById(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
-    public getMatchPollById(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getMatchPollById(id: string, observe?: 'body', reportProgress?: boolean): Observable<MatchPollDTO>;
+    public getMatchPollById(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MatchPollDTO>>;
+    public getMatchPollById(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MatchPollDTO>>;
+    public getMatchPollById(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling getMatchPollById.');
         }
@@ -77,8 +78,8 @@ export class PollRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -165,16 +166,16 @@ export class PollRestControllerService {
 
     /**
      * Vote
-     * 
+     *
      * @param id id
      * @param vote vote
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'body', reportProgress?: boolean): Observable<MultipleChoiceVoteDTOlong>;
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MultipleChoiceVoteDTOlong>>;
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MultipleChoiceVoteDTOlong>>;
-    public matchPollVote(id: number, vote: MultipleChoiceVoteDTOlong, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public matchPollVote(id: string, vote: MultipleChoiceVoteDTOuuid, observe?: 'body', reportProgress?: boolean): Observable<MultipleChoiceVoteDTOlong>;
+    public matchPollVote(id: string, vote: MultipleChoiceVoteDTOuuid, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<MultipleChoiceVoteDTOlong>>;
+    public matchPollVote(id: string, vote: MultipleChoiceVoteDTOuuid, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<MultipleChoiceVoteDTOlong>>;
+    public matchPollVote(id: string, vote: MultipleChoiceVoteDTOuuid, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling matchPollVote.');
         }
@@ -220,15 +221,15 @@ export class PollRestControllerService {
 
     /**
      * Refresh match poll
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public refreshMatchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountDTO>>;
-    public refreshMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
-    public refreshMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
-    public refreshMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public refreshMatchPoll(id: string, observe?: 'body', reportProgress?: boolean): Observable<Array<AccountDTO>>;
+    public refreshMatchPoll(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<AccountDTO>>>;
+    public refreshMatchPoll(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<AccountDTO>>>;
+    public refreshMatchPoll(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling refreshMatchPoll.');
         }
@@ -236,8 +237,8 @@ export class PollRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header
@@ -267,15 +268,15 @@ export class PollRestControllerService {
 
     /**
      * Reset match poll
-     * 
+     *
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public resetMatchPoll(id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public resetMatchPoll(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public resetMatchPoll(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public resetMatchPoll(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public resetMatchPoll(id: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public resetMatchPoll(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public resetMatchPoll(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public resetMatchPoll(id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling resetMatchPoll.');
         }
@@ -283,8 +284,8 @@ export class PollRestControllerService {
         let headers = this.defaultHeaders;
 
         // authentication (token) required
-        if (this.configuration.apiKeys["X-Auth-Token"]) {
-            headers = headers.set('X-Auth-Token', this.configuration.apiKeys["X-Auth-Token"]);
+        if (this.configuration.apiKeys['X-Auth-Token']) {
+            headers = headers.set('X-Auth-Token', this.configuration.apiKeys['X-Auth-Token']);
         }
 
         // to determine the Accept header

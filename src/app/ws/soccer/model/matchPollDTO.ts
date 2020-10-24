@@ -14,10 +14,10 @@ import {VotesDTO} from './votesDTO';
 
 
 export interface MatchPollDTO {
-    id?: number;
+    id?: string;
     matchDate?: string;
     matchDescription?: string;
-    matchId?: number;
+    matchId?: string;
     options?: Array<AccountDTO>;
     status?: string;
     totalVotes?: number;

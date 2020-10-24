@@ -38,7 +38,7 @@ import {NewsDTO, NewsRestControllerService} from '../../ws/soccer';
 })
 export class EditMessageFormComponent implements OnInit {
 
-    @Input() messageId: number;
+    @Input() messageId: string;
 
     contentUpdated: EventEmitter<string> = new EventEmitter();
 

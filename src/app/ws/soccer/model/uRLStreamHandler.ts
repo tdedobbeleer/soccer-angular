@@ -11,7 +11,5 @@
  */
 
 
-export interface SeasonDTO {
-    description?: string;
-    id?: string;
+export interface URLStreamHandler {
 }

@@ -17,7 +17,7 @@ export interface MatchDoodleDTO {
     description?: string;
     doodle?: DoodleDTO;
     hour?: string;
-    id?: number;
+    id?: string;
     matchStatus?: MatchDoodleDTO.MatchStatusEnum;
 }
 export namespace MatchDoodleDTO {

@@ -93,7 +93,7 @@ import 'rxjs/add/operator/map';
   styles: []
 })
 export class EditTeamFormComponent implements OnInit {
-    @Input() teamId : number;
+    @Input() teamId: string;
     globalError = '';
     teamForm: FormGroup;
     showMap: boolean = false;

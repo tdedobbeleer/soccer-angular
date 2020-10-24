@@ -16,6 +16,6 @@ export interface AddressDTO {
     city?: string;
     fullAddress?: boolean;
     googleLink?: string;
-    id?: number;
+    id?: string;
     postalCode?: number;
 }

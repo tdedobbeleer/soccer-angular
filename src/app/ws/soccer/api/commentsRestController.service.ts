@@ -57,16 +57,16 @@ export class CommentsRestControllerService {
 
     /**
      * Get news
-     * 
+     *
      * @param commentId commentId
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteComment(commentId: number, id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public deleteComment(commentId: number, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public deleteComment(commentId: number, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public deleteComment(commentId: number, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteComment(commentId: string, id: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public deleteComment(commentId: string, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public deleteComment(commentId: string, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public deleteComment(commentId: string, id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (commentId === null || commentId === undefined) {
             throw new Error('Required parameter commentId was null or undefined when calling deleteComment.');
         }
@@ -106,16 +106,16 @@ export class CommentsRestControllerService {
 
     /**
      * Get news
-     * 
+     *
      * @param commentDTO commentDTO
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public editComment(commentDTO: CommentDTO, id: number, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public editComment(commentDTO: CommentDTO, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public editComment(commentDTO: CommentDTO, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public editComment(commentDTO: CommentDTO, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public editComment(commentDTO: CommentDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public editComment(commentDTO: CommentDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public editComment(commentDTO: CommentDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public editComment(commentDTO: CommentDTO, id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (commentDTO === null || commentDTO === undefined) {
             throw new Error('Required parameter commentDTO was null or undefined when calling editComment.');
         }
@@ -161,16 +161,16 @@ export class CommentsRestControllerService {
 
     /**
      * Post news
-     * 
+     *
      * @param commentDTO commentDTO
      * @param id id
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postComment(commentDTO: CommentDTO, id: number, observe?: 'body', reportProgress?: boolean): Observable<CommentDTO>;
-    public postComment(commentDTO: CommentDTO, id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
-    public postComment(commentDTO: CommentDTO, id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
-    public postComment(commentDTO: CommentDTO, id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public postComment(commentDTO: CommentDTO, id: string, observe?: 'body', reportProgress?: boolean): Observable<CommentDTO>;
+    public postComment(commentDTO: CommentDTO, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentDTO>>;
+    public postComment(commentDTO: CommentDTO, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentDTO>>;
+    public postComment(commentDTO: CommentDTO, id: string, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (commentDTO === null || commentDTO === undefined) {
             throw new Error('Required parameter commentDTO was null or undefined when calling postComment.');
         }
