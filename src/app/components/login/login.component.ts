@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {isNullOrUndefined} from 'util';
 import {map} from 'rxjs/operators';
+import {WindowRef} from "../../services/window-ref";
 
 @Component({
   selector: 'app-login',
@@ -75,8 +76,10 @@ export class LoginComponent implements OnInit {
   loading = false;
   error = false;
   lastUserName = 'lastUserName';
+  storeCreds = false;
 
   constructor(
+      private winRef: WindowRef,
       private service : LoginService,
       private route: ActivatedRoute,
       private router: Router
@@ -85,6 +88,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.model.username = this.getLastUserName();
     this.model.rememberUserName = !isNullOrUndefined(this.model.username);
+    if (this.winRef.nativeWindow.PasswordCredential || this.winRef.nativeWindow.FederatedCredential) {
+      this.storeCreds = true;
+      this.winRef.nativeWindow.navigator.credentials.get();
+    }
   }
 
   login() {
@@ -94,6 +101,20 @@ export class LoginComponent implements OnInit {
         .subscribe(
             isLoggedIn => {
               if (isLoggedIn) {
+                //store using browsers creds api
+                if (this.storeCreds) {
+
+                  let credential = new PasswordCredential({
+                    id: this.model.username, // Username/ID
+                    password: this.model.password // Password
+                  });
+
+                  this.winRef.nativeWindow.navigator.credentials.store(credential).then(() => {
+                    console.info("Credential stored in the user agent's credential manager.");
+                  }, (err) => {
+                    console.error("Error while storing the credential: ", err);
+                  });
+                }
                 //On success, save username
                 this.setLastUserName(this.model.rememberUserName ? this.model.username : undefined);
                 //redirect if needed

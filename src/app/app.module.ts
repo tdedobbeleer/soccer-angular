@@ -18,6 +18,7 @@ import {LaddaModule} from 'angular2-ladda';
 import {ApiModule, Configuration} from './ws/soccer';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {WindowRef} from "./services/window-ref";
 
 const appRoutes: Routes = [
     {path: '', loadChildren: () => import('./modules/message.module').then(m => m.MessageModule)},
@@ -46,6 +47,7 @@ export function apiConfig() {
 }
 
 @NgModule({
+    providers: [ WindowRef ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
