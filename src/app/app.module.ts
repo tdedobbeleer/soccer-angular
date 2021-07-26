@@ -65,7 +65,7 @@ export function apiConfig() {
         TabsModule.forRoot(),
         AccordionModule.forRoot(),
         SharedModule.forRoot(),
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
         ApiModule.forRoot(apiConfig),
         LaddaModule.forRoot({
             style: "expand-right",

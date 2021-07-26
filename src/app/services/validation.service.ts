@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {TranslationService} from "./translation.service";
 import {FormGroup} from "@angular/forms";
-import {isObject} from "util";
+import {Util} from "../classes/util";
 
 @Injectable()
 export class ValidationService {
@@ -18,7 +18,7 @@ export class ValidationService {
             const parsedfield = formErrors[field];
             const control = form.get(field);
 
-            if (isObject(parsedfield)) {
+            if (Util.isObject(parsedfield)) {
                 this.onValueChanged(form.get(field), parsedfield);
             } else {
                 // clear previous error message (if any)

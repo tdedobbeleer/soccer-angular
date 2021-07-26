@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
-import {isNullOrUndefined} from 'util';
 import {map} from 'rxjs/operators';
 import {WindowRef} from "../../services/window-ref";
+import {Util} from "../../classes/util";
 
 @Component({
   selector: 'app-login',
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.model.username = this.getLastUserName();
-    this.model.rememberUserName = !isNullOrUndefined(this.model.username);
+    this.model.rememberUserName = !Util.isNullOrUndefined(this.model.username);
   }
 
   login() {
@@ -121,7 +121,7 @@ export class LoginComponent implements OnInit {
   }
 
   setLastUserName(username) {
-    if (!isNullOrUndefined(username)) {
+    if (!Util.isNullOrUndefined(username)) {
       localStorage.setItem(this.lastUserName, username);
     }
     else {

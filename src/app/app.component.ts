@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {LoginService} from "./services/login.service";
 import {Router} from "@angular/router";
-import {isNullOrUndefined} from "util";
+import {Util} from "./classes/util";
 
 @Component({
     selector: 'app-root',
@@ -37,7 +37,7 @@ export class AppComponent {
     }
 
     private navigate(i) {
-        if (!isNullOrUndefined(this.nav[i])) {
+        if (!Util.isNullOrUndefined(this.nav[i])) {
             this._router.navigate([this.nav[i]]);
         }
     }

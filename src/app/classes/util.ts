@@ -2,6 +2,15 @@ import * as moment from "moment";
 
 export class Util {
 
+    static isObject(value : any) {
+        return value !== null && typeof value === 'object';
+    }
+    static isUndefined(value : any) {
+        return value === undefined;
+    }
+    static isNullOrUndefined(value : any) {
+        return value === null || value === undefined;
+    }
     static parseDate(date: Date): string {
         return moment(date).format('DD/MM/YYYY').toString();
     }

@@ -4,7 +4,6 @@ import {FocusOnErrorDirective} from '../../directives/focus-on-error.directive';
 import {FocusOnSuccessDirective} from '../../directives/focus-on-success.directive';
 import {ValidationService} from '../../services/validation.service';
 import {ErrorHandlerService} from '../../services/error-handler.service';
-import {isNullOrUndefined} from 'util';
 import {Util} from '../../classes/util';
 import {AddressDTO, TeamDTO, TeamsRestControllerService} from '../../ws/soccer';
 import {Observable} from 'rxjs/Observable';
@@ -153,7 +152,7 @@ export class EditTeamFormComponent implements OnInit {
                             id: t.id,
                             name: t.name,
                             selectedAddress: t.address,
-                            useGoogleLink: !isNullOrUndefined(t.address.googleLink)
+                            useGoogleLink: !Util.isNullOrUndefined(t.address.googleLink)
 
                         });
 

@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {TranslationService} from "../../services/translation.service";
 import {LoginService} from "../../services/login.service";
-import {isUndefined} from "util";
 import {SecUtil} from "../../classes/sec-util";
 import {Router} from "@angular/router";
 import {WindowRef} from "../../services/window-ref";
+import {Util} from "../../classes/util";
 
 @Component({
   selector: 'app-navbar',
@@ -102,7 +102,7 @@ export class NavbarComponent implements OnInit {
     this.user = SecUtil.getUser();
     SecUtil.userUpdated.subscribe(u => {
       this.user = u;
-      this.isLoggedIn = !isUndefined(u);
+      this.isLoggedIn = !Util.isUndefined(u);
     })
   }
 

@@ -1,11 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ErrorHandlerService} from '../../services/error-handler.service';
-import {isNullOrUndefined} from 'util';
 import {MatchDoodleDTO, MatchDTO, MatchesRestControllerService, SeasonDTO} from '../../ws/soccer';
 import {TabsetComponent} from 'ngx-bootstrap';
 import {SecUtil} from '../../classes/sec-util';
 import * as FileSaver from 'file-saver';
 import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
+import {Util} from "../../classes/util";
 
 @Component({
     selector: 'app-season',
@@ -78,7 +78,7 @@ export class SeasonComponent implements OnInit {
     }
 
     getMatches() {
-        if (isNullOrUndefined(this.matchesPlayed) || isNullOrUndefined(this.matchesToCome)) {
+        if (Util.isNullOrUndefined(this.matchesPlayed) || Util.isNullOrUndefined(this.matchesToCome)) {
             this.matchesToCome = [];
             this.matchesPlayed = [];
             this._matchesApi.matchesForSeason(this.season.id).subscribe(

@@ -2,15 +2,17 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ErrorHandlerService} from '../../services/error-handler.service';
 import {Router} from '@angular/router';
 import {SecUtil} from '../../classes/sec-util';
-import {isNullOrUndefined} from 'util';
 import {DoodleDTO, DoodleRestControllerService, MatchDoodleDTO, PresenceDTO} from '../../ws/soccer';
+import {Util} from "../../classes/util";
 
 @Component({
     selector: 'app-doodle',
     template: `
-        <div class="panel panel-default" *ngIf="matchDoodle"
-             [ngClass]="{'panel-warning': force, 'panel-danger': matchDoodle?.matchStatus == matchStatus.CANCELLED && !force }"
-             [ngClass]="{ }">
+        <div class="panel" *ngIf="matchDoodle"
+             [ngClass]="{
+             'panel-warning': force, 
+             'panel-danger': matchDoodle?.matchStatus == matchStatus.CANCELLED && !force,
+             'panel-default' : matchDoodle?.matchStatus !== matchStatus.CANCELLED && !force}">
             <div class="panel-heading"><span class="glyphicon glyphicon-calendar" aria-hidden="true">
         </span>&nbsp;{{matchDoodle.date}}&nbsp;-&nbsp;{{matchDoodle.hour}}
                 <span title="{{'tooltip.doodle.status.closed' | translate}}"
@@ -178,7 +180,7 @@ export class DoodleComponent implements OnInit {
 
     getPresenceClass(presence: PresenceDTO) {
         //console.log("Creating presence class");
-        if (!isNullOrUndefined(presence)) {
+        if (!Util.isNullOrUndefined(presence)) {
             switch (presence.type) {
                 case PresenceDTO.TypeEnum.NOTFILLEDIN:
                     return "glyphicon glyphicon-question-sign grey";
