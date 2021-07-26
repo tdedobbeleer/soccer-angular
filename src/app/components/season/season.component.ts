@@ -44,7 +44,7 @@ import MatchStatusEnum = MatchDoodleDTO.MatchStatusEnum;
 export class SeasonComponent implements OnInit {
     @Input() season: SeasonDTO;
     @Input() show: boolean;
-    @ViewChild('staticTabs', {static: false}) staticTabs: TabsetComponent;
+    @ViewChild('staticTabs') staticTabs: TabsetComponent;
 
     matchesPlayed: MatchDTO[];
     matchesToCome: MatchDTO[];

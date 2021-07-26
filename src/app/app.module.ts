@@ -12,7 +12,14 @@ import {PlayerListComponent} from './components/player-list/player-list.componen
 import {FaqComponent} from './components/faq/faq.component';
 import {SharedModule} from './modules/shared.module';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {AccordionModule, AlertModule, BsDropdownModule, CollapseModule, TabsModule} from 'ngx-bootstrap';
+import {
+    AccordionModule,
+    AlertModule,
+    BsDropdownModule,
+    CollapseModule,
+    TabsModule
+} from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {BrowserModule} from '@angular/platform-browser';
 import {LaddaModule} from 'angular2-ladda';
 import {ApiModule, Configuration} from './ws/soccer';
@@ -53,6 +60,7 @@ export function apiConfig() {
         BrowserAnimationsModule,
         AlertModule.forRoot(),
         BsDropdownModule.forRoot(),
+        BsDatepickerModule.forRoot(),
         CollapseModule.forRoot(),
         TabsModule.forRoot(),
         AccordionModule.forRoot(),

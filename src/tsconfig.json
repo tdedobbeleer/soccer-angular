@@ -15,7 +15,16 @@
     "sourceMap": true,
     "target": "es2015",
     "typeRoots": [
-      "../node_modules/@types",
+      "../node_modules/@types"
     ]
   }
+,
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts",
+    "typings.d.ts"
+  ]
 }

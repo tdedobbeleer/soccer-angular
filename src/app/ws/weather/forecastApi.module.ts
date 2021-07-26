@@ -20,7 +20,7 @@ export class ForecastApiModule {
         }
     }
 
-    public static forRoot(configurationFactory: () => ForecastApiConfiguration): ModuleWithProviders {
+    public static forRoot(configurationFactory: () => ForecastApiConfiguration): ModuleWithProviders<ForecastApiModule> {
         return {
             ngModule: ForecastApiModule,
             providers: [{provide: ForecastApiConfiguration, useFactory: configurationFactory}]

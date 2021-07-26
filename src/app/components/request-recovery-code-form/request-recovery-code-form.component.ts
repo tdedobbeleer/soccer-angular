@@ -70,7 +70,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
   isLoading: boolean = false;
 
   @ViewChild(FocusOnErrorDirective, {static: true}) errorFocus: FocusOnErrorDirective;
-  @ViewChild(ReCaptchaComponent, {static: false}) captcha: ReCaptchaComponent;
+  @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
 
     constructor(private _fb: FormBuilder, private _translationService: TranslationService, private _api: PasswordRecoveryRestControllerService, private _validationService: ValidationService, private _errorService: ErrorHandlerService) {
   }
