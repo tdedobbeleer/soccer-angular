@@ -2,14 +2,13 @@
   "compilerOptions": {
     "baseUrl": "",
     "declaration": false,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
       "es6",
       "dom"
     ],
     "mapRoot": "./",
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",
     "sourceMap": true,
@@ -18,4 +17,13 @@
       "../node_modules/@types"
     ]
   }
+,
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts",
+    "typings.d.ts"
+  ]
 }

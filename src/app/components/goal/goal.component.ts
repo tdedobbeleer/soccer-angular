@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {FormGroup} from "@angular/forms";
-import {isNullOrUndefined} from "util";
 import {AccountDTO} from "../../ws/soccer";
+import {Util} from "../../classes/util";
 
 @Component({
     selector: 'app-goal',
@@ -37,12 +37,12 @@ export class GoalsComponent implements OnInit {
     }
 
     isSelectedAssist(selected: any, player: any) {
-        if (isNullOrUndefined(selected)) return isNullOrUndefined(player);
+        if (Util.isNullOrUndefined(selected)) return Util.isNullOrUndefined(player);
         return selected.id == player.id;
     }
 
     isSelectedScorer(selected: any, player: any) {
-        if (isNullOrUndefined(selected)) return isNullOrUndefined(player);
+        if (Util.isNullOrUndefined(selected)) return Util.isNullOrUndefined(player);
         return selected.id == player.id;
     }
 }

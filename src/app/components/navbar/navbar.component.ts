@@ -1,9 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {TranslationService} from "../../services/translation.service";
 import {LoginService} from "../../services/login.service";
-import {isUndefined} from "util";
 import {SecUtil} from "../../classes/sec-util";
 import {Router} from "@angular/router";
+import {WindowRef} from "../../services/window-ref";
+import {Util} from "../../classes/util";
 
 @Component({
   selector: 'app-navbar',
@@ -92,7 +93,7 @@ export class NavbarComponent implements OnInit {
   private en : Lang = {locale : 'en', display: 'English'};
   private nl: Lang = {locale : 'nl', display: 'Nederlands'};
 
-    constructor(private _translate: TranslationService, private _loginService: LoginService, private _router: Router) {
+    constructor(private winRef: WindowRef, private _translate: TranslationService, private _loginService: LoginService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -101,7 +102,7 @@ export class NavbarComponent implements OnInit {
     this.user = SecUtil.getUser();
     SecUtil.userUpdated.subscribe(u => {
       this.user = u;
-      this.isLoggedIn = !isUndefined(u);
+      this.isLoggedIn = !Util.isUndefined(u);
     })
   }
 
@@ -118,6 +119,9 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this._loginService.logout();
+    if (this.winRef.nativeWindow.navigator.credentials && this.winRef.nativeWindow.navigator.credentials.preventSilentAccess) {
+      this.winRef.nativeWindow.navigator.credentials.preventSilentAccess();
+    }
   }
 
   goto(page) {

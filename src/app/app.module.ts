@@ -12,12 +12,20 @@ import {PlayerListComponent} from './components/player-list/player-list.componen
 import {FaqComponent} from './components/faq/faq.component';
 import {SharedModule} from './modules/shared.module';
 import {NavbarComponent} from './components/navbar/navbar.component';
-import {AccordionModule, AlertModule, BsDropdownModule, CollapseModule, TabsModule} from 'ngx-bootstrap';
+import {
+    AccordionModule,
+    AlertModule,
+    BsDropdownModule,
+    CollapseModule,
+    TabsModule
+} from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import {BrowserModule} from '@angular/platform-browser';
 import {LaddaModule} from 'angular2-ladda';
 import {ApiModule, Configuration} from './ws/soccer';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {WindowRef} from "./services/window-ref";
 
 const appRoutes: Routes = [
     {path: '', loadChildren: () => import('./modules/message.module').then(m => m.MessageModule)},
@@ -46,16 +54,18 @@ export function apiConfig() {
 }
 
 @NgModule({
+    providers: [ WindowRef ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AlertModule.forRoot(),
         BsDropdownModule.forRoot(),
+        BsDatepickerModule.forRoot(),
         CollapseModule.forRoot(),
         TabsModule.forRoot(),
         AccordionModule.forRoot(),
         SharedModule.forRoot(),
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
         ApiModule.forRoot(apiConfig),
         LaddaModule.forRoot({
             style: "expand-right",

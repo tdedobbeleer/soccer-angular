@@ -1,6 +1,6 @@
-import {isNullOrUndefined, isUndefined} from "util";
 import {EventEmitter} from "@angular/core";
 import {Configuration} from "../ws/soccer";
+import {Util} from "./util";
 
 export class SecUtil {
     private static LOCAL_STORAGE_USER: string = 'currentUser';
@@ -14,7 +14,7 @@ export class SecUtil {
     }
 
     static isLoggedIn() {
-        return !isNullOrUndefined(localStorage.getItem(this.LOCAL_STORAGE_USER));
+        return !Util.isNullOrUndefined(localStorage.getItem(this.LOCAL_STORAGE_USER));
     }
 
     static isAdmin() {
@@ -22,7 +22,7 @@ export class SecUtil {
     }
 
     static setUser(user: any) {
-        if (isUndefined(user)) {
+        if (Util.isUndefined(user)) {
             localStorage.removeItem(this.LOCAL_STORAGE_USER);
         }
         else {

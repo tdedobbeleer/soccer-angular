@@ -50,9 +50,8 @@ import {AccountDTO, MatchPollDTO, PollRestControllerService} from '../../ws/socc
                           </div>
                           <div class="input-group" [formGroup]="pollForm">
                               <select class="form-control" name="group-poll" formControlName="id">
-                                  <option [selected]="true" [value]="null">{{'text.motmPoll.select.player' | translate}}</option>
-                                  <option *ngFor="let a of poll.options" [value]="a.id">{{a.name}}
-                                  </option>
+                                  <option value="null" selected disabled>{{'text.motmPoll.select.player' | translate}}</option>
+                                  <option *ngFor="let a of poll.options" [value]="a.id">{{a.name}}</option>
                               </select>
 
                               <div class="input-group-btn">

@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ErrorHandlerService} from '../../services/error-handler.service';
-import {isNullOrUndefined} from 'util';
 import {Subject} from 'rxjs/Rx';
 import {DataTableDirective} from 'angular-datatables';
 import {AccountStatisticDTO, SeasonDTO, SeasonsRestControllerService, StatisticsRestControllerService} from '../../ws/soccer';
 import {SecUtil} from '../../classes/sec-util';
 import * as FileSaver from 'file-saver';
+import {Util} from "../../classes/util";
 
 @Component({
     selector: 'app-statistics-list',
@@ -101,7 +101,7 @@ export class StatisticsListComponent implements OnInit {
         this._seasonsApi.getSeasons()
             .subscribe(s => {
                     this.seasons = s;
-                    if (!isNullOrUndefined(s) && s.length > 0) {
+                    if (!Util.isNullOrUndefined(s) && s.length > 0) {
                         this.getStatisticsForSeason(this.seasons[0], true);
                     }
                 }, e => {
