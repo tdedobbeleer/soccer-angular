@@ -5,7 +5,7 @@ cache:
     - node_modules
 
 node_js:
-   - node # will use latest node
+  - 16 # use 'node' for the latest node. Might give compat issues.
 
 before_script: # commands to run before the build step
    - travis_retry npm install -g -dd @angular/cli
