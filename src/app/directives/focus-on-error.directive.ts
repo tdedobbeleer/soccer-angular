@@ -1,7 +1,7 @@
 import {Directive, ElementRef} from "@angular/core";
 
 @Directive({
-    selector: 'div[class=error-div]'
+    selector: 'div.error-div'
 })
 export class FocusOnErrorDirective {
 
@@ -9,7 +9,7 @@ export class FocusOnErrorDirective {
     }
 
     trigger() {
-        this.elementRef.nativeElement.scrollIntoView(false, {behavior: "smooth"});
+        this.elementRef.nativeElement.scrollIntoView({behavior: "smooth"});
     }
 
 }

@@ -161,8 +161,8 @@ export class EditAccountFormComponent implements OnInit {
 
     isLoading: boolean = false;
 
-    @ViewChild(FocusOnErrorDirective, {static: true}) error: FocusOnErrorDirective;
-    @ViewChild(FocusOnSuccessDirective, {static: true}) success: FocusOnSuccessDirective;
+    @ViewChild(FocusOnErrorDirective) error!: FocusOnErrorDirective;
+    @ViewChild(FocusOnSuccessDirective) success!: FocusOnSuccessDirective;
 
     passwordFormErrors = {
         'id': '',
@@ -217,7 +217,7 @@ export class EditAccountFormComponent implements OnInit {
         this._api.getProfile(this.profileId).subscribe(
             profile => {
                 this.profileForm.patchValue({
-                    id: profile.id,
+                    id: profile.account.id,
                     phone: profile.phone,
                     mobilePhone: profile.mobilePhone,
                     position: profile.position,

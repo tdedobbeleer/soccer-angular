@@ -1,7 +1,7 @@
 import {Directive, ElementRef} from "@angular/core";
 
 @Directive({
-    selector: '[div[class=success-div]]'
+    selector: 'div.success-div'
 })
 export class FocusOnSuccessDirective {
 
@@ -9,7 +9,7 @@ export class FocusOnSuccessDirective {
     }
 
     trigger() {
-        this.elementRef.nativeElement.scrollIntoView(false, {behavior: "smooth"});
+        this.elementRef.nativeElement.scrollIntoView({behavior: "smooth"});
     }
 
 }
