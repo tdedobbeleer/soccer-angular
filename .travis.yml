@@ -10,12 +10,12 @@ node_js:
 before_script: # commands to run before the build step
    - travis_retry npm install -g -dd @angular/cli
    - travis_retry npm install -g -dd firebase-tools # installs firebase to run firebase deploy
+   - if [ "$TRAVIS_BRANCH" == "master" ]; then export RELEASE_PROJECT=svk-p-01; export RELEASE_CONFIG=p; else export RELEASE_PROJECT=svk-q-01; export RELEASE_CONFIG=q; fi
 
 script: # the build step
-   - if [ "$TRAVIS_BRANCH" == "master" ]; then ng build --aot --prod --configuration=p; else ng build --aot --prod --configuration=q ; fi
+  - ng build --aot --prod --configuration=$RELEASE_CONFIG
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then firebase use p --token $FIREBASE_TOKEN --non-interactive; else firebase use q --token $FIREBASE_TOKEN --non-interactive ; fi
-  - firebase deploy --only hosting --token $FIREBASE_TOKEN --non-interactive
+  - firebase deploy --project=$RELEASE_PROJECT --only hosting --token $FIREBASE_TOKEN --non-interactive
 
 notifications:
   email: # only receive email when the build status changes (someone broke the build!)
