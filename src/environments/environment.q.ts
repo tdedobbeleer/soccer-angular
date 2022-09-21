@@ -1,7 +1,7 @@
 export const environment = {
     production: true,
     defaultTeamName: 'SVK',
-    api_url: 'https://svk-q-01.herokuapp.com',
+    api_url: 'https://svk-q-api-3qrxv6rj3q-ew.a.run.app',
     weather_api_key: 'ed947b1f42105d993e46d24c3d770be2',
     weather_api_country: 'be',
     weather_api_url: 'https://api.openweathermap.org',
