@@ -77,15 +77,15 @@ import {Util} from "../../classes/util";
     styles: []
 })
 export class StatisticsListComponent implements OnInit {
+    @ViewChild(DataTableDirective, {static: false})
+    dtElement: DataTableDirective;
+
     seasons: SeasonDTO[];
     season : SeasonDTO;
     accountStatistics: AccountStatisticDTO[];
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
     isLoggedIn: boolean;
-
-    @ViewChild(DataTableDirective, {static: true})
-    dtElement: DataTableDirective;
 
     constructor(private _api: StatisticsRestControllerService, private errorHandler: ErrorHandlerService, private _seasonsApi: SeasonsRestControllerService) {
     }
@@ -97,19 +97,25 @@ export class StatisticsListComponent implements OnInit {
             info: false,
             order: [[1, "desc"]],
         };
-
-        this._seasonsApi.getSeasons()
-            .subscribe(s => {
-                    this.seasons = s;
-                    if (!Util.isNullOrUndefined(s) && s.length > 0) {
-                        this.getStatisticsForSeason(this.seasons[0], true);
-                    }
-                }, e => {
-                    this.errorHandler.handle(e);
-                }
-            );
         this.isLoggedIn = SecUtil.isLoggedIn();
 
+    }
+
+    ngAfterViewInit(){
+        this._seasonsApi.getSeasons()
+                    .subscribe(s => {
+                            this.seasons = s;
+                            if (!Util.isNullOrUndefined(s) && s.length > 0) {
+                                this.getStatisticsForSeason(this.seasons[0].id, true);
+                            }
+                        }, e => {
+                            this.errorHandler.handle(e);
+                        }
+                    );
+      }
+
+      ngOnDestroy(): void {
+        this.dtTrigger.unsubscribe();
     }
 
     exportStatistics() {
@@ -120,9 +126,10 @@ export class StatisticsListComponent implements OnInit {
         });
     }
 
-    getStatisticsForSeason(season: SeasonDTO, init: boolean) {
+    getStatisticsForSeason(seasonId: string, init: boolean) {
 
-        this._api.getStatictics(season.id).subscribe(
+        this.season = this.seasons.filter(value => value.id === seasonId)[0];
+        this._api.getStatictics(this.season.id).subscribe(
             r => {
                 if (!init) {
                     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -138,7 +145,6 @@ export class StatisticsListComponent implements OnInit {
                     // Call the dtTrigger to rerender again
                     this.dtTrigger.next();
                 }
-                this.season = season;
             },
             e => {
                 this.errorHandler.handle(e);
