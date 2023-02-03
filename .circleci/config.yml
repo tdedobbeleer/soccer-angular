@@ -6,7 +6,12 @@ workflows:
     jobs:
       - install
       - build
-      - release
+      - release-q
+      - release-p:
+          filters:
+            branches:
+              only:
+                - master
 
 jobs:
   "install":
@@ -42,18 +47,15 @@ jobs:
             not: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: ng build --aot --prod --configuration=q
-  "release":
+  "release-prod":
     steps:
       - run:
           name: install-firebase
           command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
-      - when:
-          condition:
-            equal: [ "master", << pipeline.git.branch >> ]
-          steps:
-            - run: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
-      - when:
-          condition:
-            not: [ "master", << pipeline.git.branch >> ]
-          steps:
-            - run: firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+      - run: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+  "release-q":
+    steps:
+      - run:
+          name: install-firebase
+          command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
+      - run: firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
