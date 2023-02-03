@@ -9,7 +9,7 @@ workflows:
       - release
 
 jobs:
-  install:
+  "install":
     working_directory: ~/repo
     docker:
       - image: cimg/node:16.19.0
@@ -27,33 +27,33 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  build:
+  "build":
     steps:
       - run:
           name: install-amgular
           command: npm install -g -dd @angular/cli
       - when:
           condition:
-            equal: [ master, << pipeline.git.branch >> ]
+            equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: ng build --aot --prod --configuration=p
       - when:
           condition:
-            not: [ master, << pipeline.git.branch >> ]
+            not: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: ng build --aot --prod --configuration=q
-  release:
+  "release":
     steps:
       - run:
           name: install-firebase
           command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
       - when:
           condition:
-            equal: [ master, << pipeline.git.branch >> ]
+            equal: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
       - when:
           condition:
-            not: [ master, << pipeline.git.branch >> ]
+            not: [ "master", << pipeline.git.branch >> ]
           steps:
             - run: firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
