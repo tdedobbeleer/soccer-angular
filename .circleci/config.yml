@@ -32,33 +32,25 @@ jobs:
           name: install-angular
           command: npm install -g -dd @angular/cli
       - run:
-          name: build-production
-          command: ng build --aot --prod --configuration=p
-          filters:
-            branches:
-              only:
-                - master
-      - run:
-          name: build-quality
-          command: ng build --aot --prod --configuration=q
-          filters:
-            branches:
-              ignore:
-                - master
+          name: build-angular
+          environment:
+            BRANCH: <<pipeline.git.branch>>
+            command: |
+              if [ $BRANCH -eq "master" ]; then
+                ng build --aot --configuration production --configuration=p
+              else
+                ng build --aot --configuration production --configuration=q
+              fi
       - run:
           name: install-firebase-tools
           command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
       - run:
-          name: deploy-production
-          command: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
-          filters:
-            branches:
-              only:
-                - master
-      - run:
-          name: deploy-quality
-          command: firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
-          filters:
-            branches:
-              ignore:
-                - master
+          name: deploy-to-firebase
+          environment:
+            BRANCH: <<pipeline.git.branch>>
+            command: |
+              if [ $BRANCH -eq "master" ]; then
+                firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+              else
+                firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+              fi
