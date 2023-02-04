@@ -10,14 +10,14 @@ workflows:
             - install
           filters:
             branches:
-              not:
+              ignore:
                 - master
       - release-q:
           requires:
             - build-q
           filters:
             branches:
-              not:
+              ignore:
                 - master
       - build-p:
           requires:
