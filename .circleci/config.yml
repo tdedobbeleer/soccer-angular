@@ -29,6 +29,9 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: install-angular
+          command: npm install -g -dd @angular/cli
+      - run:
           name: build-angular
           environment:
             BRANCH: <<pipeline.git.branch>>
