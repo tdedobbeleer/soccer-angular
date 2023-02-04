@@ -29,9 +29,6 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: install-angular
-          command: npm install -g -dd @angular/cli
-      - run:
           name: build-angular
           environment:
             BRANCH: <<pipeline.git.branch>>
@@ -50,7 +47,7 @@ jobs:
             BRANCH: <<pipeline.git.branch>>
           command: |
             if [ $BRANCH -eq "master" ]; then
-              firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+              firebase deploy --project=svk-p-01 --only hosting --non-interactive
             else
-              firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+              firebase deploy --project=svk-q-01 --only hosting --non-interactive
             fi
