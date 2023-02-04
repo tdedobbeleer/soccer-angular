@@ -1,5 +1,9 @@
 version: 2.1
 
+var_1: &job_defaults
+  docker:
+    - image: cimg/node:16.19.0
+
 workflows:
   version: 2
   build:
@@ -36,8 +40,7 @@ workflows:
 
 jobs:
   "install":
-    docker:
-      - image: cimg/node:16.19.0
+    <<: *job_defaults
     steps:
       - checkout
       - run:
@@ -53,24 +56,28 @@ jobs:
           paths:
             - ./node_modules
   "build-prod":
+    <<: *job_defaults
     steps:
       - run:
           name: install-amgular
           command: npm install -g -dd @angular/cli
       - run: ng build --aot --prod --configuration=p
   "build-q":
+    <<: *job_defaults
     steps:
       - run:
           name: install-amgular
           command: npm install -g -dd @angular/cli
       - run: ng build --aot --prod --configuration=q
   "release-p":
+    <<: *job_defaults
     steps:
       - run:
           name: install-firebase
           command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
       - run: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
   "release-q":
+    <<: *job_defaults
     steps:
       - run:
           name: install-firebase
