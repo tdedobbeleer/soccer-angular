@@ -9,38 +9,10 @@ workflows:
   version: 2
   build:
     jobs:
-      - install
-      - build-q:
-          requires:
-            - install
-          filters:
-            branches:
-              ignore:
-                - master
-      - release-q:
-          requires:
-            - build-q
-          filters:
-            branches:
-              ignore:
-                - master
-      - build-p:
-          requires:
-            - install
-          filters:
-            branches:
-              only:
-                - master
-      - release-p:
-          requires:
-            - build-p
-          filters:
-            branches:
-              only:
-                - master
+      - build_and_release
 
 jobs:
-  "install":
+  "build_and_release":
     <<: *job_defaults
     steps:
       - checkout
@@ -56,31 +28,37 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  "build-p":
-    <<: *job_defaults
-    steps:
       - run:
-          name: install-amgular
+          name: install-angular
           command: npm install -g -dd @angular/cli
-      - run: ng build --aot --prod --configuration=p
-  "build-q":
-    <<: *job_defaults
-    steps:
       - run:
-          name: install-amgular
-          command: npm install -g -dd @angular/cli
-      - run: ng build --aot --prod --configuration=q
-  "release-p":
-    <<: *job_defaults
-    steps:
+          name: build-production
+          command: ng build --aot --prod --configuration=p
+          filters:
+            branches:
+              only:
+                - master
       - run:
-          name: install-firebase
+          name: build-quality
+          command: ng build --aot --prod --configuration=q
+          filters:
+            branches:
+              ignore:
+                - master
+      - run:
+          name: install-firebase-tools
           command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
-      - run: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
-  "release-q":
-    <<: *job_defaults
-    steps:
       - run:
-          name: install-firebase
-          command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
-      - run: firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+          name: deploy-production
+          command: firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+          filters:
+            branches:
+              only:
+                - master
+      - run:
+          name: deploy-quality
+          command: firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+          filters:
+            branches:
+              ignore:
+                - master
