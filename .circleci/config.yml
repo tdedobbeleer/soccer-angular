@@ -35,12 +35,12 @@ jobs:
           name: build-angular
           environment:
             BRANCH: <<pipeline.git.branch>>
-            command: |
-              if [ $BRANCH -eq "master" ]; then
-                ng build --aot --configuration production --configuration=p
-              else
-                ng build --aot --configuration production --configuration=q
-              fi
+          command: |
+            if [ $BRANCH -eq "master" ]; then
+              ng build --aot --configuration production --configuration=p
+            else
+              ng build --aot --configuration production --configuration=q
+            fi
       - run:
           name: install-firebase-tools
           command: npm install -g -dd firebase-tools # installs firebase to run firebase deploy
@@ -48,9 +48,9 @@ jobs:
           name: deploy-to-firebase
           environment:
             BRANCH: <<pipeline.git.branch>>
-            command: |
-              if [ $BRANCH -eq "master" ]; then
-                firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
-              else
-                firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
-              fi
+          command: |
+            if [ $BRANCH -eq "master" ]; then
+              firebase deploy --project=svk-p-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+            else
+              firebase deploy --project=svk-q-01 --only hosting --token $FIREBASE_TOKEN --non-interactive
+            fi
