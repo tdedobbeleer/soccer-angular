@@ -50,7 +50,7 @@ jobs:
             BRANCH: <<pipeline.git.branch>>
           command: |
             if [ $BRANCH -eq "master" ]; then
-              firebase deploy --project=svk-p-01 --only hosting --non-interactive
+              firebase deploy --project=svk-p-01 --only hosting --non-interactive --token $FIREBASE_TOKEN
             else
-              firebase deploy --project=svk-q-01 --only hosting --non-interactive
+              firebase deploy --project=svk-q-01 --only hosting --non-interactive --token $FIREBASE_TOKEN
             fi
