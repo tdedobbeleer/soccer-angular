@@ -55,7 +55,7 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  "build-prod":
+  "build-p":
     <<: *job_defaults
     steps:
       - run:
