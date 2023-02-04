@@ -5,9 +5,30 @@ workflows:
   build:
     jobs:
       - install
-      - build
-      - release-q
+      - build-q:
+          requires:
+            - install
+          filters:
+            branches:
+              not:
+                - master
+      - release-q:
+          requires:
+            - build-q
+          filters:
+            branches:
+              not:
+                - master
+      - build-p:
+          requires:
+            - install
+          filters:
+            branches:
+              only:
+                - master
       - release-p:
+          requires:
+            - build-p
           filters:
             branches:
               only:
@@ -15,7 +36,6 @@ workflows:
 
 jobs:
   "install":
-    working_directory: ~/repo
     docker:
       - image: cimg/node:16.19.0
     steps:
@@ -32,22 +52,19 @@ jobs:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-  "build":
+  "build-prod":
     steps:
       - run:
           name: install-amgular
           command: npm install -g -dd @angular/cli
-      - when:
-          condition:
-            equal: [ "master", << pipeline.git.branch >> ]
-          steps:
-            - run: ng build --aot --prod --configuration=p
-      - when:
-          condition:
-            not: [ "master", << pipeline.git.branch >> ]
-          steps:
-            - run: ng build --aot --prod --configuration=q
-  "release-prod":
+      - run: ng build --aot --prod --configuration=p
+  "build-q":
+    steps:
+      - run:
+          name: install-amgular
+          command: npm install -g -dd @angular/cli
+      - run: ng build --aot --prod --configuration=q
+  "release-p":
     steps:
       - run:
           name: install-firebase
