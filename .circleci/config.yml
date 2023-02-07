@@ -36,7 +36,7 @@ jobs:
           environment:
             BRANCH: <<pipeline.git.branch>>
           command: |
-            if [ $BRANCH -eq "master" ]; then
+            if [ "${BRANCH}" == "master" ]; then
               ng build --aot --configuration production --configuration=p
             else
               ng build --aot --configuration production --configuration=q
@@ -49,7 +49,7 @@ jobs:
           environment:
             BRANCH: <<pipeline.git.branch>>
           command: |
-            if [ $BRANCH -eq "master" ]; then
+            if [ "${BRANCH}" == "master" ]; then
               firebase deploy --project=svk-p-01 --only hosting --non-interactive --token $FIREBASE_TOKEN
             else
               firebase deploy --project=svk-q-01 --only hosting --non-interactive --token $FIREBASE_TOKEN
