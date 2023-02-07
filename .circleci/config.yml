@@ -37,9 +37,9 @@ jobs:
             BRANCH: <<pipeline.git.branch>>
           command: |
             if [ "${BRANCH}" == "master" ]; then
-              ng build --aot --configuration production --configuration=p
+              ng build --aot --configuration=p
             else
-              ng build --aot --configuration production --configuration=q
+              ng build --aot --configuration=q
             fi
       - run:
           name: install-firebase-tools
