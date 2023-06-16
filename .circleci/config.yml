@@ -22,7 +22,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: install-npm
+          name: npm -v && install-npm
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
