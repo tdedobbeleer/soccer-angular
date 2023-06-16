@@ -144,7 +144,7 @@ export class RegistrationFormComponent implements OnInit {
 
         if (this.registrationForm.valid) {
             this.isLoading = true;
-            this._api.createAccount(this.registrationForm.controls['captchaResponse'].value, model).subscribe(
+            this._api.createAccount(model).subscribe(
                 r => {
                     console.log("Registration success");
                     this.success = true;

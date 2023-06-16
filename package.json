@@ -11,8 +11,8 @@
     "e2e": "protractor"
   },
   "engines": {
-    "node": "v8-lts",
-    "npm": "latest"
+    "node": ">=16",
+    "npm": ">=8"
   },
   "private": true,
   "dependencies": {

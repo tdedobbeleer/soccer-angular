@@ -110,7 +110,7 @@ export class RequestRecoveryCodeFormComponent implements OnInit {
 
     if (this.recoveryForm.valid) {
       this.isLoading = true;
-      this._api.forgotPassword(this.recoveryForm.controls['captchaResponse'].value, dto).subscribe(
+      this._api.forgotPassword(dto).subscribe(
           r => {
             this.success = true;
           },

@@ -58,7 +58,6 @@ export class PasswordRecoveryRestControllerService {
     /**
      * Get a password recovery code
      * 
-     * @param captchaResponse captchaResponse
      * @param passwordRecoveryDTO passwordRecoveryDTO
      * @param iSO3Country 
      * @param iSO3Language 
@@ -76,13 +75,10 @@ export class PasswordRecoveryRestControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public forgotPassword(captchaResponse: string, passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (captchaResponse === null || captchaResponse === undefined) {
-            throw new Error('Required parameter captchaResponse was null or undefined when calling forgotPassword.');
-        }
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public forgotPassword(passwordRecoveryDTO: PasswordRecoveryDTO, iSO3Country?: string, iSO3Language?: string, country?: string, displayCountry?: string, displayLanguage?: string, displayName?: string, displayScript?: string, displayVariant?: string, language?: string, script?: string, unicodeLocaleAttributes?: Array<string>, unicodeLocaleKeys?: Array<string>, variant?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (passwordRecoveryDTO === null || passwordRecoveryDTO === undefined) {
             throw new Error('Required parameter passwordRecoveryDTO was null or undefined when calling forgotPassword.');
         }
@@ -93,9 +89,6 @@ export class PasswordRecoveryRestControllerService {
         }
         if (iSO3Language !== undefined) {
             queryParameters = queryParameters.set('ISO3Language', <any>iSO3Language);
-        }
-        if (captchaResponse !== undefined) {
-            queryParameters = queryParameters.set('captchaResponse', <any>captchaResponse);
         }
         if (country !== undefined) {
             queryParameters = queryParameters.set('country', <any>country);

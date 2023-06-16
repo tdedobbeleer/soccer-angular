@@ -3,7 +3,7 @@ version: 2.1
 var_1: &job_defaults
   working_directory: ~/repo
   docker:
-    - image: cimg/node:16.19.0
+    - image: cimg/node:16.20.0
 
 workflows:
   version: 2
@@ -18,7 +18,7 @@ jobs:
       - checkout
       - run:
           name: update-npm
-          command: npm install -g npm
+          command: npm install -g npm@8.19.4
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:

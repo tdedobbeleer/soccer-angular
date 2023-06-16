@@ -58,25 +58,16 @@ export class RegistrationRestControllerService {
     /**
      * Create an account
      * 
-     * @param captchaResponse captchaResponse
      * @param registrationDTO registrationDTO
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
-    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
-    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
-    public createAccount(captchaResponse: string, registrationDTO: RegistrationDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-        if (captchaResponse === null || captchaResponse === undefined) {
-            throw new Error('Required parameter captchaResponse was null or undefined when calling createAccount.');
-        }
+    public createAccount(registrationDTO: RegistrationDTO, observe?: 'body', reportProgress?: boolean): Observable<ResponseEntity>;
+    public createAccount(registrationDTO: RegistrationDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResponseEntity>>;
+    public createAccount(registrationDTO: RegistrationDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResponseEntity>>;
+    public createAccount(registrationDTO: RegistrationDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
         if (registrationDTO === null || registrationDTO === undefined) {
             throw new Error('Required parameter registrationDTO was null or undefined when calling createAccount.');
-        }
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (captchaResponse !== undefined) {
-            queryParameters = queryParameters.set('captchaResponse', <any>captchaResponse);
         }
 
         let headers = this.defaultHeaders;
@@ -107,7 +98,6 @@ export class RegistrationRestControllerService {
         return this.httpClient.post<ResponseEntity>(`${this.basePath}/api/v1/registration`,
             registrationDTO,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
